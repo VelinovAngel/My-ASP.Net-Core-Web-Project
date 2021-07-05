@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BikerBooking.Data
+﻿namespace BikerBooking.Data
 {
-    class BikerDbContext
+    public class BikerDbContext
     {
     }
 }
