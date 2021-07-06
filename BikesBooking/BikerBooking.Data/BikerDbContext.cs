@@ -1,15 +1,14 @@
 ﻿namespace BikerBooking.Data
 {
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using System.Diagnostics.CodeAnalysis;
 
-    public class BikerDbContext : DbContext
+    public class BikerDbContext : IdentityDbContext
     {
 
-        protected BikerDbContext()
-        {
-        }
-        public BikerDbContext([NotNullAttribute] DbContextOptions options) : base(options)
+        public BikerDbContext([NotNullAttribute] DbContextOptions<BikerDbContext> options) 
+            : base(options)
         {
         }
 
