@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BikesBooking.Services.Infrastructure
+﻿namespace BikesBooking.Services.Infrastructure
 {
-    class ServiceMappingProfile
+    using AutoMapper;
+
+
+    public class ServiceMappingProfile : Profile
     {
+        public ServiceMappingProfile()
+        {
+        }
     }
 }
