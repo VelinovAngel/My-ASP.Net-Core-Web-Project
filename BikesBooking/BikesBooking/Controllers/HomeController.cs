@@ -5,6 +5,7 @@
 
     using BikesBooking.Models;
     using BikesBooking.Models.Motor;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
@@ -12,9 +13,12 @@
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public IWebHostEnvironment WebHost { get; }
+
+        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHost)
         {
             _logger = logger;
+            WebHost = webHost;
         }
 
         public IActionResult Index()
@@ -36,6 +40,12 @@
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Contact()
+        {
+           
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
