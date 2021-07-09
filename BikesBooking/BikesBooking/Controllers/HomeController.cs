@@ -1,14 +1,13 @@
-﻿using BikesBooking.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BikesBooking.Controllers
+﻿namespace BikesBooking.Controllers
 {
+    using System;
+    using System.Diagnostics;
+
+    using BikesBooking.Models;
+    using BikesBooking.Models.Motor;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
+
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -19,6 +18,17 @@ namespace BikesBooking.Controllers
         }
 
         public IActionResult Index()
+        {
+            var model = new SearchMotorModel
+            {
+                DropOffDate = DateTime.UtcNow,
+                PickUpDate = DateTime.UtcNow.AddDays(1),
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Index(SearchMotorModel model)
         {
             return View();
         }
