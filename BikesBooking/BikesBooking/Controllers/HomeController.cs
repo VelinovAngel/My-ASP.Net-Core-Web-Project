@@ -11,16 +11,7 @@
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public IWebHostEnvironment WebHost { get; }
-
-        public HomeController(ILogger<HomeController> logger, IWebHostEnvironment webHost)
-        {
-            _logger = logger;
-            WebHost = webHost;
-        }
-
+        
         public IActionResult Index()
         {
             var model = new SearchMotorModel
@@ -35,17 +26,6 @@
         public IActionResult Index(SearchMotorModel model)
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-           
-            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
