@@ -26,6 +26,30 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Booking> Bookings { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<Color> Colors { get; set; }
+
+        public DbSet<Contact> Contacts { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+
+        public DbSet<Model> Models { get; set; }
+
+        public DbSet<Motorcycle> Motorcycles { get; set; }
+
+        public DbSet<PrivateDealer> PrivateDealers { get; set; }
+
+        public DbSet<Provider> Providers { get; set; }
+
+        public DbSet<PublicDealer> PublicDealers { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

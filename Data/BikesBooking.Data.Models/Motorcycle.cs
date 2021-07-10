@@ -1,10 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BikesBooking.Data.Models
+﻿namespace BikesBooking.Data.Models
 {
-    class Motorcycle
+    using System.ComponentModel.DataAnnotations;
+
+    using BikerBooking.Data.Models.Enums;
+    using BikesBooking.Data.Common.Models;
+
+    public class Motorcycle : BaseDeletableModel<int>
     {
+        public int ManufacturerId { get; set; }
+
+        public Manufacturer Manufacturer { get; set; }
+
+        public int ModelId { get; set; }
+
+        public Model Model { get; set; }
+
+        public int ColorId { get; set; }
+
+        public Color Color { get; set; }
+
+        [Required]
+        public int CubicCentimetre { get; set; }
+
+        public Brand Brand { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
+
+        public bool Available { get; set; }
+
+        [Required]
+        public string Url { get; set; }
+
+        public int ReviewId { get; set; }
+
+        public Review Review { get; set; }
+
+        public int CityId { get; set; }
+
+        public City City { get; set; }
+
+        public int BookingId { get; set; }
+
+        public Booking Booking { get; set; }
     }
 }

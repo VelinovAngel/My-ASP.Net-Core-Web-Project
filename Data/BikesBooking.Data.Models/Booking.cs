@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public class Booking
+    using BikesBooking.Data.Common.Models;
+
+    public class Booking : BaseDeletableModel<int>
     {
         public Booking()
         {

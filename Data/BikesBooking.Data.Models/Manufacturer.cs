@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Data.Common.Models;
 
@@ -12,6 +13,8 @@
             this.Motorcycles = new HashSet<Motorcycle>();
         }
 
+        [Required]
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public DateTime Year { get; set; }

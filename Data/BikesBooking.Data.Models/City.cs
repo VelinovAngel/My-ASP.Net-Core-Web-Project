@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Data.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Data.Common.Models;
 
@@ -11,6 +12,8 @@
             this.Motorcycles = new HashSet<Motorcycle>();
         }
 
+        [Required]
+        [MaxLength(25)]
         public string Name { get; set; }
 
         public int Postcode { get; set; }
