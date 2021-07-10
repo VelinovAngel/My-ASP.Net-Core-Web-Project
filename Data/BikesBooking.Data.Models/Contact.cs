@@ -1,10 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BikesBooking.Data.Models
+﻿namespace BikesBooking.Data.Models
 {
-    class Contact
+    using BikesBooking.Data.Common.Models;
+
+    public class Contact : BaseDeletableModel<int>
     {
+        public string Username { get; set; }
+
+        public string Email { get; set; }
+
+        public string Description { get; set; }
+
+        public string Complaint { get; set; }
     }
 }
