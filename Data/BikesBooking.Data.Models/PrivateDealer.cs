@@ -14,10 +14,17 @@
         public string Address { get; set; }
 
         [Required]
+        public string Email { get; set; }
+
+        [Required]
         public string Description { get; set; }
 
         public int ProviderId { get; set; }
 
-        public Provider Provider { get; set; }
+        public virtual Provider Provider { get; set; }
+
+        public string PriveteDealerId { get; set; }
+
+        public virtual ApplicationUser AddedPrivateDealer { get; set; }
     }
 }

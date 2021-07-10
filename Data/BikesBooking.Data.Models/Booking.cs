@@ -14,7 +14,7 @@
 
         public int ProviderId { get; set; }
 
-        public Provider Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         public int Quantity { get; set; }
 

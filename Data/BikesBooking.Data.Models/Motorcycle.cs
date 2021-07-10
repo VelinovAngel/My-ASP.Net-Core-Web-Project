@@ -9,15 +9,15 @@
     {
         public int ManufacturerId { get; set; }
 
-        public Manufacturer Manufacturer { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
 
         public int ModelId { get; set; }
 
-        public Model Model { get; set; }
+        public virtual Model Model { get; set; }
 
         public int ColorId { get; set; }
 
-        public Color Color { get; set; }
+        public virtual Color Color { get; set; }
 
         [Required]
         public int CubicCentimetre { get; set; }
@@ -34,14 +34,14 @@
 
         public int ReviewId { get; set; }
 
-        public Review Review { get; set; }
+        public virtual Review Review { get; set; }
 
         public int CityId { get; set; }
 
-        public City City { get; set; }
+        public virtual City City { get; set; }
 
         public int BookingId { get; set; }
 
-        public Booking Booking { get; set; }
+        public virtual Booking Booking { get; set; }
     }
 }

@@ -8,7 +8,6 @@
     using BikesBooking.Data.Models;
     using BikesBooking.Data.Repositories;
     using BikesBooking.Data.Seeding;
-    using BikesBooking.Services.Data;
     using BikesBooking.Services.Mapping;
     using BikesBooking.Services.Messaging;
     using BikesBooking.Web.ViewModels;
@@ -64,7 +63,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

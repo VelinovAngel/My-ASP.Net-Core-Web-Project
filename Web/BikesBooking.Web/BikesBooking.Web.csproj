@@ -36,4 +36,8 @@
     <ProjectReference Include="..\BikesBooking.Web.Infrastructure\BikesBooking.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\BikesBooking.Web.ViewModels\BikesBooking.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Administration\Views\Dashboard\" />
+  </ItemGroup>
 </Project>

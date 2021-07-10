@@ -20,7 +20,7 @@
 
         public int CountryId { get; set; }
 
-        public Country Country { get; set; }
+        public virtual Country Country { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }
