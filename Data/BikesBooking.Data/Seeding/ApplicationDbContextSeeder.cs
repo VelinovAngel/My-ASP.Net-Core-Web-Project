@@ -26,6 +26,10 @@
             var seeders = new List<ISeeder>
                           {
                               new RolesSeeder(),
+                              new ModelMotorcycleSeeder(dbContext),
+                              new ManufactureMotorcycle(dbContext),
+                              new ColorMotorcycleSeeder(dbContext),
+                              new CountrySeeder(dbContext),
                           };
 
             foreach (var seeder in seeders)

@@ -3,7 +3,56 @@
     this.ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@model SearchMotorModel
+
+
+<div class="row">
+    <div class="col-lg-4 col-md-6 text-light">
+        <div>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="search-form-container lead-section">
+                <h4 class="font-weight-bold"> Search for a rental</h4>
+                <form method="post" class="search-form-container lead-section">
+                    <div class="form-group">
+                        <label asp-for="Country"></label>
+                        <input asp-for="Country" class="form-control" />
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PickUpDate"></label>
+                        <input asp-for="PickUpDate" class="form-control" />
+                        <span asp-validation-for="PickUpDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DropOffDate"></label>
+                        <input asp-for="DropOffDate" class="form-control" />
+                        <span asp-validation-for="DropOffDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Type"></label>
+                        <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-7 col-lg-offset-1 col-md-7 col-sm-6 text-light">
+        <h2 class="display-3">Rent a motorcycle, scooter or bicycle in any part of the world</h2>
+        <ul class="advantages-list h4">
+            <li>Compare 942 rental companies worldwide</li>
+            <li>Price Match Guarantee</li>
+            <li>Manage your booking online</li>
+            <li>Verified reviews and ratings</li>
+            <li>FREE cancellations on most bookings</li>
+        </ul>
+    </div>
 </div>
+

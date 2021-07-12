@@ -17,7 +17,7 @@
         [MaxLength(20)]
         public string Name { get; set; }
 
-        public DateTime Year { get; set; }
+        public int Year { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }

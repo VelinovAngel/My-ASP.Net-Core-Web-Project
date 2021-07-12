@@ -1,0 +1,63 @@
+﻿@model ContactUsForm
+
+
+<h1 class="text-light">
+    Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
+    a matter of hours to help you.
+</h1>
+
+<section class="mb-4">
+
+    <h2 class="h1-responsive font-weight-bold text-center my-4 text-light">Contact us</h2>
+
+    <div class="row">
+        <div class="col-md-9 mb-md-0 mb-5">
+            <form id="contact-form" name="contact-form" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label asp-for="Name" class="text-light">Your name</label>
+                            <input asp-for="Name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="md-form mb-0">
+                            <label asp-for="Email" class="text-light">Your email</label>
+                            <input asp-for="Email" class="form-control">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-0">
+                            <label asp-for="Subject" class="text-light">Subject</label>
+                            <input asp-for="Subject" class="form-control">
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form">
+                            <label asp-for="Description" class="text-light">Your message</label>
+                            <textarea asp-for="Description" rows="4" class="form-control md-textarea"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center text-md-left">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+                <div class="status"></div>
+            </form>
+        </div>
+    </div>
+</section>
