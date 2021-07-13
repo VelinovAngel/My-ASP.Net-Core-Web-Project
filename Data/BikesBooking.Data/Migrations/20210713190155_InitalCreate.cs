@@ -272,6 +272,33 @@
                 });
 
             migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClientId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddedClientId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Clients_AspNetUsers_AddedClientId",
+                        column: x => x.AddedClientId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Cities",
                 columns: table => new
                 {
@@ -326,6 +353,7 @@
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProviderId = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     PickUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DropOffDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -338,7 +366,39 @@
                 {
                     table.PrimaryKey("PK_Bookings", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Bookings_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Bookings_Providers_ProviderId",
+                        column: x => x.ProviderId,
+                        principalTable: "Providers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Offers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProviderId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PickUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DropOffDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Offers_Providers_ProviderId",
                         column: x => x.ProviderId,
                         principalTable: "Providers",
                         principalColumn: "Id",
@@ -432,6 +492,7 @@
                     ReviewId = table.Column<int>(type: "int", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
                     BookingId = table.Column<int>(type: "int", nullable: false),
+                    OfferId = table.Column<int>(type: "int", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -468,6 +529,12 @@
                         name: "FK_Motorcycles_Models_ModelId",
                         column: x => x.ModelId,
                         principalTable: "Models",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Motorcycles_Offers_OfferId",
+                        column: x => x.OfferId,
+                        principalTable: "Offers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -528,6 +595,11 @@
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bookings_ClientId",
+                table: "Bookings",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bookings_IsDeleted",
                 table: "Bookings",
                 column: "IsDeleted");
@@ -545,6 +617,16 @@
             migrationBuilder.CreateIndex(
                 name: "IX_Cities_IsDeleted",
                 table: "Cities",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_AddedClientId",
+                table: "Clients",
+                column: "AddedClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_IsDeleted",
+                table: "Clients",
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
@@ -603,9 +685,24 @@
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Motorcycles_OfferId",
+                table: "Motorcycles",
+                column: "OfferId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Motorcycles_ReviewId",
                 table: "Motorcycles",
                 column: "ReviewId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offers_IsDeleted",
+                table: "Offers",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Offers_ProviderId",
+                table: "Offers",
+                column: "ProviderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PrivateDealers_AddedPrivateDealerId",
@@ -701,13 +798,19 @@
                 name: "Models");
 
             migrationBuilder.DropTable(
+                name: "Offers");
+
+            migrationBuilder.DropTable(
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Clients");
 
             migrationBuilder.DropTable(
                 name: "Providers");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Countries");

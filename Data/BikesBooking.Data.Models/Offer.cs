@@ -5,14 +5,16 @@
 
     using BikesBooking.Data.Common.Models;
 
-    public class Booking : BaseDeletableModel<int>
+    public class Offer : BaseDeletableModel<int>
     {
-        public Booking()
+        public Offer()
         {
             this.Motorcycles = new HashSet<Motorcycle>();
         }
 
-        public virtual Client Client { get; set; }
+        public int ProviderId { get; set; }
+
+        public virtual Provider Provider { get; set; }
 
         public int Quantity { get; set; }
 

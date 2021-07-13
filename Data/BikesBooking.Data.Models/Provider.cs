@@ -10,7 +10,6 @@
         {
             this.PublicDealers = new HashSet<PublicDealer>();
             this.PriverDealers = new HashSet<PrivateDealer>();
-            this.Bookings = new HashSet<Booking>();
         }
 
         public int CountryId { get; set; }
@@ -20,7 +19,5 @@
         public virtual ICollection<PublicDealer> PublicDealers { get; set; }
 
         public virtual ICollection<PrivateDealer> PriverDealers { get; set; }
-
-        public virtual ICollection<Booking> Bookings { get; set; }
     }
 }
