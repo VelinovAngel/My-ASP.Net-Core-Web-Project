@@ -33,6 +33,14 @@
             foreach (var jsonProp in properties)
             {
                 await this.db.Countries.AddAsync(new Country { Name = jsonProp.Name, Abbreviation = jsonProp.Code });
+                await this.db.SaveChangesAsync();
+
+                var idCountry = this.db.Countries.FirstOrDefault(x => x.Name == jsonProp.Name);
+
+                foreach (var city in jsonProp.Cities)
+                {
+                    await this.db.Cities.AddAsync(new City { CountryId = idCountry.Id, Name = city.Name, Postcode = city.Postcode });
+                }
             }
 
             await this.db.SaveChangesAsync();

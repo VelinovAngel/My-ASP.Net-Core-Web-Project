@@ -1,98 +1,288 @@
-[
+﻿[
   {
     "name": "Austria",
-    "code": "AT"
+    "code": "AT",
+    "Cities": [
+      {
+        "Name": "Vienna",
+        "Postcode": "1400"
+      },
+      {
+        "Name": "Graz",
+        "Postcode": "1801"
+      },
+      {
+        "Name": "Linz",
+        "Postcode": "4010"
+      },
+      {
+        "Name": "Salzburg",
+        "Postcode": "5020"
+      }
+    ]
   },
   {
     "name": "Belgium",
-    "code": "BE"
+    "code": "BE",
+    "Cities": [
+      {
+        "Name": "Aalst",
+        "Postcode": "1174"
+      },
+      {
+        "Name": "Aarschot",
+        "Postcode": "1194"
+      },
+      {
+        "Name": "Antoing",
+        "Postcode": "1817"
+      },
+      {
+        "Name": "Bastogne",
+        "Postcode": "1332"
+      }
+    ]
   },
   {
     "name": "Bulgaria",
-    "code": "BG"
+    "code": "BG",
+    "Cities": [
+      {
+        "Name": "Sofia",
+        "Postcode": "1000"
+      },
+      {
+        "Name": "Plovdiv",
+        "Postcode": "4000"
+      },
+      {
+        "Name": "Varna",
+        "Postcode": "9000"
+      },
+      {
+        "Name": "Burgas",
+        "Postcode": "8000"
+      }
+    ]
   },
   {
     "name": "Croatia",
-    "code": "HR"
-  },
-  {
-    "name": "Cyprus",
-    "code": "CY"
-  },
-  {
-    "name": "Czech Republic",
-    "code": "CZ"
-  },
-  {
-    "name": "Denmark",
-    "code": "DK"
+    "code": "HR",
+    "Cities": [
+      {
+        "Name": "Zagreb",
+        "Postcode": "10000"
+      },
+      {
+        "Name": "Split",
+        "Postcode": "21000"
+      },
+      {
+        "Name": "Rijeka",
+        "Postcode": "51000"
+      },
+      {
+        "Name": "Osijek",
+        "Postcode": "31000"
+      }
+    ]
   },
   {
     "name": "France",
-    "code": "FR"
+    "code": "FR",
+    "Cities": [
+      {
+        "Name": "Paris",
+        "Postcode": "75056"
+      },
+      {
+        "Name": "Marseille",
+        "Postcode": "13055"
+      },
+      {
+        "Name": "Lyon",
+        "Postcode": "69123"
+      },
+      {
+        "Name": "Toulouse",
+        "Postcode": "31555"
+      }
+    ]
   },
   {
     "name": "Germany",
-    "code": "DE"
+    "code": "DE",
+    "Cities": [
+      {
+        "Name": "Berlin",
+        "Postcode": "10115"
+      },
+      {
+        "Name": "Hamburg",
+        "Postcode": "20001"
+      },
+      {
+        "Name": "Munich",
+        "Postcode": "80331"
+      },
+      {
+        "Name": "Cologne",
+        "Postcode": "50441"
+      }
+    ]
   },
   {
     "name": "Greece",
-    "code": "GR"
-  },
-  {
-    "name": "Hungary",
-    "code": "HU"
+    "code": "GR",
+    "Cities": [
+      {
+        "Name": "Athens",
+        "Postcode": "32461"
+      },
+      {
+        "Name": "Thessaloniki",
+        "Postcode": "16900"
+      },
+      {
+        "Name": "Patras",
+        "Postcode": "2928"
+      },
+      {
+        "Name": "Piraeus",
+        "Postcode": "15441"
+      }
+    ]
   },
   {
     "name": "Italy",
-    "code": "IT"
-  },
-  {
-    "name": "Luxembourg",
-    "code": "LU"
-  },
-  {
-    "name": "Macedonia",
-    "code": "MK"
-  },
-  {
-    "name": "Malta",
-    "code": "MT"
-  },
-  {
-    "name": "Monaco",
-    "code": "MC"
-  },
-  {
-    "name": "Netherlands",
-    "code": "NL"
+    "code": "IT",
+    "Cities": [
+      {
+        "Name": "Roma",
+        "Postcode": "00199"
+      },
+      {
+        "Name": "Milano",
+        "Postcode": "20066"
+      },
+      {
+        "Name": "Venezia",
+        "Postcode": "30100"
+      },
+      {
+        "Name": "Torino",
+        "Postcode": "10121"
+      }
+    ]
   },
   {
     "name": "Romania",
-    "code": "RO"
+    "code": "RO",
+    "Cities": [
+      {
+        "Name": "Roma",
+        "Postcode": "00199"
+      },
+      {
+        "Name": "Milano",
+        "Postcode": "20066"
+      },
+      {
+        "Name": "Venezia",
+        "Postcode": "30100"
+      },
+      {
+        "Name": "Torino",
+        "Postcode": "10121"
+      }
+    ]
   },
   {
     "name": "Serbia",
-    "code": "CS"
-  },
-  {
-    "name": "Slovenia",
-    "code": "SI"
+    "code": "CS",
+    "Cities": [
+      {
+        "Name": "Belgrade",
+        "Postcode": "11000"
+      },
+      {
+        "Name": "Bor",
+        "Postcode": "19210"
+      },
+      {
+        "Name": "Loznica",
+        "Postcode": "15300"
+      },
+      {
+        "Name": "Novi Pazar",
+        "Postcode": "36300"
+      }
+    ]
   },
   {
     "name": "Spain",
-    "code": "ES"
-  },
-  {
-    "name": "Switzerland",
-    "code": "CH"
+    "code": "ES",
+    "Cities": [
+      {
+        "Name": "Madrid",
+        "Postcode": "28080"
+      },
+      {
+        "Name": "Barcelona",
+        "Postcode": "08080"
+      },
+      {
+        "Name": "Valencia",
+        "Postcode": "46080"
+      },
+      {
+        "Name": "Seville",
+        "Postcode": "41001"
+      }
+    ]
   },
   {
     "name": "Turkey",
-    "code": "TR"
+    "code": "TR",
+    "Cities": [
+      {
+        "Name": "Istanbul",
+        "Postcode": "34000"
+      },
+      {
+        "Name": "Ankara",
+        "Postcode": "06111"
+      },
+      {
+        "Name": "İzmir",
+        "Postcode": "35000"
+      },
+      {
+        "Name": "Bursa",
+        "Postcode": "16000"
+      }
+    ]
   },
   {
     "name": "United Kingdom",
-    "code": "GB"
+    "code": "GB",
+    "Cities": [
+      {
+        "Name": "London",
+        "Postcode": "120120"
+      },
+      {
+        "Name": "Belfast",
+        "Postcode": "908090"
+      },
+      {
+        "Name": "Bristol",
+        "Postcode": "808080"
+      },
+      {
+        "Name": "Cambridge",
+        "Postcode": "606060"
+      }
+    ]
   }
 ]

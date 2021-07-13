@@ -5,5 +5,7 @@
         public string Name { get; set; }
 
         public string Code { get; set; }
+
+        public CitiesDtoInput[] Cities { get; set; }
     }
 }
