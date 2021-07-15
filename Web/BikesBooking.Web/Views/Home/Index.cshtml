@@ -14,26 +14,34 @@
             <div class="search-form-container lead-section">
                 <h4 class="font-weight-bold"> Search for a rental</h4>
                 <form method="post" class="search-form-container lead-section">
+
                     <div class="form-group">
                         <label asp-for="CountryId"></label>
                         <select asp-for="CountryId" class="form-control" asp-items="countriesItems"></select>
                         <span asp-validation-for="CountryId" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
-                        <label asp-for="City"></label>
-                        <input asp-for="City" class="form-control" />
-                        <span asp-validation-for="City" class="text-danger"></span>
+                        <label asp-for="CityId"></label>
+                        <select asp-for="CityId" 
+                                name="CityId" 
+                                id="CityId"
+                                asp-items="@(new SelectList(string.Empty, "Id", "Name"))" class="form-control" ></select>
+                        <span asp-validation-for="CityId" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="PickUpDate"></label>
                         <input asp-for="PickUpDate" class="form-control" />
                         <span asp-validation-for="PickUpDate" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="DropOffDate"></label>
                         <input asp-for="DropOffDate" class="form-control" />
                         <span asp-validation-for="DropOffDate" class="text-danger"></span>
                     </div>
+
                     <div class="form-group">
                         <label asp-for="Type"></label>
                         <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>
@@ -57,3 +65,27 @@
     </div>
 </div>
 
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+             getCity();
+             $('#CountryId').change(function () {
+            getCity();
+            });
+        });
+        function getCity() {
+            var url = '@Url.Content("~/")' + "City/GetCity";
+
+            var ddlSource = '#CountryId';
+            $.getJSON(url, { id: $(ddlSource).val() }, function (data) {
+                var items = '';
+                $('#CityId').empty();
+                $.each(data, function (i, city) {
+                    items += "<option value ='" + city.value + "'>" + city.text + "</option>";
+                });
+                $('#CityId').html(items);
+            });
+        }
+    </script>
+}

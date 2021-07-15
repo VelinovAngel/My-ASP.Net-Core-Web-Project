@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Services.Data
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO;
 
@@ -8,6 +9,6 @@
     {
         IEnumerable<KeyValuePair<string, string>> GetKeyValuePairs();
 
-        IEnumerable<CityDtoOutput> GetAllCitiesByCountryId(int id);
+        Task<IEnumerable<CityDtoOutput>> GetAllCitiesByCountryIdAsync(int id);
     }
 }

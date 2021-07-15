@@ -31,7 +31,7 @@
             }).ToList()
             .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name.ToString()));
 
-        public async Task<IEnumerable<CityDtoOutput>> GetAllCitiesByCountryId(int id)
+        public async Task<IEnumerable<CityDtoOutput>> GetAllCitiesByCountryIdAsync(int id)
             => await this.citirsRepository.All().AsQueryable()
             .Where(x => x.CountryId == id)
             .Select(x => new CityDtoOutput
@@ -39,6 +39,5 @@
                 Id = x.Id,
                 Name = x.Name,
             }).ToListAsync();
-
     }
 }
