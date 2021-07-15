@@ -1,14 +1,14 @@
 ﻿@model ContactUsForm
 
 
-<h1 class="text-light">
+<h1>
     Do you have any questions? Please do not hesitate to contact us directly. Our team will come back to you within
     a matter of hours to help you.
 </h1>
 
 <section class="mb-4">
 
-    <h2 class="h1-responsive font-weight-bold text-center my-4 text-light">Contact us</h2>
+    <h2 class="h1-responsive font-weight-bold text-center my-4 ">Contact us</h2>
 
     <div class="row">
         <div class="col-md-9 mb-md-0 mb-5">
@@ -18,7 +18,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <label asp-for="Name" class="text-light">Your name</label>
+                            <label asp-for="Name">Your name</label>
                             <input asp-for="Name" class="form-control">
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
@@ -26,7 +26,7 @@
 
                     <div class="col-md-6">
                         <div class="md-form mb-0">
-                            <label asp-for="Email" class="text-light">Your email</label>
+                            <label asp-for="Email">Your email</label>
                             <input asp-for="Email" class="form-control">
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="md-form mb-0">
-                            <label asp-for="Subject" class="text-light">Subject</label>
+                            <label asp-for="Subject">Subject</label>
                             <input asp-for="Subject" class="form-control">
                             <span asp-validation-for="Subject" class="text-danger"></span>
                         </div>
@@ -46,7 +46,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="md-form">
-                            <label asp-for="Description" class="text-light">Your message</label>
+                            <label asp-for="Description">Your message</label>
                             <textarea asp-for="Description" rows="4" class="form-control md-textarea"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>

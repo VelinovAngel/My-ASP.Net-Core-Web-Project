@@ -1,14 +1,14 @@
 ﻿namespace BikesBooking.Web.ViewModels.Motor
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class SearchMotorModel
     {
         [Required]
-        [MinLength(3)]
-        [MaxLength(15)]
-        public string Country { get; set; }
+        [Display(Name = "Country")]
+        public int CountryId { get; set; }
 
         [Required]
         [MinLength(3)]
@@ -27,5 +27,7 @@
 
         [Required]
         public MotorType Type { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> CountriesItems { get; set; }
     }
 }

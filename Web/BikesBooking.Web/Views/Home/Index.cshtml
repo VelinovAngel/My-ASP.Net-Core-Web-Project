@@ -1,22 +1,23 @@
 ﻿@using BikesBooking.Common
 @{
     this.ViewData["Title"] = "Home Page";
+    var countriesItems = this.Model.CountriesItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
 @model SearchMotorModel
 
 
 <div class="row">
-    <div class="col-lg-4 col-md-6 text-light">
+    <div class="col-lg-4 col-md-6">
         <div>
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="search-form-container lead-section">
                 <h4 class="font-weight-bold"> Search for a rental</h4>
                 <form method="post" class="search-form-container lead-section">
                     <div class="form-group">
-                        <label asp-for="Country"></label>
-                        <input asp-for="Country" class="form-control" />
-                        <span asp-validation-for="Country" class="text-danger"></span>
+                        <label asp-for="CountryId"></label>
+                        <select asp-for="CountryId" class="form-control" asp-items="countriesItems"></select>
+                        <span asp-validation-for="CountryId" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="City"></label>
@@ -44,7 +45,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-7 col-lg-offset-1 col-md-7 col-sm-6 text-light">
+    <div class="col-lg-7 col-lg-offset-1 col-md-7 col-sm-6">
         <h2 class="display-3">Rent a motorcycle, scooter or bicycle in any part of the world</h2>
         <ul class="advantages-list h4">
             <li>Compare 942 rental companies worldwide</li>
