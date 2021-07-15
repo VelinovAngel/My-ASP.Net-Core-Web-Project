@@ -11,9 +11,8 @@
         public int CountryId { get; set; }
 
         [Required]
-        [MinLength(3)]
-        [MaxLength(12)]
-        public string City { get; set; }
+        [Display(Name = "City")]
+        public int CityId { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
