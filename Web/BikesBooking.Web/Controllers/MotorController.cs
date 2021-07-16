@@ -5,11 +5,9 @@
 
     public class MotorController : Controller
     {
-        private readonly IGetAllModelsService getAllModels;
-
-        public MotorController(IGetAllModelsService getAllModels)
+        public IActionResult Add()
         {
-            this.getAllModels = getAllModels;
+            return this.View();
         }
     }
 }

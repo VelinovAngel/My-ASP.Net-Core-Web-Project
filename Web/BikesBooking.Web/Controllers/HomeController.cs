@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
+    using System;
     using System.Diagnostics;
 
     using BikesBooking.Services.Data;
@@ -18,7 +19,11 @@
 
         public IActionResult Index()
         {
-            var viewModel = new SearchMotorModel();
+            var viewModel = new SearchMotorModel
+            {
+                DropOffDate = DateTime.UtcNow,
+                PickUpDate = DateTime.UtcNow.AddDays(1),
+            };
             viewModel.CountriesItems = this.homeService.GetKeyValuePairs();
             return this.View(viewModel);
         }
@@ -32,11 +37,12 @@
                 return this.View(input);
             }
 
-            return this.Redirect("/");
+            return this.Redirect("/All");
         }
 
-        public IActionResult Privacy()
+        public IActionResult All()
         {
+
             return this.View();
         }
 

@@ -2,7 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using BikerBooking.Data.Models.Enums;
     using BikesBooking.Data.Common.Models;
 
     public class Motorcycle : BaseDeletableModel<int>
@@ -21,8 +20,6 @@
 
         [Required]
         public int CubicCentimetre { get; set; }
-
-        public Brand Brand { get; set; }
 
         [Required]
         public decimal Price { get; set; }
