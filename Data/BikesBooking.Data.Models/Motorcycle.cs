@@ -37,11 +37,11 @@
 
         public virtual City City { get; set; }
 
-        public int OfferId { get; set; }
+        public int? OfferId { get; set; }
 
         public virtual Offer Offer { get; set; }
 
-        public int BookingId { get; set; }
+        public int? BookingId { get; set; }
 
         public virtual Booking Booking { get; set; }
     }

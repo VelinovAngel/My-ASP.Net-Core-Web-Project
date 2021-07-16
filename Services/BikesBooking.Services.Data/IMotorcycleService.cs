@@ -1,8 +1,11 @@
 ﻿namespace BikesBooking.Services.Data
 {
-    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-    public interface IGetAllModelsService
+    using BikesBooking.Web.ViewModels.Motor;
+
+    public interface IMotorcycleService
     {
+        Task CreateMotorcycle(AddMotorcycleModel createMotorcycle);
     }
 }

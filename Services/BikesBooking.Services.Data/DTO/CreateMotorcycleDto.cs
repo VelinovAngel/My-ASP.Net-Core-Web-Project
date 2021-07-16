@@ -12,11 +12,15 @@
 
         public int CubicCentimetre { get; set; }
 
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public bool Available { get; set; }
 
         public string Url { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
 
         public string Review { get; set; }
     }

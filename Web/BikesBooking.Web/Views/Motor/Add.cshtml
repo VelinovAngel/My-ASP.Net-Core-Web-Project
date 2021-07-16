@@ -2,7 +2,6 @@
 
 @{
     this.ViewData["Title"] = "Add Motorcycle";
-
 }
 
 <h4 class="font-weight-bold text-md-center">Here you can add your motorcycle.</h4>
@@ -52,6 +51,18 @@
         <label asp-for="Url"></label>
         <input asp-for="Url" class="form-control" />
         <span asp-validation-for="Url" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="City"></label>
+        <input asp-for="City" class="form-control" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Country"></label>
+        <input asp-for="Country" class="form-control" />
+        <span asp-validation-for="Country" class="text-danger"></span>
     </div>
 
     <div class="form-group">

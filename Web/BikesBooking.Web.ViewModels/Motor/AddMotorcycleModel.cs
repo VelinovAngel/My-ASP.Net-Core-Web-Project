@@ -30,7 +30,7 @@
 
         [Required]
         [Range(0, 1000, ErrorMessage = "The price must be between 0.00€ and 1000.00€!")]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         [Required]
         public bool Available { get; set; }
@@ -38,6 +38,12 @@
         [Required]
         [Url]
         public string Url { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public string Country { get; set; }
 
         [Required]
         [MaxLength(600)]
