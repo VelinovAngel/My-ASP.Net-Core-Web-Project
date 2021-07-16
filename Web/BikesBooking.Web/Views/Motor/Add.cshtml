@@ -1,45 +1,58 @@
-﻿@AddMotorcycleModel
+﻿@model AddMotorcycleModel
 
 @{ 
-    @ViewData["Title"] = "Add Motorcycle";
+    this.ViewData["Title"] = "Add Motorcycle";
 }
 
-<h4 class="font-weight-bold"> Search for a rental</h4>
+<h4 class="font-weight-bold text-md-center">Here you can add your motorcycle.</h4>
 
-<form method="post" class="search-form-container lead-section">
+<br />
+
+<form method="post" class="search-form-container lead-section col-md-6 offset-md-3">
 
     <div class="form-group">
-        <label asp-for="CountryId"></label>
-        <select asp-for="CountryId" class="form-control" asp-items="countriesItems"></select>
-        <span asp-validation-for="CountryId" class="text-danger"></span>
+        <label asp-for="Manufacturer"></label>
+        <input asp-for="Manufacturer" class="form-control" />
+        <span asp-validation-for="Manufacturer" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="CityId"></label>
-        <select asp-for="CityId"
-                name="CityId"
-                id="CityId"
-                asp-items="@(new SelectList(string.Empty, "Id", "Name"))" class="form-control"></select>
-        <span asp-validation-for="CityId" class="text-danger"></span>
+        <label asp-for="Model"></label>
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="PickUpDate"></label>
-        <input asp-for="PickUpDate" class="form-control" />
-        <span asp-validation-for="PickUpDate" class="text-danger"></span>
+        <label asp-for="Color"></label>
+        <input asp-for="Color" class="form-control" />
+        <span asp-validation-for="Color" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="DropOffDate"></label>
-        <input asp-for="DropOffDate" class="form-control" />
-        <span asp-validation-for="DropOffDate" class="text-danger"></span>
+        <label asp-for="CubicCentimetre"></label>
+        <input asp-for="CubicCentimetre" class="form-control" />
+        <span asp-validation-for="CubicCentimetre" class="text-danger"></span>
     </div>
 
     <div class="form-group">
-        <label asp-for="Type"></label>
-        <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>
-        <span asp-validation-for="Type" class="text-danger"></span>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
     </div>
 
-    <button type="submit" class="btn btn-primary">Search</button>
+    <div class="form-group">
+        <label asp-for="Review"></label>
+        <textarea asp-for="Review" class="form-control"></textarea>
+        <span asp-validation-for="Review" class="text-danger"></span>
+    </div>
+
+    <div class="form-check form-switch">
+        <input asp-for="Available" class="form-check-input" checked>
+        <label asp-for="Available" class="form-check-label">Available</label>
+        <span asp-validation-for="Available" class="text-danger"></span>
+    </div>
+
+    <br />
+
+    <button type="submit" class="btn btn-primary">Add Motorcycle</button>
 </form>

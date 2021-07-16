@@ -1,10 +1,9 @@
 ﻿namespace BikesBooking.Services.Data
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
+
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.DTO;
