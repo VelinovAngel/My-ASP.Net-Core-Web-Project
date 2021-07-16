@@ -37,12 +37,7 @@
                 return this.View(input);
             }
 
-            return this.Redirect("/All");
-        }
-
-        public IActionResult All()
-        {
-            return this.View();
+            return this.Redirect("/Motor/FreeMotors");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

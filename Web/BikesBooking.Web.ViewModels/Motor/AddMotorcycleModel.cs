@@ -1,12 +1,19 @@
 ﻿namespace BikesBooking.Web.ViewModels.Motor
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
+
+    using BikesBooking.Common;
 
     public class AddMotorcycleModel
     {
         [Required]
         [MaxLength(30)]
         public string Manufacturer { get; set; }
+
+        [Required]
+        [Range(GlobalConstants.MinYearMotorcycle, GlobalConstants.MaxYearMotorcycle)]
+        public int Year { get; set; }
 
         [Required]
         [MaxLength(30)]

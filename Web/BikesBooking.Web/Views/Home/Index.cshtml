@@ -23,10 +23,10 @@
 
                     <div class="form-group">
                         <label asp-for="CityId"></label>
-                        <select asp-for="CityId" 
-                                name="CityId" 
+                        <select asp-for="CityId"
+                                name="CityId"
                                 id="CityId"
-                                asp-items="@(new SelectList(string.Empty, "Id", "Name"))" class="form-control" ></select>
+                                asp-items="@(new SelectList(string.Empty, "Id", "Name"))" class="form-control"></select>
                         <span asp-validation-for="CityId" class="text-danger"></span>
                     </div>
 

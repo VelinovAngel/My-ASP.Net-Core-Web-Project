@@ -1,7 +1,8 @@
 ﻿@model AddMotorcycleModel
 
-@{ 
+@{
     this.ViewData["Title"] = "Add Motorcycle";
+
 }
 
 <h4 class="font-weight-bold text-md-center">Here you can add your motorcycle.</h4>
@@ -9,6 +10,7 @@
 <br />
 
 <form method="post" class="search-form-container lead-section col-md-6 offset-md-3">
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <div class="form-group">
         <label asp-for="Manufacturer"></label>
@@ -20,6 +22,12 @@
         <label asp-for="Model"></label>
         <input asp-for="Model" class="form-control" />
         <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Year"></label>
+        <input asp-for="Year" class="form-control" />
+        <span asp-validation-for="Year" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -62,3 +70,7 @@
 
     <button type="submit" class="btn btn-primary">Add Motorcycle</button>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

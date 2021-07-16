@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BikesBooking.Common\BikesBooking.Common.csproj" />
     <ProjectReference Include="..\..\Data\BikesBooking.Data.Models\BikesBooking.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\BikesBooking.Services.Mapping\BikesBooking.Services.Mapping.csproj" />
   </ItemGroup>
