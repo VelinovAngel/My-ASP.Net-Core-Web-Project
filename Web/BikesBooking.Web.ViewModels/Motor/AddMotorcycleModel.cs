@@ -30,6 +30,7 @@
 
         [Required]
         [Range(0, 1000, ErrorMessage = "The price must be between 0.00€ and 1000.00€!")]
+        [Display(Name = "Price per day")]
         public decimal Price { get; set; }
 
         [Required]

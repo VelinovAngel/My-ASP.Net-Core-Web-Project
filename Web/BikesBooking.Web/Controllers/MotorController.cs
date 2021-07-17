@@ -35,9 +35,10 @@
             return this.Redirect("/Motor/All");
         }
 
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            return this.View();
+            var model = await this.motorcycleService.GetCollectionOfMotorsAsync();
+            return this.View(model);
         }
 
         public IActionResult FreeMotors()

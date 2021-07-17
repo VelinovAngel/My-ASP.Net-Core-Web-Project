@@ -1,12 +1,15 @@
 ﻿namespace BikesBooking.Services.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
+    using BikesBooking.Services.Data.DTO;
     using BikesBooking.Web.ViewModels.Motor;
+    using Microsoft.EntityFrameworkCore;
 
     public class MotorcycleService : IMotorcycleService
     {
@@ -107,5 +110,25 @@
             await this.motorcycleRepository.AddAsync(motorcycle);
             await this.motorcycleRepository.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<MotorcycleDtoOutput>> GetCollectionOfMotorsAsync()
+            => await this.motorcycleRepository.AllAsNoTracking()
+            .AsQueryable()
+            .Select(x => new MotorcycleDtoOutput
+            {
+                Id = x.Id,
+                Manufacturer = x.Manufacturer.Name,
+                Model = x.Model.Name,
+                Color = x.Color.Name,
+                CubicCentimetre = x.CubicCentimetre,
+                Country = x.City.Country.Name,
+                City = x.City.Name,
+                Price = x.Price,
+                Available = x.Available,
+                Url = x.Url,
+                Type = (MotorType)x.TypeMotor,
+                Description = x.Description,
+            })
+            .ToListAsync();
     }
 }

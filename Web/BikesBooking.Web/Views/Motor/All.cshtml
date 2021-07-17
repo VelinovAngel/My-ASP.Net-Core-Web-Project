@@ -1,4 +1,5 @@
-﻿@{ 
+﻿
+@{
     this.ViewData["Title"] = "My motorcycles";
 }
 
@@ -9,4 +10,38 @@
         @this.TempData["Message"]
     </div>
 }
+
+<h1 class="text-center mt-2">My Collection</h1>
+<div class="row mt-2 mb-4">
+    @foreach (var motorcycle in Model)
+    {
+        <div class="card col-6 col-lg-3">
+            <img src="@motorcycle.Url"
+                 class="motor-img-top img-fluid motor-image">
+            <div class="motor-body">
+                <h5 class="motor-title text-center" data-toggle="tooltip">
+                    @motorcycle.Manufacturer -> @motorcycle.Model
+                </h5>
+                <h4 class="motor-title text-center" data-toggle="tooltip" data-placement="bottom"
+                    title="@motorcycle.Description">
+                    Description:
+                </h4>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item text-center">Type : @motorcycle.Type</li>
+                    <li class="list-group-item">
+                        <span class="motor-stat">@motorcycle.CubicCentimetre c.c.</span>
+                    </li>
+                    <li class="list-group-item">
+                        <span class="price-stat">@motorcycle.Price Euro</span>
+                    </li>
+                </ul>
+                <br />
+                <a href="/Motor/Makedisponible?motorcycleId=@motorcycle.Id" class="btn btn-block btn-success">Make available</a>
+                <a href="/Motor/Createrating?motorcycleId=@motorcycle.Id" class="btn btn-block btn-primary">Create Rating</a>
+                <a href="/Motor/RemoveFromCollection?motorcycleId=@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
+            </div>
+        </div>
+    }
+</div>
+
 
