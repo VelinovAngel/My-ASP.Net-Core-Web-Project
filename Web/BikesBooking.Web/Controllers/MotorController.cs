@@ -28,7 +28,7 @@
                 return this.View();
             }
 
-            await this.motorcycleService.CreateMotorcycle(motorcycle);
+            await this.motorcycleService.CreateMotorcycleAsync(motorcycle);
 
             this.TempData["Message"] = "Motorcycles added successful!";
 

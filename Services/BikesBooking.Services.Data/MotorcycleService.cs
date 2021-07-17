@@ -33,7 +33,7 @@
             this.cityRepository = cityRepository;
         }
 
-        public async Task CreateMotorcycle(AddMotorcycleModel createMotorcycle)
+        public async Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle)
         {
             if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
             {
@@ -74,7 +74,6 @@
                 await this.cityRepository.SaveChangesAsync();
             }
 
-
             var model = this.modelsRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.Model);
@@ -88,6 +87,9 @@
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.City);
 
+            var typeVelue = (int)createMotorcycle.Type;
+            var type = (BikesBooking.Data.Models.Enum.Type)typeVelue;
+
             var motorcycle = new Motorcycle
             {
                 ManufacturerId = manufacturer.Id,
@@ -99,6 +101,7 @@
                 Available = createMotorcycle.Available,
                 Description = createMotorcycle.Description,
                 Price = createMotorcycle.Price,
+                TypeMotor = type,
             };
 
             await this.motorcycleRepository.AddAsync(motorcycle);

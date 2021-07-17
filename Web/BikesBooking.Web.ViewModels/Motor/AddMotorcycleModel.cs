@@ -46,6 +46,9 @@
         public string Country { get; set; }
 
         [Required]
+        public MotorType Type { get; set; }
+
+        [Required]
         [MaxLength(600)]
         public string Description { get; set; }
     }

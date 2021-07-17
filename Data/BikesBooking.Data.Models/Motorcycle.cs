@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Data.Common.Models;
+    using BikesBooking.Data.Models.Enum;
 
     public class Motorcycle : BaseDeletableModel<int>
     {
@@ -28,6 +29,9 @@
         public decimal Price { get; set; }
 
         public bool Available { get; set; }
+
+        [Required]
+        public Type TypeMotor { get; set; }
 
         [Required]
         public string Url { get; set; }

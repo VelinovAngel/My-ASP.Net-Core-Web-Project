@@ -23,5 +23,7 @@
         public string City { get; set; }
 
         public string Review { get; set; }
+
+        public string TypeMotor { get; set; }
     }
 }

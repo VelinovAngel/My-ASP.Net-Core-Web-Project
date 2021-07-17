@@ -6,6 +6,6 @@
 
     public interface IMotorcycleService
     {
-        Task CreateMotorcycle(AddMotorcycleModel createMotorcycle);
+        Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle);
     }
 }
