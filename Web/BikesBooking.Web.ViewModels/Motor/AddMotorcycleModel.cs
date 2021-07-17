@@ -47,6 +47,6 @@
 
         [Required]
         [MaxLength(600)]
-        public string Review { get; set; }
+        public string Description { get; set; }
     }
 }

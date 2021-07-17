@@ -10,5 +10,7 @@
         IEnumerable<KeyValuePair<string, string>> GetKeyValuePairs();
 
         Task<IEnumerable<CityDtoOutput>> GetAllCitiesByCountryIdAsync(int id);
+
+        int GetAllCityCount();
     }
 }

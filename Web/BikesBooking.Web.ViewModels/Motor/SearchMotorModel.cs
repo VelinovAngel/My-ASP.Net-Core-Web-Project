@@ -24,6 +24,8 @@
         [Display(Name = "Drop-off Date")]
         public DateTime DropOffDate { get; set; }
 
+        public int CityCount { get; set; }
+
         [Required]
         public MotorType Type { get; set; }
 

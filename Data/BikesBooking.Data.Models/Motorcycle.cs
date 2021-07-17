@@ -22,6 +22,9 @@
         public int CubicCentimetre { get; set; }
 
         [Required]
+        public string Description { get; set; }
+
+        [Required]
         public decimal Price { get; set; }
 
         public bool Available { get; set; }
@@ -29,7 +32,7 @@
         [Required]
         public string Url { get; set; }
 
-        public int ReviewId { get; set; }
+        public int? ReviewId { get; set; }
 
         public virtual Review Review { get; set; }
 

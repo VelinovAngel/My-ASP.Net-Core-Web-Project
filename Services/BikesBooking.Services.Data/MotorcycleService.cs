@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Services.Data
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -34,78 +35,69 @@
 
         public async Task CreateMotorcycle(AddMotorcycleModel createMotorcycle)
         {
-            var model = this.modelsRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == createMotorcycle.Model);
-
-            var manufacturer = this.manufacturerRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == createMotorcycle.Manufacturer);
-
-            var color = this.colorRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == createMotorcycle.Color);
-
-            var country = this.countryRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == createMotorcycle.Country);
-
-            var city = this.colorRepository
-                .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == createMotorcycle.City);
-
-            if (model == null)
+            if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
             {
-                await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Color });
+                await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Model });
+                await this.modelsRepository.SaveChangesAsync();
             }
 
-            if (manufacturer == null)
+            if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
             {
-                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Color });
+                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer });
+                await this.manufacturerRepository.SaveChangesAsync();
             }
 
-            if (color == null)
+            if (!this.colorRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Color))
             {
                 await this.colorRepository.AddAsync(new Color { Name = createMotorcycle.Color });
+                await this.colorRepository.SaveChangesAsync();
             }
 
-            if (country == null)
+            if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Country))
             {
                 await this.countryRepository.AddAsync(new Country { Name = createMotorcycle.Country });
+                await this.countryRepository.SaveChangesAsync();
             }
 
             var countryId = this.countryRepository
                                 .AllAsNoTracking()
                                 .FirstOrDefault(x => x.Name == createMotorcycle.Country).Id;
 
-            if (city == null)
+            if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.City))
             {
-                await this.cityRepository.AddAsync(new City { Name = createMotorcycle.City, CountryId = countryId });
+                await this.cityRepository.AddAsync(new City
+                {
+                    Name = createMotorcycle.City,
+                    CountryId = countryId,
+                    Postcode = new Random().Next(1000, 99999),
+                });
+                await this.cityRepository.SaveChangesAsync();
             }
 
-            var fisrtModel = this.modelsRepository
+
+            var model = this.modelsRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.Model);
-            var firstManufacturer = this.manufacturerRepository
+            var manufacturer = this.manufacturerRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.Manufacturer);
-            var firstColor = this.colorRepository
+            var color = this.colorRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.Color);
-            var firstCity = this.cityRepository
+            var city = this.cityRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == createMotorcycle.City);
 
             var motorcycle = new Motorcycle
             {
-                ManufacturerId = firstManufacturer.Id,
-                Model = model,
-                ColorId = firstColor.Id,
-                CityId = firstCity.Id,
+                ManufacturerId = manufacturer.Id,
+                ModelId = model.Id,
+                ColorId = color.Id,
+                CityId = city.Id,
                 CubicCentimetre = createMotorcycle.CubicCentimetre,
                 Url = createMotorcycle.Url,
                 Available = createMotorcycle.Available,
-                Review = new Review { Description = createMotorcycle.Review },
+                Description = createMotorcycle.Description,
                 Price = createMotorcycle.Price,
             };
 

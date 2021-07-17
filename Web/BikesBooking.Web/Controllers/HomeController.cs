@@ -24,6 +24,7 @@
                 DropOffDate = DateTime.UtcNow,
                 PickUpDate = DateTime.UtcNow.AddDays(1),
             };
+            viewModel.CityCount = this.homeService.GetAllCityCount();
             viewModel.CountriesItems = this.homeService.GetKeyValuePairs();
             return this.View(viewModel);
         }

@@ -38,5 +38,8 @@
                 Id = x.Id,
                 Name = x.Name,
             }).ToListAsync();
+
+        public int GetAllCityCount()
+            => this.citirsRepository.AllAsNoTracking().Count();
     }
 }
