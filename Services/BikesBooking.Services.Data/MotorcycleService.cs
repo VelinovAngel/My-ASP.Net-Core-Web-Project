@@ -19,6 +19,7 @@
         private readonly IRepository<Color> colorRepository;
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
+        private readonly IRepository<Offer> offerRepository;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -26,7 +27,8 @@
             IRepository<Motorcycle> motorcycleRepository,
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
-            IRepository<City> cityRepository)
+            IRepository<City> cityRepository,
+            IRepository<Offer> offerRepository)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -34,6 +36,7 @@
             this.colorRepository = colorRepository;
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
+            this.offerRepository = offerRepository;
         }
 
         public async Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle)
@@ -130,5 +133,23 @@
                 Description = x.Description,
             })
             .ToListAsync();
+
+        public async Task<OfferSigleMotorcycleModel> GetMotorcycleByIdAsync(int id)
+            => await this.motorcycleRepository.AllAsNoTracking()
+            .AsQueryable()
+            .Where(x => x.Id == id)
+            .Select(x => new OfferSigleMotorcycleModel
+            {
+                ModelId = x.Id,
+                Manufacturer = x.Manufacturer.Name,
+                Model = x.Model.Name,
+                CubicCentimetre = x.CubicCentimetre,
+                Color = x.Color.Name,
+                Price = x.Price,
+                Url = x.Url,
+                Available = x.Available,
+                Type = x.TypeMotor.ToString(),
+            })
+            .FirstOrDefaultAsync();
     }
 }

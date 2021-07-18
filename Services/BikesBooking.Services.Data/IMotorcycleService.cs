@@ -11,5 +11,7 @@
         Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle);
 
         Task<IEnumerable<MotorcycleDtoOutput>> GetCollectionOfMotorsAsync();
+
+        Task<OfferSigleMotorcycleModel> GetMotorcycleByIdAsync(int id);
     }
 }

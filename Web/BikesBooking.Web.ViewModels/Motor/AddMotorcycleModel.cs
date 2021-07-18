@@ -25,7 +25,7 @@
 
         [Required]
         [Display(Name = "Cubic Centimetre")]
-        [Range(0, 1000, ErrorMessage = "The cubic centimetre must be between 50c.c. and 1250c.c.!")]
+        [Range(0, 1250, ErrorMessage = "The cubic centimetre must be between 50c.c. and 1250c.c.!")]
         public int CubicCentimetre { get; set; }
 
         [Required]

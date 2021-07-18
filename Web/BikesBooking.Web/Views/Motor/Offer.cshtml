@@ -1,39 +1,57 @@
-﻿@model AllMotorsModel
+﻿@model OfferSigleMotorcycleModel
 
-@{ 
-    this.ViewData["Title"] = "Edit";
+@{
+    this.ViewData["Title"] = "Offer motorcycle";
 }
 
 
 <section class="py-5">
     <div class="container">
-        <h1 style="margin: 2%; text-align: center;">Trip</h1>
+        <h1 style="margin: 2%; text-align: center;">Page for details for your bike and the possibility of putting it on offer!</h1>
         <div>
             <div class="form-group text-center">
                 <img src="@Model.Url" class="img-fluid">
             </div>
-            <div class="card col-6 col-lg-3">
-                <div class="motor-body">
-                    <h5 class="motor-title text-center" data-toggle="tooltip">
-                        @Model.Manufacturer -> @Model.Model
-                    </h5>
-                    <h4 class="motor-title text-center" data-toggle="tooltip" data-placement="bottom"
-                        title="@Model.Description">
-                        Description:
-                    </h4>
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item text-center">Type : @Model.Type</li>
-                        <li class="list-group-item">
-                            <span class="motor-stat">@Model.CubicCentimetre c.c.</span>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="price-stat">@Model.Price Euro</span>
-                        </li>
-                    </ul>
-                    <br />
-                    <a asp-controller="Motor" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-block btn-success">Offer</a>
+            <div class="form-group">
+                <label>Manufacturer and Model:</label>
+                <h5 type="text" readonly class="form-control">@Model.Manufacturer : @Model.Model</h5>
+            </div>
+            <div class="form-group">
+                <label>Color:</label>
+                <h5 type="text" readonly class="form-control">@Model.Color</h5>
+            </div>
+            <div class="form-group">
+                <label>Cubic Centimetre:</label>
+                <h5 type="text" readonly class="form-control">@Model.CubicCentimetre</h5>
+            </div>
+            <div class="form-group">
+                <label>Price per day:</label>
+                <h5 type="text" readonly class="form-control">@Model.Price</h5>
+            </div>
+            @if (Model.Available == true)
+            {
+                <div class="form-group">
+                    <label>Available:</label>
+                    <h5 class="alert alert-success">Free. You can offer this motorcycle!</h5>
+                </div>
+                <div class="form-group text-center">
+                    <div class="button-holder">
+                        <a asp-controller="Motor" asp-action="OfferThisModel" asp-route-id="@Model.ModelId" class="btn btn-block btn-success">Offer</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-group">1
+                    <label>Available:</label>
+                    <h5 class="alert alert-danger">Busy! You don't can put available this motorcycle!</h5>
+                </div>
+            }
+            <div class="form-group text-center">
+                <div class="button-holder">
+                    <a asp-controller="Motor" asp-action="Edit" asp-route-id="@Model.ModelId" class="btn btn-block btn-primary">Edit</a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+            </div>
+    </section>

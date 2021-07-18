@@ -41,19 +41,13 @@
             return this.View(motorcycle);
         }
 
+        public async Task<IActionResult> Offer(int id)
+        {
+            var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
+            return this.View(model);
+        }
 
         public IActionResult Edit(int id)
-        {
-            return this.View();
-        }
-
-        public IActionResult Offer(int id)
-        {
-            return this.View();
-        }
-
-
-        public IActionResult FreeMotors()
         {
             return this.View();
         }
