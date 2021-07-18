@@ -1,0 +1,39 @@
+﻿@model AllMotorsModel
+
+@{ 
+    this.ViewData["Title"] = "Edit";
+}
+
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Trip</h1>
+        <div>
+            <div class="form-group text-center">
+                <img src="@Model.Url" class="img-fluid">
+            </div>
+            <div class="card col-6 col-lg-3">
+                <div class="motor-body">
+                    <h5 class="motor-title text-center" data-toggle="tooltip">
+                        @Model.Manufacturer -> @Model.Model
+                    </h5>
+                    <h4 class="motor-title text-center" data-toggle="tooltip" data-placement="bottom"
+                        title="@Model.Description">
+                        Description:
+                    </h4>
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item text-center">Type : @Model.Type</li>
+                        <li class="list-group-item">
+                            <span class="motor-stat">@Model.CubicCentimetre c.c.</span>
+                        </li>
+                        <li class="list-group-item">
+                            <span class="price-stat">@Model.Price Euro</span>
+                        </li>
+                    </ul>
+                    <br />
+                    <a asp-controller="Motor" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-block btn-success">Offer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

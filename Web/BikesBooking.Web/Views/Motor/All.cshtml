@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<MotorcycleDtoOutput>
+
 @{
     this.ViewData["Title"] = "My motorcycles";
 }
@@ -36,9 +37,9 @@
                     </li>
                 </ul>
                 <br />
-                <a href="/Motor/Makedisponible?motorcycleId=@motorcycle.Id" class="btn btn-block btn-success">Make available</a>
-                <a href="/Motor/Createrating?motorcycleId=@motorcycle.Id" class="btn btn-block btn-primary">Create Rating</a>
-                <a href="/Motor/RemoveFromCollection?motorcycleId=@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
+                <a asp-controller="Motor" asp-action="Offer" asp-route-id="@motorcycle.Id" class="btn btn-block btn-success">Offer</a>
+                <a asp-controller="Motor" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary">Create Rating</a>
+                <a asp-controller="Motor" asp-action="RemoveFromCollection" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
             </div>
         </div>
     }

@@ -37,9 +37,21 @@
 
         public async Task<IActionResult> All()
         {
-            var model = await this.motorcycleService.GetCollectionOfMotorsAsync();
-            return this.View(model);
+            var motorcycle = await this.motorcycleService.GetCollectionOfMotorsAsync();
+            return this.View(motorcycle);
         }
+
+
+        public IActionResult Edit(int id)
+        {
+            return this.View();
+        }
+
+        public IActionResult Offer(int id)
+        {
+            return this.View();
+        }
+
 
         public IActionResult FreeMotors()
         {
