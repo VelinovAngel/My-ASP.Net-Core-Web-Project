@@ -1,7 +1,11 @@
-﻿namespace BikesBooking.Services.Data.DTO
+﻿namespace BikesBooking.Services.Data.DTO.Motorcycle
 {
-    public class CreateMotorcycleDto
+    using BikesBooking.Web.ViewModels.Motor;
+
+    public class MotorcycleServiceModel
     {
+        public int Id { get; set; }
+
         public string Manufacturer { get; set; }
 
         public int Year { get; set; }
@@ -18,12 +22,12 @@
 
         public string Url { get; set; }
 
-        public string Country { get; set; }
-
         public string City { get; set; }
 
-        public string Review { get; set; }
+        public string Country { get; set; }
 
-        public string TypeMotor { get; set; }
+        public MotorType Type { get; set; }
+
+        public string Description { get; set; }
     }
 }

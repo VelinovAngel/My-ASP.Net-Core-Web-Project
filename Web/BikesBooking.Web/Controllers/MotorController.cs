@@ -35,10 +35,12 @@
             return this.Redirect("/Motor/All");
         }
 
-        public async Task<IActionResult> All()
+        public async Task<IActionResult> All([FromQuery] AllMotorcyclesQueryModel query)
         {
-            var motorcycle = await this.motorcycleService.GetCollectionOfMotorsAsync();
-            return this.View(motorcycle);
+            var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage);
+            query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;
+            query.Motors = motorcycleResult.Motorcycle;
+            return this.View(query);
         }
 
         public async Task<IActionResult> Offer(int id)

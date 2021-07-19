@@ -7,7 +7,7 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Services.Data.DTO;
+    using BikesBooking.Services.Data.DTO.Motorcycle;
     using BikesBooking.Web.ViewModels.Motor;
     using Microsoft.EntityFrameworkCore;
 
@@ -114,25 +114,39 @@
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<MotorcycleDtoOutput>> GetCollectionOfMotorsAsync()
-            => await this.motorcycleRepository.AllAsNoTracking()
-            .AsQueryable()
-            .Select(x => new MotorcycleDtoOutput
+        public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage)
+        {
+            var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
+              .AsQueryable()
+              .Skip((currentPage - 1) * motorcyclesPerPage)
+              .Take(motorcyclesPerPage)
+              .Select(x => new MotorcycleServiceModel
+              {
+                  Id = x.Id,
+                  Manufacturer = x.Manufacturer.Name,
+                  Model = x.Model.Name,
+                  Color = x.Color.Name,
+                  CubicCentimetre = x.CubicCentimetre,
+                  Country = x.City.Country.Name,
+                  City = x.City.Name,
+                  Price = x.Price,
+                  Available = x.Available,
+                  Url = x.Url,
+                  Type = (MotorType)x.TypeMotor,
+                  Description = x.Description,
+              })
+              .ToListAsync();
+
+            var totalCounts = this.modelsRepository.AllAsNoTracking().Count();
+
+            return new MotorcycleQueryServiceModel
             {
-                Id = x.Id,
-                Manufacturer = x.Manufacturer.Name,
-                Model = x.Model.Name,
-                Color = x.Color.Name,
-                CubicCentimetre = x.CubicCentimetre,
-                Country = x.City.Country.Name,
-                City = x.City.Name,
-                Price = x.Price,
-                Available = x.Available,
-                Url = x.Url,
-                Type = (MotorType)x.TypeMotor,
-                Description = x.Description,
-            })
-            .ToListAsync();
+                TotalMotorcycles = totalCounts,
+                CurrentPage = currentPage,
+                MotorcyclesPerPage = motorcyclesPerPage,
+                Motorcycle = motorcycles,
+            };
+        }
 
         public async Task<OfferSigleMotorcycleModel> GetMotorcycleByIdAsync(int id)
             => await this.motorcycleRepository.AllAsNoTracking()
