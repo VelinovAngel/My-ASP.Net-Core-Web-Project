@@ -1,6 +1,6 @@
-﻿namespace BikesBooking.Web.ViewModels.Motor
+﻿namespace BikesBooking.Services.Data.DTO.MotorcycleModels
 {
-    public class AllMotorsModel
+    public class AddMotorcycleDto
     {
         public int Id { get; set; }
 
@@ -24,7 +24,7 @@
 
         public string Country { get; set; }
 
-        public MotorType Type { get; set; }
+        public TypeOfMotors Type { get; set; }
 
         public string Description { get; set; }
     }

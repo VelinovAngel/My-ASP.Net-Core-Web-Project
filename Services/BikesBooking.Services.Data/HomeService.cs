@@ -13,17 +13,28 @@
     {
         private readonly IDeletableEntityRepository<Country> countreisRepository;
         private readonly IDeletableEntityRepository<City> citirsRepository;
+        private readonly IDeletableEntityRepository<Manufacturer> manufacturerRepository;
 
         public HomeService(
             IDeletableEntityRepository<Country> countreisRepository,
-            IDeletableEntityRepository<City> citirsRepository)
+            IDeletableEntityRepository<City> citirsRepository,
+            IDeletableEntityRepository<Manufacturer> manufacturerRepository)
         {
             this.countreisRepository = countreisRepository;
             this.citirsRepository = citirsRepository;
+            this.manufacturerRepository = manufacturerRepository;
         }
 
-        public IEnumerable<KeyValuePair<string, string>> GetKeyValuePairs()
+        public IEnumerable<KeyValuePair<string, string>> GetKeyValuePairsCoutries()
             => this.countreisRepository.All().Select(x => new
+            {
+                x.Id,
+                x.Name,
+            }).ToList()
+            .Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name.ToString()));
+
+        public IEnumerable<KeyValuePair<string, string>> GetKeyValuePairsModels()
+            => this.manufacturerRepository.All().Select(x => new
             {
                 x.Id,
                 x.Name,

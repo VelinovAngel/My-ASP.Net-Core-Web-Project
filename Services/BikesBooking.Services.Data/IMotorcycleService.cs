@@ -3,14 +3,14 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO.Motorcycle;
-    using BikesBooking.Web.ViewModels.Motor;
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public interface IMotorcycleService
     {
-        Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle);
+        Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle);
 
         Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage);
 
-        Task<OfferSigleMotorcycleModel> GetMotorcycleByIdAsync(int id);
+        Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
     }
 }

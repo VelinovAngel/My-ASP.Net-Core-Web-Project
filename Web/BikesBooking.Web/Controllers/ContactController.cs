@@ -1,7 +1,9 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
     using System.Threading.Tasks;
+
     using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.DTO.ContactModels;
     using BikesBooking.Web.ViewModels.Contact;
     using Microsoft.AspNetCore.Mvc;
 
@@ -27,9 +29,17 @@
                 return this.View();
             }
 
-            await this.contactService.SendContactMessageAsync(contact);
+            var massage = new ContactFormDto
+            {
+                Name = contact.Name,
+                Email = contact.Email,
+                Description = contact.Description,
+                Subject = contact.Subject,
+            };
 
-            this.TempData["Successful Message"] = "Messager sedn successfully";
+            await this.contactService.SendContactMessageAsync(massage);
+
+            this.TempData["Successful Message"] = "Message send successfully";
 
             return this.RedirectToAction("Contact", "Contact");
         }

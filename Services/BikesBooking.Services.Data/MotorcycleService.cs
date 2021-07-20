@@ -1,15 +1,15 @@
 ﻿namespace BikesBooking.Services.Data
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.DTO.Motorcycle;
-    using BikesBooking.Web.ViewModels.Motor;
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using Microsoft.EntityFrameworkCore;
+
 
     public class MotorcycleService : IMotorcycleService
     {
@@ -39,7 +39,7 @@
             this.offerRepository = offerRepository;
         }
 
-        public async Task CreateMotorcycleAsync(AddMotorcycleModel createMotorcycle)
+        public async Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle)
         {
             if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
             {
@@ -132,7 +132,7 @@
                   Price = x.Price,
                   Available = x.Available,
                   Url = x.Url,
-                  Type = (MotorType)x.TypeMotor,
+                  Type = (TypeOfMotors)x.TypeMotor,
                   Description = x.Description,
               })
               .ToListAsync();
@@ -148,11 +148,11 @@
             };
         }
 
-        public async Task<OfferSigleMotorcycleModel> GetMotorcycleByIdAsync(int id)
+        public async Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id)
             => await this.motorcycleRepository.AllAsNoTracking()
             .AsQueryable()
             .Where(x => x.Id == id)
-            .Select(x => new OfferSigleMotorcycleModel
+            .Select(x => new OfferSigleMotorcycleDto
             {
                 ModelId = x.Id,
                 Manufacturer = x.Manufacturer.Name,

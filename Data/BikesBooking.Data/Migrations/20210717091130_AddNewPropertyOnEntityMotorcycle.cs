@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BikesBooking.Data.Migrations
+﻿namespace BikesBooking.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class AddNewPropertyOnEntityMotorcycle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,7 +19,7 @@ namespace BikesBooking.Data.Migrations
                 table: "Motorcycles",
                 type: "nvarchar(max)",
                 nullable: false,
-                defaultValue: "");
+                defaultValue: string.Empty);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

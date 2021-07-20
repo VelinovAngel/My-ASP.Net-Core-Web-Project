@@ -2,10 +2,10 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Web.ViewModels.Contact;
+    using BikesBooking.Services.Data.DTO.ContactModels;
 
     public interface IContactService
     {
-        Task SendContactMessageAsync(ContactUsForm contact);
+        Task SendContactMessageAsync(ContactFormDto contact);
     }
 }

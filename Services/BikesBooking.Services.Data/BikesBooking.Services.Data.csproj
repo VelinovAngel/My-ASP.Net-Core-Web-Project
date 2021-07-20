@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\BikesBooking.Data.Common\BikesBooking.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\BikesBooking.Data.Models\BikesBooking.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Web\BikesBooking.Web.ViewModels\BikesBooking.Web.ViewModels.csproj" />
     <ProjectReference Include="..\BikesBooking.Services.Mapping\BikesBooking.Services.Mapping.csproj" />
   </ItemGroup>
 

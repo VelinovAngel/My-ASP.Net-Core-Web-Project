@@ -21,11 +21,12 @@
         {
             var viewModel = new SearchMotorModel
             {
-                DropOffDate = DateTime.UtcNow,
-                PickUpDate = DateTime.UtcNow.AddDays(1),
+                PickUpDate = DateTime.UtcNow,
+                DropOffDate = DateTime.UtcNow.AddDays(1),
             };
             viewModel.CityCount = this.homeService.GetAllCityCount();
-            viewModel.CountriesItems = this.homeService.GetKeyValuePairs();
+            viewModel.CountriesItems = this.homeService.GetKeyValuePairsCoutries();
+            viewModel.ManufacturerItems = this.homeService.GetKeyValuePairsModels();
             return this.View(viewModel);
         }
 
@@ -34,7 +35,9 @@
         {
             if (!this.ModelState.IsValid)
             {
-                input.CountriesItems = this.homeService.GetKeyValuePairs();
+                input.CityCount = this.homeService.GetAllCityCount();
+                input.CountriesItems = this.homeService.GetKeyValuePairsCoutries();
+                input.ManufacturerItems = this.homeService.GetKeyValuePairsModels();
                 return this.View(input);
             }
 

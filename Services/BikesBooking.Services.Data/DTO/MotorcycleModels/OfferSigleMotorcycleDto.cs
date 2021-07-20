@@ -1,6 +1,6 @@
-﻿namespace BikesBooking.Web.ViewModels.Motor
+﻿namespace BikesBooking.Services.Data.DTO.MotorcycleModels
 {
-    public class OfferSigleMotorcycleModel
+    public class OfferSigleMotorcycleDto
     {
         public int ModelId { get; set; }
 

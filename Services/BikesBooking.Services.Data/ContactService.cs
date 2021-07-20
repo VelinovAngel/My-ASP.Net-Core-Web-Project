@@ -4,7 +4,7 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Web.ViewModels.Contact;
+    using BikesBooking.Services.Data.DTO.ContactModels;
 
     public class ContactService : IContactService
     {
@@ -15,7 +15,7 @@
             this.contactRepository = contactRepository;
         }
 
-        public async Task SendContactMessageAsync(ContactUsForm contact)
+        public async Task SendContactMessageAsync(ContactFormDto contact)
         {
             var message = new Contact
             {

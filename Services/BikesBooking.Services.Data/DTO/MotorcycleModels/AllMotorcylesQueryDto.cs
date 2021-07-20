@@ -1,10 +1,10 @@
-﻿namespace BikesBooking.Web.ViewModels.Motor
+﻿namespace BikesBooking.Services.Data.DTO.MotorcycleModels
 {
     using System.Collections.Generic;
 
     using BikesBooking.Services.Data.DTO.Motorcycle;
 
-    public class AllMotorcyclesQueryModel
+    public class AllMotorcylesQueryDto
     {
         public const int MotorcyclesPerPage = 4;
 

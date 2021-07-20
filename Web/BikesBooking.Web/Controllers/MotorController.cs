@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Web.ViewModels.Motor;
     using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddMotorcycleModel motorcycle)
+        public async Task<IActionResult> Add(AddMotorcycleDto motorcycle)
         {
             if (!this.ModelState.IsValid)
             {
@@ -35,7 +36,7 @@
             return this.Redirect("/Motor/All");
         }
 
-        public async Task<IActionResult> All([FromQuery] AllMotorcyclesQueryModel query)
+        public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
         {
             var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage);
             query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;

@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
+
     public class SearchMotorModel
     {
         [Required]
@@ -27,8 +29,13 @@
         public int CityCount { get; set; }
 
         [Required]
-        public MotorType Type { get; set; }
+        [Display(Name = "Brand")]
+        public int ManufacturerId { get; set; }
+
+        public AddMotorcycleDto Type { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CountriesItems { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> ManufacturerItems { get; set; }
     }
 }
