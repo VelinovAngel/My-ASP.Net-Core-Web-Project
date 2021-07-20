@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Motorcycle
 {
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
+    using System;
 
     public class MotorcycleServiceModel
     {
@@ -23,6 +24,8 @@
         public string Url { get; set; }
 
         public string City { get; set; }
+
+        public DateTime AddedOn { get; set; }
 
         public string Country { get; set; }
 

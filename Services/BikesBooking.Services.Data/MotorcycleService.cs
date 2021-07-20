@@ -10,7 +10,6 @@
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using Microsoft.EntityFrameworkCore;
 
-
     public class MotorcycleService : IMotorcycleService
     {
         private readonly IRepository<Model> modelsRepository;
@@ -118,6 +117,7 @@
         {
             var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
               .AsQueryable()
+              .OrderByDescending(x => x.CreatedOn)
               .Skip((currentPage - 1) * motorcyclesPerPage)
               .Take(motorcyclesPerPage)
               .Select(x => new MotorcycleServiceModel
@@ -134,6 +134,7 @@
                   Url = x.Url,
                   Type = (TypeOfMotors)x.TypeMotor,
                   Description = x.Description,
+                  AddedOn = x.CreatedOn,
               })
               .ToListAsync();
 
@@ -165,5 +166,7 @@
                 Type = x.TypeMotor.ToString(),
             })
             .FirstOrDefaultAsync();
+
+
     }
 }

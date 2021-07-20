@@ -33,7 +33,7 @@
 
             this.TempData["Message"] = "Motorcycles added successful!";
 
-            return this.Redirect("/Motor/All");
+            return this.RedirectToAction("Motor", "All");
         }
 
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)

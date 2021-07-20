@@ -18,12 +18,15 @@
     <div class="row mt-2 mb-4">
         @foreach (var motorcycle in Model.Motors)
         {
-            <div class="card col-6 col-lg-3">
+            <div class="card col-6 col-lg-3 ">
                 <img src="@motorcycle.Url"
-                     class="motor-img-top img-fluid motor-image">
+                     class="motor-img-top img-fluid img-thumbnail motor-image" style="width: 120%; height: 230px;">
                 <div class="motor-body">
-                    <h5 class="motor-title text-center" data-toggle="tooltip">
-                        @motorcycle.Manufacturer -> @motorcycle.Model
+                    <h3 class="motor-title text-center" data-toggle="tooltip">
+                        @motorcycle.Manufacturer
+                    </h3>
+                    <h5 class="text-center" data-toggle="tooltip">
+                        @motorcycle.Model
                     </h5>
                     <h4 class="motor-title text-center" data-toggle="tooltip" data-placement="bottom"
                         title="@motorcycle.Description">
@@ -38,10 +41,15 @@
                             <span class="price-stat">@motorcycle.Price Euro</span>
                         </li>
                     </ul>
+                    <div class="card-footer">
+                        <small class="text-muted">
+                            Last updated @motorcycle.AddedOn
+                        </small>
+                    </div>
                     <br />
                     <a asp-controller="Motor" asp-action="Offer" asp-route-id="@motorcycle.Id" class="btn btn-block btn-success">Offer</a>
-                    <a asp-controller="Motor" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary">Create Rating</a>
-                    <a asp-controller="Motor" asp-action="RemoveFromCollection" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
+                    <a asp-controller="Motor" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary">Rating</a>
+                    <a asp-controller="Motor" asp-action="Remove" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>     
                 </div>
             </div>
         }
