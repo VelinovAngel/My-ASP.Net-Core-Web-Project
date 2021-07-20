@@ -43,5 +43,17 @@
 
             return this.RedirectToAction("Contact", "Contact");
         }
+
+        public IActionResult ClientMessages()
+        {
+            var messages = this.contactService.GetAllMessages();
+            if (messages == null)
+            {
+                this.TempData["NoMessages"] = "Not found message from clients!";
+                return this.RedirectToAction("Contact", "Contact");
+            }
+
+            return this.View(messages.Result);
+        }
     }
 }

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ContactFormDto>
+
+@{
+    ViewData["Title"] = "All client Messages";
+}
+
+@if (this.TempData.ContainsKey("NoMessages"))
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["NoMessages"]
+    </div>
+}
+
+
+<section class="py-5">
+    <div class="container bg-image" style="background-image:url('/img/ClientMessages.jpg'); height: 100vh;">
+        <h1 style="margin: 2%; text-align: center;">Message from all clients</h1>
+        <div style="padding: 5%;">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var client in Model)
+                    {
+                        <tr>
+                            <th scope="row">@client.Name</th>
+                            <td>@client.Email</td>
+                            <td>
+                                <div class="button-holder">
+                                    <a asp-controller="Contact" asp-action="Details" asp-route-id="@client.Id" class="btn btn-primary text-uppercase">Details</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

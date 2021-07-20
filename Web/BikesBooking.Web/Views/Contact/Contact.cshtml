@@ -1,5 +1,9 @@
 ﻿@model ContactUsForm
 
+@{ 
+    this.ViewData["Title"] = "Contact Page";
+}
+
 @if (this.TempData.ContainsKey("Successful Message"))
 {
     <div class="alert alert-success alert-dismissible fade show">

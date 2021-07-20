@@ -41,7 +41,7 @@
                 return this.View(input);
             }
 
-            return this.RedirectToAction("Motor", "FreeMotors");
+            return this.RedirectToAction("FreeMotors", "User");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

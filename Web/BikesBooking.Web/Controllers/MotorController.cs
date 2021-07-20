@@ -33,7 +33,7 @@
 
             this.TempData["Message"] = "Motorcycles added successful!";
 
-            return this.RedirectToAction("Motor", "All");
+            return this.RedirectToAction("All", "Motor");
         }
 
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
@@ -59,7 +59,7 @@
         {
             await this.motorcycleService.RemoveMotorcycleAsync(id);
 
-            return this.RedirectToAction("Motor", "All");
+            return this.RedirectToAction("All", "Motor");
         }
     }
 }
