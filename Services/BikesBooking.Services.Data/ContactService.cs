@@ -28,8 +28,12 @@
                 Email = x.Email,
                 Subject = x.Complaint,
                 Description = x.Description,
+                CreatedOn = x.CreatedOn,
             })
             .ToListAsync();
+
+        public ContactFormDto GetSingleMessage(int id)
+            => this.GetAllMessages().Result.Where(x => x.Id == id).FirstOrDefault();
 
         public async Task SendContactMessageAsync(ContactFormDto contact)
         {

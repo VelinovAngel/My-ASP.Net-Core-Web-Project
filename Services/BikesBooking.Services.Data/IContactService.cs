@@ -10,5 +10,7 @@
         Task SendContactMessageAsync(ContactFormDto contact);
 
         Task<IEnumerable<ContactFormDto>> GetAllMessages();
+
+        ContactFormDto GetSingleMessage(int id);
     }
 }

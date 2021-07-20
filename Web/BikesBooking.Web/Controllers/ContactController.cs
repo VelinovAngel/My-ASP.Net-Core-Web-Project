@@ -55,5 +55,16 @@
 
             return this.View(messages.Result);
         }
+
+        public IActionResult Details(int id)
+        {
+            var message = this.contactService.GetSingleMessage(id);
+            if (message == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.View(message);
+        }
     }
 }
