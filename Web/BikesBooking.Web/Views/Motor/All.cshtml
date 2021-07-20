@@ -65,10 +65,13 @@
            asp-route-currentPage="@previousPage"><<</a>
     </div>
 
-    @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
-                                                 !Model.Motors.Any(); }
 
-    <div class="col-md-6">
+    <a class="col-md-2">@Model.CurrentPage</a>
+
+    @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+                                                  !Model.Motors.Any(); }
+
+    <div class="col-md-4">
         <a class="btn btn-primary float-sm-right @(shouldButtonBeDisabled ? "disabled" : string.Empty)" style="margin-top: 10px"
            asp-controller="Motor"
            asp-action="All"
