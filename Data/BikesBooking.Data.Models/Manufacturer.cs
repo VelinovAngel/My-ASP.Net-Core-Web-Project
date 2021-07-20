@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
     public class Manufacturer : BaseDeletableModel<int>
@@ -14,7 +15,7 @@
         }
 
         [Required]
-        [MaxLength(20)]
+        [MaxLength(GlobalConstants.ManufacturerNameLength)]
         public string Name { get; set; }
 
         public int Year { get; set; }

@@ -2,15 +2,17 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
     public class PublicDealer : BaseDeletableModel<int>
     {
         [Required]
+        [MaxLength(GlobalConstants.DealerNameLength)]
         public string Name { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(GlobalConstants.DealerAddressLength)]
         public string Address { get; set; }
 
         [Required]

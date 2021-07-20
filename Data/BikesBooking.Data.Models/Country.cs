@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
     public class Country : BaseDeletableModel<int>
@@ -14,7 +15,7 @@
         }
 
         [Required]
-        [MaxLength(25)]
+        [MaxLength(GlobalConstants.CountryNameLength)]
         public string Name { get; set; }
 
         public string Abbreviation { get; set; }

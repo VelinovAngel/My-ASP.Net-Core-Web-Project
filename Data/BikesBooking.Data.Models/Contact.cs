@@ -2,12 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
     public class Contact : BaseDeletableModel<int>
     {
         [Required]
-        [MaxLength(15)]
+        [MaxLength(GlobalConstants.ContactUsernameLength)]
         public string Username { get; set; }
 
         [Required]

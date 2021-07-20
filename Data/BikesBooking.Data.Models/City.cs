@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
     public class City : BaseDeletableModel<int>
@@ -13,7 +14,7 @@
         }
 
         [Required]
-        [MaxLength(25)]
+        [MaxLength(GlobalConstants.CityNameMaxLength)]
         public string Name { get; set; }
 
         public int Postcode { get; set; }
