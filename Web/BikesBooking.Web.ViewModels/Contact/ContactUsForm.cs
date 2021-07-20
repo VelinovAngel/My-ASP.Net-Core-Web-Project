@@ -2,11 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using BikesBooking.Common;
+
     public class ContactUsForm
     {
         [Required]
-        [MinLength(3)]
-        [MaxLength(15)]
+        [MinLength(GlobalConstants.ContactFormUsernameMin)]
+        [MaxLength(GlobalConstants.ContactFormUsernameMax)]
         public string Name { get; set; }
 
         [Required]

@@ -21,7 +21,30 @@
 
         public const int ManufacturerNameLength = 20;
 
+        public const int ModelNameLength = 20;
 
+        public const int DealerNameLength = 30;
 
+        public const int DealerAddressLength = 30;
+
+        // Form model validation
+
+        public const int ContactFormUsernameMin = 3;
+
+        public const int ContactFormUsernameMax = 15;
+
+        public const int CubicCentimetreMin = 50;
+
+        public const int CubicCentimetreMax = 1250;
+
+        public const int MotorcyclePriceMax = 1000;
+
+        public const int MotorcyclePriceMin = 1;
+
+        public const int MotorcycleDescription = 600;
+
+        public const int CityNameMinLength = 3;
+
+        public const int CountryNameMinLength = 3;
     }
 }

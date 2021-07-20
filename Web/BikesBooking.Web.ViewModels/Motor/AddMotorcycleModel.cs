@@ -8,7 +8,7 @@
     public class AddMotorcycleModel
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(GlobalConstants.ManufacturerNameLength)]
         public string Manufacturer { get; set; }
 
         [Required]
@@ -25,12 +25,18 @@
 
         [Required]
         [Display(Name = "Cubic Centimetre")]
-        [Range(50, 1250, ErrorMessage = "The cubic centimetre must be between 50c.c. and 1250c.c.!")]
+        [Range(
+            GlobalConstants.CubicCentimetreMin,
+            GlobalConstants.CubicCentimetreMax,
+            ErrorMessage = "The cubic centimetre must be between {1} c.c. and {2} c.c.!")]
         public int CubicCentimetre { get; set; }
 
         [Required]
-        [Range(0, 1000, ErrorMessage = "The price must be between 0.00€ and 1000.00€!")]
         [Display(Name = "Price per day")]
+        [Range(
+            GlobalConstants.MotorcyclePriceMin,
+            GlobalConstants.MotorcyclePriceMax,
+            ErrorMessage = "The price must be between {1}.00 € and {2}.00 €!")]
         public decimal Price { get; set; }
 
         [Required]
@@ -41,16 +47,24 @@
         public string Url { get; set; }
 
         [Required]
+        [StringLength(
+            GlobalConstants.CityNameMaxLength,
+            ErrorMessage = "The city name must be between {1} and {2} characters.",
+            MinimumLength = GlobalConstants.CityNameMinLength)]
         public string City { get; set; }
 
         [Required]
+        [StringLength(
+            GlobalConstants.CountryNameLength,
+            ErrorMessage = "The country name must be between {1} and {2} characters.",
+            MinimumLength = GlobalConstants.CountryNameMinLength)]
         public string Country { get; set; }
 
         [Required]
         public MotorType Type { get; set; }
 
         [Required]
-        [MaxLength(600)]
+        [MaxLength(GlobalConstants.MotorcycleDescription)]
         public string Description { get; set; }
     }
 }
