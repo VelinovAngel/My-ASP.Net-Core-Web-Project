@@ -167,6 +167,19 @@
             })
             .FirstOrDefaultAsync();
 
+        public async Task RemoveMotorcycleAsync(int id)
+        {
+            var motorcycle = await this.motorcycleRepository
+                .AllAsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
 
+            if (motorcycle == null)
+            {
+                return;
+            }
+
+            this.motorcycleRepository.Delete(motorcycle);
+            await this.motorcycleRepository.SaveChangesAsync();
+        }
     }
 }

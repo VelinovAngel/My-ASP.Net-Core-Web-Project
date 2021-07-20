@@ -54,5 +54,12 @@
         {
             return this.View();
         }
+
+        public async Task<IActionResult> Remove(int id)
+        {
+            await this.motorcycleService.RemoveMotorcycleAsync(id);
+
+            return this.RedirectToAction("Motor", "All");
+        }
     }
 }

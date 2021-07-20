@@ -12,5 +12,7 @@
         Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage);
 
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
+
+        Task RemoveMotorcycleAsync(int id);
     }
 }
