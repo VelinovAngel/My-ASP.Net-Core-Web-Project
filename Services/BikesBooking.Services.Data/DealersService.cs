@@ -26,7 +26,7 @@
             this.providerRepository = providerRepository;
         }
 
-        public async Task CreatePublicDealer(CreateDealerDto dealer, string userId)
+        public async Task CreatePublicDealerAsync(CreateDealerDto dealer, string userId)
         {
             if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == dealer.Country))
             {

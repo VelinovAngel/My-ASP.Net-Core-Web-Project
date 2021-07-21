@@ -1,5 +1,7 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
+    using System.Threading.Tasks;
+
     using BikesBooking.Services.Data;
     using BikesBooking.Services.Data.DTO.Dealers;
     using BikesBooking.Web.Infrastructure;
@@ -22,7 +24,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreatePublic(CreateDealerDto publicDealer)
+        public async Task<IActionResult> CreatePublicAsync(CreateDealerDto publicDealer)
         {
             var userId = this.User.GetId();
             var isAlreadyExistId = this.dealersService.IsAlreadyPublicDealerExist(userId);
@@ -37,7 +39,7 @@
                 return this.View();
             }
 
-            this.dealersService.CreatePublicDealer(publicDealer, userId);
+            await this.dealersService.CreatePublicDealerAsync(publicDealer, userId);
 
             this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
 
@@ -51,7 +53,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult CreatePrivate(CreateDealerDto privateDealer)
+        public async Task<IActionResult> CreatePrivate(CreateDealerDto privateDealer)
         {
             return this.View();
         }

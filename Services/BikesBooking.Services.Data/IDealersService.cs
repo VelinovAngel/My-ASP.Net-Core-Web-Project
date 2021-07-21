@@ -8,6 +8,6 @@
     {
         bool IsAlreadyPublicDealerExist(string id);
 
-        Task CreatePublicDealer(CreateDealerDto dealer, string userId);
+        Task CreatePublicDealerAsync(CreateDealerDto dealer, string userId);
     }
 }
