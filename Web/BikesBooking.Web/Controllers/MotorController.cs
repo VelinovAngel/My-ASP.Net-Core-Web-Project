@@ -18,7 +18,6 @@
             this.motorcycleService = motorcycleService;
         }
 
-        [Authorize]
         public IActionResult Add()
         {
             var currentUserId = this.User.GetId();

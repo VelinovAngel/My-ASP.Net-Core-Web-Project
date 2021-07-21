@@ -53,7 +53,7 @@
 
         public const int DealerAddressMaxLength = 30;
 
-        public const int DealerAddressMinLength = 30;
+        public const int DealerAddressMinLength = 5;
 
         public const int DescriptionMaxLength = 50;
 

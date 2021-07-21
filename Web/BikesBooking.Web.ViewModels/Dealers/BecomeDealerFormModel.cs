@@ -21,7 +21,21 @@
         public string Address { get; set; }
 
         [Required]
-        [Url]
+        [StringLength(
+            GlobalConstants.CountryNameLength,
+            ErrorMessage = "The dealer country must be between {1} and {2} characters.",
+            MinimumLength = GlobalConstants.CountryNameMinLength)]
+        public string Country { get; set; }
+
+        [Required]
+        [StringLength(
+            GlobalConstants.CityNameMaxLength,
+            ErrorMessage = "The dealer City must be between {1} and {2} characters.",
+            MinimumLength = GlobalConstants.CityNameMinLength)]
+        public string City { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
 
         [Required]

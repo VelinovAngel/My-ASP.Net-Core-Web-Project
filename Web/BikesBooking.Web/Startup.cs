@@ -65,6 +65,7 @@
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IMotorcycleService, MotorcycleService>();
             services.AddTransient<IContactService, ContactService>();
+            services.AddTransient<IDealersService, DealersService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
