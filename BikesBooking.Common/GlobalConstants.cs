@@ -28,7 +28,6 @@
         public const int DealerAddressLength = 30;
 
         // Form model validation
-
         public const int ContactFormUsernameMin = 3;
 
         public const int ContactFormUsernameMax = 15;
@@ -46,5 +45,18 @@
         public const int CityNameMinLength = 3;
 
         public const int CountryNameMinLength = 3;
+
+        // Dealer
+        public const int DealerNameMinLength = 3;
+
+        public const int DealerNameMaxLength = 30;
+
+        public const int DealerAddressMaxLength = 30;
+
+        public const int DealerAddressMinLength = 30;
+
+        public const int DescriptionMaxLength = 50;
+
+        public const int DescriptionMinLength = 5;
     }
 }

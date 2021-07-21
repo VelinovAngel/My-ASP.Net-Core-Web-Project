@@ -4,7 +4,9 @@
 
     using BikesBooking.Services.Data;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
+    using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Motor;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class MotorController : Controller
@@ -16,8 +18,10 @@
             this.motorcycleService = motorcycleService;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
+            var currentUserId = this.User.GetId();
             return this.View();
         }
 

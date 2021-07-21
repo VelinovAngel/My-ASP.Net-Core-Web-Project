@@ -24,4 +24,8 @@
     <ProjectReference Include="..\BikesBooking.Services.Mapping\BikesBooking.Services.Mapping.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\Dealers\" />
+  </ItemGroup>
+
 </Project>
