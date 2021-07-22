@@ -66,6 +66,7 @@
             services.AddTransient<IMotorcycleService, MotorcycleService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IDealersService, DealersService>();
+            services.AddTransient<IUserService, UserService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

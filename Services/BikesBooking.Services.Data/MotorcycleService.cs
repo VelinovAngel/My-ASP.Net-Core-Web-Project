@@ -180,5 +180,8 @@
             this.motorcycleRepository.Delete(motorcycle);
             await this.motorcycleRepository.SaveChangesAsync();
         }
+
+        public int GetMotorcycleCount()
+            => this.motorcycleRepository.AllAsNoTracking().Count();
     }
 }

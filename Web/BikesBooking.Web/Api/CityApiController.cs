@@ -16,7 +16,6 @@
             this.homeService = homeService;
         }
 
-
         [Route("api/GetCity")]
         [HttpGet]
         public async Task<SelectList> GetCityAsync(int id)

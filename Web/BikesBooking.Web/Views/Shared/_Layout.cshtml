@@ -35,10 +35,19 @@
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container-fluid h-100">
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
-            @this.RenderBody()
+            <div class="row">
+                <div class="offset-3 col-lg-6 g-mb-30 g-mb-0--lg">
+                    @this.RenderBody()
+                </div>
+
+                <div class="col-lg-2">     
+                    <partial name="_PartialStatisticsTable"/>
+                    <partial name="_PartialWeatherWidget" />
+                </div>
+            </div>
         </main>
         <br />
     </div>
@@ -55,6 +64,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
     <script src="~/js/custom.js" asp-append-version="true"></script>
+    <script src="~/js/Statistics.js" asp-append-version="true"></script>
     @*<script src="~/js/slider.js" asp-append-version="true"></script>*@
     @await this.RenderSectionAsync("Scripts", required: false)
 </body>

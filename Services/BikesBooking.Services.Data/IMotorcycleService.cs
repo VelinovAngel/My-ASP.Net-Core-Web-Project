@@ -17,5 +17,7 @@
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
 
         Task RemoveMotorcycleAsync(int id);
+
+        public int GetMotorcycleCount();
     }
 }

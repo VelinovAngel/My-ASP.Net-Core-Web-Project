@@ -1,7 +1,8 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Motorcycle
 {
-    using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using System;
+
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public class MotorcycleServiceModel
     {
