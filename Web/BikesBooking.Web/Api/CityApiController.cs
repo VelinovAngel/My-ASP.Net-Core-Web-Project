@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Web.Controllers
+﻿namespace BikesBooking.Web.Api
 {
     using System.Threading.Tasks;
 
@@ -6,21 +6,23 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class CityController : BaseController
+    [ApiController]
+    public class CityApiController : ControllerBase
     {
         private readonly IHomeService homeService;
 
-        public CityController(IHomeService homeService)
+        public CityApiController(IHomeService homeService)
         {
             this.homeService = homeService;
         }
 
-        [ActionName("GetCity")]
-        public async Task<IActionResult> GetCityAsync(int id)
+
+        [Route("api/GetCity")]
+        [HttpGet]
+        public async Task<SelectList> GetCityAsync(int id)
         {
             var model = await this.homeService.GetAllCitiesByCountryIdAsync(id);
-
-            return this.Json(new SelectList(model, "Id", "Name"));
+            return new SelectList(model, "Id", "Name");
         }
     }
 }

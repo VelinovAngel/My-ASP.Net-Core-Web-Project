@@ -82,7 +82,7 @@
             });
         });
         function getCity() {
-            var url = '@Url.Content("~/")' + "City/GetCity";
+            var url = '@Url.Content("~/")' + "api/GetCity";
 
             var ddlSource = '#CountryId';
             $.getJSON(url, { id: $(ddlSource).val() }, function (data) {
