@@ -7,9 +7,12 @@
 
     public interface IMotorcycleService
     {
-        Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle);
+        Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle, int dealerId);
 
-        Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage);
+        Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(
+            int currentPage,
+            int motorcyclesPerPage,
+            int dealerId);
 
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
 

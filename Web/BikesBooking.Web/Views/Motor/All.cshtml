@@ -12,6 +12,7 @@
     </div>
 }
 
+
 <h1 class="text-center mt-2">My Collection</h1>
 
 <form method="get">
@@ -49,7 +50,7 @@
                     <br />
                     <a asp-controller="Motor" asp-action="Offer" asp-route-id="@motorcycle.Id" class="btn btn-block btn-success">Offer</a>
                     <a asp-controller="Motor" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary">Rating</a>
-                    <a asp-controller="Motor" asp-action="Remove" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>     
+                    <a asp-controller="Motor" asp-action="Remove" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
                 </div>
             </div>
         }
@@ -77,7 +78,7 @@
     <a class="col-md-2">@Model.CurrentPage</a>
 
     @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
-                                                  !Model.Motors.Any(); }
+                                                   !Model.Motors.Any(); }
 
     <div class="col-md-4">
         <a class="btn btn-primary float-sm-right @(shouldButtonBeDisabled ? "disabled" : string.Empty)" style="margin-top: 10px"

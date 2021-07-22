@@ -18,7 +18,6 @@
         private readonly IRepository<Color> colorRepository;
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
-        private readonly IRepository<Offer> offerRepository;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -26,8 +25,7 @@
             IRepository<Motorcycle> motorcycleRepository,
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
-            IRepository<City> cityRepository,
-            IRepository<Offer> offerRepository)
+            IRepository<City> cityRepository)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -35,10 +33,9 @@
             this.colorRepository = colorRepository;
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
-            this.offerRepository = offerRepository;
         }
 
-        public async Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle)
+        public async Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle, int dealerId)
         {
             if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
             {
@@ -107,16 +104,18 @@
                 Description = createMotorcycle.Description,
                 Price = createMotorcycle.Price,
                 TypeMotor = type,
+                DealerId = dealerId,
             };
 
             await this.motorcycleRepository.AddAsync(motorcycle);
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
-        public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage)
+        public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage, int dealerId)
         {
             var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
               .AsQueryable()
+              .Where(x => x.DealerId == dealerId)
               .OrderByDescending(x => x.CreatedOn)
               .Skip((currentPage - 1) * motorcyclesPerPage)
               .Take(motorcyclesPerPage)

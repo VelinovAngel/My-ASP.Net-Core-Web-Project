@@ -40,11 +40,7 @@
 
         public DbSet<Motorcycle> Motorcycles { get; set; }
 
-        public DbSet<PrivateDealer> PrivateDealers { get; set; }
-
-        public DbSet<Provider> Providers { get; set; }
-
-        public DbSet<PublicDealer> PublicDealers { get; set; }
+        public DbSet<Dealer> Dealers { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
 

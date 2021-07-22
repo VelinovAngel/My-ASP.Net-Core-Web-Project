@@ -11,11 +11,9 @@
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="CreatePublic">Become Public Dealer</a>
+            <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="Create">Become Dealer</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Dealer" asp-action="CreatePrivate">Become Private Dealer</a>
-        </li>
+
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item">

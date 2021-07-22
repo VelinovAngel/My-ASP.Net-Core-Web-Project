@@ -11,7 +11,6 @@
         public Country()
         {
             this.Cities = new HashSet<City>();
-            this.Providers = new HashSet<Provider>();
         }
 
         [Required]
@@ -21,7 +20,5 @@
         public string Abbreviation { get; set; }
 
         public virtual ICollection<City> Cities { get; set; }
-
-        public virtual ICollection<Provider> Providers { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BikesBooking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210717111701_AddNewPropertyOnEntityMotorcycleType")]
-    partial class AddNewPropertyOnEntityMotorcycleType
+    [Migration("20210722170614_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -374,6 +374,63 @@ namespace BikesBooking.Data.Migrations
                     b.ToTable("Countries");
                 });
 
+            modelBuilder.Entity("BikesBooking.Data.Models.Dealer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedDealerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DealerId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedDealerId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.ToTable("Dealers");
+                });
+
             modelBuilder.Entity("BikesBooking.Data.Models.Manufacturer", b =>
                 {
                     b.Property<int>("Id")
@@ -464,6 +521,9 @@ namespace BikesBooking.Data.Migrations
                     b.Property<int>("CubicCentimetre")
                         .HasColumnType("int");
 
+                    b.Property<int>("DealerId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
@@ -507,6 +567,8 @@ namespace BikesBooking.Data.Migrations
 
                     b.HasIndex("ColorId");
 
+                    b.HasIndex("DealerId");
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("ManufacturerId");
@@ -545,9 +607,6 @@ namespace BikesBooking.Data.Migrations
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -555,152 +614,7 @@ namespace BikesBooking.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("ProviderId");
-
                     b.ToTable("Offers");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.PrivateDealer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddedPrivateDealerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PriveteDealerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddedPrivateDealerId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ProviderId");
-
-                    b.ToTable("PrivateDealers");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.Provider", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Providers");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.PublicDealer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AddedPublicDealerId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProviderId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PublicDealerId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddedPublicDealerId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ProviderId");
-
-                    b.ToTable("PublicDealers");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Review", b =>
@@ -877,6 +791,23 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("AddedClient");
                 });
 
+            modelBuilder.Entity("BikesBooking.Data.Models.Dealer", b =>
+                {
+                    b.HasOne("BikesBooking.Data.Models.ApplicationUser", "AddedDealer")
+                        .WithMany()
+                        .HasForeignKey("AddedDealerId");
+
+                    b.HasOne("BikesBooking.Data.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("AddedDealer");
+
+                    b.Navigation("City");
+                });
+
             modelBuilder.Entity("BikesBooking.Data.Models.Motorcycle", b =>
                 {
                     b.HasOne("BikesBooking.Data.Models.Booking", "Booking")
@@ -892,6 +823,12 @@ namespace BikesBooking.Data.Migrations
                     b.HasOne("BikesBooking.Data.Models.Color", "Color")
                         .WithMany("Motorcycles")
                         .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("BikesBooking.Data.Models.Dealer", "Dealer")
+                        .WithMany("Motorcycles")
+                        .HasForeignKey("DealerId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -921,6 +858,8 @@ namespace BikesBooking.Data.Migrations
 
                     b.Navigation("Color");
 
+                    b.Navigation("Dealer");
+
                     b.Navigation("Manufacturer");
 
                     b.Navigation("Model");
@@ -928,62 +867,6 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("Offer");
 
                     b.Navigation("Review");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
-                {
-                    b.HasOne("BikesBooking.Data.Models.Provider", "Provider")
-                        .WithMany()
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Provider");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.PrivateDealer", b =>
-                {
-                    b.HasOne("BikesBooking.Data.Models.ApplicationUser", "AddedPrivateDealer")
-                        .WithMany()
-                        .HasForeignKey("AddedPrivateDealerId");
-
-                    b.HasOne("BikesBooking.Data.Models.Provider", "Provider")
-                        .WithMany("PriverDealers")
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AddedPrivateDealer");
-
-                    b.Navigation("Provider");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.Provider", b =>
-                {
-                    b.HasOne("BikesBooking.Data.Models.Country", "Country")
-                        .WithMany("Providers")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.PublicDealer", b =>
-                {
-                    b.HasOne("BikesBooking.Data.Models.ApplicationUser", "AddedPublicDealer")
-                        .WithMany()
-                        .HasForeignKey("AddedPublicDealerId");
-
-                    b.HasOne("BikesBooking.Data.Models.Provider", "Provider")
-                        .WithMany("PublicDealers")
-                        .HasForeignKey("ProviderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("AddedPublicDealer");
-
-                    b.Navigation("Provider");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1064,8 +947,11 @@ namespace BikesBooking.Data.Migrations
             modelBuilder.Entity("BikesBooking.Data.Models.Country", b =>
                 {
                     b.Navigation("Cities");
+                });
 
-                    b.Navigation("Providers");
+            modelBuilder.Entity("BikesBooking.Data.Models.Dealer", b =>
+                {
+                    b.Navigation("Motorcycles");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Manufacturer", b =>
@@ -1081,13 +967,6 @@ namespace BikesBooking.Data.Migrations
             modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
                 {
                     b.Navigation("Motorcycles");
-                });
-
-            modelBuilder.Entity("BikesBooking.Data.Models.Provider", b =>
-                {
-                    b.Navigation("PriverDealers");
-
-                    b.Navigation("PublicDealers");
                 });
 #pragma warning restore 612, 618
         }

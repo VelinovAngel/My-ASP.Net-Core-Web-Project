@@ -6,16 +6,19 @@
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Motor;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class MotorController : Controller
     {
         private readonly IMotorcycleService motorcycleService;
+        private readonly IDealersService dealersService;
 
-        public MotorController(IMotorcycleService motorcycleService)
+        public MotorController(
+            IMotorcycleService motorcycleService,
+            IDealersService dealersService)
         {
             this.motorcycleService = motorcycleService;
+            this.dealersService = dealersService;
         }
 
         public IActionResult Add()
@@ -27,12 +30,14 @@
         [HttpPost]
         public async Task<IActionResult> Add(AddMotorcycleDto motorcycle)
         {
+            int userId = this.GetUserId();
+
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            await this.motorcycleService.CreateMotorcycleAsync(motorcycle);
+            await this.motorcycleService.CreateMotorcycleAsync(motorcycle, userId);
 
             this.TempData["Message"] = "Motorcycles added successful!";
 
@@ -41,7 +46,8 @@
 
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
         {
-            var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage);
+            var userId = this.GetUserId();
+            var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage, userId);
             query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;
             query.Motors = motorcycleResult.Motorcycle;
             return this.View(query);
@@ -63,6 +69,13 @@
             await this.motorcycleService.RemoveMotorcycleAsync(id);
 
             return this.RedirectToAction("All", "Motor");
+        }
+
+        private int GetUserId()
+        {
+            var currentUserId = this.User.GetId();
+            var userId = this.dealersService.GetDealerId(currentUserId);
+            return userId;
         }
     }
 }

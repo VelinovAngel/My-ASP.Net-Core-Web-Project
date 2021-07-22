@@ -1,12 +1,18 @@
 ﻿namespace BikesBooking.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Common;
     using BikesBooking.Data.Common.Models;
 
-    public class PublicDealer : BaseDeletableModel<int>
+    public class Dealer : BaseDeletableModel<int>
     {
+        public Dealer()
+        {
+            this.Motorcycles = new HashSet<Motorcycle>();
+        }
+
         [Required]
         [MaxLength(GlobalConstants.DealerNameLength)]
         public string Name { get; set; }
@@ -21,12 +27,14 @@
         [Required]
         public string Description { get; set; }
 
-        public int ProviderId { get; set; }
+        public int CityId { get; set; }
 
-        public virtual Provider Provider { get; set; }
+        public virtual City City { get; set; }
 
-        public string PublicDealerId { get; set; }
+        public string DealerId { get; set; }
 
-        public virtual ApplicationUser AddedPublicDealer { get; set; }
+        public virtual ApplicationUser AddedDealer { get; set; }
+
+        public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }
 }

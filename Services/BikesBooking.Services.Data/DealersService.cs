@@ -3,30 +3,28 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.DTO.Dealers;
 
     public class DealersService : IDealersService
     {
-        private readonly IRepository<PublicDealer> publicDelaer;
+        private readonly IRepository<Dealer> dealerRepository;
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
-        private readonly IRepository<Provider> providerRepository;
 
         public DealersService(
-            IRepository<PublicDealer> publicDelaer,
+            IRepository<Dealer> dealer,
             IRepository<Country> countryRepository,
-            IRepository<City> cityRepository,
-            IRepository<Provider> providerRepository)
+            IRepository<City> cityRepository)
         {
-            this.publicDelaer = publicDelaer;
+            this.dealerRepository = dealer;
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
-            this.providerRepository = providerRepository;
         }
 
-        public async Task CreatePublicDealerAsync(CreateDealerDto dealer, string userId)
+        public async Task CreateDealerAsync(CreateDealerDto dealer, string userId)
         {
             if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == dealer.Country))
             {
@@ -50,28 +48,37 @@
                 await this.cityRepository.SaveChangesAsync();
             }
 
-            var provider = new Provider
-            {
-                CountryId = countryId,
-            };
-            await this.providerRepository.AddAsync(provider);
-            await this.providerRepository.SaveChangesAsync();
+            var cityId = this.cityRepository
+                                .AllAsNoTracking()
+                                .FirstOrDefault(x => x.Name == dealer.City).Id;
 
-            var publicDealer = new PublicDealer
+            var publicDealer = new Dealer
             {
                 Name = dealer.Name,
                 Address = dealer.Address,
                 Description = dealer.Description,
                 Email = dealer.Email,
-                ProviderId = provider.Id,
-                PublicDealerId = userId,
+                DealerId = userId,
+                CityId = cityId,
             };
 
-            await this.publicDelaer.AddAsync(publicDealer);
-            await this.publicDelaer.SaveChangesAsync();
+            await this.dealerRepository.AddAsync(publicDealer);
+            await this.dealerRepository.SaveChangesAsync();
         }
 
-        public bool IsAlreadyPublicDealerExist(string id)
-            => this.publicDelaer.AllAsNoTracking().Any(x => x.PublicDealerId == id);
+        public CurrDealerIdDto GetCurrentDealerId(CurrDealerIdDto dealerId, string userId)
+            => this.dealerRepository.AllAsNoTracking()
+            .Where(x => x.DealerId == userId)
+            .Select(d => new CurrDealerIdDto { Id = d.Id })
+            .FirstOrDefault();
+
+        public int GetDealerId(string userId)
+            => this.dealerRepository.AllAsNoTracking()
+            .Where(x => x.DealerId == userId)
+            .Select(d => new { Id = d.Id })
+            .FirstOrDefault().Id;
+
+        public bool IsAlreadyDealerExist(string id)
+            => this.dealerRepository.AllAsNoTracking().Any(x => x.DealerId == id);
     }
 }

@@ -12,15 +12,15 @@
             this.Motorcycles = new HashSet<Motorcycle>();
         }
 
-        public int ProviderId { get; set; }
-
-        public virtual Provider Provider { get; set; }
-
         public int Quantity { get; set; }
 
         public DateTime PickUpDate { get; set; }
 
         public DateTime DropOffDate { get; set; }
+
+        public int BookingId { get; set; }
+
+        public Booking Booking { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }

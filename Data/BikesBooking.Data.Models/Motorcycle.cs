@@ -48,8 +48,8 @@
 
         public virtual Offer Offer { get; set; }
 
-        public int? BookingId { get; set; }
+        public int DealerId { get; set; }
 
-        public virtual Booking Booking { get; set; }
+        public virtual Dealer Dealer { get; set; }
     }
 }

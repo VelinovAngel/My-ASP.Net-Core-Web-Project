@@ -1,10 +1,9 @@
-﻿namespace BikesBooking.Data.Migrations
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace BikesBooking.Data.Migrations
 {
-    using System;
-
-    using Microsoft.EntityFrameworkCore.Migrations;
-
-    public partial class InitalCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,7 +18,7 @@
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -48,7 +47,7 @@
                     TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -65,7 +64,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,7 +84,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -103,7 +102,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -121,7 +120,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -138,11 +137,30 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Models", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Offers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    PickUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DropOffDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Offers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,7 +176,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,7 +191,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -194,7 +212,7 @@
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,7 +232,7 @@
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -232,7 +250,7 @@
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -258,7 +276,7 @@
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -285,7 +303,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -310,7 +328,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -324,35 +342,11 @@
                 });
 
             migrationBuilder.CreateTable(
-                name: "Providers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CountryId = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Providers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Providers_Countries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProviderId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     PickUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -360,7 +354,7 @@
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -371,106 +365,39 @@
                         principalTable: "Clients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Bookings_Providers_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Providers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Offers",
+                name: "Dealers",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProviderId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false),
-                    PickUpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DropOffDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Offers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Offers_Providers_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Providers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PrivateDealers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProviderId = table.Column<int>(type: "int", nullable: false),
-                    PriveteDealerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedPrivateDealerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CityId = table.Column<int>(type: "int", nullable: false),
+                    DealerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AddedDealerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PrivateDealers", x => x.Id);
+                    table.PrimaryKey("PK_Dealers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PrivateDealers_AspNetUsers_AddedPrivateDealerId",
-                        column: x => x.AddedPrivateDealerId,
+                        name: "FK_Dealers_AspNetUsers_AddedDealerId",
+                        column: x => x.AddedDealerId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PrivateDealers_Providers_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Providers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PublicDealers",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProviderId = table.Column<int>(type: "int", nullable: false),
-                    PublicDealerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddedPublicDealerId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PublicDealers", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PublicDealers_AspNetUsers_AddedPublicDealerId",
-                        column: x => x.AddedPublicDealerId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_PublicDealers_Providers_ProviderId",
-                        column: x => x.ProviderId,
-                        principalTable: "Providers",
+                        name: "FK_Dealers_Cities_CityId",
+                        column: x => x.CityId,
+                        principalTable: "Cities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -485,18 +412,20 @@
                     ModelId = table.Column<int>(type: "int", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
                     CubicCentimetre = table.Column<int>(type: "int", nullable: false),
-                    Brand = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Available = table.Column<bool>(type: "bit", nullable: false),
+                    TypeMotor = table.Column<int>(type: "int", nullable: false),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ReviewId = table.Column<int>(type: "int", nullable: false),
+                    ReviewId = table.Column<int>(type: "int", nullable: true),
                     CityId = table.Column<int>(type: "int", nullable: false),
-                    BookingId = table.Column<int>(type: "int", nullable: false),
                     OfferId = table.Column<int>(type: "int", nullable: true),
+                    BookingId = table.Column<int>(type: "int", nullable: true),
+                    DealerId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -517,6 +446,12 @@
                         name: "FK_Motorcycles_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Motorcycles_Dealers_DealerId",
+                        column: x => x.DealerId,
+                        principalTable: "Dealers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -605,11 +540,6 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookings_ProviderId",
-                table: "Bookings",
-                column: "ProviderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Cities_CountryId",
                 table: "Cities",
                 column: "CountryId");
@@ -645,6 +575,21 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Dealers_AddedDealerId",
+                table: "Dealers",
+                column: "AddedDealerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dealers_CityId",
+                table: "Dealers",
+                column: "CityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dealers_IsDeleted",
+                table: "Dealers",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Manufacturers_IsDeleted",
                 table: "Manufacturers",
                 column: "IsDeleted");
@@ -668,6 +613,11 @@
                 name: "IX_Motorcycles_ColorId",
                 table: "Motorcycles",
                 column: "ColorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Motorcycles_DealerId",
+                table: "Motorcycles",
+                column: "DealerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Motorcycles_IsDeleted",
@@ -700,51 +650,6 @@
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offers_ProviderId",
-                table: "Offers",
-                column: "ProviderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PrivateDealers_AddedPrivateDealerId",
-                table: "PrivateDealers",
-                column: "AddedPrivateDealerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PrivateDealers_IsDeleted",
-                table: "PrivateDealers",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PrivateDealers_ProviderId",
-                table: "PrivateDealers",
-                column: "ProviderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Providers_CountryId",
-                table: "Providers",
-                column: "CountryId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Providers_IsDeleted",
-                table: "Providers",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PublicDealers_AddedPublicDealerId",
-                table: "PublicDealers",
-                column: "AddedPublicDealerId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PublicDealers_IsDeleted",
-                table: "PublicDealers",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PublicDealers_ProviderId",
-                table: "PublicDealers",
-                column: "ProviderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_IsDeleted",
                 table: "Reviews",
                 column: "IsDeleted");
@@ -774,22 +679,16 @@
                 name: "Motorcycles");
 
             migrationBuilder.DropTable(
-                name: "PrivateDealers");
-
-            migrationBuilder.DropTable(
-                name: "PublicDealers");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Bookings");
 
             migrationBuilder.DropTable(
-                name: "Cities");
+                name: "Colors");
 
             migrationBuilder.DropTable(
-                name: "Colors");
+                name: "Dealers");
 
             migrationBuilder.DropTable(
                 name: "Manufacturers");
@@ -807,7 +706,7 @@
                 name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Providers");
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

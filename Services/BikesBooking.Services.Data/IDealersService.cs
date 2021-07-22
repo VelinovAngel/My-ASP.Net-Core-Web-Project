@@ -6,8 +6,12 @@
 
     public interface IDealersService
     {
-        bool IsAlreadyPublicDealerExist(string id);
+        bool IsAlreadyDealerExist(string id);
 
-        Task CreatePublicDealerAsync(CreateDealerDto dealer, string userId);
+        Task CreateDealerAsync(CreateDealerDto dealer, string userId);
+
+        public int GetDealerId(string userId);
+
+        CurrDealerIdDto GetCurrentDealerId(CurrDealerIdDto dealerId, string userId);
     }
 }

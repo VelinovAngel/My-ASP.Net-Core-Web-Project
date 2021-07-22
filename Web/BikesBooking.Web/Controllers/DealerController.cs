@@ -17,17 +17,17 @@
             this.dealersService = dealersService;
         }
 
-        public IActionResult CreatePublic()
+        public IActionResult Create()
         {
             return this.View();
         }
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreatePublicAsync(CreateDealerDto publicDealer)
+        public async Task<IActionResult> Create(CreateDealerDto publicDealer)
         {
             var userId = this.User.GetId();
-            var isAlreadyExistId = this.dealersService.IsAlreadyPublicDealerExist(userId);
+            var isAlreadyExistId = this.dealersService.IsAlreadyDealerExist(userId);
 
             if (isAlreadyExistId)
             {
@@ -39,23 +39,11 @@
                 return this.View();
             }
 
-            await this.dealersService.CreatePublicDealerAsync(publicDealer, userId);
+            await this.dealersService.CreateDealerAsync(publicDealer, userId);
 
             this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
 
             return this.RedirectToAction("All", "Motor");
-        }
-
-        public IActionResult CreatePrivate()
-        {
-            return this.View();
-        }
-
-        [Authorize]
-        [HttpPost]
-        public async Task<IActionResult> CreatePrivate(CreateDealerDto privateDealer)
-        {
-            return this.View();
         }
     }
 }
