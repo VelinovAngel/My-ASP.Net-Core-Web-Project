@@ -39,13 +39,15 @@
         <partial name="_CookieConsentPartial" />
         <main role="main" class="pb-3">
             <div class="row">
-                <div class="offset-3 col-lg-6 g-mb-30 g-mb-0--lg">
+                <div class="col-lg-2">
+                    <partial name="_PartialWeatherWidget" />
+                </div>
+                <div class="col-lg-8 g-mb-30 g-mb-0--lg">
                     @this.RenderBody()
                 </div>
 
-                <div class="col-lg-2">     
-                    <partial name="_PartialStatisticsTable"/>
-                    <partial name="_PartialWeatherWidget" />
+                <div class="col-lg-2">
+                    <partial name="_PartialStatisticsTable" />
                 </div>
             </div>
         </main>
