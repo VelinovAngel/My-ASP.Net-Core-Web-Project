@@ -61,12 +61,12 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<IMotorcycleService, MotorcycleService>();
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IDealersService, DealersService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IEmailSenderService, EmailSenderService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

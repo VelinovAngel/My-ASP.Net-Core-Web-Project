@@ -4,6 +4,7 @@
 
     using BikesBooking.Services.Data;
     using BikesBooking.Services.Data.DTO.ContactModels;
+    using BikesBooking.Services.Messaging;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Contact;
     using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,16 @@
     {
         private readonly IContactService contactService;
         private readonly IDealersService dealersService;
+        private readonly IEmailSenderService emailSenderService;
 
         public ContactController(
             IContactService contactService,
-            IDealersService dealersService)
+            IDealersService dealersService,
+            IEmailSenderService emailSenderService)
         {
             this.contactService = contactService;
             this.dealersService = dealersService;
+            this.emailSenderService = emailSenderService;
         }
 
         public IActionResult Contact()
@@ -81,7 +85,7 @@
         }
 
         [HttpPost]
-        public IActionResult SendEmailToUser([FromRoute]int id, SendEmailForm emailInfo)
+        public IActionResult SendEmailToUser([FromRoute]int id, string subject, string content)
         {
             if (!this.ModelState.IsValid)
             {
@@ -95,12 +99,13 @@
 
             var dealerEmail = this.dealersService.GetCurrentDealerEmail(userId);
             var currUserEmail = currUser.Email;
-            var content = emailInfo.Content;
-            var subject = emailInfo.Subject;
+            var currContent = content;
+            var currSubject = subject;
 
-            this.TempData["Successful Message"] = "Message send successfully";
+            this.emailSenderService.SendMail(dealerEmail, currUserEmail, currSubject, currContent);
+            this.TempData["Successful Message"] = $"Email to {currUserEmail} send successfully";
 
-            return this.View();
+            return this.RedirectToAction("SendEmailToUser", "Contact");
         }
     }
 }

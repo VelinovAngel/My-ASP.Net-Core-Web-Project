@@ -23,7 +23,7 @@
         public StatisticsResponseModel GetStatistics()
         {
             var totalMotorcycles = this.motorcycleService.GetMotorcycleCount();
-            var totalUsers = this.userService.GetTotalUsers();
+            var totalUsers = this.userService.GetTotalDeales();
             var totalRent = this.motorcycleService.GetNotAvailableMotorcycleCount();
             return new StatisticsResponseModel
             {

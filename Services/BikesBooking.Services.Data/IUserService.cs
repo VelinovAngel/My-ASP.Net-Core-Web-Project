@@ -2,6 +2,6 @@
 {
     public interface IUserService
     {
-        int GetTotalUsers();
+        int GetTotalDeales();
     }
 }

@@ -7,14 +7,14 @@
 
     public class UserService : IUserService
     {
-        private readonly IRepository<ApplicationUser> user;
+        private readonly IRepository<Dealer> dealer;
 
-        public UserService(IRepository<ApplicationUser> user)
+        public UserService(IRepository<Dealer> dealer)
         {
-            this.user = user;
+            this.dealer = dealer;
         }
 
-        public int GetTotalUsers()
-            => this.user.AllAsNoTracking().Count();
+        public int GetTotalDeales()
+            => this.dealer.AllAsNoTracking().Count();
     }
 }
