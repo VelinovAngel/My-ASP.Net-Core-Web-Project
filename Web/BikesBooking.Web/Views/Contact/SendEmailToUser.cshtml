@@ -1,0 +1,48 @@
+﻿@model SendEmailForm
+
+@{
+    this.ViewData["Title"] = "Send Email";
+}
+
+@if (this.TempData.ContainsKey("Successful Message"))
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["Successful Message"]
+    </div>
+}
+
+<h1 class="text-center">
+    Answer to client: @Model.ClientName complaint.
+</h1>
+
+<section class="mb-4">
+
+    <div class="row">
+        <div class="offset-1">
+            <form method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-md-6 col offset-2">
+                        <div class="md-form mb-0">
+                            <label asp-for="Subject">Subject</label>
+                            <input asp-for="Subject" class="form-control">
+                            <span asp-validation-for="Subject" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col offset-2 col-md-6">
+                        <div class="md-form">
+                            <label asp-for="Content">Your message</label>
+                            <textarea asp-for="Content" rows="6" cols="120" class="form-control md-textarea"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                    <div class="text-center col-10 mt-4">
+                        <button type="submit" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser">Send</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+</section>

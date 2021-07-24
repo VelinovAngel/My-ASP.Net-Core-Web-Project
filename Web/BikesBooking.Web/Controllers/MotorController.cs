@@ -23,7 +23,6 @@
 
         public IActionResult Add()
         {
-            var currentUserId = this.User.GetId();
             return this.View();
         }
 

@@ -40,7 +40,6 @@
     <ProjectReference Include="..\..\Services\BikesBooking.Services.Data\BikesBooking.Services.Data.csproj" />
     <ProjectReference Include="..\..\Services\BikesBooking.Services.Mapping\BikesBooking.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\BikesBooking.Services.Messaging\BikesBooking.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\BikesBooking.Services\BikesBooking.Services.csproj" />
   </ItemGroup>
 
 </Project>

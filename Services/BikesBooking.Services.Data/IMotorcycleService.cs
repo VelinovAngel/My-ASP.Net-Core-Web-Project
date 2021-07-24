@@ -19,5 +19,7 @@
         Task RemoveMotorcycleAsync(int id);
 
         public int GetMotorcycleCount();
+
+        public int GetNotAvailableMotorcycleCount();
     }
 }

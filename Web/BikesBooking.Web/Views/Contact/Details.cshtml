@@ -29,5 +29,9 @@
                 <h5 type="text" readonly class="form-control">@Model.CreatedOn.ToShortDateString()</h5>
             </div>
         </div>
+        <div class="text-center text-md-left mt-3">
+            <a type="submit" class="btn btn-primary offset-6" asp-controller="Contact" asp-action="SendEmailToUser" asp-route-id="@Model.Id">Send Email</a>
+        </div>
+        <div class="status"></div>
     </div>
 </section>

@@ -78,6 +78,13 @@
             .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
+        public string GetCurrentDealerEmail(int id)
+             => this.dealerRepository.AllAsNoTracking()
+                    .Where(x => x.Id == id)
+                    .Select(x => x.Email)
+                    .FirstOrDefault()
+                    .ToString();
+
         public bool IsAlreadyDealerExist(string id)
             => this.dealerRepository.AllAsNoTracking().Any(x => x.DealerId == id);
     }

@@ -2,7 +2,7 @@
     $.get('/api/statistics', (data) => {
         $('#totals-motorcycles').text(data.totalsMotorcycles);
         $('#totals-users').text(data.totalsUsers);
-        $('#total-rents').text(data.totalsRent);
+        $('#totals-rent').text(data.totalsRent);
 
         $('#statistics-button').hide();
     });

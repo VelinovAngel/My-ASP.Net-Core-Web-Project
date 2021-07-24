@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO.ContactModels;
+    using BikesBooking.Services.Data.DTO.UserModels;
 
     public interface IContactService
     {
@@ -12,5 +13,7 @@
         Task<IEnumerable<ContactFormDto>> GetAllMessages();
 
         ContactFormDto GetSingleMessage(int id);
+
+        UserInfoDto GetInfoFromUser(int id);
     }
 }

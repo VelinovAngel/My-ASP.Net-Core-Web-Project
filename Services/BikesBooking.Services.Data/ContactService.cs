@@ -7,6 +7,7 @@
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.DTO.ContactModels;
+    using BikesBooking.Services.Data.DTO.UserModels;
     using Microsoft.EntityFrameworkCore;
 
     public class ContactService : IContactService
@@ -48,5 +49,16 @@
             await this.contactRepository.AddAsync(message);
             await this.contactRepository.SaveChangesAsync();
         }
+
+        public UserInfoDto GetInfoFromUser(int id)
+            => this.contactRepository.AllAsNoTracking()
+            .Where(x => x.Id == id)
+            .Select(x => new UserInfoDto
+            {
+                Id = x.Id,
+                Username = x.Username,
+                Email = x.Email,
+            })
+            .FirstOrDefault();
     }
 }

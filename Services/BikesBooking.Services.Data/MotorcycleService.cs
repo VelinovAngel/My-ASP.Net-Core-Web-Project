@@ -183,5 +183,10 @@
 
         public int GetMotorcycleCount()
             => this.motorcycleRepository.AllAsNoTracking().Count();
+
+        public int GetNotAvailableMotorcycleCount()
+            => this.motorcycleRepository.AllAsNoTracking()
+            .Where(x => x.Available == false)
+            .Count();
     }
 }

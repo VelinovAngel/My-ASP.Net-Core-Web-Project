@@ -58,5 +58,8 @@
         public const int DescriptionMaxLength = 50;
 
         public const int DescriptionMinLength = 5;
+
+        // Paging
+        public const int MaxPageElements = 4;
     }
 }

@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
 
+    using BikesBooking.Common;
     using BikesBooking.Services.Data.DTO.Motorcycle;
 
     public class AllMotorcylesQueryDto
     {
-        public const int MotorcyclesPerPage = 4;
+        public const int MotorcyclesPerPage = GlobalConstants.MaxPageElements;
 
         public int CurrentPage { get; set; } = 1;
 
