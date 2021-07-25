@@ -1,4 +1,7 @@
 ﻿@using BikesBooking.Common
+
+@inject IDealersService Dealers
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +25,12 @@
                 </button>
                 @if (this.User.Identity.IsAuthenticated)
                 {
-                    <partial name="_PartialManagementDealerMenu" />
+                    var userId = User.GetId();
+                    var userIsDealer = Dealers.IsAlreadyDealerExist(userId);
+                    if (userIsDealer)
+                    {
+                        <partial name="_PartialManagementDealerMenu" />
+                    }
                 }
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />

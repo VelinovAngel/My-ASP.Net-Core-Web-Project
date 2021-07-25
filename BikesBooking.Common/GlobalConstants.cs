@@ -65,9 +65,16 @@
         // Google and Fb Login
         public static class FacebookLogin
         {
-            public const string AppId = "Authentication:Facebook:AppId";
+            public const string AppId = "AuthenticationFacebook:Facebook:AppId";
 
-            public const string AppSecret = "Authentication:Facebook:AppSecret";
+            public const string AppSecret = "AuthenticationFacebook:Facebook:AppSecret";
+        }
+
+        public static class GoogleLogin
+        {
+            public const string AppId = "AuthenticationGoogle:Google:AppId";
+
+            public const string AppSecret = "AuthenticationGoogle:Google:AppSecret";
         }
     }
 }

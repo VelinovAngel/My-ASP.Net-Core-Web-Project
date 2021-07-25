@@ -46,6 +46,11 @@
                 {
                     options.AppId = this.configuration[FacebookLogin.AppId];
                     options.AppSecret = this.configuration[FacebookLogin.AppSecret];
+                })
+                .AddGoogle(option =>
+                {
+                    option.ClientId = this.configuration[GoogleLogin.AppId];
+                    option.ClientSecret = this.configuration[GoogleLogin.AppSecret];
                 });
 
             services.Configure<CookiePolicyOptions>(
