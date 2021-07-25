@@ -3,5 +3,7 @@
     public interface IUserService
     {
         int GetTotalDeales();
+
+        int GetTotalUsers();
     }
 }

@@ -6,6 +6,8 @@
 
         public int TotalsUsers { get; set; }
 
+        public int TotalsDealers { get; set; }
+
         public int TotalsRent { get; set; }
     }
 }

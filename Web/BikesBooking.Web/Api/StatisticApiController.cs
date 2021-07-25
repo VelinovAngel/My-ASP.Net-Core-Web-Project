@@ -23,13 +23,15 @@
         public StatisticsResponseModel GetStatistics()
         {
             var totalMotorcycles = this.motorcycleService.GetMotorcycleCount();
-            var totalUsers = this.userService.GetTotalDeales();
+            var totalDealers = this.userService.GetTotalDeales();
+            var totalUsers = this.userService.GetTotalUsers();
             var totalRent = this.motorcycleService.GetNotAvailableMotorcycleCount();
             return new StatisticsResponseModel
             {
                 TotalsMotorcycles = totalMotorcycles,
                 TotalsUsers = totalUsers,
                 TotalsRent = totalRent,
+                TotalsDealers = totalDealers,
             };
         }
     }

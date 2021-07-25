@@ -6,6 +6,7 @@
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Motor;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class MotorController : Controller
@@ -21,6 +22,7 @@
             this.dealersService = dealersService;
         }
 
+        [Authorize]
         public IActionResult Add()
         {
             return this.View();
@@ -43,6 +45,7 @@
             return this.RedirectToAction("All", "Motor");
         }
 
+        [Authorize]
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
         {
             var userId = this.GetUserId();
@@ -63,6 +66,7 @@
             return this.View();
         }
 
+        [Authorize]
         public async Task<IActionResult> Remove(int id)
         {
             await this.motorcycleService.RemoveMotorcycleAsync(id);

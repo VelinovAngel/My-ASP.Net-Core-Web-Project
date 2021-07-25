@@ -7,6 +7,7 @@
     using BikesBooking.Services.Messaging;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Contact;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class ContactController : BaseController
@@ -53,6 +54,7 @@
             return this.RedirectToAction("Contact", "Contact");
         }
 
+        [Authorize]
         public IActionResult ClientMessages()
         {
             var messages = this.contactService.GetAllMessages();
@@ -65,6 +67,7 @@
             return this.View(messages.Result);
         }
 
+        [Authorize]
         public IActionResult Details(int id)
         {
             var message = this.contactService.GetSingleMessage(id);
@@ -76,6 +79,7 @@
             return this.View(message);
         }
 
+        [Authorize]
         public IActionResult SendEmailToUser([FromRoute] int id)
         {
             var client = new SendEmailForm();
@@ -84,6 +88,7 @@
             return this.View(client);
         }
 
+        [Authorize]
         [HttpPost]
         public IActionResult SendEmailToUser([FromRoute]int id, string subject, string content)
         {
