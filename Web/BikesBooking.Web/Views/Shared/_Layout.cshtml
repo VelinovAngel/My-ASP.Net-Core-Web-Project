@@ -12,15 +12,18 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3" style="background-color: cornflowerblue">
+        <nav class="navbar navbar-expand-sm navbar-light border-bottom box-shadow mb-3 nav-bar">
             <div class="container">
                 <img src="~/img/BikesBooking.png" class="pmg m-sm-1" width="70" height="60">
-                    <a class="navbar-brand m-sm-1 font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index"><h3 class="font-weight-bold">@GlobalConstants.SystemName</h3></a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                <partial name="_PartialManagementDealerMenu" />
+                <a class="navbar-brand m-sm-1 font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index"><h3 class="font-weight-bold">@GlobalConstants.SystemName</h3></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @if (this.User.Identity.IsAuthenticated)
+                {
+                    <partial name="_PartialManagementDealerMenu" />
+                }
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                 </div>
@@ -47,7 +50,7 @@
         <br />
     </div>
 
-    <footer class="border-top footer text-muted" style="background-color: cornflowerblue">
+    <footer class="border-top footer text-muted nav-bar">
         <div>
             <partial name="_PartialFooterView" />
         </div>

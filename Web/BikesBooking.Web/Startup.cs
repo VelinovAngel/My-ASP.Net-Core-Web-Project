@@ -22,6 +22,8 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
 
+    using static BikesBooking.Common.GlobalConstants;
+
     public class Startup
     {
         private readonly IConfiguration configuration;
@@ -38,6 +40,13 @@
 
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = this.configuration[FacebookLogin.AppId];
+                    options.AppSecret = this.configuration[FacebookLogin.AppSecret];
+                });
 
             services.Configure<CookiePolicyOptions>(
                 options =>

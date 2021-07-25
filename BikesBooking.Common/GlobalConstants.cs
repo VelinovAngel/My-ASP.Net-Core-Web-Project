@@ -61,5 +61,13 @@
 
         // Paging
         public const int MaxPageElements = 4;
+
+        // Google and Fb Login
+        public static class FacebookLogin
+        {
+            public const string AppId = "Authentication:Facebook:AppId";
+
+            public const string AppSecret = "Authentication:Facebook:AppSecret";
+        }
     }
 }

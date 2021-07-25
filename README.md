@@ -20,3 +20,4 @@ ___________________________________________
 * Bootstrap 4
 * AJAX real-time Requests
 * jQuery
+* Facebook login (for developers)
