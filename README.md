@@ -20,4 +20,7 @@ ___________________________________________
 * Bootstrap 4
 * AJAX real-time Requests
 * jQuery
+<<<<<<< HEAD
 * Facebook login (for developers)
+=======
+>>>>>>> 3c989522969f578d716ae3536de054d22381eb08
