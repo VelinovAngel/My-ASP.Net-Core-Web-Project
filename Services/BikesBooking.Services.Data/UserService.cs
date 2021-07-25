@@ -10,7 +10,8 @@
         private readonly IRepository<Dealer> dealer;
         private readonly IRepository<ApplicationUser> user;
 
-        public UserService(IRepository<Dealer> dealer,
+        public UserService(
+            IRepository<Dealer> dealer,
             IRepository<ApplicationUser> user)
         {
             this.dealer = dealer;
