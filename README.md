@@ -16,7 +16,7 @@ ___________________________________________
 * ASP.NET CORE 5 view components
 * EntityFrameworkCore 5.0.6
 * MSSQL Server
-* MailKit
+* MailKit 2.13.0
 * Bootstrap 4
 * AJAX real-time Requests
 * jQuery
