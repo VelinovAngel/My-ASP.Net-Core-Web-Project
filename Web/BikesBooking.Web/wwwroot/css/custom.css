@@ -1,6 +1,8 @@
 .loginPage {
-    background-repeat: no-repeat;
+    height: 150%;
+    /* Center and scale the image nicely */
     background-position: center;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
