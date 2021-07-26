@@ -23,4 +23,5 @@ ___________________________________________
 * Areas
 * Facebook login (for developers)
 * Google login (for developers)
+* Custom Identity
 

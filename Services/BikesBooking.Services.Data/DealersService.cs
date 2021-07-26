@@ -52,7 +52,7 @@
                                 .AllAsNoTracking()
                                 .FirstOrDefault(x => x.Name == dealer.City).Id;
 
-            var publicDealer = new Dealer
+            var currDealer = new Dealer
             {
                 Name = dealer.Name,
                 Address = dealer.Address,
@@ -62,15 +62,9 @@
                 CityId = cityId,
             };
 
-            await this.dealerRepository.AddAsync(publicDealer);
+            await this.dealerRepository.AddAsync(currDealer);
             await this.dealerRepository.SaveChangesAsync();
         }
-
-        public CurrDealerIdDto GetCurrentDealerId(CurrDealerIdDto dealerId, string userId)
-            => this.dealerRepository.AllAsNoTracking()
-            .Where(x => x.DealerId == userId)
-            .Select(d => new CurrDealerIdDto { Id = d.Id })
-            .FirstOrDefault();
 
         public int GetDealerId(string userId)
             => this.dealerRepository.AllAsNoTracking()

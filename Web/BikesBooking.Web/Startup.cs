@@ -80,6 +80,7 @@
             services.AddTransient<IContactService, ContactService>();
             services.AddTransient<IDealersService, DealersService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
         }
 

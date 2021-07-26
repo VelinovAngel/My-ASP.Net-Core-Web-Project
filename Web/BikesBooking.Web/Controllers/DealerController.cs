@@ -24,7 +24,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Create(CreateDealerDto publicDealer)
+        public async Task<IActionResult> Create(CreateDealerDto dealer)
         {
             var userId = this.User.GetId();
             var isAlreadyExistId = this.dealersService.IsAlreadyDealerExist(userId);
@@ -39,7 +39,7 @@
                 return this.View();
             }
 
-            await this.dealersService.CreateDealerAsync(publicDealer, userId);
+            await this.dealersService.CreateDealerAsync(dealer, userId);
 
             this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
 

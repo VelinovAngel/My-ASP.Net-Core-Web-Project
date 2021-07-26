@@ -1,9 +1,5 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Clients
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     public class CreateClientDto
     {
         public string Name { get; set; }

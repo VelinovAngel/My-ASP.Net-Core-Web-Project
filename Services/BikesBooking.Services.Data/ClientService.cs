@@ -1,21 +1,41 @@
 ﻿namespace BikesBooking.Services.Data
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using BikesBooking.Data.Common.Repositories;
+    using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.DTO.Clients;
 
-    public class ClientService : IClientSevice
+    public class ClientService : IClientService
     {
-        public Task CreateDealerAsync(CreateClientDto client, string userId)
+        private readonly IRepository<Client> clientRepository;
+
+        public ClientService(IRepository<Client> clientRepository)
         {
-            throw new NotImplementedException();
+            this.clientRepository = clientRepository;
+        }
+
+        public async Task CreateClientAsync(CreateClientDto client, string userId)
+        {
+            var currClient = new Client
+            {
+                Name = client.Name,
+                Email = client.Email,
+                Address = client.Address,
+                ClientId = userId,
+            };
+
+            await this.clientRepository.AddAsync(currClient);
+            await this.clientRepository.SaveChangesAsync();
         }
 
         public int GetClientId(string userId)
-        {
-            throw new NotImplementedException();
-        }
+             => this.clientRepository.AllAsNoTracking()
+            .Where(x => x.ClientId == userId)
+            .Select(d => new { Id = d.Id })
+            .FirstOrDefault().Id;
 
         public string GetCurrentClientEmail(int id)
         {
@@ -23,8 +43,6 @@
         }
 
         public bool IsAlreadyClientExist(string id)
-        {
-            throw new NotImplementedException();
-        }
+            => this.clientRepository.AllAsNoTracking().Any(x => x.ClientId == id);
     }
 }

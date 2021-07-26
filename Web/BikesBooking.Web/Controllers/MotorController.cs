@@ -55,12 +55,14 @@
             return this.View(query);
         }
 
+        [Authorize]
         public async Task<IActionResult> Offer(int id)
         {
             var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
             return this.View(model);
         }
 
+        [Authorize]
         public IActionResult Edit(int id)
         {
             return this.View();

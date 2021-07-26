@@ -62,6 +62,17 @@
         // Paging
         public const int MaxPageElements = 4;
 
+        public static class ClientValidation
+        {
+            public const int ClientNameMinLength = 3;
+
+            public const int ClientNameMaxLength = 30;
+
+            public const int CLientAddressMaxLength = 30;
+
+            public const int ClientAddressMinLength = 5;
+        }
+
         // Google and Fb Login
         public static class FacebookLogin
         {

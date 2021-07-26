@@ -1,7 +1,7 @@
-﻿@model BecomeDealerFormModel
+﻿@model BecomeClientFromModel
 
 @{
-    this.ViewData["Title"] = "Become Delaer";
+    this.ViewData["Title"] = "Become Client";
 }
 
 
@@ -27,32 +27,14 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="City"></label>
-            <input asp-for="City" class="form-control" placeholder="Es: Plovdiv.." />
-            <span asp-validation-for="City" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Country"></label>
-            <input asp-for="Country" class="form-control" placeholder="Es: Bulgaria.." />
-            <span asp-validation-for="Country" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
             <label asp-for="Address"></label>
             <input asp-for="Address" class="form-control" placeholder="Es: ul.Chemshir n7.." />
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="Description"></label>
-            <input asp-for="Description" class="form-control" placeholder="I'm a big dealer'" />
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-
         <br />
 
-        <button type="submit" class="btn btn-primary">Become dealer</button>
+        <button type="submit" class="btn btn-primary">Become Client</button>
 
     </form>
 </div>

@@ -4,9 +4,9 @@
 
     using BikesBooking.Services.Data.DTO.Clients;
 
-    public interface IClientSevice
+    public interface IClientService
     {
-        Task CreateDealerAsync(CreateClientDto client, string userId);
+        Task CreateClientAsync(CreateClientDto client, string userId);
 
         bool IsAlreadyClientExist(string id);
 
