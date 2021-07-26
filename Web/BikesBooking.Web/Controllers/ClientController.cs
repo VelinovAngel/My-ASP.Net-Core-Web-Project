@@ -24,6 +24,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateClientDto client)
         {
             var userId = this.User.GetId();

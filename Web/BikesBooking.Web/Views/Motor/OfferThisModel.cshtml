@@ -1,0 +1,52 @@
+﻿@model OfferThisModelForm
+
+@{
+    this.ViewData["Title"] = "Offer-This-Model";
+}
+
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Page for details for your bike and the possibility of putting it on offer!</h1>
+        <div>
+            <div class="form-group text-center">
+                <img src="@Model.Motor.Url" class="img-fluid">
+            </div>
+            <div class="form-group">
+                <label>Manufacturer and Model:</label>
+                <h5 type="text" readonly class="form-control">@Model.Motor.Manufacturer : @Model.Motor.Model</h5>
+            </div>
+            <div class="form-group">
+                <label>Color:</label>
+                <h5 type="text" readonly class="form-control">@Model.Motor.Color</h5>
+            </div>
+            <div class="form-group">
+                <label>Cubic Centimetre:</label>
+                <h5 type="text" readonly class="form-control">@Model.Motor.CubicCentimetre cc</h5>
+            </div>
+            <div class="form-group">
+                <label>Price per day:</label>
+                <h5 type="text" readonly class="form-control">@Model.Motor.Price Euro</h5>
+            </div>
+
+            <form method="post" class="container lead-section col-md-6 offset-md-3">
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="PickUpDate"></label>
+                    <input asp-for="PickUpDate" class="form-control" />
+                    <span asp-validation-for="PickUpDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="DropOffDate"></label>
+                    <input asp-for="DropOffDate" class="form-control" />
+                    <span asp-validation-for="DropOffDate" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-success">Done</button>
+            </form>
+
+        </div>
+    </div>
+</section>

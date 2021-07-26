@@ -18,6 +18,7 @@
         private readonly IRepository<Color> colorRepository;
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
+        private readonly IRepository<Offer> offerRepository;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -25,7 +26,8 @@
             IRepository<Motorcycle> motorcycleRepository,
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
-            IRepository<City> cityRepository)
+            IRepository<City> cityRepository,
+            IRepository<Offer> offerRepository)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -33,6 +35,7 @@
             this.colorRepository = colorRepository;
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
+            this.offerRepository = offerRepository;
         }
 
         public async Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle, int dealerId)
@@ -188,5 +191,39 @@
             => this.motorcycleRepository.AllAsNoTracking()
             .Where(x => x.Available == false)
             .Count();
+
+        public async Task OfferCurrentMotor(OfferPeriodForMotorDto offerPeriodForMotorDto, int id)
+        {
+            var currentMotor = this.motorcycleRepository
+                .AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .FirstOrDefault();
+
+            var offer = await this.AddOffer(offerPeriodForMotorDto);
+
+            var offerId = this.offerRepository
+                               .AllAsNoTracking()
+                               .Where(x => x.PickUpDate == offerPeriodForMotorDto.PickUpDate &&
+                                           x.DropOffDate == offerPeriodForMotorDto.DropOffDate)
+                               .FirstOrDefault().Id;
+
+            currentMotor.OfferId = offer.Id;
+
+            await this.motorcycleRepository.AddAsync(currentMotor);
+            await this.motorcycleRepository.SaveChangesAsync();
+        }
+
+        private async Task<Offer> AddOffer(OfferPeriodForMotorDto offerPeriodForMotorDto)
+        {
+            var offer = new Offer
+            {
+                PickUpDate = offerPeriodForMotorDto.PickUpDate,
+                DropOffDate = offerPeriodForMotorDto.DropOffDate,
+                Quantity = 1,
+            };
+            await this.offerRepository.AddAsync(offer);
+            await this.offerRepository.SaveChangesAsync();
+            return offer;
+        }
     }
 }

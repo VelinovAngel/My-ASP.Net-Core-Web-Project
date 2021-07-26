@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data;
@@ -60,6 +61,35 @@
         {
             var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
             return this.View(model);
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> OfferThisModel(int id)
+        {
+            var motor = new OfferThisModelForm
+            {
+                Motor = await this.motorcycleService.GetMotorcycleByIdAsync(id),
+                PickUpDate = DateTime.UtcNow,
+                DropOffDate = DateTime.UtcNow.AddDays(1),
+            };
+
+            return this.View(motor);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> OfferThisModel(OfferThisModelForm offerThisModelForm, [FromRoute]int id)
+        {
+            var pickUpDate = offerThisModelForm.PickUpDate;
+            var dropOffDate = offerThisModelForm.DropOffDate;
+            var offer = new OfferPeriodForMotorDto
+            {
+                PickUpDate = pickUpDate,
+                DropOffDate = dropOffDate,
+            };
+            await this.motorcycleService.OfferCurrentMotor(offer, id);
+            return this.RedirectToAction("All", "Motor");
         }
 
         [Authorize]

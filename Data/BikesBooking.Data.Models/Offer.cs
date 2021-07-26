@@ -18,7 +18,7 @@
 
         public DateTime DropOffDate { get; set; }
 
-        public int BookingId { get; set; }
+        public int? BookingId { get; set; }
 
         public Booking Booking { get; set; }
 
