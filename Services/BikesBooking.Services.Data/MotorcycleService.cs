@@ -198,8 +198,14 @@
                 .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
-
-            var offer = await this.AddOffer(offerPeriodForMotorDto);
+            if (!this.offerRepository
+                               .AllAsNoTracking()
+                               .Where(x => x.PickUpDate == offerPeriodForMotorDto.PickUpDate &&
+                                           x.DropOffDate == offerPeriodForMotorDto.DropOffDate)
+                               .Any())
+            {
+                var offer = await this.AddOffer(offerPeriodForMotorDto);
+            }
 
             var offerId = this.offerRepository
                                .AllAsNoTracking()
@@ -207,9 +213,10 @@
                                            x.DropOffDate == offerPeriodForMotorDto.DropOffDate)
                                .FirstOrDefault().Id;
 
-            currentMotor.OfferId = offer.Id;
+            currentMotor.OfferId = offerId;
+            currentMotor.Available = false;
 
-            await this.motorcycleRepository.AddAsync(currentMotor);
+            this.motorcycleRepository.Update(currentMotor);
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
