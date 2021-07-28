@@ -2,7 +2,8 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Contact;
+    using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.ContactModels;
     using BikesBooking.Services.Messaging;
     using BikesBooking.Web.Infrastructure;

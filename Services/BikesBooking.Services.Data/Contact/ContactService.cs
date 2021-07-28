@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Services.Data
+﻿namespace BikesBooking.Services.Data.Contact
 {
     using System.Collections.Generic;
     using System.Linq;

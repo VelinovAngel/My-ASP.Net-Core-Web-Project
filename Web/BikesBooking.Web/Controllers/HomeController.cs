@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics;
 
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Home;
     using BikesBooking.Web.ViewModels;
     using BikesBooking.Web.ViewModels.Motor;
     using Microsoft.AspNetCore.Mvc;

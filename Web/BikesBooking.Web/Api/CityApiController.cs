@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Home;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
 

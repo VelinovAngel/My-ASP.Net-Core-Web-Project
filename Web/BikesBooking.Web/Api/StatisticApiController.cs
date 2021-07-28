@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Web.Api
 {
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Motorcycle;
+    using BikesBooking.Services.Data.User;
     using BikesBooking.Web.ViewModels.Api.Statistics;
     using Microsoft.AspNetCore.Mvc;
 

@@ -3,8 +3,9 @@
     using System;
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
+    using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Motor;
     using Microsoft.AspNetCore.Authorization;
@@ -62,7 +63,6 @@
             var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
             return this.View(model);
         }
-
 
         [Authorize]
         public async Task<IActionResult> OfferThisModel(int id)

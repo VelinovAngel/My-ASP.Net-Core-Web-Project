@@ -8,7 +8,12 @@
     using BikesBooking.Data.Models;
     using BikesBooking.Data.Repositories;
     using BikesBooking.Data.Seeding;
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Client;
+    using BikesBooking.Services.Data.Contact;
+    using BikesBooking.Services.Data.Dealer;
+    using BikesBooking.Services.Data.Home;
+    using BikesBooking.Services.Data.Motorcycle;
+    using BikesBooking.Services.Data.User;
     using BikesBooking.Services.Mapping;
     using BikesBooking.Services.Messaging;
     using BikesBooking.Web.ViewModels;

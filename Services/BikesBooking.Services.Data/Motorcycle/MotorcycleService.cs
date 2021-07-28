@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Services.Data
+﻿namespace BikesBooking.Services.Data.Motorcycle
 {
     using System;
     using System.Linq;

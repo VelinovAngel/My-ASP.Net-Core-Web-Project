@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data;
+    using BikesBooking.Services.Data.Client;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
