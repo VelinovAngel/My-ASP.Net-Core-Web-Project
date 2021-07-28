@@ -6,24 +6,36 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Services.Data.DTO.Clients;
 
     public class ClientService : IClientService
     {
         private readonly IRepository<Client> clientRepository;
+        private readonly IRepository<ApplicationUser> userRepository;
 
-        public ClientService(IRepository<Client> clientRepository)
+        public ClientService(
+            IRepository<Client> clientRepository,
+            IRepository<ApplicationUser> userRepository)
         {
             this.clientRepository = clientRepository;
+            this.userRepository = userRepository;
         }
 
-        public async Task CreateClientAsync(CreateClientDto client, string userId)
+        public async Task CreateClientAsync(string userId, string address, string city)
         {
+            var firstName = this.userRepository.AllAsNoTracking()
+                               .Where(x => x.Id == userId)
+                               .FirstOrDefault().FirstName;
+            var lastName = this.userRepository.AllAsNoTracking()
+                               .Where(x => x.Id == userId)
+                               .FirstOrDefault().LastName;
+            var fullName = $"{firstName} + {lastName}";
+            var email = this.userRepository.AllAsNoTracking().Where(x => x.Id == userId).FirstOrDefault().Email;
+            var completeAddress = $"{city} - {address}";
             var currClient = new Client
             {
-                Name = client.Name,
-                Email = client.Email,
-                Address = client.Address,
+                Name = fullName,
+                Email = email,
+                Address = completeAddress,
                 ClientId = userId,
             };
 

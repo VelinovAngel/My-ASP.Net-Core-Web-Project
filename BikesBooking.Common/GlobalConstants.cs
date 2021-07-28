@@ -46,31 +46,37 @@
 
         public const int CountryNameMinLength = 3;
 
-        // Dealer
-        public const int DealerNameMinLength = 3;
+        public static class Dealer
+        {
+            public const int NameMinLength = 3;
 
-        public const int DealerNameMaxLength = 30;
+            public const int NameMaxLength = 30;
 
-        public const int DealerAddressMaxLength = 30;
+            public const int AddressMaxLength = 30;
 
-        public const int DealerAddressMinLength = 5;
+            public const int AddressMinLength = 5;
 
-        public const int DescriptionMaxLength = 50;
+            public const int DescriptionMaxLength = 50;
 
-        public const int DescriptionMinLength = 5;
+            public const int DescriptionMinLength = 5;
+        }
 
         // Paging
         public const int MaxPageElements = 4;
 
         public static class ClientValidation
         {
-            public const int ClientNameMinLength = 3;
+            public const int NameMinLength = 3;
 
-            public const int ClientNameMaxLength = 30;
+            public const int NameMaxLength = 30;
 
-            public const int CLientAddressMaxLength = 30;
+            public const int AddressMaxLength = 30;
 
-            public const int ClientAddressMinLength = 5;
+            public const int AddressMinLength = 5;
+
+            public const int CityNameMinLength = 3;
+
+            public const int CityNameMaxLength = 25;
         }
 
         // Google and Fb Login

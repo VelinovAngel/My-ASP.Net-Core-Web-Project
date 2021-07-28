@@ -8,20 +8,16 @@
     {
         [Required]
         [StringLength(
-           ClientValidation.ClientNameMaxLength,
-           ErrorMessage = "The dealer name must be between {1} and {2} characters.",
-           MinimumLength = ClientValidation.ClientNameMinLength)]
-        public string Name { get; set; }
+            ClientValidation.CityNameMaxLength,
+            ErrorMessage = "The client city name must be between {1} and {2} characters.",
+            MinimumLength = ClientValidation.CityNameMinLength)]
+        public string City { get; set; }
 
         [Required]
         [StringLength(
-            ClientValidation.CLientAddressMaxLength,
-            ErrorMessage = "The dealer address must be between {1} and {2} characters.",
-            MinimumLength = ClientValidation.ClientAddressMinLength)]
+            ClientValidation.AddressMaxLength,
+            ErrorMessage = "The client address must be between {1} and {2} characters.",
+            MinimumLength = ClientValidation.AddressMinLength)]
         public string Address { get; set; }
-
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
     }
 }

@@ -2,11 +2,9 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data.DTO.Clients;
-
     public interface IClientService
     {
-        Task CreateClientAsync(CreateClientDto client, string userId);
+        Task CreateClientAsync(string userId, string address, string city);
 
         bool IsAlreadyClientExist(string id);
 

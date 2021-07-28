@@ -3,7 +3,7 @@ My web defence project in SoftUni..
 
 
 
-Description
+Description:
 ___________________________________________
 BikeBookig.....TODO
 
@@ -12,16 +12,18 @@ BikeBookig.....TODO
 Built With
 ___________________________________________
 
-* ASP.NET CORE 5
-* ASP.NET CORE 5 view components
+* ASP.NET MVC 5
+* ASP.NET MVC 5 view components
 * EntityFrameworkCore 5.0.6
 * MSSQL Server
-* MailKit 2.13.0
+* PartialView
+* MailKit 2.13.0 (Email sender by Google)
 * Bootstrap 4
 * AJAX real-time Requests
 * jQuery
-* Areas
+* Areas (Administrator, User -> Client or Dealer)
 * Facebook login (for developers)
 * Google login (for developers)
-* Custom Identity
+* Custom Identity (login and register)
+
 

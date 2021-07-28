@@ -2,36 +2,36 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using BikesBooking.Common;
+    using static BikesBooking.Common.GlobalConstants;
 
     public class BecomeDealerFormModel
     {
         [Required]
         [StringLength(
-            GlobalConstants.DealerNameMaxLength,
-            ErrorMessage = "The dealer name must be between {1} and {2} characters.",
-            MinimumLength = GlobalConstants.DealerNameMinLength)]
+            Dealer.NameMaxLength,
+            ErrorMessage = "The dealer's Company name must be between {1} and {2} characters.",
+            MinimumLength = Dealer.NameMinLength)]
         public string Name { get; set; }
 
         [Required]
         [StringLength(
-            GlobalConstants.DealerAddressMaxLength,
+            Dealer.AddressMaxLength,
             ErrorMessage = "The dealer address must be between {1} and {2} characters.",
-            MinimumLength = GlobalConstants.DealerAddressMinLength)]
+            MinimumLength = Dealer.AddressMinLength)]
         public string Address { get; set; }
 
         [Required]
         [StringLength(
-            GlobalConstants.CountryNameLength,
+            CountryNameLength,
             ErrorMessage = "The dealer country must be between {1} and {2} characters.",
-            MinimumLength = GlobalConstants.CountryNameMinLength)]
+            MinimumLength = CountryNameMinLength)]
         public string Country { get; set; }
 
         [Required]
         [StringLength(
-            GlobalConstants.CityNameMaxLength,
+            CityNameMaxLength,
             ErrorMessage = "The dealer City must be between {1} and {2} characters.",
-            MinimumLength = GlobalConstants.CityNameMinLength)]
+            MinimumLength = CityNameMinLength)]
         public string City { get; set; }
 
         [Required]
@@ -40,9 +40,9 @@
 
         [Required]
         [StringLength(
-            GlobalConstants.DescriptionMaxLength,
+            Dealer.DescriptionMaxLength,
             ErrorMessage = "The description must be between {1} and {2} characters.",
-            MinimumLength = GlobalConstants.DescriptionMinLength)]
+            MinimumLength = Dealer.DescriptionMinLength)]
         public string Description { get; set; }
     }
 }

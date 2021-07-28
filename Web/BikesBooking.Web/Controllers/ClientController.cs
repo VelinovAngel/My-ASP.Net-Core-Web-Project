@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.Client;
-    using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -25,7 +24,7 @@
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateClientDto client)
+        public async Task<IActionResult> Create(string address, string city)
         {
             var userId = this.User.GetId();
             var isAlreadyExists = this.clientService.IsAlreadyClientExist(userId);
@@ -40,7 +39,7 @@
                 return this.View();
             }
 
-            await this.clientService.CreateClientAsync(client, userId);
+            await this.clientService.CreateClientAsync(userId, address, city);
 
             return this.RedirectToAction("Index", "Home");
         }

@@ -3,7 +3,7 @@ namespace BikesBooking.Data.Models
 {
     using System;
     using System.Collections.Generic;
-
+    using System.ComponentModel.DataAnnotations.Schema;
     using BikesBooking.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
@@ -17,6 +17,14 @@ namespace BikesBooking.Data.Models
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
         }
+
+        [PersonalData]
+        [Column(TypeName = "nvarchar(100)")]
+        public string FirstName { get; set; }
+
+        [PersonalData]
+        [Column(TypeName = "nvarchar(100)")]
+        public string LastName { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }
