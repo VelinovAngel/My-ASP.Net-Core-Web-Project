@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Web.Api
+﻿namespace BikesBooking.Web.Controllers.ApiController
 {
     using System.Threading.Tasks;
 

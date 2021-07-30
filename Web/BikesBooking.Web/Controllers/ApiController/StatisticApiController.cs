@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Web.Api
+﻿namespace BikesBooking.Web.Controllers.ApiController
 {
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;

@@ -46,6 +46,9 @@
 
         public const int CountryNameMinLength = 3;
 
+        // Paging
+        public const int MaxPageElements = 4;
+
         public static class Dealer
         {
             public const int NameMinLength = 3;
@@ -60,9 +63,6 @@
 
             public const int DescriptionMinLength = 5;
         }
-
-        // Paging
-        public const int MaxPageElements = 4;
 
         public static class ClientValidation
         {

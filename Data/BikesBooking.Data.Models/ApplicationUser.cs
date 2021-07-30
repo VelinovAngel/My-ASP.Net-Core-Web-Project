@@ -4,6 +4,7 @@ namespace BikesBooking.Data.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+
     using BikesBooking.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
