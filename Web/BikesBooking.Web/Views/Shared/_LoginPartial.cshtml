@@ -21,7 +21,7 @@
         }
 
         var userId = User.GetId();
-        var userIsDealer = Dealers.IsAlreadyDealerExist(userId);
+        var userIsDealer = Dealers.IsDealer(userId);
         var userIsClient= Client.IsAlreadyClientExist(userId);
 
         if (userIsDealer || userIsClient)

@@ -49,7 +49,7 @@
                     </div>
                     <br />
                     <a asp-controller="Motor" asp-action="Offer" asp-route-id="@motorcycle.Id" class="btn btn-block btn-success">Offer</a>
-                    <a asp-controller="Motor" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-warning">Rating</a>
+                    <a asp-controller="Motor" asp-action="Edit" asp-route-id="@motorcycle.Id" class="btn btn-block btn-warning">Edit</a>
                     <a asp-controller="Motor" asp-action="Remove" asp-route-id="@motorcycle.Id" class="btn btn-block btn-danger">Remove</a>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     </div>
 
 
-    <a class="col-md-2">@Model.CurrentPage</a>
+    <a class="col-md-2 form-text font-italic"><h4>Page:@Model.CurrentPage</h4></a>
 
     @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
                                                    !Model.Motors.Any(); }

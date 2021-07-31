@@ -6,6 +6,7 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
+    using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using Microsoft.EntityFrameworkCore;
 
@@ -18,6 +19,7 @@
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
         private readonly IRepository<Offer> offerRepository;
+        private readonly IDealersService dealerService;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -26,7 +28,8 @@
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
             IRepository<City> cityRepository,
-            IRepository<Offer> offerRepository)
+            IRepository<Offer> offerRepository,
+            IDealersService dealerService)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -35,48 +38,12 @@
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
             this.offerRepository = offerRepository;
+            this.dealerService = dealerService;
         }
 
         public async Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId)
         {
-            if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
-            {
-                await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Model });
-                await this.modelsRepository.SaveChangesAsync();
-            }
-
-            if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
-            {
-                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer });
-                await this.manufacturerRepository.SaveChangesAsync();
-            }
-
-            if (!this.colorRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Color))
-            {
-                await this.colorRepository.AddAsync(new Color { Name = createMotorcycle.Color });
-                await this.colorRepository.SaveChangesAsync();
-            }
-
-            if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Country))
-            {
-                await this.countryRepository.AddAsync(new Country { Name = createMotorcycle.Country });
-                await this.countryRepository.SaveChangesAsync();
-            }
-
-            var countryId = this.countryRepository
-                                .AllAsNoTracking()
-                                .FirstOrDefault(x => x.Name == createMotorcycle.Country).Id;
-
-            if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.City))
-            {
-                await this.cityRepository.AddAsync(new City
-                {
-                    Name = createMotorcycle.City,
-                    CountryId = countryId,
-                    Postcode = new Random().Next(1000, 99999),
-                });
-                await this.cityRepository.SaveChangesAsync();
-            }
+            await this.ValidationMotorcycle(createMotorcycle);
 
             var model = this.modelsRepository
                 .AllAsNoTracking()
@@ -114,6 +81,51 @@
 
             return motorcycle.Id;
         }
+
+        public async Task<bool> Edit(MotorcycleServiceDto motorcycle, int id)
+        {
+            var motorcycleData = this.motorcycleRepository.AllAsNoTracking().FirstOrDefault(x => x.Id == id);
+
+            if (motorcycleData == null)
+            {
+                return false;
+            }
+
+            await this.ValidationMotorcycle(motorcycle);
+
+            var model = this.modelsRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == motorcycle.Model);
+            var manufacturer = this.manufacturerRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == motorcycle.Manufacturer);
+            var color = this.colorRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == motorcycle.Color);
+            var city = this.cityRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == motorcycle.City);
+
+            var typeVelue = (int)motorcycle.Type;
+            var type = (BikesBooking.Data.Models.Enum.Type)typeVelue;
+
+            motorcycleData.ManufacturerId = manufacturer.Id;
+            motorcycleData.ModelId = model.Id;
+            motorcycleData.ColorId = color.Id;
+            motorcycleData.CityId = city.Id;
+            motorcycleData.CubicCentimetre = motorcycle.CubicCentimetre;
+            motorcycleData.Url = motorcycle.Url;
+            motorcycleData.Available = motorcycle.Available;
+            motorcycleData.Description = motorcycle.Description;
+            motorcycleData.Price = motorcycle.Price;
+            motorcycleData.TypeMotor = type;
+
+            this.motorcycleRepository.Update(motorcycleData);
+            await this.motorcycleRepository.SaveChangesAsync();
+
+            return true;
+        }
+
 
         public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage, int dealerId)
         {
@@ -167,6 +179,7 @@
                 Url = x.Url,
                 Available = x.Available,
                 Type = x.TypeMotor.ToString(),
+                DealerId = x.Dealer.DealerId,
             })
             .FirstOrDefaultAsync();
 
@@ -198,13 +211,14 @@
                 Country = x.City.Country.Name,
                 City = x.City.Name,
                 Price = x.Price,
+                Year = x.Manufacturer.Year,
                 Available = x.Available,
                 Url = x.Url,
                 Type = (TypeOfMotors)x.TypeMotor,
                 Description = x.Description,
                 AddedOn = x.CreatedOn,
-                DealerId = x.Dealer.Id,
-                DealerName = x.Dealer.Name,
+                DealerId = x.Dealer.DealerId,
+                Dealer = x.Dealer.Name,
             })
             .FirstOrDefault();
 
@@ -255,6 +269,48 @@
             await this.offerRepository.AddAsync(offer);
             await this.offerRepository.SaveChangesAsync();
             return offer;
+        }
+
+        private async Task ValidationMotorcycle(MotorcycleServiceDto createMotorcycle)
+        {
+            if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
+            {
+                await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Model });
+                await this.modelsRepository.SaveChangesAsync();
+            }
+
+            if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
+            {
+                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer });
+                await this.manufacturerRepository.SaveChangesAsync();
+            }
+
+            if (!this.colorRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Color))
+            {
+                await this.colorRepository.AddAsync(new Color { Name = createMotorcycle.Color });
+                await this.colorRepository.SaveChangesAsync();
+            }
+
+            if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Country))
+            {
+                await this.countryRepository.AddAsync(new Country { Name = createMotorcycle.Country });
+                await this.countryRepository.SaveChangesAsync();
+            }
+
+            var countryId = this.countryRepository
+                                .AllAsNoTracking()
+                                .FirstOrDefault(x => x.Name == createMotorcycle.Country).Id;
+
+            if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.City))
+            {
+                await this.cityRepository.AddAsync(new City
+                {
+                    Name = createMotorcycle.City,
+                    CountryId = countryId,
+                    Postcode = new Random().Next(1000, 99999),
+                });
+                await this.cityRepository.SaveChangesAsync();
+            }
         }
     }
 }

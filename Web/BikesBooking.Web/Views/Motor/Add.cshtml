@@ -1,4 +1,4 @@
-﻿@model MotorcycleModel
+﻿@model MotorcycleServiceDto
 
 @{
     this.ViewData["Title"] = "Add Motorcycle";
@@ -9,7 +9,7 @@
 {
     <div class="alert alert-success alert-dismissible fade show">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        @this.TempData["AddDealerSuccessful"]
+        @this.TempData["Message"]
     </div>
 }
 
@@ -17,90 +17,4 @@
 
 <br />
 
-<div class="container mb-5">
-    <form method="post" class="container lead-section col-md-6 offset-md-3">
-        <div asp-validation-summary="All" class="text-danger"></div>
-
-        <div class="form-group">
-            <label asp-for="Manufacturer"></label>
-            <input asp-for="Manufacturer" class="form-control" placeholder="Es: Yamaha.." />
-            <span asp-validation-for="Manufacturer" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Model"></label>
-            <input asp-for="Model" class="form-control" placeholder="Es: Tracer.." />
-            <span asp-validation-for="Model" class="text-danger"></span>
-
-            <div class="form-group">
-                <label asp-for="Type"></label>
-                <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Year"></label>
-            <input asp-for="Year" class="form-control" placeholder="@DateTime.UtcNow.Year" />
-            <span asp-validation-for="Year" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Color"></label>
-            <input asp-for="Color" class="form-control" placeholder="Es: Blue.." />
-            <span asp-validation-for="Color" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CubicCentimetre"></label>
-            <input asp-for="CubicCentimetre" class="form-control" placeholder="from 50 to 1250.." />
-            <span asp-validation-for="CubicCentimetre" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Price"></label>
-            <input asp-for="Price" class="form-control" placeholder="Es: 130.." />
-            <span asp-validation-for="Price" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Url"></label>
-            <input asp-for="Url" class="form-control" placeholder="https://..." />
-            <span asp-validation-for="Url" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="City"></label>
-            <input asp-for="City" class="form-control" placeholder="Es: Plovdiv.." />
-            <span asp-validation-for="City" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Country"></label>
-            <input asp-for="Country" class="form-control" placeholder="Es: Bulgaria.." />
-            <span asp-validation-for="Country" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Description"></label>
-            <textarea asp-for="Description" class="form-control"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-
-        <div class="form-check form-switch">
-            <input asp-for="Available" class="form-check-input" checked>
-            <label asp-for="Available" class="form-check-label">Available</label>
-            <span asp-validation-for="Available" class="text-danger"></span>
-        </div>
-
-        <br />
-
-        <button type="submit" class="btn btn-primary">Add Motorcycle</button>
-
-    </form>
-</div>
-
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+<partial name="_MotorFormPartial" model="@Model" />

@@ -27,20 +27,28 @@
         [Authorize]
         public IActionResult Add()
         {
+            var userId = this.User.GetId();
+
+            if (!this.dealersService.IsDealer(userId))
+            {
+                return this.RedirectToAction("Create", "Dealer");
+            }
+
             return this.View();
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Add(MotorcycleServiceDto motorcycle)
         {
-            int userId = this.GetUserId();
+            var dealerId = this.GetUserId();
 
             if (!this.ModelState.IsValid)
             {
                 return this.View();
             }
 
-            var motorid = await this.motorcycleService.CreateMotorcycleAsync(motorcycle, userId);
+            await this.motorcycleService.CreateMotorcycleAsync(motorcycle, dealerId);
 
             this.TempData["Message"] = "Motorcycles added successful!";
 
@@ -50,8 +58,15 @@
         [Authorize]
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
         {
-            var userId = this.GetUserId();
-            var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage, userId);
+            var userId = this.User.GetId();
+
+            if (!this.dealersService.IsDealer(userId))
+            {
+                return this.RedirectToAction("Create", "Dealer");
+            }
+
+            var dealerId = this.GetUserId();
+            var motorcycleResult = await this.motorcycleService.GetCollectionOfMotorsAsync(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage, dealerId);
             query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;
             query.Motors = motorcycleResult.Motorcycle;
             return this.View(query);
@@ -60,19 +75,32 @@
         [Authorize]
         public async Task<IActionResult> Offer(int id)
         {
+            var userId = this.User.GetId();
             var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
+            if (model.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
             return this.View(model);
         }
 
         [Authorize]
         public async Task<IActionResult> OfferThisModel(int id)
         {
+            var userId = this.User.GetId();
+
             var motor = new OfferThisModelForm
             {
                 Motor = await this.motorcycleService.GetMotorcycleByIdAsync(id),
                 PickUpDate = DateTime.UtcNow,
                 DropOffDate = DateTime.UtcNow.AddDays(1),
             };
+
+            if (motor.Motor.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
 
             return this.View(motor);
         }
@@ -95,7 +123,66 @@
         [Authorize]
         public IActionResult Edit(int id)
         {
-            return this.View();
+            var userId = this.User.GetId();
+
+            if (!this.dealersService.IsDealer(userId))
+            {
+                return this.RedirectToAction("Create", "Dealer");
+            }
+
+            var motor = this.motorcycleService.Details(id);
+            if (motor.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            return this.View(new MotorcycleFormModel
+            {
+                Manufacturer = motor.Manufacturer,
+                Model = motor.Model,
+                Type = (MotorType)motor.Type,
+                Year = motor.Year,
+                Country = motor.Country,
+                City = motor.City,
+                Color = motor.Color,
+                Available = motor.Available,
+                CubicCentimetre = motor.CubicCentimetre,
+                Description = motor.Description,
+                Price = motor.Price,
+                Url = motor.Url,
+            });
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Edit(int id, MotorcycleServiceDto motorcycleFormModel)
+        {
+            var userId = this.User.GetId();
+
+            if (!this.dealersService.IsDealer(userId))
+            {
+                return this.RedirectToAction("Create", "Dealer");
+            }
+
+            var motor = this.motorcycleService.Details(id);
+            if (motor.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            var isMotorcycleEdited = this.motorcycleService.Edit(motorcycleFormModel, id);
+
+            if (!isMotorcycleEdited.Result)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("All", "Motor");
         }
 
         [Authorize]

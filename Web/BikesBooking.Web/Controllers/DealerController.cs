@@ -27,7 +27,7 @@
         public async Task<IActionResult> Create(CreateDealerDto dealer)
         {
             var userId = this.User.GetId();
-            var isAlreadyExistId = this.dealersService.IsAlreadyDealerExist(userId);
+            var isAlreadyExistId = this.dealersService.IsDealer(userId);
 
             if (isAlreadyExistId)
             {

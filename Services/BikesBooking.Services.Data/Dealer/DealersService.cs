@@ -79,7 +79,8 @@
                     .FirstOrDefault()
                     .ToString();
 
-        public bool IsAlreadyDealerExist(string id)
-            => this.dealerRepository.AllAsNoTracking().Any(x => x.DealerId == id);
+        public bool IsDealer(string userId)
+            => this.dealerRepository.AllAsNoTracking().Any(x => x.DealerId == userId);
+
     }
 }

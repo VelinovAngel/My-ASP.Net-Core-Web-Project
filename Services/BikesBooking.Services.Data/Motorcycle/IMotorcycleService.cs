@@ -8,6 +8,8 @@
     {
         Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId);
 
+        Task<bool> Edit(MotorcycleServiceDto motorcycle, int id);
+
         Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(
             int currentPage,
             int motorcyclesPerPage,

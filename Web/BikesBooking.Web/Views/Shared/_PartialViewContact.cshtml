@@ -9,7 +9,7 @@
 @if (this.SignInManager.IsSignedIn(this.User))
 {
     var userId = User.GetId();
-    var userIsDealer = Dealers.IsAlreadyDealerExist(userId);
+    var userIsDealer = Dealers.IsDealer(userId);
     @if (userIsDealer)
     {
 
