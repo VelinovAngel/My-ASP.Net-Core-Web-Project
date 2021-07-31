@@ -258,6 +258,10 @@
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
+        public bool IsByDealer(int motorId, int dealerId)
+            => this.motorcycleRepository.AllAsNoTracking()
+                                        .Any(x => x.Id == motorId && x.DealerId == dealerId);
+
         private async Task<Offer> AddOffer(OfferPeriodForMotorDto offerPeriodForMotorDto)
         {
             var offer = new Offer

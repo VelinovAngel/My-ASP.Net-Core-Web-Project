@@ -23,6 +23,8 @@
 
         MotorcycleDetailsModel Details(int id);
 
+        bool IsByDealer(int motorId, int dealerId);
+
         public int GetMotorcycleCount();
 
         public int GetNotAvailableMotorcycleCount();

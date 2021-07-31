@@ -158,10 +158,16 @@
         public IActionResult Edit(int id, MotorcycleServiceDto motorcycleFormModel)
         {
             var userId = this.User.GetId();
+            var dealerId = this.dealersService.GetDealerId(userId);
 
             if (!this.dealersService.IsDealer(userId))
             {
                 return this.RedirectToAction("Create", "Dealer");
+            }
+
+            if (this.motorcycleService.IsByDealer(id, dealerId))
+            {
+                return this.BadRequest();
             }
 
             var motor = this.motorcycleService.Details(id);
