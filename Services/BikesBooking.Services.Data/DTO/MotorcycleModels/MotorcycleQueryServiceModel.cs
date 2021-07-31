@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Services.Data.DTO.Motorcycle
+﻿namespace BikesBooking.Services.Data.DTO.MotorcycleModels
 {
     using System.Collections.Generic;
 
@@ -10,6 +10,6 @@
 
         public int TotalMotorcycles { get; set; }
 
-        public IEnumerable<MotorcycleServiceModel> Motorcycle { get; set; }
+        public IEnumerable<MotorcycleDetailsModel> Motorcycle { get; set; }
     }
 }

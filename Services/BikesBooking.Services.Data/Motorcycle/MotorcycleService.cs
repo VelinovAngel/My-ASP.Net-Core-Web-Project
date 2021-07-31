@@ -6,7 +6,6 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Services.Data.DTO.Motorcycle;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using Microsoft.EntityFrameworkCore;
 
@@ -38,7 +37,7 @@
             this.offerRepository = offerRepository;
         }
 
-        public async Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle, int dealerId)
+        public async Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId)
         {
             if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
             {
@@ -112,6 +111,8 @@
 
             await this.motorcycleRepository.AddAsync(motorcycle);
             await this.motorcycleRepository.SaveChangesAsync();
+
+            return motorcycle.Id;
         }
 
         public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage, int dealerId)
@@ -122,7 +123,7 @@
               .OrderByDescending(x => x.CreatedOn)
               .Skip((currentPage - 1) * motorcyclesPerPage)
               .Take(motorcyclesPerPage)
-              .Select(x => new MotorcycleServiceModel
+              .Select(x => new MotorcycleDetailsModel
               {
                   Id = x.Id,
                   Manufacturer = x.Manufacturer.Name,
@@ -183,6 +184,29 @@
             this.motorcycleRepository.Delete(motorcycle);
             await this.motorcycleRepository.SaveChangesAsync();
         }
+
+        public MotorcycleDetailsModel Details(int id)
+            => this.motorcycleRepository.AllAsNoTracking()
+            .Where(x => x.Id == id)
+            .Select(x => new MotorcycleDetailsModel
+            {
+                Id = x.Id,
+                Manufacturer = x.Manufacturer.Name,
+                Model = x.Model.Name,
+                Color = x.Color.Name,
+                CubicCentimetre = x.CubicCentimetre,
+                Country = x.City.Country.Name,
+                City = x.City.Name,
+                Price = x.Price,
+                Available = x.Available,
+                Url = x.Url,
+                Type = (TypeOfMotors)x.TypeMotor,
+                Description = x.Description,
+                AddedOn = x.CreatedOn,
+                DealerId = x.Dealer.Id,
+                DealerName = x.Dealer.Name,
+            })
+            .FirstOrDefault();
 
         public int GetMotorcycleCount()
             => this.motorcycleRepository.AllAsNoTracking().Count();

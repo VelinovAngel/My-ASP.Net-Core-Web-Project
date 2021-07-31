@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using BikesBooking.Services.Data.DTO.Motorcycle;
+    using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public class AllMotorcyclesQueryModel
     {
@@ -12,6 +12,6 @@
 
         public int TotalMotorcycle { get; set; }
 
-        public IEnumerable<MotorcycleServiceModel> Motors { get; set; }
+        public IEnumerable<MotorcycleDetailsModel> Motors { get; set; }
     }
 }

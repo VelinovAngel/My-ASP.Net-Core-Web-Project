@@ -1,6 +1,6 @@
 ﻿namespace BikesBooking.Services.Data.DTO.MotorcycleModels
 {
-    public class AddMotorcycleDto
+    public class MotorcycleServiceDto
     {
         public int Id { get; set; }
 

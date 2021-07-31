@@ -5,7 +5,7 @@
 
     using BikesBooking.Common;
 
-    public class AddMotorcycleModel
+    public class MotorcycleModel
     {
         [Required]
         [MaxLength(GlobalConstants.ManufacturerNameLength)]

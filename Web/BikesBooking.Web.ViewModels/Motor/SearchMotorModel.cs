@@ -32,7 +32,7 @@
         [Display(Name = "Brand")]
         public int ManufacturerId { get; set; }
 
-        public AddMotorcycleDto Type { get; set; }
+        public MotorcycleServiceDto Type { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CountriesItems { get; set; }
 

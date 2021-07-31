@@ -2,12 +2,11 @@
 {
     using System.Threading.Tasks;
 
-    using BikesBooking.Services.Data.DTO.Motorcycle;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public interface IMotorcycleService
     {
-        Task CreateMotorcycleAsync(AddMotorcycleDto createMotorcycle, int dealerId);
+        Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId);
 
         Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(
             int currentPage,
@@ -19,6 +18,8 @@
         Task OfferCurrentMotor(OfferPeriodForMotorDto offerPeriodForMotorDto, int id);
 
         Task RemoveMotorcycleAsync(int id);
+
+        MotorcycleDetailsModel Details(int id);
 
         public int GetMotorcycleCount();
 

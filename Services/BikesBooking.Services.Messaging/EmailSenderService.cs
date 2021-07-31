@@ -16,7 +16,7 @@
             email.Body = new TextPart(TextFormat.Html) { Text = html };
 
             var emailProject = "accoutaspnetcoreproject@gmail.com";
-            var password = "shfupswylwketxvj";
+            var password = "qkebhhnrfxpmizax";
 
             // send email
             using var smtp = new SmtpClient();

@@ -31,7 +31,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(AddMotorcycleDto motorcycle)
+        public async Task<IActionResult> Add(MotorcycleServiceDto motorcycle)
         {
             int userId = this.GetUserId();
 
@@ -40,7 +40,7 @@
                 return this.View();
             }
 
-            await this.motorcycleService.CreateMotorcycleAsync(motorcycle, userId);
+            var motorid = await this.motorcycleService.CreateMotorcycleAsync(motorcycle, userId);
 
             this.TempData["Message"] = "Motorcycles added successful!";
 
