@@ -165,7 +165,7 @@
                 return this.RedirectToAction("Create", "Dealer");
             }
 
-            if (this.motorcycleService.IsByDealer(id, dealerId))
+            if (!this.motorcycleService.IsByDealer(id, dealerId))
             {
                 return this.BadRequest();
             }
@@ -178,7 +178,21 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(new MotorcycleFormModel
+                {
+                    Manufacturer = motor.Manufacturer,
+                    Model = motor.Model,
+                    Type = (MotorType)motor.Type,
+                    Year = motor.Year,
+                    Country = motor.Country,
+                    City = motor.City,
+                    Color = motor.Color,
+                    Available = motor.Available,
+                    CubicCentimetre = motor.CubicCentimetre,
+                    Description = motor.Description,
+                    Price = motor.Price,
+                    Url = motor.Url,
+                });
             }
 
             var isMotorcycleEdited = this.motorcycleService.Edit(motorcycleFormModel, id);

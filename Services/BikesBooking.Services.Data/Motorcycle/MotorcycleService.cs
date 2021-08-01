@@ -149,7 +149,7 @@
                   Url = x.Url,
                   Type = (TypeOfMotors)x.TypeMotor,
                   Description = x.Description,
-                  AddedOn = x.CreatedOn,
+                  AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
               })
               .ToListAsync();
 
@@ -216,7 +216,7 @@
                 Url = x.Url,
                 Type = (TypeOfMotors)x.TypeMotor,
                 Description = x.Description,
-                AddedOn = x.CreatedOn,
+                AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
                 DealerId = x.Dealer.DealerId,
                 Dealer = x.Dealer.Name,
             })
@@ -260,7 +260,7 @@
 
         public bool IsByDealer(int motorId, int dealerId)
             => this.motorcycleRepository.AllAsNoTracking()
-                                        .Any(x => x.Id == motorId && x.DealerId == dealerId);
+                                        .Any(x => x.Id == motorId && x.Dealer.Id == dealerId);
 
         private async Task<Offer> AddOffer(OfferPeriodForMotorDto offerPeriodForMotorDto)
         {
