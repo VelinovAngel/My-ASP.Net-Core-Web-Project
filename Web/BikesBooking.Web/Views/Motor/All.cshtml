@@ -66,27 +66,43 @@
     var maxPage = Math.Ceiling((double)Model.TotalMotorcycle / AllMotorcyclesQueryModel.MotorcyclesPerPage);
 }
 
-<div class="row mb-5">
-    <div class="col-md-6">
-        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
-           asp-controller="Motor"
-           asp-action="All"
-           asp-route-currentPage="@previousPage"><<</a>
-    </div>
 
+@{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+                                                 !Model.Motors.Any(); }
 
-    <a class="col-md-2 form-text font-italic"><h4>Page:@Model.CurrentPage</h4></a>
+<hr />
 
-    @{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
-                                                   !Model.Motors.Any(); }
+<nav aria-label="...">
+    <ul class="pagination justify-content-center">
+        <li class="page-item disabled">
+            <a class="btn @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="Motor"
+               asp-action="All"
+               asp-route-currentPage="@previousPage">Previous</a>
+        </li>
+        @if (@Model.CurrentPage != 1)
+        {
+            <li class="page-item"><a class="page-link" href="#">@previousPage</a></li>
+        }
 
-    <div class="col-md-4">
-        <a class="btn btn-primary float-sm-right @(shouldButtonBeDisabled ? "disabled" : string.Empty)" style="margin-top: 10px"
-           asp-controller="Motor"
-           asp-action="All"
-           asp-route-currentPage="@(Model.CurrentPage + 1)">>></a>
-    </div>
-</div>
+        <li class="page-item active">
+            <a class="page-link" href="#">@Model.CurrentPage<span class="sr-only">(current)</span></a>
+        </li>
+
+        @{
+            var nextpage = Model.CurrentPage + 1;
+        }
+
+        <li class="page-item"><a class="page-link" href="#">@nextpage</a></li>
+
+        <li class="page-item">
+            <a class="btn @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
+               asp-controller="Motor"
+               asp-action="All"
+               asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
+        </li>
+    </ul>
+</nav>
+
 
 @if (!Model.Motors.Any())
 {
