@@ -2,22 +2,22 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static BikesBooking.Common.GlobalConstants;
+    using static BikesBooking.Common.GlobalConstants.ClientValidation;
 
     public class BecomeClientFromModel
     {
         [Required]
         [StringLength(
-            ClientValidation.CityNameMaxLength,
+            CityNameMaxLength,
             ErrorMessage = "The client city name must be between {1} and {2} characters.",
-            MinimumLength = ClientValidation.CityNameMinLength)]
+            MinimumLength = CityNameMinLength)]
         public string City { get; set; }
 
         [Required]
         [StringLength(
-            ClientValidation.AddressMaxLength,
+            AddressMaxLength,
             ErrorMessage = "The client address must be between {1} and {2} characters.",
-            MinimumLength = ClientValidation.AddressMinLength)]
+            MinimumLength = AddressMinLength)]
         public string Address { get; set; }
     }
 }

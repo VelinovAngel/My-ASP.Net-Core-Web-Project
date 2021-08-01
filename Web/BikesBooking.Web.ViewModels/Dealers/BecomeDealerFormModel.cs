@@ -3,21 +3,22 @@
     using System.ComponentModel.DataAnnotations;
 
     using static BikesBooking.Common.GlobalConstants;
+    using static BikesBooking.Common.GlobalConstants.Dealer;
 
     public class BecomeDealerFormModel
     {
         [Required]
         [StringLength(
-            Dealer.NameMaxLength,
+            NameMaxLength,
             ErrorMessage = "The dealer's Company name must be between {1} and {2} characters.",
-            MinimumLength = Dealer.NameMinLength)]
+            MinimumLength = NameMinLength)]
         public string Name { get; set; }
 
         [Required]
         [StringLength(
             Dealer.AddressMaxLength,
             ErrorMessage = "The dealer address must be between {1} and {2} characters.",
-            MinimumLength = Dealer.AddressMinLength)]
+            MinimumLength = AddressMinLength)]
         public string Address { get; set; }
 
         [Required]
@@ -40,9 +41,9 @@
 
         [Required]
         [StringLength(
-            Dealer.DescriptionMaxLength,
+            DescriptionMaxLength,
             ErrorMessage = "The description must be between {1} and {2} characters.",
-            MinimumLength = Dealer.DescriptionMinLength)]
+            MinimumLength = DescriptionMinLength)]
         public string Description { get; set; }
     }
 }
