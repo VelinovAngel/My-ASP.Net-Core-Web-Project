@@ -52,7 +52,15 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= this.Url.Content("~/User/DealerOrClient");
+            if (this.Input.Role == "Dealer")
+            {
+                returnUrl ??= this.Url.Content("~/Dealer/Create");
+            }
+            else if (this.Input.Role == "Client")
+            {
+                returnUrl ??= this.Url.Content("~/Client/Create");
+            }
+
             this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (this.ModelState.IsValid)
             {
@@ -118,6 +126,9 @@
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            public string Role { get; set; }
         }
     }
 }

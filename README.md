@@ -26,6 +26,6 @@ ___________________________________________
 * Roles (User -> Client or Dealer)
 * Facebook login (for developers)
 * Google login (for developers)
-* Custom Identity (login and register)
+* Custom Identity (login and register with initial chooice if you wanna be a dealer or client)
 
 

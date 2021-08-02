@@ -12,6 +12,7 @@
             NameMaxLength,
             ErrorMessage = "The dealer's Company name must be between {1} and {2} characters.",
             MinimumLength = NameMinLength)]
+        [Display(Name ="Name of company")]
         public string Name { get; set; }
 
         [Required]
@@ -19,6 +20,7 @@
             Dealer.AddressMaxLength,
             ErrorMessage = "The dealer address must be between {1} and {2} characters.",
             MinimumLength = AddressMinLength)]
+        [Display(Name = "Address of company")]
         public string Address { get; set; }
 
         [Required]
