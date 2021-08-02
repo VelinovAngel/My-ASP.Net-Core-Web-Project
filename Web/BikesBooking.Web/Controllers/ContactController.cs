@@ -55,7 +55,7 @@
             return this.RedirectToAction("Contact", "Contact");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Dealer")]
         public IActionResult ClientMessages()
         {
             var messages = this.contactService.GetAllMessages();
@@ -68,7 +68,7 @@
             return this.View(messages.Result);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Dealer")]
         public IActionResult Details(int id)
         {
             var message = this.contactService.GetSingleMessage(id);
@@ -80,7 +80,7 @@
             return this.View(message);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Dealer")]
         public IActionResult SendEmailToUser([FromRoute] int id)
         {
             var client = new SendEmailForm();
@@ -89,7 +89,7 @@
             return this.View(client);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Dealer")]
         [HttpPost]
         public IActionResult SendEmailToUser([FromRoute]int id, string subject, string content)
         {

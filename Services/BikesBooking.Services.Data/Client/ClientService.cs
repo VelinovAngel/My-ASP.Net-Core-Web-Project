@@ -28,7 +28,7 @@
             var lastName = this.userRepository.AllAsNoTracking()
                                .Where(x => x.Id == userId)
                                .FirstOrDefault().LastName;
-            var fullName = $"{firstName} + {lastName}";
+            var fullName = $"{firstName} {lastName}";
             var email = this.userRepository.AllAsNoTracking().Where(x => x.Id == userId).FirstOrDefault().Email;
             var completeAddress = $"{city} - {address}";
             var currClient = new Client
@@ -49,10 +49,8 @@
             .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
-        public string GetCurrentClientEmail(int id)
-        {
-            throw new NotImplementedException();
-        }
+        public string GetCurrentClientEmail(string id)
+            => this.clientRepository.AllAsNoTracking().FirstOrDefault(x => x.ClientId == id).Email;
 
         public bool IsAlreadyClientExist(string id)
             => this.clientRepository.AllAsNoTracking().Any(x => x.ClientId == id);

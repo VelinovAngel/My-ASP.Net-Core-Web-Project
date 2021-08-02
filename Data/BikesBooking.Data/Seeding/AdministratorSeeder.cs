@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BikesBooking.Common;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -50,7 +49,6 @@
                 PhoneNumberConfirmed = false,
                 SecurityStamp = Guid.NewGuid().ToString("D"),
             };
-
 
             if (!context.Users.Any(u => u.UserName == user.UserName))
             {

@@ -25,6 +25,7 @@
         }
 
         [Authorize]
+        [Authorize(Roles = "Dealer")]
         public IActionResult Add()
         {
             var userId = this.User.GetId();
@@ -38,7 +39,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Dealer")]
         public async Task<IActionResult> Add(MotorcycleServiceDto motorcycle)
         {
             var dealerId = this.GetUserId();

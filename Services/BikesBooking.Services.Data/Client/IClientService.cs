@@ -8,7 +8,7 @@
 
         bool IsAlreadyClientExist(string id);
 
-        string GetCurrentClientEmail(int id);
+        string GetCurrentClientEmail(string id);
 
         public int GetClientId(string userId);
     }
