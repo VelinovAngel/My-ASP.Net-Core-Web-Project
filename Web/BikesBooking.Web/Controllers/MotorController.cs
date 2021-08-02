@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize(Roles = "Dealer, Administrator")]
     public class MotorController : Controller
     {
         private readonly IMotorcycleService motorcycleService;
@@ -23,9 +24,7 @@
             this.motorcycleService = motorcycleService;
             this.dealersService = dealersService;
         }
-
-        [Authorize]
-        [Authorize(Roles = "Dealer")]
+ 
         public IActionResult Add()
         {
             var userId = this.User.GetId();
@@ -39,7 +38,7 @@
         }
 
         [HttpPost]
-        [Authorize(Roles = "Dealer")]
+        [Authorize]
         public async Task<IActionResult> Add(MotorcycleServiceDto motorcycle)
         {
             var dealerId = this.GetUserId();
