@@ -41,7 +41,7 @@
                 return this.View(input);
             }
 
-            return this.RedirectToAction("FreeMotors", "User");
+            return this.RedirectToAction("FreeMotors", "User", input);
         }
 
         public IActionResult Privacy()

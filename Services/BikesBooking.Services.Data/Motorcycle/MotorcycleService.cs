@@ -262,6 +262,43 @@
             => this.motorcycleRepository.AllAsNoTracking()
                                         .Any(x => x.Id == motorId && x.Dealer.Id == dealerId);
 
+        public async Task<MotorcycleQueryServiceModel> GetFreeMotors(int currentPage, int motorcyclesPerPage, DateTime pickUpDate, DateTime dropOffDate)
+        {
+            var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
+             .AsQueryable()
+             .Where(x => x.Available == true && x.Offer.PickUpDate <= pickUpDate && x.Offer.DropOffDate >= dropOffDate)
+             .OrderByDescending(x => x.CreatedOn)
+             .Skip((currentPage - 1) * motorcyclesPerPage)
+             .Take(motorcyclesPerPage)
+             .Select(x => new MotorcycleDetailsModel
+             {
+                 Id = x.Id,
+                 Manufacturer = x.Manufacturer.Name,
+                 Model = x.Model.Name,
+                 Color = x.Color.Name,
+                 CubicCentimetre = x.CubicCentimetre,
+                 Country = x.City.Country.Name,
+                 City = x.City.Name,
+                 Price = x.Price,
+                 Available = x.Available,
+                 Url = x.Url,
+                 Type = (TypeOfMotors)x.TypeMotor,
+                 Description = x.Description,
+                 AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+             })
+             .ToListAsync();
+
+            var totalCounts = this.modelsRepository.AllAsNoTracking().Count();
+
+            return new MotorcycleQueryServiceModel
+            {
+                TotalMotorcycles = totalCounts,
+                CurrentPage = currentPage,
+                MotorcyclesPerPage = motorcyclesPerPage,
+                Motorcycle = motorcycles,
+            };
+        }
+
         private async Task<Offer> AddOffer(OfferPeriodForMotorDto offerPeriodForMotorDto)
         {
             var offer = new Offer

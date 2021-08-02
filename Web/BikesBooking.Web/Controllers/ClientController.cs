@@ -56,5 +56,10 @@
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        public IActionResult Book()
+        {
+            return this.View();
+        }
     }
 }

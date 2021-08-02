@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Services.Data.Motorcycle
 {
+    using System;
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
@@ -14,6 +15,12 @@
             int currentPage,
             int motorcyclesPerPage,
             int dealerId);
+
+        Task<MotorcycleQueryServiceModel> GetFreeMotors(
+            int currentPage,
+            int motorcyclesPerPage,
+            DateTime pickUpDate,
+            DateTime dropOffDate);
 
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
 
