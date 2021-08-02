@@ -16,6 +16,7 @@ ___________________________________________
 * ASP.NET MVC 5.0 view components
 * EntityFrameworkCore 5.0.8
 * MSSQL Server
+* Initial seeding : Roles, Model , Manufacturer, Color, Countries and Cities.
 * PartialView
 * MailKit 2.14.0 (Email sender by Google)
 * Bootstrap 4

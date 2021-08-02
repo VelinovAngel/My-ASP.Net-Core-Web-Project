@@ -6,6 +6,11 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string DealerRoleName = "Dealer";
+
+        public const string ClientRoleName = "Client";
+
+
         // DbContext validation
         public const int MinYearMotorcycle = 1998;
 
