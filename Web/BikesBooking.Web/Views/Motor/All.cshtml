@@ -13,7 +13,7 @@
 }
 
 
-<h1 class="text-center mt-2">My Collection</h1>
+<h1 class="text-center mt-2">My Store</h1>
 
 <form method="get">
     <div class="row mt-2 mb-4">
@@ -67,8 +67,17 @@
 }
 
 
-@{ var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
-                                                 !Model.Motors.Any(); }
+@{ 
+    var shouldButtonBeDisabled = Model.CurrentPage == maxPage ||
+                                                   !Model.Motors.Any();
+    var isLastPage = false;
+    }
+
+@if (!Model.Motors.Any())
+{
+    <h2 class="text-center">No more motorcycle!</h2>
+    isLastPage = true;
+}
 
 <hr />
 
@@ -92,7 +101,10 @@
             var nextpage = Model.CurrentPage + 1;
         }
 
-        <li class="page-item"><a class="page-link" href="#">@nextpage</a></li>
+        @if (!isLastPage)
+        {
+            <li class="page-item"><a class="page-link" href="#">@nextpage</a></li>
+        }
 
         <li class="page-item">
             <a class="btn @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
@@ -102,10 +114,5 @@
         </li>
     </ul>
 </nav>
-
-
-@if (!Model.Motors.Any())
-{
-    <h2 class="text-center">No more motorcycle!</h2>}
 
 

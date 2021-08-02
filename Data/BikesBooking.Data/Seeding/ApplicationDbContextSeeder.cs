@@ -30,6 +30,7 @@
                               new ManufactureMotorcycle(dbContext),
                               new ColorMotorcycleSeeder(dbContext),
                               new CountrySeeder(dbContext),
+                              new AdministratorSeeder(dbContext, serviceProvider),
                           };
 
             foreach (var seeder in seeders)

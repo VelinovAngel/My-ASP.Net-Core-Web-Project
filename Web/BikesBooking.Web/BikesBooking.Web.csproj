@@ -42,8 +42,4 @@
     <ProjectReference Include="..\..\Services\BikesBooking.Services.Messaging\BikesBooking.Services.Messaging.csproj" />
     <ProjectReference Include="..\BikesBooking.Web.ViewModels\BikesBooking.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Dashboard\" />
-  </ItemGroup>
 </Project>
