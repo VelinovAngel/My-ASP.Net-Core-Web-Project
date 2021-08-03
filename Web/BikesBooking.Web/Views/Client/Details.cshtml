@@ -1,0 +1,49 @@
+﻿@{
+    this.ViewData["Title"] = "Details";
+}
+
+
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Page for details for your bike and the possibility of booking it!</h1>
+        <div>
+            <div class="form-group text-center">
+                <img src="@Model.Url" class="img-fluid">
+            </div>
+            <div class="form-group">
+                <label>Brand and Model:</label>
+                <h5 type="text" readonly class="form-control">@Model.Manufacturer : @Model.Model</h5>
+            </div>
+            <div class="form-group">
+                <label>Color:</label>
+                <h5 type="text" readonly class="form-control">@Model.Color</h5>
+            </div>
+            <div class="form-group">
+                <label>Cubic Centimetre:</label>
+                <h5 type="text" readonly class="form-control">@Model.CubicCentimetre cc</h5>
+            </div>
+            <div class="form-group">
+                <label>Price per day:</label>
+                <h5 type="text" readonly class="form-control">@Model.Price Euro</h5>
+            </div>
+            <div class="form-group">
+                <label>Dealer name:</label>
+                <h5 type="text" readonly class="form-control">@Model.Dealer</h5>
+            </div>
+            <div class="form-group">
+                <label>City:</label>
+                <h5 type="text" readonly class="form-control">@Model.City</h5>
+            </div>
+            <div class="form-group">
+                <label>Country:</label>
+                <h5 type="text" readonly class="form-control">@Model.Country</h5>
+            </div>
+            <div class="form-group text-center">
+                <div class="button-holder">
+                    <a asp-controller="Client" asp-action="Book" asp-route-id="@Model.Id" class="btn btn-block btn-primary">Book</a>
+                    <a asp-controller="Client" asp-action="Rating" asp-route-id="@Model.Id" class="btn btn-block btn-primary">Rating</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

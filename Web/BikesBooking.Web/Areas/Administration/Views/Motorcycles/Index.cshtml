@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<BikesBooking.Data.Models.Motorcycle>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "All motorcycles";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                Brand
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Model)

@@ -5,6 +5,7 @@
 
     using BikesBooking.Common;
     using BikesBooking.Services.Data.Client;
+    using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
@@ -15,15 +16,18 @@
         private readonly IClientService clientService;
         private readonly IUserService userService;
         private readonly IServiceProvider serviceProvider;
+        private readonly IMotorcycleService motorcycleService;
 
         public ClientController(
             IClientService clientService,
             IUserService userService,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IMotorcycleService motorcycleService)
         {
             this.clientService = clientService;
             this.userService = userService;
             this.serviceProvider = serviceProvider;
+            this.motorcycleService = motorcycleService;
         }
 
         [Authorize]
@@ -60,6 +64,12 @@
         public IActionResult Book()
         {
             return this.View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = this.motorcycleService.Details(id);
+            return this.View(model);
         }
     }
 }

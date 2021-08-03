@@ -1,0 +1,37 @@
+﻿@model IEnumerable<BikesBooking.Data.Models.Motorcycle>
+
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">Dashboard</h1>
+<br />
+<hr />
+<div class="row">
+    <div class="card offset-md-2" style="width: 18rem;">
+        <img class="card-img-top" src="/img/MotorDashboard.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title text-center">Motorcycles</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a asp-area="Administration" asp-controller="Motorcycles" asp-action="Index" class="btn btn-primary">Motorcycles</a>
+        </div>
+    </div>
+    <div class="card mr-4 ml-4" style="width: 18rem;">
+        <img class="card-img-top pb-5" src="/img/MotorDealers.jpeg" alt="Card image cap">
+        <br />
+        <div class="card-body">
+            <h5 class="card-title text-xl-center pt-5">Dealers</h5>
+            <p class="card-text pt-3">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a asp-area="Administration" asp-controller="Dealers" asp-action="Index" class="btn btn-primary">Dealers</a>
+        </div>
+    </div>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="/img/Client.jpg" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title text-center">Client</h5>
+            <p class="card-text pt-4">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a asp-area="Administration" asp-controller="Clients" asp-action="Index" class="btn btn-primary">Clients</a>
+        </div>
+    </div>
+</div>
