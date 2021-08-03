@@ -19,30 +19,30 @@
             this.contactRepository = contactRepository;
         }
 
-        public async Task<IEnumerable<ContactFormDto>> GetAllMessages()
-            => await this.contactRepository.AllAsNoTracking()
+        public IEnumerable<ContactFormDto> GetAllMessages()
+            => this.contactRepository.AllAsNoTracking()
             .AsQueryable()
             .Select(x => new ContactFormDto
             {
                 Id = x.Id,
-                Name = x.Username,
+                Username = x.Username,
                 Email = x.Email,
-                Subject = x.Complaint,
+                Complaint = x.Complaint,
                 Description = x.Description,
                 CreatedOn = x.CreatedOn,
             })
-            .ToListAsync();
+            .ToList();
 
         public ContactFormDto GetSingleMessage(int id)
-            => this.GetAllMessages().Result.Where(x => x.Id == id).FirstOrDefault();
+            => this.GetAllMessages().Where(x => x.Id == id).FirstOrDefault();
 
         public async Task SendContactMessageAsync(ContactFormDto contact)
         {
             var message = new Contact
             {
-                Username = contact.Name,
+                Username = contact.Username,
                 Email = contact.Email,
-                Complaint = contact.Subject,
+                Complaint = contact.Complaint,
                 Description = contact.Description,
             };
 

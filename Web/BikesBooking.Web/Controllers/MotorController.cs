@@ -58,6 +58,11 @@
         [Authorize]
         public async Task<IActionResult> All([FromQuery] AllMotorcylesQueryDto query)
         {
+            if (query.CurrentPage <= 0)
+            {
+                return this.NotFound();
+            }
+
             var userId = this.User.GetId();
 
             if (!this.dealersService.IsDealer(userId))

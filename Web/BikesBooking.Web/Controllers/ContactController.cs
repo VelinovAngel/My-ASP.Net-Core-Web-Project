@@ -42,10 +42,10 @@
 
             var massage = new ContactFormDto
             {
-                Name = contact.Name,
+                Username = contact.Username,
                 Email = contact.Email,
                 Description = contact.Description,
-                Subject = contact.Subject,
+                Complaint = contact.Complaint,
             };
 
             await this.contactService.SendContactMessageAsync(massage);
@@ -65,7 +65,7 @@
                 return this.RedirectToAction("Contact", "Contact");
             }
 
-            return this.View(messages.Result);
+            return this.View(messages);
         }
 
         [Authorize(Roles = "Dealer")]
