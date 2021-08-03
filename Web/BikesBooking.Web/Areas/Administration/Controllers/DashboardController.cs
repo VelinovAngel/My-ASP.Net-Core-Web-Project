@@ -8,24 +8,10 @@
 
     public class DashboardController : AdministrationController
     {
-        private readonly ApplicationDbContext context;
 
-        public DashboardController(ApplicationDbContext context)
+        public IActionResult Index()
         {
-            this.context = context;
-        }
-
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = this.context.Motorcycles
-                .Include(m => m.City)
-                .Include(m => m.Color)
-                .Include(m => m.Dealer)
-                .Include(m => m.Manufacturer)
-                .Include(m => m.Model)
-                .Include(m => m.Offer)
-                .Include(m => m.Review);
-            return this.View(await applicationDbContext.ToListAsync());
+            return this.View();
         }
     }
 }
