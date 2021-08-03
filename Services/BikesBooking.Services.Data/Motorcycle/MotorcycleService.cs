@@ -252,7 +252,7 @@
                                .FirstOrDefault().Id;
 
             currentMotor.OfferId = offerId;
-            currentMotor.Available = false;
+            currentMotor.Available = true;
 
             this.motorcycleRepository.Update(currentMotor);
             await this.motorcycleRepository.SaveChangesAsync();
@@ -279,6 +279,7 @@
                  CubicCentimetre = x.CubicCentimetre,
                  Country = x.City.Country.Name,
                  City = x.City.Name,
+                 Year = x.Manufacturer.Year,
                  Price = x.Price,
                  Available = x.Available,
                  Url = x.Url,
@@ -322,7 +323,7 @@
 
             if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
             {
-                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer });
+                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer, Year = createMotorcycle.Year});
                 await this.manufacturerRepository.SaveChangesAsync();
             }
 

@@ -11,36 +11,17 @@
     <div class="row mt-2 mb-4">
         @foreach (var motorcycle in Model.Motors)
         {
-            <div class="card col-6 col-lg-3 ">
-                <img src="@motorcycle.Url"
-                     class="motor-img-top img-fluid img-thumbnail motor-image" style="width: 300px; height: 180px;">
-                <div class="motor-body">
-                    <h3 class="motor-title text-center" data-toggle="tooltip">
-                        @motorcycle.Manufacturer
-                    </h3>
-                    <h5 class="text-center" data-toggle="tooltip">
-                        @motorcycle.Model
-                    </h5>
-                    <h4 class="motor-title text-center" data-toggle="tooltip" data-placement="bottom"
-                        title="@motorcycle.Description">
-                        Description:
-                    </h4>
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item text-center">Type : @motorcycle.Type</li>
-                        <li class="list-group-item">
-                            <span class="motor-stat">@motorcycle.CubicCentimetre c.c.</span>
-                        </li>
-                        <li class="list-group-item">
-                            <span class="price-stat">@motorcycle.Price Euro</span>
-                        </li>
-                    </ul>
-                    <div class="card-footer">
-                        <small class="text-muted">
-                            Last updated @motorcycle.AddedOn
-                        </small>
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <img class="motor-img-top img-fluid img-thumbnail motor-image" style="width: 400px; height: 250px;" src="@motorcycle.Url" alt="@motorcycle.Manufacturer @motorcycle.Model - @motorcycle.Year (@motorcycle.Type)">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-center">@motorcycle.Year  @motorcycle.Manufacturer @motorcycle.Model (@motorcycle.Type)</h5>
+                        <div class="row">
+                            <a asp-controller="Motor" asp-action="Details" asp-route-id="@motorcycle.Id" class="btn btn-primary md-2 offset-4">View</a>
+                            <br />
+                            <a asp-controller="Client" asp-action="Book" asp-route-id="@motorcycle.Id" class="btn btn-primary ml-2">Book</a>
+                        </div>
                     </div>
-                    <br />
-                    <a asp-controller="Client" asp-action="Book" asp-route-id="@motorcycle.Id" class="btn btn-block btn-success">Book this motor</a>                  
                 </div>
             </div>
         }
