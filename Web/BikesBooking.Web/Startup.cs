@@ -136,14 +136,14 @@
 
             app.UseRouting();
 
-            app.UseHangfireDashboard("/hangfire", new DashboardOptions
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseHangfireDashboard("/administrator/statistic", new DashboardOptions
             {
                 Authorization = new[] { new HangfireAuthorizationFilter() },
             });
             app.UseHangfireServer();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(
                 endpoints =>

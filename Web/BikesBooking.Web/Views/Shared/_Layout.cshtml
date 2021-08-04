@@ -19,6 +19,11 @@
             <div class="container">
                 <img src="~/img/BikesBooking.png" class="pmg m-sm-1" width="70" height="60">
                 <a class="navbar-brand m-sm-1 font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index"><h3 class="font-weight-bold">@GlobalConstants.SystemName</h3></a>
+                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                {
+                    <a class="btn btn-outline-dark m-md-2" href="/Administrator/Statistic">Statistic</a>
+
+                }
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

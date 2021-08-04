@@ -9,8 +9,8 @@
         public bool Authorize(DashboardContext context)
         {
             var httpContext = context.GetHttpContext();
-            var isInRole = httpContext.User.IsInRole("Administrator");
-            return true;
+            var isInRole = httpContext.User.IsInRole(GlobalConstants.AdministratorRoleName);
+            return isInRole;
         }
     }
 }
