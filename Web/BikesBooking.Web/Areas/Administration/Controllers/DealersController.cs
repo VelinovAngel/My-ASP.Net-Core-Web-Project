@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Data;
+    using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,17 +12,21 @@
 
     public class DealersController : AdministrationController
     {
-        private readonly ApplicationDbContext context;
+        private readonly IRepository<Dealer> dealer;
+        private readonly IRepository<City> city;
 
-        public DealersController(ApplicationDbContext context)
+        public DealersController(
+            IRepository<Dealer> dealer,
+            IRepository<City> city)
         {
-            this.context = context;
+            this.dealer = dealer;
+            this.city = city;
         }
 
         // GET: Administration/Dealers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = this.context.Dealers
+            var applicationDbContext = this.dealer.All()
                 .Include(d => d.City)
                 .ThenInclude(c => c.Country);
             return this.View(await applicationDbContext.ToListAsync());
@@ -35,7 +40,7 @@
                 return this.NotFound();
             }
 
-            var dealer = await this.context.Dealers
+            var dealer = await this.dealer.All()
                 .Include(d => d.City)
                 .ThenInclude(d => d.Country)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -50,7 +55,7 @@
         // GET: Administration/Dealers/Create
         public IActionResult Create()
         {
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name");
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name");
             return this.View();
         }
 
@@ -63,12 +68,12 @@
         {
             if (this.ModelState.IsValid)
             {
-                this.context.Add(dealer);
-                await this.context.SaveChangesAsync();
+                await this.dealer.AddAsync(dealer);
+                await this.dealer.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", dealer.CityId);
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", dealer.CityId);
             return this.View(dealer);
         }
 
@@ -80,13 +85,13 @@
                 return this.NotFound();
             }
 
-            var dealer = await this.context.Dealers.FindAsync(id);
+            var dealer = this.dealer.All().FirstOrDefault(x => x.Id == id);
             if (dealer == null)
             {
                 return this.NotFound();
             }
 
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", dealer.CityId);
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", dealer.CityId);
             return this.View(dealer);
         }
 
@@ -95,8 +100,11 @@
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Name,Address,Email,Description,CityId,CountryId,DealerId,CreatedOn")] Dealer dealer)
+        public async Task<IActionResult> Edit(int id, [Bind("Name,Address,Email,Description,CityId,CountryId,Id,DealerId,CreatedOn")] Dealer dealer)
         {
+            //var dealerInfo = this.dealer.All()
+            //    .Where(x => x.DealerId == dealer.DealerId).FirstOrDefault();
+
             if (id != dealer.Id)
             {
                 return this.NotFound();
@@ -106,8 +114,8 @@
             {
                 try
                 {
-                    this.context.Update(dealer);
-                    await this.context.SaveChangesAsync();
+                    this.dealer.Update(dealer);
+                    await this.dealer.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -124,7 +132,7 @@
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", dealer.CityId);
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", dealer.CityId);
             return this.View(dealer);
         }
 
@@ -136,7 +144,7 @@
                 return this.NotFound();
             }
 
-            var dealer = await this.context.Dealers
+            var dealer = await this.dealer.All()
                 .Include(d => d.City)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (dealer == null)
@@ -153,15 +161,15 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var dealer = await this.context.Dealers.FindAsync(id);
-            this.context.Dealers.Remove(dealer);
-            await this.context.SaveChangesAsync();
+            var dealer = this.dealer.All().FirstOrDefault(x => x.Id == id);
+            this.dealer.Delete(dealer);
+            await this.dealer.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
         private bool DealerExists(int id)
         {
-            return this.context.Dealers.Any(e => e.Id == id);
+            return this.dealer.All().Any(e => e.Id == id);
         }
     }
 }

@@ -19,7 +19,6 @@
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
         private readonly IRepository<Offer> offerRepository;
-        private readonly IDealersService dealerService;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -28,8 +27,7 @@
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
             IRepository<City> cityRepository,
-            IRepository<Offer> offerRepository,
-            IDealersService dealerService)
+            IRepository<Offer> offerRepository)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -38,7 +36,6 @@
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
             this.offerRepository = offerRepository;
-            this.dealerService = dealerService;
         }
 
         public async Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId)
