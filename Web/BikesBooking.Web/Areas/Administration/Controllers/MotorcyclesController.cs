@@ -1,9 +1,11 @@
 ﻿namespace BikesBooking.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
     using BikesBooking.Data;
+    using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
@@ -11,17 +13,39 @@
 
     public class MotorcyclesController : AdministrationController
     {
-        private readonly ApplicationDbContext context;
+        private readonly IRepository<Dealer> dealer;
+        private readonly IRepository<City> city;
+        private readonly IRepository<Motorcycle> motorcycle;
+        private readonly IRepository<Color> color;
+        private readonly IRepository<Model> model;
+        private readonly IRepository<Manufacturer> manufacturer;
+        private readonly IRepository<Offer> offer;
+        private readonly IRepository<Review> review;
 
-        public MotorcyclesController(ApplicationDbContext context)
+        public MotorcyclesController(
+            IRepository<Dealer> dealer,
+            IRepository<City> city,
+            IRepository<Motorcycle> motorcycle,
+            IRepository<Color> color,
+            IRepository<Model> model,
+            IRepository<Manufacturer> manufacturer,
+            IRepository<Offer> offer,
+            IRepository<Review> review)
         {
-            this.context = context;
+            this.dealer = dealer;
+            this.city = city;
+            this.motorcycle = motorcycle;
+            this.color = color;
+            this.model = model;
+            this.manufacturer = manufacturer;
+            this.offer = offer;
+            this.review = review;
         }
 
         // GET: Administration/Motorcycles
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = this.context.Motorcycles
+            var applicationDbContext = this.motorcycle.All()
                 .Include(m => m.City)
                 .Include(m => m.Color)
                 .Include(m => m.Dealer)
@@ -40,7 +64,7 @@
                 return this.NotFound();
             }
 
-            var motorcycle = await this.context.Motorcycles
+            var motorcycle = await this.motorcycle.All()
                 .Include(m => m.City)
                 .Include(m => m.Color)
                 .Include(m => m.Dealer)
@@ -60,13 +84,13 @@
         // GET: Administration/Motorcycles/Create
         public IActionResult Create()
         {
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name");
-            this.ViewData["ColorId"] = new SelectList(this.context.Colors, "Id", "Name");
-            this.ViewData["DealerId"] = new SelectList(this.context.Dealers, "Id", "Address");
-            this.ViewData["ManufacturerId"] = new SelectList(this.context.Manufacturers, "Id", "Name");
-            this.ViewData["ModelId"] = new SelectList(this.context.Models, "Id", "Name");
-            this.ViewData["OfferId"] = new SelectList(this.context.Offers, "Id", "Id");
-            this.ViewData["ReviewId"] = new SelectList(this.context.Reviews, "Id", "Description");
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name");
+            this.ViewData["ColorId"] = new SelectList(this.color.All().ToList(), "Id", "Name");
+            this.ViewData["DealerId"] = new SelectList(this.dealer.All().ToList(), "Id", "Address");
+            this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name");
+            this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name");
+            this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id");
+            this.ViewData["ReviewId"] = new SelectList(this.offer.All().ToList(), "Id", "Description");
             return this.View();
         }
 
@@ -79,19 +103,19 @@
         {
             if (this.ModelState.IsValid)
             {
-                this.context.Add(motorcycle);
-                await this.context.SaveChangesAsync();
+                await this.motorcycle.AddAsync(motorcycle);
+                await this.motorcycle.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", motorcycle.CityId);
-            this.ViewData["ColorId"] = new SelectList(this.context.Colors, "Id", "Name", motorcycle.ColorId);
-            this.ViewData["DealerId"] = new SelectList(this.context.Dealers, "Id", "Address", motorcycle.DealerId);
-            this.ViewData["ManufacturerId"] = new SelectList(this.context.Manufacturers, "Id", "Name", motorcycle.ManufacturerId);
-            this.ViewData["ModelId"] = new SelectList(this.context.Models, "Id", "Name", motorcycle.ModelId);
-            this.ViewData["OfferId"] = new SelectList(this.context.Offers, "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.context.Reviews, "Id", "Description", motorcycle.ReviewId);
-            return View(motorcycle);
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", motorcycle.CityId);
+            this.ViewData["ColorId"] = new SelectList(this.color.All().ToList(), "Id", "Name", motorcycle.ColorId);
+            this.ViewData["DealerId"] = new SelectList(this.dealer.All().ToList(), "Id", "Address", motorcycle.DealerId);
+            this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
+            this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
+            this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
+            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
+            return this.View(motorcycle);
         }
 
         // GET: Administration/Motorcycles/Edit/5
@@ -102,19 +126,19 @@
                 return this.NotFound();
             }
 
-            var motorcycle = await this.context.Motorcycles.FindAsync(id);
+            var motorcycle = await this.motorcycle.All().FirstOrDefaultAsync(x => x.Id == id);
             if (motorcycle == null)
             {
                 return this.NotFound();
             }
 
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", motorcycle.CityId);
-            this.ViewData["ColorId"] = new SelectList(this.context.Colors, "Id", "Name", motorcycle.ColorId);
-            this.ViewData["DealerId"] = new SelectList(this.context.Dealers, "Id", "Address", motorcycle.DealerId);
-            this.ViewData["ManufacturerId"] = new SelectList(this.context.Manufacturers, "Id", "Name", motorcycle.ManufacturerId);
-            this.ViewData["ModelId"] = new SelectList(this.context.Models, "Id", "Name", motorcycle.ModelId);
-            this.ViewData["OfferId"] = new SelectList(this.context.Offers, "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.context.Reviews, "Id", "Description", motorcycle.ReviewId);
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", motorcycle.CityId);
+            this.ViewData["ColorId"] = new SelectList(this.color.All().ToList(), "Id", "Name", motorcycle.ColorId);
+            this.ViewData["DealerId"] = new SelectList(this.dealer.All().ToList(), "Id", "Address", motorcycle.DealerId);
+            this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
+            this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
+            this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
+            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
             return this.View(motorcycle);
         }
 
@@ -134,8 +158,9 @@
             {
                 try
                 {
-                    this.context.Update(motorcycle);
-                    await this.context.SaveChangesAsync();
+                    motorcycle.CreatedOn = DateTime.UtcNow;
+                    this.motorcycle.Update(motorcycle);
+                    await this.motorcycle.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,13 +176,14 @@
 
                 return this.RedirectToAction(nameof(this.Index));
             }
-            this.ViewData["CityId"] = new SelectList(this.context.Cities, "Id", "Name", motorcycle.CityId);
-            this.ViewData["ColorId"] = new SelectList(this.context.Colors, "Id", "Name", motorcycle.ColorId);
-            this.ViewData["DealerId"] = new SelectList(this.context.Dealers, "Id", "Address", motorcycle.DealerId);
-            this.ViewData["ManufacturerId"] = new SelectList(this.context.Manufacturers, "Id", "Name", motorcycle.ManufacturerId);
-            this.ViewData["ModelId"] = new SelectList(this.context.Models, "Id", "Name", motorcycle.ModelId);
-            this.ViewData["OfferId"] = new SelectList(this.context.Offers, "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.context.Reviews, "Id", "Description", motorcycle.ReviewId);
+
+            this.ViewData["CityId"] = new SelectList(this.city.All().ToList(), "Id", "Name", motorcycle.CityId);
+            this.ViewData["ColorId"] = new SelectList(this.color.All().ToList(), "Id", "Name", motorcycle.ColorId);
+            this.ViewData["DealerId"] = new SelectList(this.dealer.All().ToList(), "Id", "Address", motorcycle.DealerId);
+            this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
+            this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
+            this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
+            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
             return this.View(motorcycle);
         }
 
@@ -169,7 +195,7 @@
                 return this.NotFound();
             }
 
-            var motorcycle = await this.context.Motorcycles
+            var motorcycle = await this.motorcycle.All()
                 .Include(m => m.City)
                 .Include(m => m.Color)
                 .Include(m => m.Dealer)
@@ -192,15 +218,15 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var motorcycle = await this.context.Motorcycles.FindAsync(id);
-            this.context.Motorcycles.Remove(motorcycle);
-            await this.context.SaveChangesAsync();
+            var motorcycle = await this.motorcycle.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.motorcycle.Delete(motorcycle);
+            await this.motorcycle.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
         private bool MotorcycleExists(int id)
         {
-            return this.context.Motorcycles.Any(e => e.Id == id);
+            return this.motorcycle.All().Any(e => e.Id == id);
         }
     }
 }

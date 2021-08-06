@@ -9,15 +9,15 @@
 <a class="btn btn-primary" asp-controller="Dashboard" asp-action="Index">Back to Dashboard</a>
 <hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
+<table class="table table-striped table-bordered">
     <thead>
         <tr>
             <th>
                 Brand
             </th>
-            <th>
+            <th class="col-1">
                 @Html.DisplayNameFor(model => model.Model)
             </th>
             <th>
@@ -28,9 +28,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.TypeMotor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Review)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.City)
@@ -65,9 +62,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TypeMotor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Review.Description)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.City.Name)

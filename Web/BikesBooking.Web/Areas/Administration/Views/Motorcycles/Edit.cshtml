@@ -1,4 +1,5 @@
-﻿@model BikesBooking.Data.Models.Motorcycle
+﻿@using BikesBooking.Web.ViewModels.Motor 
+@model BikesBooking.Data.Models.Motorcycle
 
 @{
     ViewData["Title"] = "Edit";
@@ -19,32 +20,37 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ManufacturerId" class="control-label"></label>
+                <label asp-for="ManufacturerId" class="control-label"> Brand </label>
                 <select asp-for="ManufacturerId" class="form-control" asp-items="ViewBag.ManufacturerId"></select>
                 <span asp-validation-for="ManufacturerId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ModelId" class="control-label"></label>
+                <label asp-for="ModelId" class="control-label"> Model </label>
                 <select asp-for="ModelId" class="form-control" asp-items="ViewBag.ModelId"></select>
                 <span asp-validation-for="ModelId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ColorId" class="control-label"></label>
+                <label asp-for="ColorId" class="control-label"> Color </label>
                 <select asp-for="ColorId" class="form-control" asp-items="ViewBag.ColorId"></select>
                 <span asp-validation-for="ColorId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CubicCentimetre" class="control-label"></label>
+                <label asp-for="CityId" class="control-label"> City </label>
+                <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CubicCentimetre" class="control-label"> Cubic Centimetre</label>
                 <input asp-for="CubicCentimetre" class="form-control" />
                 <span asp-validation-for="CubicCentimetre" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label asp-for="Description" class="control-label"> Description </label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
+                <label asp-for="Price" class="control-label"> Price per day </label>
                 <input asp-for="Price" class="form-control" />
                 <span asp-validation-for="Price" class="text-danger"></span>
             </div>
@@ -54,17 +60,42 @@
                 </label>
             </div>
             <div class="form-group">
-                <label asp-for="TypeMotor" class="control-label"></label>
-                <select asp-for="TypeMotor" class="form-control"></select>
+                <label asp-for="TypeMotor"> Motor type</label>
+                <select asp-for="TypeMotor" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>
                 <span asp-validation-for="TypeMotor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DealerId" class="control-label">Dealer Id</label>
+                <input asp-for="DealerId" class="form-control" />
+                <span asp-validation-for="DealerId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Url" class="control-label"></label>
                 <input asp-for="Url" class="form-control" />
                 <span asp-validation-for="Url" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rejectButton">
+                Save
+            </button>
+
+            <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog ">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Confirmation message!</u></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="bg-light">Are you sure you want to save this data?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger btn-icon">Confirm</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
