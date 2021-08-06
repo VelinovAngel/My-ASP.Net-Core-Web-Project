@@ -19,6 +19,15 @@
     }
 
 }
-<li class="nav-item m-md-2">
-    <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="Contact">Contact Us</a>
-</li>
+else
+{
+    <li class="nav-item m-md-2">
+        <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="Contact">Contact Us</a>
+    </li>
+}
+@if (this.User.IsInRole("Client"))
+{
+    <li class="nav-item m-md-2">
+        <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="Contact">Contact Us</a>
+    </li>
+}

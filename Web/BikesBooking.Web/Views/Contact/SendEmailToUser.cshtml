@@ -40,7 +40,27 @@
                     </div>
                 </div>
                 <div class="text-center col-12 mt-4">
-                    <button type="submit" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser">Send</button>
+                    <button type="button" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser" data-toggle="modal" data-target="#rejectButton">Send</button>
+                </div>
+
+                <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Confirmation message!</u></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="bg-light">Are you sure you want to send this email to @ViewBag.CurrentUserEmail?</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger btn-icon">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </form>
         </div>

@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator, Dealer")]
     public class ContactController : BaseController
     {
         private readonly IContactService contactService;
@@ -89,6 +89,8 @@
             var client = new SendEmailForm();
             var currUser = this.contactService.GetInfoFromUser(id);
             client.ClientName = currUser.Username;
+            var currUserEmail = currUser.Email;
+            this.ViewBag.CurrentUserEmail = currUserEmail;
             return this.View(client);
         }
 
@@ -110,6 +112,7 @@
             var currUserEmail = currUser.Email;
             var currContent = content;
             var currSubject = subject;
+            
 
             this.emailSenderService.SendMail(dealerEmail, currUserEmail, currSubject, currContent);
             this.TempData["Successful Message"] = $"Email to {currUserEmail} send successfully";
