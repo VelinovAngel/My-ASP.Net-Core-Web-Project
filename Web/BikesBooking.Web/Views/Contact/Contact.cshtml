@@ -17,61 +17,89 @@
     a matter of hours to help you.
 </h1>
 
-<section class="mb-4">
+<div class="contacts-page-content container">
 
     <h2 class="h1-responsive font-weight-bold text-center my-4 ">Contact us</h2>
 
     <div class="row">
-        <div class="offset-1 col-md-10 mb-md-0 mb-5">
-            <form id="contact-form" name="contact-form" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="col-md-6">
+            <div id="map" style="height:470px; width:470px;"></div>
+            <script type="text/javascript">
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label asp-for="Username">Your name</label>
-                            <input asp-for="Username" class="form-control">
-                            <span asp-validation-for="Username" class="text-danger"></span>
+                let map;
+
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat: 42, lng: 24 },
+                        zoom: 8,
+                    });
+                }
+
+            </script>
+            <script async
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0RpeyMUgcJ5tyScz-8UASy_8kz2HJ3ek&callback=initMap">
+            </script>
+        </div>
+
+        <div class="col-lg-6 col-lg-push-1 col-md-6 col-sm-6 col-xs-12 border border-dark">
+
+            <div class="offset-1 col-md-10 mb-md-0 mb-5">
+                <form id="contact-form" name="contact-form" method="post">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <h4>We are always online, contact us!</h4>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <label asp-for="Username">Your name</label>
+                                <input asp-for="Username" class="form-control">
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                <label asp-for="Email">Your email</label>
+                                <input asp-for="Email" class="form-control">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="md-form mb-0">
-                            <label asp-for="Email">Your email</label>
-                            <input asp-for="Email" class="form-control">
-                            <span asp-validation-for="Email" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form mb-0">
+                                <label asp-for="Complaint">Subject</label>
+                                <input asp-for="Complaint" class="form-control">
+                                <span asp-validation-for="Complaint" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form mb-0">
-                            <label asp-for="Complaint">Subject</label>
-                            <input asp-for="Complaint" class="form-control">
-                            <span asp-validation-for="Complaint" class="text-danger"></span>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <label asp-for="Description">Your message</label>
+                                <textarea asp-for="Description" rows="4" class="form-control md-textarea"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="md-form">
-                            <label asp-for="Description">Your message</label>
-                            <textarea asp-for="Description" rows="4" class="form-control md-textarea"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
+                    <div class="text-center text-md-left mt-3">
+                        <button type="submit" class="btn btn-primary m-4">Send</button>
                     </div>
-                </div>
-
-                <div class="text-center text-md-left mt-3">
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </div>
-                <div class="status"></div>
-            </form>
+                    <div class="status"></div>
+                </form>
+            </div>
         </div>
     </div>
-</section>
+</div>
+
+
+
+
+
 
 
 

@@ -29,4 +29,5 @@ ___________________________________________
 * Google login (for developers)
 * Custom Identity (login and register with initial chooice if you wanna be a dealer or client)
 * HangFire for Administrator
+* Integration of Google Maps (For development purposes only)
 
