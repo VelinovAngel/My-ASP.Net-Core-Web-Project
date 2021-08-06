@@ -24,14 +24,14 @@
                 <div asp-validation-summary="All" class="text-danger"></div>
 
                 <div class="row">
-                    <div class="col-md-6 col offset-2">
+                    <div class="col-md-8 col offset-2">
                         <div class="md-form mb-0">
                             <label asp-for="Subject">Subject</label>
                             <input asp-for="Subject" class="form-control">
                             <span asp-validation-for="Subject" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col offset-2 col-md-6">
+                    <div class="col offset-2 col-md-8">
                         <div class="md-form">
                             <label asp-for="Content">Your message</label>
                             <textarea asp-for="Content" rows="6" cols="120" class="form-control md-textarea"></textarea>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-center col-10 mt-4">
+                <div class="text-center col-12 mt-4">
                     <button type="submit" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser">Send</button>
                 </div>
             </form>

@@ -7,49 +7,52 @@
 
 <section class="py-5">
     <div class="container">
-        <h1 style="margin: 2%; text-align: center;">Page for details for your bike and the possibility of putting it on offer!</h1>
+        <h1 class="text-center">Details page of you motorcycle</h1>
+        <h1 class="text-center">If you want can putting it on offer!</h1>
         <div>
-            <div class="form-group text-center">
+            <div class="form-group text-center col-10 offset-1" >
                 <img src="@Model.Url" class="img-fluid">
             </div>
-            <div class="form-group">
-                <label>Manufacturer and Model:</label>
-                <h5 type="text" readonly class="form-control">@Model.Manufacturer : @Model.Model</h5>
-            </div>
-            <div class="form-group">
-                <label>Color:</label>
-                <h5 type="text" readonly class="form-control">@Model.Color</h5>
-            </div>
-            <div class="form-group">
-                <label>Cubic Centimetre:</label>
-                <h5 type="text" readonly class="form-control">@Model.CubicCentimetre cc</h5>
-            </div>
-            <div class="form-group">
-                <label>Price per day:</label>
-                <h5 type="text" readonly class="form-control">@Model.Price Euro</h5>
-            </div>
-            @if (Model.Available == true)
-            {
+            <div class="col-10 offset-1">
                 <div class="form-group">
-                    <label>Available:</label>
-                    <h5 class="alert alert-success">Free. You can offer this motorcycle!</h5>
+                    <label class="font-weight-bold">Manufacturer and Model:</label>
+                    <h5 type="text" readonly class="form-control">@Model.Manufacturer : @Model.Model</h5>
                 </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Color:</label>
+                    <h5 type="text" readonly class="form-control">@Model.Color</h5>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Cubic Centimetre:</label>
+                    <h5 type="text" readonly class="form-control">@Model.CubicCentimetre cc</h5>
+                </div>
+                <div class="form-group">
+                    <label class="font-weight-bold">Price per day:</label>
+                    <h5 type="text" readonly class="form-control">@Model.Price Euro</h5>
+                </div>
+                @if (Model.Available == true)
+                {
+                    <div class="form-group">
+                        <label class="font-weight-bold">Available:</label>
+                        <h5 class="alert alert-success">Free. You can offer this motorcycle!</h5>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="button-holder">
+                            <a asp-controller="Motor" asp-action="OfferThisModel" asp-route-id="@Model.ModelId" class="btn btn-block btn-success">Offer</a>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group">
+                        <label class="font-weight-bold">Available:</label>
+                        <h5 class="alert alert-danger">Busy! You don't can put available this motorcycle!</h5>
+                    </div>
+                }
                 <div class="form-group text-center">
                     <div class="button-holder">
-                        <a asp-controller="Motor" asp-action="OfferThisModel" asp-route-id="@Model.ModelId" class="btn btn-block btn-success">Offer</a>
+                        <a asp-controller="Motor" asp-action="Rating" asp-route-id="@Model.ModelId" class="btn btn-block btn-primary">Rating</a>
                     </div>
-                </div>
-            }
-            else
-            {
-                <div class="form-group">
-                    <label>Available:</label>
-                    <h5 class="alert alert-danger">Busy! You don't can put available this motorcycle!</h5>
-                </div>
-            }
-            <div class="form-group text-center">
-                <div class="button-holder">
-                    <a asp-controller="Motor" asp-action="Rating" asp-route-id="@Model.ModelId" class="btn btn-block btn-primary">Rating</a>
                 </div>
             </div>
         </div>

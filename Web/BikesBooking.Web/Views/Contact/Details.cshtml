@@ -10,22 +10,22 @@
         <h1 style="margin: 2%; text-align: center;">Details for messsage:</h1>
         <div>
             <div class="form-group">
-                <label asp-for="Username">Client Name</label>
+                <label asp-for="Username" class="font-weight-bold">Client Name</label>
                 <h5 type="text" readonly class="form-control">@Model.Username</h5>
             </div>
 
             <div class="form-group">
-                <label asp-for="Complaint">Subject</label>
+                <label asp-for="Complaint" class="font-weight-bold">Subject</label>
                 <h5 type="text" readonly class="form-control">@Model.Complaint</h5>
             </div>
 
             <div class="form-group">
-                <label asp-for="Description">Description</label>
+                <label asp-for="Description" class="font-weight-bold">Description</label>
                 <textarea type="text" readonly class="form-control">@Model.Description</textarea>
             </div>
 
             <div class="form-group">
-                <label asp-for="CreatedOn">Date of sending</label>
+                <label asp-for="CreatedOn" class="font-weight-bold" >Date of sending</label>
                 <h5 type="text" readonly class="form-control">@Model.CreatedOn.ToShortDateString()</h5>
             </div>
         </div>

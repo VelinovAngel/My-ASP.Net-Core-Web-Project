@@ -9,6 +9,7 @@
     {
         [Required]
         [MaxLength(GlobalConstants.ManufacturerNameLength)]
+        [Display(Name = "Brand")]
         public string Manufacturer { get; set; }
 
         [Required]
