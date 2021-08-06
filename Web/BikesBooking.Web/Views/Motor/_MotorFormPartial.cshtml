@@ -2,7 +2,7 @@
 
 
 
-<div class="container mb-5">
+<div class="container mb-5" runat="alertify">
     <form method="post" class="container lead-section col-md-6 offset-md-3">
         <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -80,12 +80,30 @@
 
         <br />
 
-        <button type="submit" class="btn btn-primary" onclick="return confirm('Are you sure you want to change data?')">Save</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#rejectButton">
+            <i class="fas fa-user-slash">Save</i>
+        </button>
 
+        <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-titlete text-center" id="staticBackdropLabel" style="color:darkred"><u>Editing!</u></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="bg-light">Are you sure to edit this motorcycle?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger btn-icon">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}

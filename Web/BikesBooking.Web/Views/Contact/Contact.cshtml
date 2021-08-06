@@ -1,6 +1,6 @@
 ﻿@model ContactUsForm
 
-@{ 
+@{
     this.ViewData["Title"] = "Contact Page";
 }
 
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <div class="text-center text-md-left mt-3" >
+                <div class="text-center text-md-left mt-3">
                     <button type="submit" class="btn btn-primary">Send</button>
                 </div>
                 <div class="status"></div>
@@ -72,3 +72,9 @@
         </div>
     </div>
 </section>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,23 +25,23 @@
         {
             var context = serviceProvider.GetService<ApplicationDbContext>();
 
-            var admin = "Administrator";
+
 
             var roleStore = new RoleStore<IdentityRole>(context);
 
-            if (!context.Roles.Any(r => r.Name == admin))
+            if (!context.Roles.Any(r => r.Name == GlobalConstants.AdministratorRoleName))
             {
-                await roleStore.CreateAsync(new IdentityRole(admin));
+                await roleStore.CreateAsync(new IdentityRole(GlobalConstants.AdministratorRoleName));
             }
 
             var user = new ApplicationUser
             {
-                FirstName = "Angel",
-                LastName = "Velinov",
-                Email = "admin@bikesbooking.com",
-                NormalizedEmail = "ADMIN@BIKESBOOKING.COM",
-                UserName = "admin@bikesbooking.com",
-                NormalizedUserName = "ADMIN@BIKESBOOKING.COM",
+                FirstName = GlobalConstants.AdministratoFirtsName,
+                LastName = GlobalConstants.AdministratoLastName,
+                Email = GlobalConstants.AdministratorEmailAddress,
+                NormalizedEmail = GlobalConstants.AdministratorNormalizedEmail,
+                UserName = GlobalConstants.AdministratorEmailAddress,
+                NormalizedUserName = GlobalConstants.AdministratorNormalizedEmail,
                 PhoneNumber = null,
                 TwoFactorEnabled = false,
                 LockoutEnd = null,
@@ -53,14 +54,14 @@
             if (!context.Users.Any(u => u.UserName == user.UserName))
             {
                 var password = new PasswordHasher<ApplicationUser>();
-                var hashed = password.HashPassword(user, "Velinov!");
+                var hashed = password.HashPassword(user, GlobalConstants.AdministratoPassword);
                 user.PasswordHash = hashed;
 
                 var userStore = new UserStore<ApplicationUser>(context);
                 var result = userStore.CreateAsync(user);
             }
 
-            await AssignRole(serviceProvider, user.Email, admin);
+            await AssignRole(serviceProvider, user.Email, GlobalConstants.AdministratorRoleName);
 
             await context.SaveChangesAsync();
         }
@@ -73,5 +74,6 @@
 
             return result;
         }
+
     }
 }

@@ -6,10 +6,19 @@
 
         public const string AdministratorRoleName = "Administrator";
 
+        public const string AdministratoPassword = "Velino!";
+
+        public const string AdministratoFirtsName = "Angel";
+
+        public const string AdministratoLastName = "Velinov";
+
+        public const string AdministratorEmailAddress = "admin@bikesbooking.com";
+
+        public const string AdministratorNormalizedEmail = "ADMIN@BIKESBOOKING.COM";
+
         public const string DealerRoleName = "Dealer";
 
         public const string ClientRoleName = "Client";
-
 
         // DbContext validation
         public const int MinYearMotorcycle = 1998;

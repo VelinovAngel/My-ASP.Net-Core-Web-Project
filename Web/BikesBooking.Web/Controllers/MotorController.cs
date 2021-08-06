@@ -207,6 +207,8 @@
                 return this.BadRequest();
             }
 
+            this.TempData["EditSuccessful"] = "Motorcycles edited successful!";
+
             return this.RedirectToAction("All", "Motor");
         }
 

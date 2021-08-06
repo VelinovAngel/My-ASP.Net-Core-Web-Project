@@ -18,3 +18,7 @@
 <br />
 
 <partial name="_MotorFormPartial" model="@Model" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

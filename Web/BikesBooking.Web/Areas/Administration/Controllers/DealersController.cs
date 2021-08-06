@@ -1,9 +1,9 @@
 ﻿namespace BikesBooking.Web.Areas.Administration.Controllers
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BikesBooking.Data;
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Mvc;
@@ -78,7 +78,7 @@
         }
 
         // GET: Administration/Dealers/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -102,9 +102,6 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Name,Address,Email,Description,CityId,CountryId,Id,DealerId,CreatedOn")] Dealer dealer)
         {
-            //var dealerInfo = this.dealer.All()
-            //    .Where(x => x.DealerId == dealer.DealerId).FirstOrDefault();
-
             if (id != dealer.Id)
             {
                 return this.NotFound();
@@ -114,6 +111,7 @@
             {
                 try
                 {
+                    dealer.CreatedOn = DateTime.UtcNow;
                     this.dealer.Update(dealer);
                     await this.dealer.SaveChangesAsync();
                 }

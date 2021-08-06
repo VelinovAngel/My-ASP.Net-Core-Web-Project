@@ -39,10 +39,16 @@
                         </div>
                     </div>
                 </div>
-                    <div class="text-center col-10 mt-4">
-                        <button type="submit" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser">Send</button>
-                    </div>
+                <div class="text-center col-10 mt-4">
+                    <button type="submit" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser">Send</button>
+                </div>
             </form>
         </div>
     </div>
 </section>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
