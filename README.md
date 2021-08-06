@@ -24,6 +24,7 @@ ___________________________________________
 * jQuery
 * Areas (Administrator)
 * Roles (User -> Client or Dealer)
+* Management by Administrator's Dashboard all information about (motorcycles, dealers and clients)
 * Facebook login (for developers)
 * Google login (for developers)
 * Custom Identity (login and register with initial chooice if you wanna be a dealer or client)
