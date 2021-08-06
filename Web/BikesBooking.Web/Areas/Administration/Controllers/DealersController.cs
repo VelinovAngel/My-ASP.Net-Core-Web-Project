@@ -111,7 +111,7 @@
             {
                 try
                 {
-                    dealer.CreatedOn = DateTime.UtcNow;
+                    dealer.ModifiedOn = DateTime.UtcNow;
                     this.dealer.Update(dealer);
                     await this.dealer.SaveChangesAsync();
                 }

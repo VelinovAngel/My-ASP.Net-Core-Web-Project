@@ -1,4 +1,4 @@
-﻿@model BikesBooking.Data.Models.Dealer
+﻿@model BikesBooking.Data.Models.Client
 
 @{
     ViewData["Title"] = "Edit";
@@ -11,9 +11,8 @@
 </div>
 
 <hr />
-<h4 class="text-center">Dealer</h4>
+<h4 class="text-center">Client</h4>
 <hr />
-
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -34,25 +33,16 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="ClientId" class="control-label"></label>
+                <input asp-for="ClientId" class="form-control" />
+                <span asp-validation-for="ClientId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
-                <span asp-validation-for="CityId" class="text-danger"></span>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
             </div>
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DealerId" class="control-label"></label>
-                <input asp-for="DealerId" class="form-control" />
-                <span asp-validation-for="DealerId" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="CreatedOn" class="control-label"></label>
                 <input asp-for="CreatedOn" class="form-control" />
