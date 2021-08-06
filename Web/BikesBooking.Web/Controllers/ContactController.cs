@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize(Roles = "Administrator")]
     public class ContactController : BaseController
     {
         private readonly IContactService contactService;
@@ -27,12 +28,14 @@
             this.emailSenderService = emailSenderService;
         }
 
+        [AllowAnonymous]
         public IActionResult Contact()
         {
             return this.View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Contact(ContactUsForm contact)
         {
             if (!this.ModelState.IsValid)

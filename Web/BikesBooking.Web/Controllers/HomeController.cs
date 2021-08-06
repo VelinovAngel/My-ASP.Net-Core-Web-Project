@@ -6,6 +6,7 @@
     using BikesBooking.Services.Data.Home;
     using BikesBooking.Web.ViewModels;
     using BikesBooking.Web.ViewModels.Motor;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
@@ -17,6 +18,7 @@
             this.homeService = homeService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var viewModel = new SearchMotorModel
@@ -31,6 +33,7 @@
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public IActionResult Index(SearchMotorModel input)
         {
             if (!this.ModelState.IsValid)
@@ -44,6 +47,7 @@
             return this.RedirectToAction("FreeMotors", "User", input);
         }
 
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return this.View();

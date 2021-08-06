@@ -160,7 +160,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit(int id, MotorcycleServiceDto motorcycleFormModel)
+        public IActionResult Edit([FromQuery]int id, MotorcycleServiceDto motorcycleFormModel)
         {
             var userId = this.User.GetId();
             var dealerId = this.dealersService.GetDealerId(userId);
