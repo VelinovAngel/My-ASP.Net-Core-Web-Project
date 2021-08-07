@@ -26,5 +26,36 @@
             this.userService = userService;
             this.serviceProvider = serviceProvider;
         }
+
+        public IActionResult Create()
+        {
+            return this.View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateDealerDto dealer)
+        {
+            var userId = this.User.GetId();
+            var isAlreadyExistId = this.dealersService.IsDealer(userId);
+
+            if (isAlreadyExistId)
+            {
+                return this.BadRequest();
+            }
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            await this.dealersService.CreateDealerAsync(dealer, userId);
+
+            await this.userService.AssignRole(this.serviceProvider, dealer.Email, GlobalConstants.DealerRoleName);
+
+            this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
+
+            return this.RedirectToAction("All", "Motor");
+        }
     }
 }

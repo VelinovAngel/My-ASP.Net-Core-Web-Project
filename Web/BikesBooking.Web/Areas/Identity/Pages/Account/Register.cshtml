@@ -1,8 +1,6 @@
 ﻿@page
 @model RegisterModel
-@{
-    ViewData["Title"] = "Register";
-}
+@{ ViewData["Title"] = "Register"; }
 
 <h1>@ViewData["Title"]</h1>
 
@@ -47,147 +45,36 @@
                 <label class="custom-control-label" for="customRadioInline2">Client</label>
             </div>
             <hr />
-            <div class="row">
-                <button type="button"  id="reactAccRadio" class="btn btn-primary m-2" data-toggle="modal" data-target="#modal1">Register</button>
-            </div>
-
-
-            <div class="modal fade" id="dealerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Complete the information about your company!</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div asp-validation-summary="All" class="text-danger"></div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.Name"></label>
-                                <input asp-for="Input.DealerFormModel.Name" class="form-control" placeholder="Es: Angel Velinov.." />
-                                <span asp-validation-for="Input.DealerFormModel.Name" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.Email"></label>
-                                <input asp-for="Input.DealerFormModel.Email" class="form-control" />
-                                <span asp-validation-for="Input.DealerFormModel.Email" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.City"></label>
-                                <input asp-for="Input.DealerFormModel.City" class="form-control" placeholder="Es: Plovdiv.." />
-                                <span asp-validation-for="Input.DealerFormModel.City" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.Country"></label>
-                                <input asp-for="Input.DealerFormModel.Country" class="form-control" placeholder="Es: Bulgaria.." />
-                                <span asp-validation-for="Input.DealerFormModel.Country" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.Address"></label>
-                                <input asp-for="Input.DealerFormModel.Address" class="form-control" placeholder="Es: ul.Chemshir n7.." />
-                                <span asp-validation-for="Input.DealerFormModel.Address" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.DealerFormModel.Description"></label>
-                                <input asp-for="Input.DealerFormModel.Description" class="form-control" placeholder="I'm a big dealer'" />
-                                <span asp-validation-for="Input.DealerFormModel.Description" class="text-danger"></span>
-                            </div>
-                            <br />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal fade" id="clientModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Complete the information about your company!</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div asp-validation-summary="All" class="text-danger"></div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.ClientFromModel.City"></label>
-                                <input asp-for="Input.ClientFromModel.City" class="form-control" placeholder="Es: Plovdiv.." />
-                                <span asp-validation-for="Input.ClientFromModel.City" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="Input.ClientFromModel.Address"></label>
-                                <input asp-for="Input.ClientFromModel.Address" class="form-control" />
-                                <span asp-validation-for="Input.ClientFromModel.Address" class="text-danger"></span>
-                            </div>
-                            <br />
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary">Register</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
         </form>
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
             <h4>Use another service to register.</h4>
             <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
+            @{ if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                            {
+                <div>
+                    <p>
+                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                        for details on setting up this ASP.NET application to support logging in via external services.
+                    </p>
+                </div> }
+                            else
+                            {
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                     <div>
                         <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+            <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>}
                         </p>
                     </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
+                </form> } }
         </section>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.querySelectorAll('input[type="radio"]').forEach(cur => {
-            cur.addEventListener('change', e => {
-                const value = document.querySelector('input[type="radio"]:checked').value;
-                if (value === 'Dealer') {
-                    document.querySelector('#reactAccRadio').setAttribute('data-target', '#dealerModal');
-                } else if (value === 'Client') {
-                    document.querySelector('#reactAccRadio').setAttribute('data-target', '#clientModal');
-                }
-            })
-        });
-    </script>
 }
-
-

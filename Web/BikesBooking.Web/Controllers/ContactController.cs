@@ -112,7 +112,6 @@
             var currUserEmail = currUser.Email;
             var currContent = content;
             var currSubject = subject;
-            
 
             this.emailSenderService.SendMail(dealerEmail, currUserEmail, currSubject, currContent);
             this.TempData["Successful Message"] = $"Email to {currUserEmail} send successfully";
