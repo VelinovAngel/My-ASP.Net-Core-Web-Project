@@ -1,4 +1,4 @@
-﻿namespace BikesBooking.Web.ViewModels.Client
+﻿namespace BikesBooking.Services.Data.DTO.Clients
 {
     using System;
 

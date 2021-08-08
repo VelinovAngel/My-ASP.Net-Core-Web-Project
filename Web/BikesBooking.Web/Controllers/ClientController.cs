@@ -8,7 +8,6 @@
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
     using BikesBooking.Web.Infrastructure;
-    using BikesBooking.Web.ViewModels.Client;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -64,6 +63,7 @@
 
         public IActionResult Details(int id)
         {
+            var siteUrl = this.Request.Headers["Referer"];
             var model = this.motorcycleService.Details(id);
             return this.View(model);
         }

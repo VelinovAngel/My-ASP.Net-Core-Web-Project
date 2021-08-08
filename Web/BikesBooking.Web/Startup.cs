@@ -1,6 +1,8 @@
 ﻿namespace BikesBooking.Web
 {
     using System;
+    using System.Collections.Generic;
+    using System.Globalization;
     using System.Reflection;
 
     using BikesBooking.Data;
@@ -24,6 +26,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Localization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -117,7 +120,9 @@
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+
                 dbContext.Database.Migrate();
+
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             }
 
@@ -131,6 +136,15 @@
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+            {
+                SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US") },
+                SupportedUICultures = new List<CultureInfo> { new CultureInfo("en-US") },
+                DefaultRequestCulture = new RequestCulture("en-US"),
+            };
+
+            app.UseRequestLocalization(localizationOptions);
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

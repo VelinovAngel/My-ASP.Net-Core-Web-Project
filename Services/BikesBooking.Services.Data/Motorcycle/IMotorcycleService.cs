@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public interface IMotorcycleService
@@ -28,7 +28,7 @@
 
         Task RemoveMotorcycleAsync(int id);
 
-        MotorcycleDetailsModel Details(int id);
+        MotorcycleDetailViewModel Details(int id);
 
         bool IsByDealer(int motorId, int dealerId);
 

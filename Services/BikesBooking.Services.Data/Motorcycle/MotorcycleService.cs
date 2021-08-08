@@ -7,6 +7,7 @@
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.Dealer;
+    using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using Microsoft.EntityFrameworkCore;
 
@@ -195,10 +196,10 @@
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
-        public MotorcycleDetailsModel Details(int id)
+        public MotorcycleDetailViewModel Details(int id)
             => this.motorcycleRepository.AllAsNoTracking()
             .Where(x => x.Id == id)
-            .Select(x => new MotorcycleDetailsModel
+            .Select(x => new MotorcycleDetailViewModel
             {
                 Id = x.Id,
                 Manufacturer = x.Manufacturer.Name,
@@ -216,6 +217,8 @@
                 AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
                 DealerId = x.Dealer.UserId,
                 Dealer = x.Dealer.Name,
+                PickUpDate = x.Offer.PickUpDate,
+                DropOffDate = x.Offer.DropOffDate,
             })
             .FirstOrDefault();
 

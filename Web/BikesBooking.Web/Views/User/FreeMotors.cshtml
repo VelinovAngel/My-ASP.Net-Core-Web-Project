@@ -1,5 +1,6 @@
 ﻿@model AllMotorcylesQueryDto
 
+
 @{
     this.ViewData["Title"] = "Free motorcycles";
 }
@@ -51,12 +52,17 @@
 }
 
 <hr />
-
 <nav aria-label="...">
     <ul class="pagination justify-content-center">
         <li class="page-item disabled">
-            <a class="btn @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="Motor"
-               asp-action="All"
+            <a class="btn @(Model.CurrentPage == 1 ? "disabled" : string.Empty)" asp-controller="User"
+               asp-action="FreeMotors"
+               asp-route-CountryId="@Model.CountryId"
+               asp-route-CityId="@Model.CityId"
+               asp-route-PickUpDate="@Model.PickUpDate"
+               asp-route-DropOffDate="@Model.DropOffDate"
+               asp-route-ManufacturerId="@Model.ManufacturerId"
+               asp-route-Type="@Model.Type"
                asp-route-currentPage="@previousPage">Previous</a>
         </li>
         @if (@Model.CurrentPage != 1)
@@ -79,8 +85,14 @@
 
         <li class="page-item">
             <a class="btn @(shouldButtonBeDisabled ? "disabled" : string.Empty)"
-               asp-controller="Motor"
-               asp-action="All"
+               asp-controller="User"
+               asp-action="FreeMotors"
+               asp-route-CountryId="@Model.CountryId"
+               asp-route-CityId="@Model.CityId"
+               asp-route-PickUpDate="@Model.PickUpDate"
+               asp-route-DropOffDate="@Model.DropOffDate"
+               asp-route-ManufacturerId="@Model.ManufacturerId"
+               asp-route-Type="@Model.Type"
                asp-route-currentPage="@(Model.CurrentPage + 1)">Next</a>
         </li>
     </ul>

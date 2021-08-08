@@ -1,10 +1,13 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
+    using System;
+    using System.Globalization;
+    using System.Threading.Tasks;
+
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Web.ViewModels.Motor;
     using Microsoft.AspNetCore.Mvc;
-    using System.Threading.Tasks;
 
     public class UserController : Controller
     {
@@ -15,9 +18,10 @@
             this.motorcycleService = motorcycleService;
         }
 
-        public async Task<IActionResult> FreeMotors([FromQuery] AllMotorcylesQueryDto query, SearchMotorModel input)
+        public async Task<IActionResult> FreeMotors([FromQuery] AllMotorcylesQueryDto query)
         {
-            var motorcycleResult = await this.motorcycleService.GetFreeMotors(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage, input.PickUpDate, input.DropOffDate);
+
+            var motorcycleResult = await this.motorcycleService.GetFreeMotors(query.CurrentPage, AllMotorcyclesQueryModel.MotorcyclesPerPage, query.PickUpDate, query.DropOffDate);
             query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;
             query.Motors = motorcycleResult.Motorcycle;
             return this.View(query);

@@ -122,6 +122,9 @@
                 DropOffDate = dropOffDate,
             };
             await this.motorcycleService.OfferCurrentMotor(offer, id);
+
+            this.TempData["Message"] = "The bike is successfully offered";
+
             return this.RedirectToAction("All", "Motor");
         }
 

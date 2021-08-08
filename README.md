@@ -29,6 +29,7 @@ ___________________________________________
 * Bootstrap 4
 * AJAX real-time Requests
 * jQuery
+* GDPR
 * Areas (Administrator)
 * Custom validation attributs
 * Roles (User -> Client or Dealer)

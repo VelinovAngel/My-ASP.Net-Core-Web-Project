@@ -4,7 +4,7 @@
     var countriesItems = this.Model.CountriesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var manufacturerItems = this.Model.ManufacturerItems.Select(x => new SelectListItem(x.Value, x.Key));
 
-   
+
 }
 
 @model SearchMotorModel
@@ -35,13 +35,13 @@
 
                     <div class="form-group">
                         <label asp-for="PickUpDate"></label>
-                        <input asp-for="PickUpDate" class="form-control" />
+                        <input asp-for="PickUpDate"class="form-control" />
                         <span asp-validation-for="PickUpDate" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="DropOffDate"></label>
-                        <input asp-for="DropOffDate" class="form-control" />
+                        <input asp-for="DropOffDate"class="form-control" />
                         <span asp-validation-for="DropOffDate" class="text-danger"></span>
                     </div>
 

@@ -1,4 +1,7 @@
-﻿@{
+﻿@using BikesBooking.Services.Data.DTO.Clients
+@model MotorcycleDetailViewModel
+
+@{
     this.ViewData["Title"] = "Details";
 }
 
@@ -9,6 +12,10 @@
         <div class="col-8 offset-2">
             <div class="form-group text-center">
                 <img src="@Model.Url" class="img-fluid">
+            </div>
+            <div class="form-group">
+                <label class="font-weight-bold">The motorcycle is free</label>
+                <h5 type="text" readonly class="form-control">From: @Model.PickUpDate.ToString("d") To: @Model.DropOffDate.ToString("d")</h5>
             </div>
             <div class="form-group">
                 <label class="font-weight-bold">Brand and Model:</label>
@@ -35,12 +42,12 @@
                 <h5 type="text" readonly class="form-control">@Model.City</h5>
             </div>
             <div class="form-group">
-                <label class="font-weight-bold" >Country:</label>
+                <label class="font-weight-bold">Country:</label>
                 <h5 type="text" readonly class="form-control">@Model.Country</h5>
             </div>
             <div class="form-group text-center">
                 <div class="button-holder">
-                    <a asp-controller="Client" asp-action="Book" asp-route-id="@Model.Id" class="btn btn-block btn-primary">Book</a>
+                    <a asp-controller="Client" asp-action="Book" asp-route-id="@Model.Id" class="btn btn-block btn-primary">Book it</a>
                     <a asp-controller="Client" asp-action="Rating" asp-route-id="@Model.Id" class="btn btn-block btn-primary">Rating</a>
                 </div>
             </div>
