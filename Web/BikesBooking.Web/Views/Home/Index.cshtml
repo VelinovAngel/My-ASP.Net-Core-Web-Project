@@ -3,6 +3,12 @@
     this.ViewData["Title"] = "Home Page";
     var countriesItems = this.Model.CountriesItems.Select(x => new SelectListItem(x.Value, x.Key));
     var manufacturerItems = this.Model.ManufacturerItems.Select(x => new SelectListItem(x.Value, x.Key));
+
+    var param = new Dictionary<string, string>
+{
+        {"pickup", Model.PickUpDate.ToString() },
+        {"dropof", Model.DropOffDate.ToString() }
+    };
 }
 
 @model SearchMotorModel
@@ -55,7 +61,7 @@
                         <span asp-validation-for="Type" class="text-danger"></span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button asp-all-route-data="param" type="submit" class="btn btn-primary">Search</button>
                 </form>
             </div>
         </div>

@@ -5,8 +5,10 @@
 
     using BikesBooking.Common;
     using BikesBooking.Services.Data.Client;
+    using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
     using BikesBooking.Web.Infrastructure;
+    using BikesBooking.Web.ViewModels.Client;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -14,15 +16,18 @@
     {
         private readonly IClientService clientService;
         private readonly IUserService userService;
+        private readonly IMotorcycleService motorcycleService;
         private readonly IServiceProvider serviceProvider;
 
         public ClientController(
             IClientService clientService,
             IUserService userService,
+            IMotorcycleService motorcycleService,
             IServiceProvider serviceProvider)
         {
             this.clientService = clientService;
             this.userService = userService;
+            this.motorcycleService = motorcycleService;
             this.serviceProvider = serviceProvider;
         }
 
@@ -55,6 +60,12 @@
             await this.userService.AssignRole(this.serviceProvider, email, GlobalConstants.ClientRoleName);
 
             return this.RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Details(int id)
+        {
+            var model = this.motorcycleService.Details(id);
+            return this.View(model);
         }
 
         public IActionResult Book()

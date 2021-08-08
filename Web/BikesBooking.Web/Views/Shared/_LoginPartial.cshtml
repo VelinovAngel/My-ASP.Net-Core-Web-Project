@@ -13,6 +13,9 @@
         <li class="nav-item m-md-2">
             <a class="btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
         </li>
+        var user = await UserManager.GetUserAsync(this.User);
+        var bool2 = this.User.IsInRole("Client");
+
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item m-md-2">
