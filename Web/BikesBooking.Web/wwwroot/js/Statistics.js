@@ -4,7 +4,7 @@
         $('#totals-dealers').text(data.totalsDealers);
         $('#totals-users').text(data.totalsUsers);
         $('#totals-rent').text(data.totalsRent);
-        $('#totals-client').text(data.totalClient);
+        $('#totals-clients').text(data.totalsClients);
 
         $('#statistics-button').hide();
     });

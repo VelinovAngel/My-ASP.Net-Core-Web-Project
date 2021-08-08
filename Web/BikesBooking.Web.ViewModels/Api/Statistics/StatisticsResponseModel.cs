@@ -8,7 +8,7 @@
 
         public int TotalsDealers { get; set; }
 
-        public int TotalsClient { get; set; }
+        public int TotalsClients { get; set; }
 
         public int TotalsRent { get; set; }
     }

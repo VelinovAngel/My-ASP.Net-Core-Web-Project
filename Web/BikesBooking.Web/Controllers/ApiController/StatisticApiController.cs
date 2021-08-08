@@ -26,6 +26,7 @@
             var totalMotorcycles = this.motorcycleService.GetMotorcycleCount();
             var totalDealers = this.userService.GetTotalDeales();
             var totalUsers = this.userService.GetTotalUsers();
+            var totalClients = this.userService.GetTotalClients();
             var totalRent = this.motorcycleService.GetNotAvailableMotorcycleCount();
             return new StatisticsResponseModel
             {
@@ -33,6 +34,7 @@
                 TotalsUsers = totalUsers,
                 TotalsRent = totalRent,
                 TotalsDealers = totalDealers,
+                TotalsClients = totalClients,
             };
         }
     }

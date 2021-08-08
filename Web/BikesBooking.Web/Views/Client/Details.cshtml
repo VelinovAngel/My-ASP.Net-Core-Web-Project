@@ -18,6 +18,10 @@
                 <h5 type="text" readonly class="form-control">From: @Model.PickUpDate.ToString("d") To: @Model.DropOffDate.ToString("d")</h5>
             </div>
             <div class="form-group">
+                <label class="font-weight-bold">Desctription:</label>
+                <textarea type="text" rows="4" readonly class="form-control">@Model.Description</textarea>
+            </div>
+            <div class="form-group">
                 <label class="font-weight-bold">Brand and Model:</label>
                 <h5 type="text" readonly class="form-control">@Model.Manufacturer : @Model.Model</h5>
             </div>
@@ -27,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label class="font-weight-bold">Cubic Centimetre:</label>
-                <h5 type="text" readonly class="form-control">@Model.CubicCentimetre cc</h5>
+                <h5 type="text" readonly class="form-control">@Model.CubicCentimetre c.c.</h5>
             </div>
             <div class="form-group">
                 <label class="font-weight-bold">Price per day:</label>

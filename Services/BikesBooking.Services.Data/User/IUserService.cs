@@ -11,6 +11,8 @@
 
         int GetTotalUsers();
 
+        int GetTotalClients();
+
         Task<IdentityResult> AssignRole(IServiceProvider services, string email, string role);
     }
 }
