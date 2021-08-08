@@ -63,6 +63,10 @@
         // Paging
         public const int MaxPageElements = 4;
 
+        public const int MaxPageFreeMotors = 6;
+
+        public const int CurrentPage = 1;
+
         public static class Dealer
         {
             public const int NameMinLength = 3;
