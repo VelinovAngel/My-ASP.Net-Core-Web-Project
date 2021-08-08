@@ -31,9 +31,9 @@
 
         public virtual City City { get; set; }
 
-        public string DealerId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual ApplicationUser AddedDealer { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }

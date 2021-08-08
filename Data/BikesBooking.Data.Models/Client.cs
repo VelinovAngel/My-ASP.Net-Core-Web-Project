@@ -17,8 +17,8 @@
         [Required]
         public string Email { get; set; }
 
-        public string ClientId { get; set; }
+        public string UserId { get; set; }
 
-        public virtual ApplicationUser AddedClient { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

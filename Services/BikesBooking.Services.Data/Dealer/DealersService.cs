@@ -58,7 +58,7 @@
                 Address = dealer.Address,
                 Description = dealer.Description,
                 Email = dealer.Email,
-                DealerId = userId,
+                UserId = userId,
                 CityId = cityId,
             };
 
@@ -68,7 +68,7 @@
 
         public int GetDealerId(string userId)
             => this.dealerRepository.AllAsNoTracking()
-            .Where(x => x.DealerId == userId)
+            .Where(x => x.UserId == userId)
             .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
@@ -80,7 +80,7 @@
                     .ToString();
 
         public bool IsDealer(string userId)
-            => this.dealerRepository.AllAsNoTracking().Any(x => x.DealerId == userId);
+            => this.dealerRepository.AllAsNoTracking().Any(x => x.UserId == userId);
 
     }
 }

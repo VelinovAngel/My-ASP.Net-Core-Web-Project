@@ -10,28 +10,48 @@
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
+
         <li class="nav-item m-md-2">
-            <a class="btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
+            <a class="btn " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                @if (this.User.IsInRole(GlobalConstants.DealerRoleName))
+                {
+                    <!--<div class="row">-->
+                    @*<img src="/img/Client.jpg" alt="Avatar" class="avatar rounded-circle imgAvatar">*@
+                    <!--</div>-->
+                    <img src="/img/Client.jpg" width="30" height="30" class="rounded-circle nav-item"   >
+                    <span>Dealer</span>
+                }
+                else if (this.User.IsInRole(GlobalConstants.ClientRoleName))
+                {
+                    <span>Client</span>
+                }
+                else
+                {
+                    <span>Admin</span>
+                }
+            </a>
+
         </li>
+
         var user = await UserManager.GetUserAsync(this.User);
-        var bool2 = this.User.IsInRole("Client");
+
 
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item m-md-2">
-                <a class="btn btn-outline-dark" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Admin</a>
+                <a class="btn" asp-area="Administration" asp-controller="Dashboard" asp-action="Index" title="Admin">Dashboard</a>
             </li>
         }
 
         var userId = User.GetId();
         var userIsDealer = Dealers.IsDealer(userId);
-        var userIsClient= Client.IsAlreadyClientExist(userId);
+        var userIsClient = Client.IsAlreadyClientExist(userId);
 
         if (userIsDealer || userIsClient || this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <li class="nav-item m-md-2">
                 <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@this.Url.Action("Index", "Home", new { area = string.Empty })">
-                    <button type="submit" class="btn btn-outline-dark">Logout</button>
+                    <button type="submit" class="btn">Logout</button>
                 </form>
             </li>
         }
@@ -39,10 +59,10 @@
     else
     {
         <li class="nav-item m-md-2">
-            <a class="nav-link btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="nav-item btn " asp-area="Identity" asp-page="/Account/Register">Register</a>
         </li>
         <li class="nav-item m-sm-2">
-            <a class="nav-link btn btn-outline-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <a class="nav-item btn" asp-area="Identity" asp-page="/Account/Login">Login</a>
         </li>
     }
     <partial name="_PartialViewContact" />

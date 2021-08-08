@@ -55,7 +55,7 @@
 
             this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
 
-            return this.RedirectToAction("All", "Motor");
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

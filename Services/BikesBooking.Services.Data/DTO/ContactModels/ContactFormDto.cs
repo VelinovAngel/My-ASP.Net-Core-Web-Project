@@ -2,8 +2,6 @@
 {
     using System;
 
-    using BikesBooking.Data.Models;
-    using BikesBooking.Services.Mapping;
 
     public class ContactFormDto
     {

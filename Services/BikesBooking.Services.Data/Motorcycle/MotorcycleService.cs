@@ -176,7 +176,7 @@
                 Url = x.Url,
                 Available = x.Available,
                 Type = x.TypeMotor.ToString(),
-                DealerId = x.Dealer.DealerId,
+                DealerId = x.Dealer.UserId,
             })
             .FirstOrDefaultAsync();
 
@@ -214,7 +214,7 @@
                 Type = (TypeOfMotors)x.TypeMotor,
                 Description = x.Description,
                 AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
-                DealerId = x.Dealer.DealerId,
+                DealerId = x.Dealer.UserId,
                 Dealer = x.Dealer.Name,
             })
             .FirstOrDefault();

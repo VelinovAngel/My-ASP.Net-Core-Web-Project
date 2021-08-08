@@ -14,7 +14,7 @@
     {
 
         <li class="nav-item m-sm-2">
-            <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="ClientMessages">Client Messages</a>
+            <a class="nav-item btn" asp-controller="Contact" asp-action="ClientMessages">Messages</a>
         </li>
     }
 
@@ -22,12 +22,12 @@
 else
 {
     <li class="nav-item m-md-2">
-        <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="Contact">Contact Us</a>
+        <a class="nav-item btn" asp-controller="Contact" asp-action="Contact">Contact Us</a>
     </li>
 }
 @if (this.User.IsInRole("Client"))
 {
     <li class="nav-item m-md-2">
-        <a class="nav-link btn btn-outline-dark" asp-controller="Contact" asp-action="Contact">Contact Us</a>
+        <a class="nav-item btn" asp-controller="Contact" asp-action="Contact">Contact Us</a>
     </li>
 }

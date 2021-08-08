@@ -12,7 +12,7 @@
 
         public int Quantity { get; set; }
 
-        public Offer Offer { get; set; }
+        public virtual Offer Offer { get; set; }
 
         public DateTime PickUpDate { get; set; }
 

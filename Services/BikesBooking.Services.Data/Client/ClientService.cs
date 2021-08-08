@@ -1,6 +1,5 @@
 ﻿namespace BikesBooking.Services.Data.Client
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -36,7 +35,7 @@
                 Name = fullName,
                 Email = email,
                 Address = completeAddress,
-                ClientId = userId,
+                UserId = userId,
             };
 
             await this.clientRepository.AddAsync(currClient);
@@ -45,14 +44,14 @@
 
         public int GetClientId(string userId)
              => this.clientRepository.AllAsNoTracking()
-            .Where(x => x.ClientId == userId)
+            .Where(x => x.UserId == userId)
             .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
         public string GetCurrentClientEmail(string id)
-            => this.clientRepository.AllAsNoTracking().FirstOrDefault(x => x.ClientId == id).Email;
+            => this.clientRepository.AllAsNoTracking().FirstOrDefault(x => x.UserId == id).Email;
 
         public bool IsAlreadyClientExist(string id)
-            => this.clientRepository.AllAsNoTracking().Any(x => x.ClientId == id);
+            => this.clientRepository.AllAsNoTracking().Any(x => x.UserId == id);
     }
 }
