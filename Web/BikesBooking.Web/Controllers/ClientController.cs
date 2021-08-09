@@ -61,10 +61,15 @@
             return this.RedirectToAction("Index", "Home");
         }
 
-        public IActionResult Details(int id)
+        public IActionResult Details(int id, string information)
         {
-            var siteUrl = this.Request.Headers["Referer"];
             var model = this.motorcycleService.Details(id);
+
+            if (information != model.ToFriendlyUrl())
+            {
+                return this.BadRequest();
+            }
+
             return this.View(model);
         }
 

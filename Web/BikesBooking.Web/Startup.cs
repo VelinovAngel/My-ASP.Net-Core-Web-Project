@@ -112,11 +112,12 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -166,6 +167,12 @@
                 endpoints =>
                     {
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                        endpoints.MapControllerRoute(
+                            name: "Motocycle Details",
+                            pattern: "/Client/Details/{id}/{information}",
+                            defaults: new { controller = "Client", action = "Details"});
+
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
