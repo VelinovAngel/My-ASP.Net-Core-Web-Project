@@ -2,7 +2,6 @@
 {
     using System;
 
-
     public class ContactFormDto
     {
         public int Id { get; set; }

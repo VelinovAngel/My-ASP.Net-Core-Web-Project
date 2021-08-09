@@ -3,7 +3,6 @@
     using BikesBooking.Common;
     using global::Hangfire.Dashboard;
 
-
     public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
     {
         public bool Authorize(DashboardContext context)

@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Web.ViewModels.Motor
 {
     using System.Collections.Generic;
+
     using BikesBooking.Common;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 

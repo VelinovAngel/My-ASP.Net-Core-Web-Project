@@ -81,6 +81,5 @@
 
         public bool IsDealer(string userId)
             => this.dealerRepository.AllAsNoTracking().Any(x => x.UserId == userId);
-
     }
 }

@@ -30,6 +30,7 @@ ___________________________________________
 * AJAX real-time Requests
 * jQuery
 * GDPR
+* Use Caching
 * Areas (Administrator)
 * Custom validation attributs
 * Roles (User -> Client or Dealer)
@@ -39,4 +40,6 @@ ___________________________________________
 * Custom Identity (login and register with initial chooice if you wanna be a dealer or client)
 * HangFire for Administrator
 * Integration of Google Maps (For development purposes only)
+
+
 

@@ -19,6 +19,7 @@
         }
 
         [AllowAnonymous]
+        [ResponseCache(Duration = 30)]
         public IActionResult Index()
         {
             var viewModel = new SearchMotorModel

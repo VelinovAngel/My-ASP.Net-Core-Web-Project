@@ -124,7 +124,6 @@
             return true;
         }
 
-
         public async Task<MotorcycleQueryServiceModel> GetCollectionOfMotorsAsync(int currentPage, int motorcyclesPerPage, int dealerId)
         {
             var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
@@ -323,7 +322,7 @@
 
             if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
             {
-                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer, Year = createMotorcycle.Year});
+                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer, Year = createMotorcycle.Year });
                 await this.manufacturerRepository.SaveChangesAsync();
             }
 

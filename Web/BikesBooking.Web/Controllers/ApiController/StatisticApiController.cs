@@ -7,6 +7,7 @@
 
     [ApiController]
     [Route("api/statistics")]
+    [ResponseCache(Duration = 40)]
     public class StatisticApiController : ControllerBase
     {
         private readonly IMotorcycleService motorcycleService;
