@@ -13,7 +13,7 @@
         @foreach (var motorcycle in Model.Motors)
         {
             <div class="col-md-4">
-                <div class="card mb-3">
+                <div class="card mb-5 mt-3">
                     <img class="motor-img-top img-fluid img-thumbnail motor-image" style="width: 400px; height: 250px;" src="@motorcycle.Url" alt="@motorcycle.Manufacturer @motorcycle.Model - @motorcycle.Year (@motorcycle.Type)">
                     <div class="card-body text-center">
                         <h5 class="card-title text-center">@motorcycle.Year  @motorcycle.Manufacturer @motorcycle.Model (@motorcycle.Type)</h5>

@@ -4,14 +4,16 @@ using BikesBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BikesBooking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210809135459_RemoveBookingTableFromDataBase")]
+    partial class RemoveBookingTableFromDataBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,17 +218,12 @@ namespace BikesBooking.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OfferId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
-
-                    b.HasIndex("OfferId");
 
                     b.HasIndex("UserId")
                         .IsUnique()
@@ -551,6 +548,9 @@ namespace BikesBooking.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -563,19 +563,18 @@ namespace BikesBooking.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsFree")
-                        .HasColumnType("bit");
-
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("StatisticsBooked")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("IsDeleted");
 
@@ -740,15 +739,9 @@ namespace BikesBooking.Data.Migrations
 
             modelBuilder.Entity("BikesBooking.Data.Models.Client", b =>
                 {
-                    b.HasOne("BikesBooking.Data.Models.Offer", "Offer")
-                        .WithMany("Clients")
-                        .HasForeignKey("OfferId");
-
                     b.HasOne("BikesBooking.Data.Models.ApplicationUser", "User")
                         .WithOne("Client")
                         .HasForeignKey("BikesBooking.Data.Models.Client", "UserId");
-
-                    b.Navigation("Offer");
 
                     b.Navigation("User");
                 });
@@ -823,6 +816,15 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("Offer");
 
                     b.Navigation("Review");
+                });
+
+            modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
+                {
+                    b.HasOne("BikesBooking.Data.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId");
+
+                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -921,8 +923,6 @@ namespace BikesBooking.Data.Migrations
 
             modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
                 {
-                    b.Navigation("Clients");
-
                     b.Navigation("Motorcycles");
                 });
 #pragma warning restore 612, 618

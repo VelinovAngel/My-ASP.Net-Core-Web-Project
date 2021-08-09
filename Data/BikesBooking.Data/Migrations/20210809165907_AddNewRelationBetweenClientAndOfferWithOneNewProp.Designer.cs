@@ -4,14 +4,16 @@ using BikesBooking.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BikesBooking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210809165907_AddNewRelationBetweenClientAndOfferWithOneNewProp")]
+    partial class AddNewRelationBetweenClientAndOfferWithOneNewProp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -740,15 +742,13 @@ namespace BikesBooking.Data.Migrations
 
             modelBuilder.Entity("BikesBooking.Data.Models.Client", b =>
                 {
-                    b.HasOne("BikesBooking.Data.Models.Offer", "Offer")
+                    b.HasOne("BikesBooking.Data.Models.Offer", null)
                         .WithMany("Clients")
                         .HasForeignKey("OfferId");
 
                     b.HasOne("BikesBooking.Data.Models.ApplicationUser", "User")
                         .WithOne("Client")
                         .HasForeignKey("BikesBooking.Data.Models.Client", "UserId");
-
-                    b.Navigation("Offer");
 
                     b.Navigation("User");
                 });

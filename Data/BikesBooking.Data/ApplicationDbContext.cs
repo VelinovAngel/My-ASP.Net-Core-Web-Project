@@ -24,8 +24,6 @@
         {
         }
 
-        public DbSet<Booking> Bookings { get; set; }
-
         public DbSet<City> Cities { get; set; }
 
         public DbSet<Color> Colors { get; set; }

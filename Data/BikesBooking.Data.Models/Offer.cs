@@ -10,17 +10,18 @@
         public Offer()
         {
             this.Motorcycles = new HashSet<Motorcycle>();
+            this.Clients = new HashSet<Client>();
         }
 
-        public int Quantity { get; set; }
+        public int StatisticsBooked { get; set; }
+
+        public bool IsFree { get; set; }
 
         public DateTime PickUpDate { get; set; }
 
         public DateTime DropOffDate { get; set; }
 
-        public int? BookingId { get; set; }
-
-        public virtual Booking Booking { get; set; }
+        public virtual ICollection<Client> Clients { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }

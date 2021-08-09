@@ -38,7 +38,7 @@
                     <label class="font-weight-bold">Price per day:</label>
                     <h5 type="text" readonly class="form-control">@Model.Price Euro</h5>
                 </div>
-                <form method="post" class="container lead-section">
+                <form method="post">
                     <div class="">
                         <div class="form-check form-switch">
                             <input asp-for="Available" class="form-check-input font-weight-bold" checked>
@@ -50,7 +50,7 @@
                         {
                             <div class="form-group">
                                 <div class="button-holder mt-2">
-                                    <button type="submit" class="btn btn-success">Available</button>
+                                    <button type="submit" class="btn btn-block btn-success">Available</button>
                                 </div>
                             </div>
                         }
@@ -58,7 +58,7 @@
                         {
                             <div class="form-group">
                                 <div class="button-holder mt-2">
-                                    <button type="submit" class="btn btn-warning">Unavailable</button>
+                                    <button type="submit" class="btn btn-block btn-warning">Unavailable</button>
                                 </div>
                             </div>
                         }

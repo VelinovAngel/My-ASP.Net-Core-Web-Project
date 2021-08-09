@@ -318,7 +318,7 @@
             {
                 PickUpDate = offerPeriodForMotorDto.PickUpDate,
                 DropOffDate = offerPeriodForMotorDto.DropOffDate,
-                Quantity = 1,
+                StatisticsBooked = 0,
             };
             await this.offerRepository.AddAsync(offer);
             await this.offerRepository.SaveChangesAsync();

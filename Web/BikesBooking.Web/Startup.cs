@@ -118,7 +118,6 @@
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -171,7 +170,12 @@
                         endpoints.MapControllerRoute(
                             name: "Motocycle Details",
                             pattern: "/Client/Details/{id}/{information}",
-                            defaults: new { controller = "Client", action = "Details"});
+                            defaults: new { controller = "Client", action = "Details" });
+
+                        endpoints.MapControllerRoute(
+                           name: "Motocycle Details",
+                           pattern: "/Client/BookThisModel/{id}/{information}",
+                           defaults: new { controller = "Client", action = "BookThisModel" });
 
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

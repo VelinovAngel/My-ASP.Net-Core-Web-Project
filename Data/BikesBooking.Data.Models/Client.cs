@@ -17,6 +17,10 @@
         [Required]
         public string Email { get; set; }
 
+        public int? OfferId { get; set; }
+
+        public virtual Offer Offer { get; set; }
+
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }

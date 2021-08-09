@@ -61,6 +61,7 @@
             return this.RedirectToAction("Index", "Home");
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id, string information)
         {
             var model = this.motorcycleService.Details(id);
@@ -73,9 +74,63 @@
             return this.View(model);
         }
 
-        public IActionResult Book()
+        [Authorize]
+        public IActionResult Book(int id)
         {
-            return this.View();
+            var userId = this.User.GetId();
+
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("BookThisModel", "Client");
+        }
+
+        [Authorize]
+        public IActionResult BookThisModel(int id, string information)
+        {
+            var userId = this.User.GetId();
+
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var model = this.motorcycleService.Details(id);
+            if (information != model.ToFriendlyUrl())
+            {
+                return this.BadRequest();
+            }
+
+            return this.View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult BookThisModel(int id, DateTime oldPickUpData, DateTime oldDropOffData, DateTime pickUpDate, DateTime dropOffDate)
+        {
+            var userId = this.User.GetId();
+            var clientId = this.clientService.GetClientId(userId);
+
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var offerId = this.clientService.GetCurrentOfferId(oldPickUpData, oldDropOffData);
+
+            this.clientService.BookedMotorcycleByClient(clientId, offerId, pickUpDate, dropOffDate);
+
+            this.TempData["Message"] = "Motorcycles successfully booked!";
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

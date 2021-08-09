@@ -7,5 +7,4 @@
         public static string ToFriendlyUrl(this MotorcycleDetailsModel model)
             => model.Manufacturer + "-" + model.Model + "-" + model.Year;
     }
-
 }

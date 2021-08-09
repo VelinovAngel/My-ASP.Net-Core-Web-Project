@@ -25,8 +25,6 @@
         {
             var context = serviceProvider.GetService<ApplicationDbContext>();
 
-
-
             var roleStore = new RoleStore<IdentityRole>(context);
 
             if (!context.Roles.Any(r => r.Name == GlobalConstants.AdministratorRoleName))
@@ -74,6 +72,5 @@
 
             return result;
         }
-
     }
 }
