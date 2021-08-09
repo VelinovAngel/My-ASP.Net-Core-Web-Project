@@ -229,6 +229,19 @@
             .Where(x => x.Available == false)
             .Count();
 
+        public async Task ChangeStateOfMotorcycle(bool available, int id)
+        {
+            var currentMotor = this.motorcycleRepository
+               .AllAsNoTracking()
+               .Where(x => x.Id == id)
+               .FirstOrDefault();
+
+            currentMotor.Available = available;
+
+            this.motorcycleRepository.Update(currentMotor);
+            await this.motorcycleRepository.SaveChangesAsync();
+        }
+
         public async Task OfferCurrentMotor(OfferPeriodForMotorDto offerPeriodForMotorDto, int id)
         {
             var currentMotor = this.motorcycleRepository

@@ -25,6 +25,8 @@
 
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
 
+        Task ChangeStateOfMotorcycle(bool available, int id);
+
         Task OfferCurrentMotor(OfferPeriodForMotorDto offerPeriodForMotorDto, int id);
 
         Task RemoveMotorcycleAsync(int id);

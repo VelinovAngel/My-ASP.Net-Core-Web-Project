@@ -91,6 +91,33 @@
         }
 
         [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Offer(bool available, int id)
+        {
+            var userId = this.User.GetId();
+
+            await this.motorcycleService.ChangeStateOfMotorcycle(available, id);
+
+            var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
+
+            if (model.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            if (available)
+            {
+                this.TempData["Message"] = "The bike is available";
+            }
+            else
+            {
+                this.TempData["Message"] = "The bike is unavailabe";
+            }
+
+            return this.View(model);
+        }
+
+        [Authorize]
         public async Task<IActionResult> OfferThisModel(int id)
         {
             var userId = this.User.GetId();
@@ -112,7 +139,7 @@
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> OfferThisModel(OfferThisModelForm offerThisModelForm, [FromRoute]int id)
+        public async Task<IActionResult> OfferThisModel(OfferThisModelForm offerThisModelForm, [FromRoute] int id)
         {
             var pickUpDate = offerThisModelForm.PickUpDate;
             var dropOffDate = offerThisModelForm.DropOffDate;
@@ -163,7 +190,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit([FromQuery]int id, MotorcycleServiceDto motorcycleFormModel)
+        public IActionResult Edit([FromQuery] int id, MotorcycleServiceDto motorcycleFormModel)
         {
             var userId = this.User.GetId();
             var dealerId = this.dealersService.GetDealerId(userId);
