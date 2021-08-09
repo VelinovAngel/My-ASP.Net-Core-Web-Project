@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Common;
@@ -7,6 +8,11 @@
 
     public class Client : BaseDeletableModel<int>
     {
+        public Client()
+        {
+            this.Offers = new HashSet<ClientsOffers>();
+        }
+
         [Required]
         public string Name { get; set; }
 
@@ -17,9 +23,7 @@
         [Required]
         public string Email { get; set; }
 
-        public int? OfferId { get; set; }
-
-        public virtual Offer Offer { get; set; }
+        public virtual ICollection<ClientsOffers> Offers { get; set; }
 
         public string UserId { get; set; }
 

@@ -132,5 +132,22 @@
 
             return this.RedirectToAction("Index", "Home");
         }
+
+        [Authorize]
+        public IActionResult MyAllMotorcycle()
+        {
+            var userId = this.User.GetId();
+            var clientId = this.clientService.GetClientId(userId);
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var model = this.clientService.GetAllListOfMotorcycleByClietId(clientId);
+
+            return this.View();
+        }
     }
 }

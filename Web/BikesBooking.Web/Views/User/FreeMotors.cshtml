@@ -20,7 +20,7 @@
                         <div class="row">
                             <a asp-controller="Client" asp-action="Details" asp-route-id="@motorcycle.Id" asp-route-information="@motorcycle.ToFriendlyUrl()" class="btn btn-primary md-2 offset-4">View</a>
                             <br />
-                            <a asp-controller="Client" asp-action="Book" asp-route-id="@motorcycle.Id" class="btn btn-primary ml-2">Book</a>
+                            <a asp-controller="Client" asp-action="BookThisModel" asp-route-id="@motorcycle.Id" asp-route-information="@motorcycle.ToFriendlyUrl()" class="btn btn-primary ml-2">Book</a>
                         </div>
                     </div>
                 </div>

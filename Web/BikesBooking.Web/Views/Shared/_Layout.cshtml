@@ -24,6 +24,10 @@
                     <a class="btn nav-item m-md-2" href="/Administrator/Statistic">Statistic</a>
 
                 }
+                @if (this.User.IsInRole(GlobalConstants.ClientRoleName))
+                {
+                    <a class="btn nav-item m-md-2" href="/Client/MyAllMotorcycle">My motorcycle</a>
+                }
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

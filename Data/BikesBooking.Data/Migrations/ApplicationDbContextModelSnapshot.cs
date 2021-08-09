@@ -216,9 +216,6 @@ namespace BikesBooking.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("OfferId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
@@ -226,13 +223,33 @@ namespace BikesBooking.Data.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("OfferId");
-
                     b.HasIndex("UserId")
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("BikesBooking.Data.Models.ClientsOffers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OfferId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("ClientsOffers");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Color", b =>
@@ -740,17 +757,26 @@ namespace BikesBooking.Data.Migrations
 
             modelBuilder.Entity("BikesBooking.Data.Models.Client", b =>
                 {
-                    b.HasOne("BikesBooking.Data.Models.Offer", "Offer")
-                        .WithMany("Clients")
-                        .HasForeignKey("OfferId");
-
                     b.HasOne("BikesBooking.Data.Models.ApplicationUser", "User")
                         .WithOne("Client")
                         .HasForeignKey("BikesBooking.Data.Models.Client", "UserId");
 
-                    b.Navigation("Offer");
-
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("BikesBooking.Data.Models.ClientsOffers", b =>
+                {
+                    b.HasOne("BikesBooking.Data.Models.Client", "Client")
+                        .WithMany("Offers")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("BikesBooking.Data.Models.Offer", "Offer")
+                        .WithMany("Clients")
+                        .HasForeignKey("OfferId");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Offer");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Dealer", b =>
@@ -892,6 +918,11 @@ namespace BikesBooking.Data.Migrations
             modelBuilder.Entity("BikesBooking.Data.Models.City", b =>
                 {
                     b.Navigation("Motorcycles");
+                });
+
+            modelBuilder.Entity("BikesBooking.Data.Models.Client", b =>
+                {
+                    b.Navigation("Offers");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Color", b =>

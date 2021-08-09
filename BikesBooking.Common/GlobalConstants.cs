@@ -6,7 +6,7 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string AdministratoPassword = "Velino!";
+        public const string AdministratoPassword = "admin";
 
         public const string AdministratoFirtsName = "Angel";
 

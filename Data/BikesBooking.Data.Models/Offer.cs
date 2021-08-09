@@ -10,7 +10,7 @@
         public Offer()
         {
             this.Motorcycles = new HashSet<Motorcycle>();
-            this.Clients = new HashSet<Client>();
+            this.Clients = new HashSet<ClientsOffers>();
         }
 
         public int StatisticsBooked { get; set; }
@@ -21,7 +21,7 @@
 
         public DateTime DropOffDate { get; set; }
 
-        public virtual ICollection<Client> Clients { get; set; }
+        public virtual ICollection<ClientsOffers> Clients { get; set; }
 
         public virtual ICollection<Motorcycle> Motorcycles { get; set; }
     }

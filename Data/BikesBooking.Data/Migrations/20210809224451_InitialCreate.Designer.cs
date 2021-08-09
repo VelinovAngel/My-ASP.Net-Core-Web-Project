@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BikesBooking.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210809135459_RemoveBookingTableFromDataBase")]
-    partial class RemoveBookingTableFromDataBase
+    [Migration("20210809224451_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -230,6 +230,28 @@ namespace BikesBooking.Data.Migrations
                         .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Clients");
+                });
+
+            modelBuilder.Entity("BikesBooking.Data.Models.ClientsOffers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OfferId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.HasIndex("OfferId");
+
+                    b.ToTable("ClientsOffers");
                 });
 
             modelBuilder.Entity("BikesBooking.Data.Models.Color", b =>
@@ -548,9 +570,6 @@ namespace BikesBooking.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -563,18 +582,19 @@ namespace BikesBooking.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsFree")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PickUpDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("StatisticsBooked")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ClientId");
 
                     b.HasIndex("IsDeleted");
 
@@ -746,6 +766,21 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BikesBooking.Data.Models.ClientsOffers", b =>
+                {
+                    b.HasOne("BikesBooking.Data.Models.Client", "Client")
+                        .WithMany("Offers")
+                        .HasForeignKey("ClientId");
+
+                    b.HasOne("BikesBooking.Data.Models.Offer", "Offer")
+                        .WithMany("Clients")
+                        .HasForeignKey("OfferId");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Offer");
+                });
+
             modelBuilder.Entity("BikesBooking.Data.Models.Dealer", b =>
                 {
                     b.HasOne("BikesBooking.Data.Models.City", "City")
@@ -818,15 +853,6 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("Review");
                 });
 
-            modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
-                {
-                    b.HasOne("BikesBooking.Data.Models.Client", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("BikesBooking.Data.Models.ApplicationRole", null)
@@ -896,6 +922,11 @@ namespace BikesBooking.Data.Migrations
                     b.Navigation("Motorcycles");
                 });
 
+            modelBuilder.Entity("BikesBooking.Data.Models.Client", b =>
+                {
+                    b.Navigation("Offers");
+                });
+
             modelBuilder.Entity("BikesBooking.Data.Models.Color", b =>
                 {
                     b.Navigation("Motorcycles");
@@ -923,6 +954,8 @@ namespace BikesBooking.Data.Migrations
 
             modelBuilder.Entity("BikesBooking.Data.Models.Offer", b =>
                 {
+                    b.Navigation("Clients");
+
                     b.Navigation("Motorcycles");
                 });
 #pragma warning restore 612, 618
