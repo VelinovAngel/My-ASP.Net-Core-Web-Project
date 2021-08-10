@@ -8,7 +8,7 @@
 <section class="py-5">
     <div class="container">
         <h1 style="margin: 2%; text-align: center;">Page for details for your bike and the possibility of putting it on offer!</h1>
-        <div>
+        <div class="col-8 offset-2">
             <div class="form-group text-center">
                 <img src="@Model.Motor.Url" class="img-fluid">
             </div>
@@ -28,26 +28,27 @@
                 <label>Price per day:</label>
                 <h5 type="text" readonly class="form-control">@Model.Motor.Price Euro</h5>
             </div>
+        </div>
+        <form method="post" class="container lead-section col-md-6 offset-md-3">
+            <div asp-validation-summary="All" class="text-danger"></div>
 
-            <form method="post" class="container lead-section col-md-6 offset-md-3">
-                <div asp-validation-summary="All" class="text-danger"></div>
-
-                <div class="form-group">
+            <div class="row">
+                <div class="form-group col-6">
                     <label asp-for="PickUpDate"></label>
                     <input asp-for="PickUpDate" class="form-control" />
                     <span asp-validation-for="PickUpDate" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group col-6">
                     <label asp-for="DropOffDate"></label>
                     <input asp-for="DropOffDate" class="form-control" />
                     <span asp-validation-for="DropOffDate" class="text-danger"></span>
                 </div>
-
+            </div>
+            <div class="text-center">   
                 <button type="submit" class="btn btn-success">Done</button>
-            </form>
-
-        </div>
+            </div>
+        </form>
     </div>
 </section>
 

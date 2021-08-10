@@ -15,6 +15,8 @@
         [Required]
         public string Description { get; set; }
 
+        public int Hits { get; set; }
+
         public Rating Rating { get; set; }
 
         public DateTime DateRelease { get; set; }

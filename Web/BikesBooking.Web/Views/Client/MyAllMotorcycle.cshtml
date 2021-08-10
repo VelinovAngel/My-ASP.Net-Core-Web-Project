@@ -1,5 +1,6 @@
 ﻿@using BikesBooking.Services.Data.DTO.Clients
 @using Microsoft.AspNetCore.Identity
+@using BikesBooking.Data.Models.Enum
 @using BikesBooking.Data.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
@@ -27,12 +28,19 @@
                     <img class="motor-img-top img-fluid img-thumbnail" style="width: 400px; height: 250px;" src="@motorcycle.Url" alt="@motorcycle.Manufacturer @motorcycle.Model - @motorcycle.Year (@motorcycle.Type)">
                 </div>
                 <br />
-                <div class="col-2">
-                    <h6>Rating:</h6>
-                    <span><span class="card-body">@motorcycle.Rating </span></span>
-                </div>
+                <p><b>Feedback: </b> <span>@motorcycle.Rating<br></span></p>
+
+
                 <br />
-                <a asp-controller="Client" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary mt-4">Rating</a>
+                <form method="post">
+                    <textarea type="text" class="form-control"></textarea>
+                    <div class="form-group">
+                        <label asp-for="@motorcycle.Rating">Your feedback: </label>
+                        <select asp-for="@motorcycle.Rating" class="form-control" asp-items="@Html.GetEnumSelectList<Rating>()"></select>
+                        <span asp-validation-for="@motorcycle.Rating" class="text-danger"></span>
+                    </div>
+                    <a asp-controller="Client" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary mt-4">Rating</a>
+                </form>
             </div>
             <div class="col-lg-7 col-lg-offset-1 col-md-4 col-sm-2">
                 <h2 class="text-center ">@motorcycle.Manufacturer @motorcycle.Model</h2>

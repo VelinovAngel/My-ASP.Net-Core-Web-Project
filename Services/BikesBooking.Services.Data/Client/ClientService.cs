@@ -7,6 +7,7 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
+    using BikesBooking.Data.Models.Enum;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
@@ -131,6 +132,7 @@
                    Type = (TypeOfMotors)x.TypeMotor,
                    Price = x.Price,
                    Color = x.Color.Name,
+                   Rating = x.Review.Rating.ToString(),
                    City = x.City.Name,
                    Dealer = x.Dealer.Name,
                    DealerEmail = x.Dealer.Email,

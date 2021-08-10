@@ -1,7 +1,7 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Clients
 {
     using System;
-
+    using BikesBooking.Data.Models.Enum;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public class AllBookedMotorcycleDto
@@ -14,7 +14,7 @@
 
         public string Manufacturer { get; set; }
 
-        public double Rating { get; set; }
+        public string Rating { get; set; }
 
         public int Year { get; set; }
 

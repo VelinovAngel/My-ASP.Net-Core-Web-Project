@@ -210,6 +210,8 @@
                 Price = x.Price,
                 Year = x.Manufacturer.Year,
                 Available = x.Available,
+                Review = x.Review.Rating.ToString(),
+                ReviewDescription = x.Review.Description,
                 Url = x.Url,
                 Type = (TypeOfMotors)x.TypeMotor,
                 Description = x.Description,
