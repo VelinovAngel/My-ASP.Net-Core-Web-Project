@@ -11,7 +11,7 @@
     {
         Task CreateClientAsync(string userId, string address, string city);
 
-        IEnumerable<MotorcycleDetailsModel> GetAllListOfMotorcycleByClietId(int clientId);
+        IEnumerable<AllBookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId);
 
         bool IsAlreadyClientExist(string userId);
 
@@ -19,7 +19,7 @@
 
         public int GetClientId(string userId);
 
-        bool BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff);
+        Task<bool> BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId);
 
         int GetCurrentOfferId(DateTime pickUp, DateTime dropOff);
 

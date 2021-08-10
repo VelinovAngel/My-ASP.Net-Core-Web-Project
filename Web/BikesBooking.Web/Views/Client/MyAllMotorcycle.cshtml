@@ -1,0 +1,34 @@
+﻿@using BikesBooking.Services.Data.DTO.Clients
+@using Microsoft.AspNetCore.Identity
+@using BikesBooking.Data.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model IEnumerable<AllBookedMotorcycleDto>
+
+
+@{
+    this.ViewData["Title"] = "My Motorcycle";
+    var user = await UserManager.GetUserAsync(this.User);
+    var clientName = $"{user.FirstName} - {user.LastName}";
+}
+
+
+<h1 class="text-center mt-2">All booked motorcycle by: @clientName </h1>
+
+
+<div class="row mt-2 mb-4">
+    @foreach (var motorcycle in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-5 mt-3">
+                <img class="motor-img-top img-fluid img-thumbnail motor-image" style="width: 400px; height: 250px;" src="@motorcycle.Url" alt="@motorcycle.Manufacturer @motorcycle.Model - @motorcycle.Year (@motorcycle.Type)">
+                <div class="card-body text-center">
+                    <h5 class="card-title text-center">@motorcycle.Year  @motorcycle.Manufacturer @motorcycle.Model (@motorcycle.Type)</h5>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>

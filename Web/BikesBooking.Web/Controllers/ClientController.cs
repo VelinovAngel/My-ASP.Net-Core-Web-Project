@@ -112,7 +112,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult BookThisModel(int id, DateTime oldPickUpData, DateTime oldDropOffData, DateTime pickUpDate, DateTime dropOffDate)
+        public async Task<IActionResult> BookThisModel(int id, DateTime oldPickUpData, DateTime oldDropOffData, DateTime pickUpDate, DateTime dropOffDate)
         {
             var userId = this.User.GetId();
             var clientId = this.clientService.GetClientId(userId);
@@ -126,7 +126,7 @@
 
             var offerId = this.clientService.GetCurrentOfferId(oldPickUpData, oldDropOffData);
 
-            this.clientService.BookedMotorcycleByClient(clientId, offerId, pickUpDate, dropOffDate);
+            await this.clientService.BookedMotorcycleByClient(clientId, offerId, pickUpDate, dropOffDate, id);
 
             this.TempData["Message"] = "Motorcycles successfully booked!";
 
@@ -147,7 +147,7 @@
 
             var model = this.clientService.GetAllListOfMotorcycleByClietId(clientId);
 
-            return this.View();
+            return this.View(model);
         }
     }
 }

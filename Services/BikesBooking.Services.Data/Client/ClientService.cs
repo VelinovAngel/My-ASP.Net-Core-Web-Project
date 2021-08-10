@@ -32,7 +32,7 @@
             this.userRepository = userRepository;
         }
 
-        public bool BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff)
+        public async Task<bool> BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId)
         {
             var currOffer = this.offerRepository.AllAsNoTracking()
                 .Where(x => x.Id == offerId)
@@ -63,7 +63,7 @@
             }
 
             this.offerRepository.Update(currOffer);
-            this.offerRepository.SaveChangesAsync();
+            await this.offerRepository.SaveChangesAsync();
 
             var newOfferTable = new Offer
             {
@@ -72,19 +72,20 @@
                 PickUpDate = pickUp,
                 DropOffDate = dropOff,
             };
-            this.offerRepository.AddAsync(newOfferTable);
-            this.offerRepository.SaveChangesAsync();
+            await this.offerRepository.AddAsync(newOfferTable);
+            await this.offerRepository.SaveChangesAsync();
 
             var newBookingTimeSpan = new ClientsOffers
             {
                 OfferId = newOfferTable.Id,
                 ClientId = currClient.Id,
+                MotorcycleId = motorcycleId,
             };
 
-            this.clientsOffersRepository.AddAsync(newBookingTimeSpan);
-            this.clientsOffersRepository.SaveChangesAsync();
+            await this.clientsOffersRepository.AddAsync(newBookingTimeSpan);
+            await this.clientsOffersRepository.SaveChangesAsync();
             this.clientRepository.Update(currClient);
-            this.clientRepository.SaveChangesAsync();
+            await this.clientRepository.SaveChangesAsync();
             return true;
         }
 
@@ -111,22 +112,35 @@
             await this.clientRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<MotorcycleDetailsModel> GetAllListOfMotorcycleByClietId(int clientId)
+        public IEnumerable<AllBookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId)
         {
-            // var motorcycle = this.clientRepository.AllAsNoTracking()
-            //    .Where(x => x.Offer.Clients.Select(x => x.Id == clientId).FirstOrDefault())
-            //    .Select(x => new MotorcycleDetailsModel
-            //    {
-            //        Manufacturer = x.Offer.Motorcycles.Select(x => x.Manufacturer.Name).FirstOrDefault(),
-            //        Model = x.Offer.Motorcycles.Select(x => x.Model.Name).FirstOrDefault(),
-            //        Type = (TypeOfMotors)x.Offer.Motorcycles.Select(x => x.TypeMotor).FirstOrDefault(),
-            //        Price = x.Offer.Motorcycles.Select(x => x.Price).FirstOrDefault(),
-            //        Dealer = x.Offer.Motorcycles.Select(x => x.Dealer.Name).FirstOrDefault(),
-            //        Url = x.Offer.Motorcycles.Select(x => x.Url).FirstOrDefault(),
-            //        Description = x.Offer.Motorcycles.Select(x => x.Description).FirstOrDefault(),
-            //    }).ToList();
+            var currOffer = this.clientsOffersRepository.All()
+                .Where(x => x.ClientId == clientId).ToList();
 
-            return null;
+            var listOfmotorcycle = new List<AllBookedMotorcycleDto>();
+
+            foreach (var bike in currOffer)
+            {
+                var motorcycle = this.motorcyclesRepository.All()
+               .Where(x => x.Id == bike.MotorcycleId)
+               .Select(x => new AllBookedMotorcycleDto
+               {
+                   Manufacturer = x.Manufacturer.Name,
+                   Model = x.Model.Name,
+                   Type = (TypeOfMotors)x.TypeMotor,
+                   Price = x.Price,
+                   Color = x.Color.Name,
+                   City = x.City.Name,
+                   Dealer = x.Dealer.Name,
+                   Url = x.Url,
+                   Description = x.Description,
+               }).FirstOrDefault();
+                motorcycle.PickUpDate = bike.Offer.PickUpDate;
+                motorcycle.DropOffDate = bike.Offer.DropOffDate;
+                listOfmotorcycle.Add(motorcycle);
+            }
+
+            return listOfmotorcycle;
         }
 
         public int GetClientId(string userId)
