@@ -125,6 +125,7 @@
                .Where(x => x.Id == bike.MotorcycleId)
                .Select(x => new AllBookedMotorcycleDto
                {
+                   Id = x.Id,
                    Manufacturer = x.Manufacturer.Name,
                    Model = x.Model.Name,
                    Type = (TypeOfMotors)x.TypeMotor,
@@ -132,7 +133,9 @@
                    Color = x.Color.Name,
                    City = x.City.Name,
                    Dealer = x.Dealer.Name,
+                   DealerEmail = x.Dealer.Email,
                    Url = x.Url,
+                   Year = x.Manufacturer.Year,
                    Description = x.Description,
                }).FirstOrDefault();
                 motorcycle.PickUpDate = bike.Offer.PickUpDate;

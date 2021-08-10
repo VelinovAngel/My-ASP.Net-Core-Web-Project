@@ -10,7 +10,11 @@
 
         public string Dealer { get; set; }
 
+        public string DealerEmail { get; set; }
+
         public string Manufacturer { get; set; }
+
+        public double Rating { get; set; }
 
         public int Year { get; set; }
 
@@ -21,6 +25,8 @@
         public int CubicCentimetre { get; set; }
 
         public decimal Price { get; set; }
+
+        public decimal TotalPrice => this.Price * this.BookingDays.Days;
 
         public string Url { get; set; }
 
@@ -35,5 +41,7 @@
         public DateTime PickUpDate { get; set; }
 
         public DateTime DropOffDate { get; set; }
+
+        public TimeSpan BookingDays => this.DropOffDate - this.PickUpDate;
     }
 }
