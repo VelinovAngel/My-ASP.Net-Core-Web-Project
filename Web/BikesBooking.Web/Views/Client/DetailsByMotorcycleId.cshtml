@@ -33,7 +33,7 @@
                         <span id="starsForRate3" class="rating__star  fa-star @if (2.5 <= Model.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="3"></span>
                         <span id="starsForRate4" class="rating__star  fa-star @if (3.5 <= Model.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="4"></span>
                         <span id="starsForRate5" class="rating__star  fa-star @if (4.5 <= Model.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="5"></span>
-                        <span id="averageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span>
+                        <span id="avarageVoteValue">@Model.AverageVote.ToString("0.0")</span><span> / 5</span>
                         <input type="hidden" value="@Model.Id" id='h_v' class='h_v'>
                     </div>
                 </div>
@@ -87,7 +87,7 @@
         }
         executeRating(ratingStars);
         $("span[data-vote]").each(function (el) {
-            $(this).one('mouseup.mouseupSelect', function () {
+            $(this).click(function () {
                 var value = $(this).attr("data-vote");
                 var motorcycleId = $('#h_v').val();;
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
@@ -100,7 +100,8 @@
                         'X-CSRF-TOKEN': antiForgeryToken
                     },
                     success: function (data) {
-                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                        $('#avarageVoteValue').html(data.avarageVote);
+                        console.log(data);
                         for (var i = 1; i <= 5; i++) {
                             var item = $("#starsForRate" + i);
                             if (i - 0.5 <= data.averageVote) {
@@ -110,7 +111,6 @@
                                 item.removeClass("checked");
                             }
                         }
-                        setInterval('location.reload()', 1000);
                     },
 
                     contentType: 'application/json',
