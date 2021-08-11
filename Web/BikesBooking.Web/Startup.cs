@@ -17,6 +17,7 @@
     using BikesBooking.Services.Data.Home;
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
+    using BikesBooking.Services.Data.Votes;
     using BikesBooking.Services.Mapping;
     using BikesBooking.Services.Messaging;
     using BikesBooking.Web.Infrastructure.Filters.Hangfire;
@@ -89,6 +90,10 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
             services.AddMemoryCache();
+            services.AddAntiforgery(option =>
+            {
+                option.HeaderName = "X-CSRF-TOKEN";
+            });
 
             services.AddControllersWithViews(
                 options =>
@@ -112,6 +117,7 @@
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IClientService, ClientService>();
             services.AddTransient<IEmailSenderService, EmailSenderService>();
+            services.AddTransient<IVoteService, VoteService>();
 
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }

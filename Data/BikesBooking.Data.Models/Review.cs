@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Data.Common.Models;
-    using BikesBooking.Data.Models.Enum;
 
     public class Review : BaseDeletableModel<int>
     {
@@ -14,10 +13,6 @@
 
         [Required]
         public string Description { get; set; }
-
-        public int Hits { get; set; }
-
-        public Rating Rating { get; set; }
 
         public DateTime DateRelease { get; set; }
     }

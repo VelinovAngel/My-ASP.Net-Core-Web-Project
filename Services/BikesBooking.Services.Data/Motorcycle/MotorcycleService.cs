@@ -9,6 +9,7 @@
     using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
+    using BikesBooking.Services.Data.Votes;
     using Microsoft.EntityFrameworkCore;
 
     public class MotorcycleService : IMotorcycleService
@@ -20,6 +21,7 @@
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
         private readonly IRepository<Offer> offerRepository;
+        private readonly IVoteService votesService;
 
         public MotorcycleService(
             IRepository<Model> modelsRepository,
@@ -28,7 +30,8 @@
             IRepository<Color> colorRepository,
             IRepository<Country> countryRepository,
             IRepository<City> cityRepository,
-            IRepository<Offer> offerRepository)
+            IRepository<Offer> offerRepository,
+            IVoteService votesService)
         {
             this.modelsRepository = modelsRepository;
             this.manufacturerRepository = manufacturerRepository;
@@ -37,6 +40,7 @@
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
             this.offerRepository = offerRepository;
+            this.votesService = votesService;
         }
 
         public async Task<int> CreateMotorcycleAsync(MotorcycleServiceDto createMotorcycle, int dealerId)
@@ -210,7 +214,7 @@
                 Price = x.Price,
                 Year = x.Manufacturer.Year,
                 Available = x.Available,
-                Review = x.Review.Rating.ToString(),
+                Review = x.Review.Description,
                 ReviewDescription = x.Review.Description,
                 Url = x.Url,
                 Type = (TypeOfMotors)x.TypeMotor,
@@ -293,6 +297,7 @@
                  CubicCentimetre = x.CubicCentimetre,
                  Country = x.City.Country.Name,
                  City = x.City.Name,
+                 AverageVote = this.votesService.GetAverageVote(x.Id),
                  Year = x.Manufacturer.Year,
                  Price = x.Price,
                  Available = x.Available,

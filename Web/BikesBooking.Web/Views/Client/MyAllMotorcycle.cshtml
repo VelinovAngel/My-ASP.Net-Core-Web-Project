@@ -1,12 +1,11 @@
 ﻿@using BikesBooking.Services.Data.DTO.Clients
 @using Microsoft.AspNetCore.Identity
-@using BikesBooking.Data.Models.Enum
 @using BikesBooking.Data.Models
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@model IEnumerable<AllBookedMotorcycleDto>
+@model IEnumerable<BookedMotorcycleDto>
 
 
 @{
@@ -19,43 +18,36 @@
 <h1 class="text-center mt-2 mb-2">Booked motorcycle by: @clientName </h1>
 
 <br />
-<div class="mt-2 mb-4">
-    @foreach (var motorcycle in Model)
-    {
-        <div class="row mt-3 mb-3">
-            <div class="col-lg-4 col-md-4 col-sm-3">
-                <div>
-                    <img class="motor-img-top img-fluid img-thumbnail" style="width: 400px; height: 250px;" src="@motorcycle.Url" alt="@motorcycle.Manufacturer @motorcycle.Model - @motorcycle.Year (@motorcycle.Type)">
-                </div>
-                <br />
-                <p><b>Feedback: </b> <span>@motorcycle.Rating<br></span></p>
+<br />
+@if (!Model.Any())
+{
+<h2>You haven't booked any bikes yet!!</h2>
+}
 
+@foreach (var motorcycle in Model)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col"><i class="fas fa-motorcycle"></i></th>
+                <th scope="col">Dealer Name</th>
+                <th scope="col">Model</th>
+                <th scope="col">Period</th>
+                <th scope="col">Motorcycle</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row" class="col-md-1"><img src="@motorcycle.Url" style="width: 150px; height: 80px;" alt="Alternate Text" class="text-center" /></th>
+                <td> @motorcycle.Dealer</td>
+                <td class="col-md-2"> @motorcycle.Manufacturer</td>
+                <td class="col-md-2">@motorcycle.City</td>
+                <td>FROM: @motorcycle.PickUpDate.ToShortDateString() - TO: @motorcycle.DropOffDate.ToShortDateString()</td>
+                <td class="text-center col-sm-2 mt-3">
+                    <a asp-controller="Client" asp-action="DetailsByMotorcycleId" asp-route-id="@motorcycle.Id" class="btn btn-primary mt-4">Details</a>
+                </td>
+            </tr>
 
-                <br />
-                <form method="post">
-                    <textarea type="text" class="form-control"></textarea>
-                    <div class="form-group">
-                        <label asp-for="@motorcycle.Rating">Your feedback: </label>
-                        <select asp-for="@motorcycle.Rating" class="form-control" asp-items="@Html.GetEnumSelectList<Rating>()"></select>
-                        <span asp-validation-for="@motorcycle.Rating" class="text-danger"></span>
-                    </div>
-                    <a asp-controller="Client" asp-action="Rating" asp-route-id="@motorcycle.Id" class="btn btn-block btn-primary mt-4">Rating</a>
-                </form>
-            </div>
-            <div class="col-lg-7 col-lg-offset-1 col-md-4 col-sm-2">
-                <h2 class="text-center ">@motorcycle.Manufacturer @motorcycle.Model</h2>
-                <br />
-                <p><b>Color: </b> <span>@motorcycle.Color<br></span></p>
-                <p><b>Year: </b> <span>@motorcycle.Year<br></span></p>
-                <p><b>Bookign period: </b> <span>FROM: @motorcycle.PickUpDate.ToShortDateString() TO: @motorcycle.DropOffDate.ToShortDateString()<br></span></p>
-                <p><b>Description: </b> <span class="font-italic">@motorcycle.Description<br></span></p>
-
-                <p><b>Best Price Guarantee: </b> <span class="">@motorcycle.TotalPrice €<br></span></p>
-                <hr />
-                <p><b>Delaer Name: </b> <span class="">@motorcycle.Dealer <br></span></p>
-                <p><b>Email Address: </b> <span class="">@motorcycle.DealerEmail <br></span></p>
-            </div>
-        </div>
-        <hr />
-    }
-</div>
+        </tbody>
+    </table>
+}

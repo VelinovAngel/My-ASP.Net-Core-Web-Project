@@ -11,7 +11,9 @@
     {
         Task CreateClientAsync(string userId, string address, string city);
 
-        IEnumerable<AllBookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId);
+        IEnumerable<BookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId);
+
+        BookedMotorcycleDto GetSingleBookedMotorcycleByClientId(int clientId, int motorcycleId);
 
         bool IsAlreadyClientExist(string userId);
 

@@ -46,6 +46,8 @@
 
         public DbSet<Offer> Offers { get; set; }
 
+        public DbSet<Vote> Votes { get; set; }
+
         public DbSet<ClientsOffers> ClientsOffers { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

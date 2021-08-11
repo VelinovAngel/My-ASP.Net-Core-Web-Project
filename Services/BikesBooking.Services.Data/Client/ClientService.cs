@@ -10,6 +10,7 @@
     using BikesBooking.Data.Models.Enum;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
+    using BikesBooking.Services.Data.Votes;
 
     public class ClientService : IClientService
     {
@@ -18,19 +19,22 @@
         private readonly IRepository<Offer> offerRepository;
         private readonly IRepository<ClientsOffers> clientsOffersRepository;
         private readonly IRepository<ApplicationUser> userRepository;
+        private readonly IVoteService votesService;
 
         public ClientService(
             IRepository<Client> clientRepository,
             IRepository<Motorcycle> motorcyclesRepository,
             IRepository<Offer> offerRepository,
             IRepository<ClientsOffers> clientsOffersRepository,
-            IRepository<ApplicationUser> userRepository)
+            IRepository<ApplicationUser> userRepository,
+            IVoteService votesService)
         {
             this.clientRepository = clientRepository;
             this.motorcyclesRepository = motorcyclesRepository;
             this.offerRepository = offerRepository;
             this.clientsOffersRepository = clientsOffersRepository;
             this.userRepository = userRepository;
+            this.votesService = votesService;
         }
 
         public async Task<bool> BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId)
@@ -113,18 +117,18 @@
             await this.clientRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<AllBookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId)
+        public IEnumerable<BookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId)
         {
             var currOffer = this.clientsOffersRepository.All()
                 .Where(x => x.ClientId == clientId).ToList();
 
-            var listOfmotorcycle = new List<AllBookedMotorcycleDto>();
+            var listOfmotorcycle = new List<BookedMotorcycleDto>();
 
             foreach (var bike in currOffer)
             {
                 var motorcycle = this.motorcyclesRepository.All()
                .Where(x => x.Id == bike.MotorcycleId)
-               .Select(x => new AllBookedMotorcycleDto
+               .Select(x => new BookedMotorcycleDto
                {
                    Id = x.Id,
                    Manufacturer = x.Manufacturer.Name,
@@ -132,9 +136,10 @@
                    Type = (TypeOfMotors)x.TypeMotor,
                    Price = x.Price,
                    Color = x.Color.Name,
-                   Rating = x.Review.Rating.ToString(),
+                   Rating = x.Review.Description,
                    City = x.City.Name,
                    Dealer = x.Dealer.Name,
+                   AverageVote = this.votesService.GetAverageVote(bike.MotorcycleId),
                    DealerEmail = x.Dealer.Email,
                    Url = x.Url,
                    Year = x.Manufacturer.Year,
@@ -146,6 +151,12 @@
             }
 
             return listOfmotorcycle;
+        }
+
+        public BookedMotorcycleDto GetSingleBookedMotorcycleByClientId(int clientId, int motorcycle)
+        {
+            var allMotors = this.GetAllListOfMotorcycleByClietId(clientId);
+            return allMotors.FirstOrDefault(x => x.Id == motorcycle);
         }
 
         public int GetClientId(string userId)

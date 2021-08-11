@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Data.Models
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Data.Common.Models;
@@ -7,6 +8,11 @@
 
     public class Motorcycle : BaseDeletableModel<int>
     {
+        public Motorcycle()
+        {
+            this.Votes = new HashSet<Vote>();
+        }
+
         public int ManufacturerId { get; set; }
 
         public virtual Manufacturer Manufacturer { get; set; }
@@ -51,5 +57,7 @@
         public int DealerId { get; set; }
 
         public virtual Dealer Dealer { get; set; }
+
+        public virtual ICollection<Vote> Votes { get; set; }
     }
 }

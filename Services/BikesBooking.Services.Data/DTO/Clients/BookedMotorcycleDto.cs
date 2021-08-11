@@ -1,10 +1,10 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Clients
 {
     using System;
-    using BikesBooking.Data.Models.Enum;
+
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
-    public class AllBookedMotorcycleDto
+    public class BookedMotorcycleDto
     {
         public int Id { get; set; }
 
@@ -33,6 +33,8 @@
         public string City { get; set; }
 
         public string Country { get; set; }
+
+        public double AverageVote { get; set; }
 
         public TypeOfMotors Type { get; set; }
 

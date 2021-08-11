@@ -21,6 +21,15 @@
             this.serviceProvider = serviceProvider;
         }
 
+        public static async Task<IdentityResult> AssignRole(IServiceProvider services, string email, string admin)
+        {
+            UserManager<ApplicationUser> userManager = services.GetService<UserManager<ApplicationUser>>();
+            ApplicationUser user = await userManager.FindByEmailAsync(email);
+            var result = await userManager.AddToRoleAsync(user, admin);
+
+            return result;
+        }
+
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetService<ApplicationDbContext>();
@@ -62,15 +71,6 @@
             await AssignRole(serviceProvider, user.Email, GlobalConstants.AdministratorRoleName);
 
             await context.SaveChangesAsync();
-        }
-
-        public static async Task<IdentityResult> AssignRole(IServiceProvider services, string email, string admin)
-        {
-            UserManager<ApplicationUser> userManager = services.GetService<UserManager<ApplicationUser>>();
-            ApplicationUser user = await userManager.FindByEmailAsync(email);
-            var result = await userManager.AddToRoleAsync(user, admin);
-
-            return result;
         }
     }
 }

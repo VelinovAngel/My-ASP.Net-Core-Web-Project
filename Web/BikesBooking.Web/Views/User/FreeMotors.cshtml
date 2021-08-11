@@ -25,18 +25,16 @@
                     </div>
                     <div class="row container-fluid">
                         <div class="d-inline">
-                           
-                            <ul class="item-rating">
-                                <li class="font-weight-bold d-inline list-unstyled">
-                                    Rating:
-                                </li>
-                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
-                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
-                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
-                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
-                                <li class="star-empty list-unstyled d-inline"><i class="fas fa-star-half-alt"></i></li>
-                                <li class="list-unstyled"><span id="averageVoteValue">0.0</span><span> / 5</span> </li>
-                            </ul>
+                            <div class="rating ml-md-2 mb-3">
+                                <span class="font-weight-bold"> Rating:</span>
+                                <span id="starsForRate1" class="rating__star  fa-star @if (0.5 <= motorcycle.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="1"></span>
+                                <span id="starsForRate2" class="rating__star  fa-star @if (1.5 <= motorcycle.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="2"></span>
+                                <span id="starsForRate3" class="rating__star  fa-star @if (2.5 <= motorcycle.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="3"></span>
+                                <span id="starsForRate4" class="rating__star  fa-star @if (3.5 <= motorcycle.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="4"></span>
+                                <span id="starsForRate5" class="rating__star  fa-star @if (4.5 <= motorcycle.AverageVote) { <text>fa</text>}else{<text>far</text>}" data-vote="5"></span>
+                                <span id="averageVoteValue">@motorcycle.AverageVote.ToString("0.0")</span><span> / 5</span>
+                                @*<input type="hidden" value="@Model.Id" id='h_v' class='h_v'>*@
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -113,4 +111,5 @@
         </li>
     </ul>
 </nav>
+
 

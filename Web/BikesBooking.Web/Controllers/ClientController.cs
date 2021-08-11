@@ -149,5 +149,22 @@
 
             return this.View(model);
         }
+
+        [Authorize]
+        public IActionResult DetailsByMotorcycleId(int id)
+        {
+            var userId = this.User.GetId();
+            var clientId = this.clientService.GetClientId(userId);
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var model = this.clientService.GetSingleBookedMotorcycleByClientId(clientId, id);
+
+            return this.View(model);
+        }
     }
 }

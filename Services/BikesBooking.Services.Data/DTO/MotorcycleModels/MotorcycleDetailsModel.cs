@@ -8,6 +8,8 @@
 
         public string Dealer { get; set; }
 
+        public double AverageVote { get; set; }
+
         public DateTime AddedOn { get; set; }
     }
 }
