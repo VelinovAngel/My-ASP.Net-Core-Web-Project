@@ -23,6 +23,22 @@
                             <a asp-controller="Client" asp-action="BookThisModel" asp-route-id="@motorcycle.Id" asp-route-information="@motorcycle.ToFriendlyUrl()" class="btn btn-primary ml-2">Book</a>
                         </div>
                     </div>
+                    <div class="row container-fluid">
+                        <div class="d-inline">
+                           
+                            <ul class="item-rating">
+                                <li class="font-weight-bold d-inline list-unstyled">
+                                    Rating:
+                                </li>
+                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
+                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
+                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
+                                <li class="star-fill list-unstyled d-inline"><i class="fas fa-star"></i></li>
+                                <li class="star-empty list-unstyled d-inline"><i class="fas fa-star-half-alt"></i></li>
+                                <li class="list-unstyled"><span id="averageVoteValue">0.0</span><span> / 5</span> </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         }

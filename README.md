@@ -26,7 +26,7 @@ ___________________________________________
 * Initial seeding : Roles, Model , Manufacturer, Color, Countries and Cities.
 * PartialView
 * MailKit 2.14.0 (Email sender by Google)
-* Bootstrap 4
+* Bootstrap 5.1.0
 * AJAX real-time Requests
 * jQuery
 * GDPR
