@@ -7,5 +7,7 @@
         Task SetVote(int motorcycleId, string userId, byte value);
 
         double GetAverageVote(int? motorcycleId);
+
+        int GetVoteByUser(string userId);
     }
 }

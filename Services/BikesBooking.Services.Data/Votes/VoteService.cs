@@ -28,6 +28,9 @@
             return votes.Average(x => x.Value);
         }
 
+        public int GetVoteByUser(string userId)
+            => this.votesRepository.All().FirstOrDefault(x => x.UserId == userId).Value;
+
         public async Task SetVote(int motorcycleId, string userId, byte value)
         {
             var vote = this.votesRepository.All()

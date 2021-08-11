@@ -166,5 +166,14 @@
 
             return this.View(model);
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult Reviews(int id)
+        {
+
+            this.TempData["message"] = "You have successfully submitted a review for this motorcycle. Thank you!";
+            return this.RedirectToAction("DetailsByMotorcycleId", "Client");
+        }
     }
 }
