@@ -7,12 +7,12 @@ My web defence project in SoftUni..
 ___________________________________________
 <hr/>
  <h3>- BikeBookig is a global price comparison and online reservation service for scooter and motorcycle rental. </h3>
- 
-<li> 1)The sistem support two type of users : Dealer and client.</li>
-<li> 2)Each user can chooice if he want to be dealer or user.</li>
-<li> 3)Each dealer can add,edit or delete her vehicles aslo can put they in offer.</li>
-<li> 4)Each user can book different vehicle and cancel it. Can contact by email all dealers for more information.</li>
-
+ <ol>
+<li> The sistem support two type of users : Dealer and client.</li>
+<li> Each user can chooice if he want to be dealer or user.</li>
+<li> Each dealer can add,edit or delete her vehicles aslo can put they in offer.</li>
+<li> Each user can book different vehicle and cancel it. Can contact by email all dealers for more information.</li>
+</ol>
 
 
 
