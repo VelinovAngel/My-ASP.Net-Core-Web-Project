@@ -26,5 +26,7 @@
         int GetCurrentOfferId(DateTime pickUp, DateTime dropOff);
 
         ClientServiceModel GetCurrentClient(string userId);
+
+        Task CreaterReviewByUser(int motorcycleId, byte value, string username, string description);
     }
 }

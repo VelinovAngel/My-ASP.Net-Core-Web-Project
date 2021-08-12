@@ -14,6 +14,12 @@
         [Required]
         public string Description { get; set; }
 
+        public int Vote { get; set; }
+
         public DateTime DateRelease { get; set; }
+
+        public int? MotorcycleId { get; set; }
+
+        public virtual Motorcycle Motorcycle { get; set; }
     }
 }

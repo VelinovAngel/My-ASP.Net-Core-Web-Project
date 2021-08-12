@@ -7,7 +7,6 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Data.Models.Enum;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Services.Data.Votes;
@@ -19,6 +18,7 @@
         private readonly IRepository<Offer> offerRepository;
         private readonly IRepository<ClientsOffers> clientsOffersRepository;
         private readonly IRepository<ApplicationUser> userRepository;
+        private readonly IRepository<Review> reviewRepository;
         private readonly IVoteService votesService;
 
         public ClientService(
@@ -27,6 +27,7 @@
             IRepository<Offer> offerRepository,
             IRepository<ClientsOffers> clientsOffersRepository,
             IRepository<ApplicationUser> userRepository,
+            IRepository<Review> reviewRepository,
             IVoteService votesService)
         {
             this.clientRepository = clientRepository;
@@ -34,6 +35,7 @@
             this.offerRepository = offerRepository;
             this.clientsOffersRepository = clientsOffersRepository;
             this.userRepository = userRepository;
+            this.reviewRepository = reviewRepository;
             this.votesService = votesService;
         }
 
@@ -136,7 +138,6 @@
                    Type = (TypeOfMotors)x.TypeMotor,
                    Price = x.Price,
                    Color = x.Color.Name,
-                   Rating = x.Review.Description,
                    City = x.City.Name,
                    Dealer = x.Dealer.Name,
                    AverageVote = this.votesService.GetAverageVote(bike.MotorcycleId),
@@ -147,7 +148,12 @@
                }).FirstOrDefault();
                 motorcycle.PickUpDate = bike.Offer.PickUpDate;
                 motorcycle.DropOffDate = bike.Offer.DropOffDate;
-                listOfmotorcycle.Add(motorcycle);
+
+                if (bike.Offer.DropOffDate >= DateTime.UtcNow)
+                {
+                    listOfmotorcycle.Add(motorcycle);
+                    continue;
+                }
             }
 
             return listOfmotorcycle;
@@ -189,5 +195,19 @@
 
         public bool IsAlreadyClientExist(string userId)
             => this.clientRepository.AllAsNoTracking().Any(x => x.UserId == userId);
+
+        public async Task CreaterReviewByUser(int motorcycleId, byte value, string username, string description)
+        {
+            var review = new Review
+            {
+                MotorcycleId = motorcycleId,
+                DateRelease = DateTime.UtcNow,
+                Name = username,
+                Description = description,
+                Vote = value,
+            };
+            await this.reviewRepository.AddAsync(review);
+            await this.reviewRepository.SaveChangesAsync();
+        }
     }
 }

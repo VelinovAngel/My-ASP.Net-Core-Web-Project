@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using BikesBooking.Data;
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Mvc;
@@ -51,8 +50,7 @@
                 .Include(m => m.Dealer)
                 .Include(m => m.Manufacturer)
                 .Include(m => m.Model)
-                .Include(m => m.Offer)
-                .Include(m => m.Review);
+                .Include(m => m.Offer);
             return this.View(await applicationDbContext.ToListAsync());
         }
 
@@ -71,7 +69,6 @@
                 .Include(m => m.Manufacturer)
                 .Include(m => m.Model)
                 .Include(m => m.Offer)
-                .Include(m => m.Review)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (motorcycle == null)
             {
@@ -90,7 +87,6 @@
             this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name");
             this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name");
             this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id");
-            this.ViewData["ReviewId"] = new SelectList(this.offer.All().ToList(), "Id", "Description");
             return this.View();
         }
 
@@ -114,7 +110,7 @@
             this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
             this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
             this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
+
             return this.View(motorcycle);
         }
 
@@ -138,7 +134,7 @@
             this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
             this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
             this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
+
             return this.View(motorcycle);
         }
 
@@ -183,7 +179,6 @@
             this.ViewData["ManufacturerId"] = new SelectList(this.manufacturer.All().ToList(), "Id", "Name", motorcycle.ManufacturerId);
             this.ViewData["ModelId"] = new SelectList(this.model.All().ToList(), "Id", "Name", motorcycle.ModelId);
             this.ViewData["OfferId"] = new SelectList(this.offer.All().ToList(), "Id", "Id", motorcycle.OfferId);
-            this.ViewData["ReviewId"] = new SelectList(this.review.All().ToList(), "Id", "Description", motorcycle.ReviewId);
             return this.View(motorcycle);
         }
 
@@ -202,7 +197,6 @@
                 .Include(m => m.Manufacturer)
                 .Include(m => m.Model)
                 .Include(m => m.Offer)
-                .Include(m => m.Review)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (motorcycle == null)
             {

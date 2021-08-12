@@ -1,12 +1,16 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Clients
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public class BookedMotorcycleDto
     {
         public int Id { get; set; }
+
+        [MaxLength(100)]
+        public string DescriptionMessage { get; set; }
 
         public string Dealer { get; set; }
 

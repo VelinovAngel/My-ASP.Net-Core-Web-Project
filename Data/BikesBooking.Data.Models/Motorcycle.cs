@@ -11,6 +11,7 @@
         public Motorcycle()
         {
             this.Votes = new HashSet<Vote>();
+            this.Reviews = new HashSet<Review>();
         }
 
         public int ManufacturerId { get; set; }
@@ -42,10 +43,6 @@
         [Required]
         public string Url { get; set; }
 
-        public int? ReviewId { get; set; }
-
-        public virtual Review Review { get; set; }
-
         public int CityId { get; set; }
 
         public virtual City City { get; set; }
@@ -57,6 +54,8 @@
         public int DealerId { get; set; }
 
         public virtual Dealer Dealer { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
 
         public virtual ICollection<Vote> Votes { get; set; }
     }

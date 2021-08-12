@@ -7,6 +7,7 @@
     using BikesBooking.Services.Data.Client;
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
+    using BikesBooking.Services.Data.Votes;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -17,17 +18,20 @@
         private readonly IUserService userService;
         private readonly IMotorcycleService motorcycleService;
         private readonly IServiceProvider serviceProvider;
+        private readonly IVoteService votesService;
 
         public ClientController(
             IClientService clientService,
             IUserService userService,
             IMotorcycleService motorcycleService,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IVoteService votesService)
         {
             this.clientService = clientService;
             this.userService = userService;
             this.motorcycleService = motorcycleService;
             this.serviceProvider = serviceProvider;
+            this.votesService = votesService;
         }
 
         [Authorize]
@@ -169,11 +173,17 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult Reviews(int id)
+        public async Task<IActionResult> Reviews(int id, string descriptionMessage)
         {
+            var userId = this.User.GetId();
+            var clientName = this.clientService.GetCurrentClient(userId);
+
+            var vote = this.votesService.GetVoteByUser(userId);
+
+            await this.clientService.CreaterReviewByUser(id, (byte)vote, clientName.Name, descriptionMessage);
 
             this.TempData["message"] = "You have successfully submitted a review for this motorcycle. Thank you!";
-            return this.RedirectToAction("DetailsByMotorcycleId", "Client");
+            return this.RedirectToAction("DetailsByMotorcycleId", new { id = id });
         }
     }
 }
