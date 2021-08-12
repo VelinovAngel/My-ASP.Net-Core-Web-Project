@@ -49,6 +49,13 @@
                 <textarea asp-for="DescriptionMessage" type="text" class="form-control"></textarea>
                 <span asp-validation-for="DescriptionMessage" class="text-danger"></span>
                 <button type="submit" asp-controller="Client" asp-action="Reviews" asp-route-id="@Model.Id" class="btn btn-block btn-primary mt-4">Feedback</button>
+                <button type="submit" asp-controller="Client" asp-action="Cancellation"
+                        asp-route-id="@Model.Id"
+                        asp-route-PickUpDate="@Model.PickUpDate"
+                        asp-route-DropOffDate="@Model.DropOffDate"
+                        class="btn btn-block btn-danger mt-4">
+                    Cancellation
+                </button>
             </form>
         </div>
         <div class="col-lg-7 col-lg-offset-1 col-md-4 col-sm-2">
@@ -71,6 +78,7 @@
 
 
 @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
     <script>
         const ratingStars = [...document.getElementsByClassName("rating__star")];
 
