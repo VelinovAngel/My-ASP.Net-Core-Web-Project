@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using BikesBooking.Common;
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using Microsoft.AspNetCore.Identity;
@@ -32,7 +32,7 @@
             => this.dealer.AllAsNoTracking().Count();
 
         public int GetTotalUsers()
-            => this.user.AllAsNoTracking().Count();
+            => this.user.AllAsNoTracking().Where(x=>x.Email != GlobalConstants.AdministratorEmailAddress).Count();
 
         public int GetTotalClients()
             => this.client.AllAsNoTracking().Count();
