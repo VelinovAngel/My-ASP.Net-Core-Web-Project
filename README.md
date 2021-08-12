@@ -3,8 +3,7 @@ My web defence project in SoftUni..
 
 
 
-<h3>Description</h3>
-___________________________________________
+<h3>Description:</h3>
 <hr/>
  <h3>- BikeBookig is a global price comparison and online reservation service for scooter and motorcycle rental. </h3>
  <ol>
@@ -17,30 +16,30 @@ ___________________________________________
 
 
 
-<h3>  Built With</h3> 
+<h3>  Built With:</h3> 
 <hr/>
 <ul>
-<li>  * ASP.NET MVC 5.0</li>
-<li>  * ASP.NET MVC 5.0 view components</li>
-<li>  * EntityFrameworkCore 5.0.8</li>
-<li>  * MSSQL Server</li>
-<li>  * Initial seeding : Roles, Model , Manufacturer, Color, Countries and Cities.</li>
-<li>  * PartialView</li>
-<li>  * MailKit 2.14.0 (Email sender by Google)</li>
-<li>  * Bootstrap 4</li>
-<li>  * AJAX real-time Requests</li>
-<li>  * jQuery </li>
-<li>  * GDPR</li>
-<li>  * Use Caching</li>
-<li>  * Areas (Administrator)</li>
-<li>  * Custom validation attributs</li>
-<li>  * Roles (User -> Client or Dealer)</li>
-<li>  * Management by Administrator's Dashboard all information about (motorcycles, dealers and clients)</li>
-<li>  * Facebook login (for developers)</li>
-<li>  * Google login (for developers)</li>
-<li>  * Custom Identity (login and register with initial chooice if you wanna be a dealer or client)</li>
-<li>  * HangFire for Administrator</li>
-<li>  * Integration of Google Maps (For development purposes only)</li>
+<li>  ASP.NET MVC 5.0</li>
+<li>  ASP.NET MVC 5.0 view components</li>
+<li>  EntityFrameworkCore 5.0.8</li>
+<li>  MSSQL Server</li>
+<li>  Initial seeding : Roles, Model , Manufacturer, Color, Countries and Cities.</li>
+<li>  PartialView</li>
+<li>  MailKit 2.14.0 (Email sender by Google)</li>
+<li>  Bootstrap 4</li>
+<li>  AJAX real-time Requests</li>
+<li>  jQuery </li>
+<li>  GDPR</li>
+<li>  Use Caching</li>
+<li>  Areas (Administrator)</li>
+<li>  Custom validation attributs</li>
+<li>  Roles (User -> Client or Dealer)</li>
+<li>  Management by Administrator's Dashboard all information about (motorcycles, dealers and clients)</li>
+<li>  Facebook login (for developers)</li>
+<li>  Google login (for developers)</li>
+<li>  Custom Identity (login and register with initial chooice if you wanna be a dealer or client)</li>
+<li>  HangFire for Administrator</li>
+<li>  Integration of Google Maps (For development purposes only)</li>
 </ul>
 
 
