@@ -54,7 +54,9 @@
         <main role="main" class="pb-3">
             <div class="row">
                 <div class="col-lg-2">
-                    <partial name="_PartialWeatherWidget" />
+                    <cache expires-after="@TimeSpan.FromDays(1)">
+                        <partial name="_PartialWeatherWidget" />
+                    </cache>
                 </div>
                 <div class="col-lg-8 g-mb-30 g-mb-0-lg">
                     @this.RenderBody()
@@ -70,7 +72,10 @@
 
     <footer class="border-top footer text-muted nav-bar">
         <div>
-            <partial name="_PartialFooterView" />
+
+            <cache expires-after="@TimeSpan.FromDays(1)">
+                <partial name="_PartialFooterView" />
+            </cache>
         </div>
     </footer>
 

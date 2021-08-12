@@ -90,6 +90,7 @@
                         options.MinimumSameSitePolicy = SameSiteMode.None;
                     });
             services.AddMemoryCache();
+            services.AddResponseCaching();
             services.AddAntiforgery(option =>
             {
                 option.HeaderName = "X-CSRF-TOKEN";
@@ -157,6 +158,7 @@
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseResponseCaching();
             app.UseRouting();
 
             app.UseAuthentication();

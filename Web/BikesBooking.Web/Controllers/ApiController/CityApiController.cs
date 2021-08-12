@@ -18,7 +18,6 @@
 
         [Route("api/GetCity")]
         [HttpGet]
-        [ResponseCache(Duration = 30)]
         public async Task<SelectList> GetCityAsync(int id)
         {
             var model = await this.homeService.GetAllCitiesByCountryIdAsync(id);

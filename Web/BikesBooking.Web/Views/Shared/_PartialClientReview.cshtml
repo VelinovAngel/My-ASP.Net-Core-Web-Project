@@ -1,31 +1,35 @@
-﻿
+﻿@using BikesBooking.Services.Data.Votes
+@inject IVoteService VoteService
+
+@{
+    var latestsFeedback = VoteService.GetLastestThreeFeedBack();
+}
+
 <br />
 <h3 class="font-italic text-center">Reviews from previous customers</h3>
 <br />
 <div class="row offset-2">
-    @for (int i = 0; i < 3; i++)
+    @foreach (var feedback in latestsFeedback)
     {
-    <div class="card  bg-light  mr-4 border" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Client name:</h5>
-            <p class="card-text">Description</p>
+        <div class="card  bg-light  mr-4 border" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">@feedback.Name</h5>
+                <p class="card-text">@feedback.Description</p>
 
-        </div>
-        <br />
-        <br />
-        <div class="row container-fluid">
-            <div class="d-inline">
-                <div class="rating ml-md-1 mb-3">
-                    <span class="font-weight-bold"></span>
-                    <span id="starsForRate1" class="rating__star  fa-star fa" data-vote="1"></span>
-                    <span id="starsForRate2" class="rating__star  fa-star fa" data-vote="2"></span>
-                    <span id="starsForRate3" class="rating__star  fa-star fa" data-vote="3"></span>
-                    <span id="starsForRate4" class="rating__star  fa-star fa" data-vote="4"></span>
-                    <span id="starsForRate5" class="rating__star  fa-star fa" data-vote="5"></span>
-                    <span id="averageVoteValue">0.0</span><span> / 5</span>
+            </div>
+            <div class="row container-fluid">
+                <div class="d-inline">
+                    <div class="rating ml-md-2 mb-3">
+                        <span class="font-weight-bold"> Rating:</span>
+                        <span id="starsForRate1" class="rating__star  fa-star @if (0.5 <= feedback.Vote) { <text>fa</text>}else{<text>far</text>}" data-vote="1"></span>
+                        <span id="starsForRate2" class="rating__star  fa-star @if (1.5 <= feedback.Vote) { <text>fa</text>}else{<text>far</text>}" data-vote="2"></span>
+                        <span id="starsForRate3" class="rating__star  fa-star @if (2.5 <= feedback.Vote) { <text>fa</text>}else{<text>far</text>}" data-vote="3"></span>
+                        <span id="starsForRate4" class="rating__star  fa-star @if (3.5 <= feedback.Vote) { <text>fa</text>}else{<text>far</text>}" data-vote="4"></span>
+                        <span id="starsForRate5" class="rating__star  fa-star @if (4.5 <= feedback.Vote) { <text>fa</text>}else{<text>far</text>}" data-vote="5"></span>
+                        <span id="averageVoteValue">@feedback.Vote.ToString("0.0")</span><span> / 5</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     }
 </div>
