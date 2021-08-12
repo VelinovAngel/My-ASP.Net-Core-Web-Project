@@ -41,9 +41,13 @@
 
         public async Task<bool> BookThisMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId)
         {
+            var currMotorcycle = this.motorcyclesRepository.All()
+                .FirstOrDefault(x => x.Id == motorcycleId);
+
             var currOffer = this.offerRepository.AllAsNoTracking()
                 .Where(x => x.Id == offerId)
                 .FirstOrDefault();
+
             if (currOffer == null)
             {
                 return false;
@@ -63,6 +67,7 @@
                 if (currOffer.PickUpDate > currOffer.DropOffDate)
                 {
                     currOffer.PickUpDate = currOffer.DropOffDate;
+                    currMotorcycle.Available = false;
                 }
 
                 currOffer.StatisticsBooked++;

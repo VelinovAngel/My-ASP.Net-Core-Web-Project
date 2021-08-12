@@ -166,25 +166,53 @@
         }
 
         public async Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id)
-            => await this.motorcycleRepository.AllAsNoTracking()
-            .AsQueryable()
-            .Where(x => x.Id == id)
-            .Select(x => new OfferSigleMotorcycleDto
+        {
+            var currentOffer = this.motorcycleRepository.All()
+               .FirstOrDefault(x => x.Id == id);
+
+            if (currentOffer.OfferId != null)
             {
-                ModelId = x.Id,
-                Manufacturer = x.Manufacturer.Name,
-                Model = x.Model.Name,
-                CubicCentimetre = x.CubicCentimetre,
-                Color = x.Color.Name,
-                Price = x.Price,
-                Url = x.Url,
-                Available = x.Available,
-                Type = x.TypeMotor.ToString(),
-                DealerId = x.Dealer.UserId,
-                BeginBooking = x.Offer.PickUpDate,
-                FinalBooking = x.Offer.DropOffDate,
-            })
-            .FirstOrDefaultAsync();
+                return await this.motorcycleRepository.AllAsNoTracking()
+              .AsQueryable()
+              .Where(x => x.Id == id)
+              .Select(x => new OfferSigleMotorcycleDto
+              {
+                  ModelId = x.Id,
+                  Manufacturer = x.Manufacturer.Name,
+                  Model = x.Model.Name,
+                  CubicCentimetre = x.CubicCentimetre,
+                  Color = x.Color.Name,
+                  Price = x.Price,
+                  Url = x.Url,
+                  Available = x.Available,
+                  Type = x.TypeMotor.ToString(),
+                  DealerId = x.Dealer.UserId,
+                  BeginBooking = x.Offer.PickUpDate,
+                  FinalBooking = x.Offer.DropOffDate,
+              })
+              .FirstOrDefaultAsync();
+            }
+            else
+            {
+                return await this.motorcycleRepository.AllAsNoTracking()
+              .AsQueryable()
+              .Where(x => x.Id == id)
+              .Select(x => new OfferSigleMotorcycleDto
+              {
+                  ModelId = x.Id,
+                  Manufacturer = x.Manufacturer.Name,
+                  Model = x.Model.Name,
+                  CubicCentimetre = x.CubicCentimetre,
+                  Color = x.Color.Name,
+                  Price = x.Price,
+                  Url = x.Url,
+                  Available = x.Available,
+                  Type = x.TypeMotor.ToString(),
+                  DealerId = x.Dealer.UserId,
+              })
+              .FirstOrDefaultAsync();
+            }
+        }
 
         public async Task RemoveMotorcycleAsync(int id)
         {
@@ -254,19 +282,14 @@
                 .AllAsNoTracking()
                 .Where(x => x.Id == id)
                 .FirstOrDefault();
-            if (!this.offerRepository
-                               .AllAsNoTracking()
-                               .Where(x => x.PickUpDate == offerPeriodForMotorDto.PickUpDate &&
-                                           x.DropOffDate == offerPeriodForMotorDto.DropOffDate)
-                               .Any())
-            {
-                var offer = await this.AddOffer(offerPeriodForMotorDto);
-            }
+
+            var offer = await this.AddOffer(offerPeriodForMotorDto);
 
             var offerId = this.offerRepository
                                .AllAsNoTracking()
                                .Where(x => x.PickUpDate == offerPeriodForMotorDto.PickUpDate &&
                                            x.DropOffDate == offerPeriodForMotorDto.DropOffDate)
+                               .OrderByDescending(x => x.CreatedOn)
                                .FirstOrDefault().Id;
 
             currentMotor.OfferId = offerId;
