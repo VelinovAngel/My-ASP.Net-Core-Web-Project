@@ -22,7 +22,7 @@
 
 
 <h1 class="text-center mt-2">My Store</h1>
-
+<br />
 <form method="get">
     <div class="row mt-2 mb-4">
         @foreach (var motorcycle in Model.Motors)
@@ -52,7 +52,7 @@
                     </ul>
                     <div class="card-footer">
                         <small class="text-muted">
-                            Last updated @motorcycle.AddedOn
+                            Last updated @motorcycle.AddedOn.ToShortTimeString()
                         </small>
                     </div>
                     <br />

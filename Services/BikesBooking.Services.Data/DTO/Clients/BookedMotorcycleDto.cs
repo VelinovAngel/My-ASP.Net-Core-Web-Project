@@ -10,7 +10,7 @@
         public int Id { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(100, ErrorMessage = "Description for your feedback is required!")]
         public string DescriptionMessage { get; set; }
 
         public string Dealer { get; set; }

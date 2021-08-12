@@ -39,7 +39,7 @@
             this.votesService = votesService;
         }
 
-        public async Task<bool> BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId)
+        public async Task<bool> BookThisMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId)
         {
             var currOffer = this.offerRepository.AllAsNoTracking()
                 .Where(x => x.Id == offerId)

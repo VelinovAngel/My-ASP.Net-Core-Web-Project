@@ -181,6 +181,8 @@
                 Available = x.Available,
                 Type = x.TypeMotor.ToString(),
                 DealerId = x.Dealer.UserId,
+                BeginBooking = x.Offer.PickUpDate,
+                FinalBooking = x.Offer.DropOffDate,
             })
             .FirstOrDefaultAsync();
 

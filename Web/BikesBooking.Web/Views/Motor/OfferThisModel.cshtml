@@ -28,6 +28,11 @@
                 <label>Price per day:</label>
                 <h5 type="text" readonly class="form-control">@Model.Motor.Price Euro</h5>
             </div>
+            <div class="form-group">
+                <h5 type="text" readonly class="alert alert-warning">
+                    Your offer is active from: @Model.Motor.BeginBooking.ToShortDateString() To: @Model.Motor.FinalBooking.ToShortDateString()
+                </h5>
+            </div>
         </div>
         <form method="post" class="container lead-section col-md-6 offset-md-3">
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -45,7 +50,7 @@
                     <span asp-validation-for="DropOffDate" class="text-danger"></span>
                 </div>
             </div>
-            <div class="text-center">   
+            <div class="text-center">
                 <button type="submit" class="btn btn-success">Done</button>
             </div>
         </form>

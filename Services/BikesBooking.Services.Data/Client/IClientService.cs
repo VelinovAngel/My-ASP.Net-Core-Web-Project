@@ -21,7 +21,7 @@
 
         public int GetClientId(string userId);
 
-        Task<bool> BookedMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId);
+        Task<bool> BookThisMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId);
 
         int GetCurrentOfferId(DateTime pickUp, DateTime dropOff);
 

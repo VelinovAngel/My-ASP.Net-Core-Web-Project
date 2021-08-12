@@ -48,9 +48,10 @@
                         <span asp-validation-for="DropOffDate" class="text-danger"></span>
                     </div>
                 </div>
-
+                <div class="text-center">
                 <button type="submit"  asp-route-oldDropOffData="@Model.DropOffDate"
                                        asp-route-oldPickUpData="@Model.PickUpDate" class="btn btn-success">Book it</button>
+                </div>
             </form>
             <div class="form-group text-center">
             </div>

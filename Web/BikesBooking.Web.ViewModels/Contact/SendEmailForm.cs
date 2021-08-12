@@ -12,8 +12,10 @@
         [Required]
         public string Subject { get; set; }
 
+        [Required]
         public string ClientName { get; set; }
 
+        [Required]
         public string Email { get; set; }
     }
 }

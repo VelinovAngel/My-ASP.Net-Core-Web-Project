@@ -96,15 +96,6 @@
         [Authorize]
         public IActionResult BookThisModel(int id, string information)
         {
-            var userId = this.User.GetId();
-
-            var currClient = this.clientService.GetCurrentClient(userId);
-
-            if (currClient.UserId != userId)
-            {
-                return this.BadRequest();
-            }
-
             var model = this.motorcycleService.Details(id);
             if (information != model.ToFriendlyUrl())
             {
@@ -130,7 +121,7 @@
 
             var offerId = this.clientService.GetCurrentOfferId(oldPickUpData, oldDropOffData);
 
-            await this.clientService.BookedMotorcycleByClient(clientId, offerId, pickUpDate, dropOffDate, id);
+            await this.clientService.BookThisMotorcycleByClient(clientId, offerId, pickUpDate, dropOffDate, id);
 
             this.TempData["Message"] = "Motorcycles successfully booked!";
 
