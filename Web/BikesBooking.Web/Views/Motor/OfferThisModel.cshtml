@@ -30,7 +30,7 @@
                 <label>Price per day:</label>
                 <h5 type="text" readonly class="form-control">@Model.Motor.Price Euro</h5>
             </div>
-            @if (beginBooking != 1 && finalBooking != 1 && Model.PickUpDate == Model.DropOffDate)
+            @if (beginBooking != 1 && finalBooking != 1 || Model.PickUpDate == Model.DropOffDate)
             {
                 <div class="form-group">
                     <h5 type="text" readonly class="alert alert-warning">

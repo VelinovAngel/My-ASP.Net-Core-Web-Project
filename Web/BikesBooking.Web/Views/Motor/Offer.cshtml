@@ -40,11 +40,13 @@
                 </div>
                 <form method="post">
                     <div class="">
-                        <div class="form-check form-switch">
-                            <input asp-for="Available" class="form-check-input font-weight-bold" checked>
-                            <label asp-for="Available" class="form-check-label">Available</label>
-                            <span asp-validation-for="Available" class="text-danger"></span>
+                        <div class="form-check">
+                            <input asp-for="Available" class="form-check-input" type="checkbox">
+                            <label class="form-check-label font-weight-bold" for="flexCheckDefault">
+                                Available
+                            </label>
                         </div>
+                    
 
                         @if (Model.Available == true)
                         {
