@@ -20,8 +20,7 @@
         Task<MotorcycleQueryServiceModel> GetFreeMotors(
             int currentPage,
             int motorcyclesPerPage,
-            DateTime pickUpDate,
-            DateTime dropOffDate);
+            SearchMotorcycleInputModel inputModel);
 
         Task<OfferSigleMotorcycleDto> GetMotorcycleByIdAsync(int id);
 

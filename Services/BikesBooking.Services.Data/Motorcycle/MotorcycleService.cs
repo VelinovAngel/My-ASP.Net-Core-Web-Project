@@ -303,11 +303,16 @@
             => this.motorcycleRepository.AllAsNoTracking()
                                         .Any(x => x.Id == motorId && x.Dealer.Id == dealerId);
 
-        public async Task<MotorcycleQueryServiceModel> GetFreeMotors(int currentPage, int motorcyclesPerPage, DateTime pickUpDate, DateTime dropOffDate)
+        public async Task<MotorcycleQueryServiceModel> GetFreeMotors(int currentPage, int motorcyclesPerPage, SearchMotorcycleInputModel inputModel)
         {
             var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
              .AsQueryable()
-             .Where(x => x.Available == true && x.Offer.PickUpDate <= pickUpDate && x.Offer.DropOffDate >= dropOffDate)
+             .Where(x => x.Available == true
+             && x.Offer.PickUpDate <= inputModel.PickUpDate
+             && x.Offer.DropOffDate >= inputModel.DropOffDate
+             && x.ManufacturerId == inputModel.ManufacturerId
+             && x.CityId == inputModel.CityId
+             && x.TypeMotor == inputModel.Type)
              .OrderByDescending(x => x.CreatedOn)
              .Skip((currentPage - 1) * motorcyclesPerPage)
              .Take(motorcyclesPerPage)

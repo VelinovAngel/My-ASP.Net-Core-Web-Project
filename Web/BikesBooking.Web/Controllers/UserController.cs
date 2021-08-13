@@ -15,9 +15,9 @@
             this.motorcycleService = motorcycleService;
         }
 
-        public async Task<IActionResult> FreeMotors([FromQuery] AllFreeMotorcylesQueryDto query)
+        public async Task<IActionResult> FreeMotors([FromQuery] AllFreeMotorcylesQueryDto query, SearchMotorcycleInputModel inputModel)
         {
-            var motorcycleResult = await this.motorcycleService.GetFreeMotors(query.CurrentPage, AllFreeMotorcylesQueryDto.MotorcyclesPerPage, query.PickUpDate, query.DropOffDate);
+            var motorcycleResult = await this.motorcycleService.GetFreeMotors(query.CurrentPage, AllFreeMotorcylesQueryDto.MotorcyclesPerPage, inputModel);
             query.TotalMotorcycle = motorcycleResult.TotalMotorcycles;
             query.Motors = motorcycleResult.Motorcycle;
             return this.View(query);

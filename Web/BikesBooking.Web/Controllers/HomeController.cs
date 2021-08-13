@@ -22,7 +22,7 @@
         [ResponseCache(Duration = 30)]
         public IActionResult Index()
         {
-            var viewModel = new SearchMotorModel
+            var viewModel = new SearchFormMotorModel
             {
                 PickUpDate = DateTime.UtcNow,
                 DropOffDate = DateTime.UtcNow.AddDays(1),
@@ -35,7 +35,7 @@
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult Index(SearchMotorModel input)
+        public IActionResult Index(SearchFormMotorModel input)
         {
             if (!this.ModelState.IsValid)
             {

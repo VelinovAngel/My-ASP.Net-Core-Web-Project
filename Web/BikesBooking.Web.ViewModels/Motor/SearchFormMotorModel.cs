@@ -6,7 +6,7 @@
 
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
-    public class SearchMotorModel
+    public class SearchFormMotorModel
     {
         [Required]
         [Display(Name = "Country")]
@@ -32,7 +32,7 @@
         [Display(Name = "Brand")]
         public int ManufacturerId { get; set; }
 
-        public MotorcycleServiceDto Type { get; set; }
+        public MotorType Type { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CountriesItems { get; set; }
 

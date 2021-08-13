@@ -5,6 +5,7 @@
     using System.Text;
 
     using BikesBooking.Common;
+    using BikesBooking.Services.Data.Motorcycle;
 
     public class AllFreeMotorcylesQueryDto
     {
@@ -28,7 +29,7 @@
 
         public int ManufacturerId { get; set; }
 
-        public MotorcycleServiceDto Type { get; set; }
+        public BikesBooking.Data.Models.Enum.Type Type { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CountriesItems { get; set; }
 
