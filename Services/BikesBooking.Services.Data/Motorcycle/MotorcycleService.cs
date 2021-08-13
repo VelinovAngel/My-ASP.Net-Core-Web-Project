@@ -259,8 +259,8 @@
             => this.motorcycleRepository.AllAsNoTracking().Count();
 
         public int GetNotAvailableMotorcycleCount()
-            => this.motorcycleRepository.AllAsNoTracking()
-            .Where(x => x.Available == false)
+            => this.offerRepository.AllAsNoTracking()
+            .Where(x => x.IsFree == false)
             .Count();
 
         public async Task ChangeStateOfMotorcycle(bool available, int id)

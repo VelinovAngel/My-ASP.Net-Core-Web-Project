@@ -70,7 +70,7 @@
             <p><b>Best Price Guarantee: </b> <span class="">@Model.TotalPrice €<br></span></p>
             <hr />
             <p><b>Delaer Name: </b> <span class="">@Model.Dealer <br></span></p>
-            <p><b>Email Address: </b> <span class="">@Model.DealerEmail <a asp-controller="Client" asp-action="Rating" asp-route-id="@Model.Id" class="offset-4 col-4 btn btn-primary mt-4">Send Email</a><br></span></p>
+            <p><b>Email Address: </b> <span class="">@Model.DealerEmail <a asp-controller="Client" asp-action="SendEmailClient" asp-route-id="@Model.Id" class="offset-4 col-4 btn btn-primary mt-4">Send Email</a><br></span></p>
         </div>
     </div>
     <hr />

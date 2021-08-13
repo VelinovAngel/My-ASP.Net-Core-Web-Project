@@ -203,6 +203,14 @@
 
         public async Task CreaterReviewByUser(int motorcycleId, byte value, string username, string description)
         {
+            var currMotorcycle = this.reviewRepository.All()
+                .Where(x => x.MotorcycleId == motorcycleId).ToList();
+
+            if (currMotorcycle.Any(x => x.Name == username))
+            {
+                return;
+            }
+
             var review = new Review
             {
                 MotorcycleId = motorcycleId,

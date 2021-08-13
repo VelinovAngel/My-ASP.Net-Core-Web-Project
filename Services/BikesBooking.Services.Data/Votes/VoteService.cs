@@ -12,13 +12,16 @@
     {
         private readonly IRepository<Vote> votesRepository;
         private readonly IRepository<Motorcycle> motorcycleRepository;
+        private readonly IRepository<Review> reviewRepository;
 
         public VoteService(
             IRepository<Vote> votesRepository,
-            IRepository<Motorcycle> motorcycleRepository)
+            IRepository<Motorcycle> motorcycleRepository,
+            IRepository<Review> reviewRepository)
         {
             this.votesRepository = votesRepository;
             this.motorcycleRepository = motorcycleRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         public double GetAverageVote(int? motorcyleId)
@@ -55,42 +58,16 @@
         }
 
         public IEnumerable<ReviewOutputDto> GetLastestThreeFeedBack()
-        {
-            var feedbacks = new List<ReviewOutputDto>();
-
-            var allFeedbackForAllMotorcycle = this.motorcycleRepository.All()
-                .Where(x => x.Reviews.Count > 0)
-                .Select(x => x.Reviews.OrderByDescending(c => c.CreatedOn).Take(1).ToList())
-                .ToList();
-            int counter = 0;
-            bool isFound = false;
-            foreach (var feedbackForMotorcycle in allFeedbackForAllMotorcycle)
+        => this.reviewRepository.All()
+            .Select(x => new ReviewOutputDto
             {
-                foreach (var item in feedbackForMotorcycle)
-                {
-                    var feedback = new ReviewOutputDto
-                    {
-                        Name = item.Name,
-                        Description = item.Description,
-                        DateRelease = item.DateRelease,
-                        Vote = item.Vote,
-                    };
-                    feedbacks.Add(feedback);
-                    counter++;
-                    if (counter == 3)
-                    {
-                        isFound = true;
-                        break;
-                    }
-                }
-
-                if (isFound)
-                {
-                    break;
-                }
-            }
-
-            return feedbacks;
-        }
+                Name = x.Name,
+                DateRelease = x.DateRelease,
+                Description = x.Description,
+                Vote = x.Vote,
+            })
+                .OrderByDescending(x => x.Vote)
+                .ThenByDescending(c => c.DateRelease)
+                .ToList().Take(3);
     }
 }
