@@ -32,7 +32,7 @@ My web defence project in SoftUni..
 <li>  GDPR</li>
 <li>  Use Caching</li>
 <li>  Areas (Administrator)</li>
-<li>  Custom validation attributs</li>
+<li>  Custom validation attributes</li>
 <li>  Roles (User -> Client or Dealer)</li>
 <li>  Management by Administrator's Dashboard all information about (motorcycles, dealers and clients)</li>
 <li>  Facebook login (for developers)</li>
