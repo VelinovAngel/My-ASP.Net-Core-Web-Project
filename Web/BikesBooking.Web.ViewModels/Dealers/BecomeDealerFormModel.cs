@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Web.ViewModels.Dealers
 {
+    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
 
     using static BikesBooking.Common.GlobalConstants;
@@ -47,5 +48,8 @@
             ErrorMessage = "The description must be between {1} and {2} characters.",
             MinimumLength = DescriptionMinLength)]
         public string Description { get; set; }
+
+        [Display(Name = "Put a profile picture")]
+        public IFormFile ImageFile { get; set; }
     }
 }

@@ -15,6 +15,7 @@
     <form method="post" class="container lead-section col-md-6 offset-md-3">
         <div asp-validation-summary="All" class="text-danger"></div>
 
+
         <div class="form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" class="form-control" placeholder="Es: CmtMotors.." />
@@ -51,6 +52,17 @@
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
 
+        <label asp-for="ImageFile"></label>
+        <div class="row">
+            <div class="btn">
+                <input type="file" asp-for="ImageFile">
+            </div>
+            <div class="text-center">
+                <img src="http://via.placeholder.com/240x180" id="preview" class="img-thumbnail">
+            </div>
+
+        </div>
+
         <br />
 
         <button type="submit" class="btn btn-primary">Become dealer</button>
@@ -60,4 +72,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script src="~/js/ReadImageForPlaceholder.js"></script>
+    <link href="~/css/PlaceHolder.css" rel="stylesheet" />
 }
