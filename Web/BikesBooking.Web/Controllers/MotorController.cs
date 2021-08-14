@@ -190,7 +190,7 @@
 
         [Authorize]
         [HttpPost]
-        public IActionResult Edit([FromQuery] int id, MotorcycleServiceDto motorcycleFormModel)
+        public IActionResult Edit(MotorcycleServiceDto motorcycleFormModel)
         {
             var userId = this.User.GetId();
             var dealerId = this.dealersService.GetDealerId(userId);
@@ -200,12 +200,12 @@
                 return this.RedirectToAction("Create", "Dealer");
             }
 
-            if (!this.motorcycleService.IsByDealer(id, dealerId))
+            if (!this.motorcycleService.IsByDealer(motorcycleFormModel.Id, dealerId))
             {
                 return this.BadRequest();
             }
 
-            var motor = this.motorcycleService.Details(id);
+            var motor = this.motorcycleService.DetailsForEdit(motorcycleFormModel.Id);
             if (motor.DealerId != userId)
             {
                 return this.BadRequest();
@@ -230,7 +230,7 @@
                 });
             }
 
-            var isMotorcycleEdited = this.motorcycleService.Edit(motorcycleFormModel, id);
+            var isMotorcycleEdited = this.motorcycleService.Edit(motorcycleFormModel, motorcycleFormModel.Id);
 
             if (!isMotorcycleEdited.Result)
             {
