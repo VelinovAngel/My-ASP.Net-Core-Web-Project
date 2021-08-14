@@ -24,6 +24,7 @@
 
         public int ColorId { get; set; }
 
+        public bool IsApproved { get; set; }
 
         public virtual Color Color { get; set; }
 
