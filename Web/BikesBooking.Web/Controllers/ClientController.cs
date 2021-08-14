@@ -4,13 +4,17 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Common;
+    using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.Client;
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
     using BikesBooking.Services.Data.Votes;
+    using BikesBooking.Web.Areas.Identity.Pages.Account;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
 
     public class ClientController : Controller
     {
@@ -19,24 +23,35 @@
         private readonly IMotorcycleService motorcycleService;
         private readonly IServiceProvider serviceProvider;
         private readonly IVoteService votesService;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<LogoutModel> logger;
 
         public ClientController(
             IClientService clientService,
             IUserService userService,
             IMotorcycleService motorcycleService,
             IServiceProvider serviceProvider,
-            IVoteService votesService)
+            IVoteService votesService,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<LogoutModel> logger)
         {
             this.clientService = clientService;
             this.userService = userService;
             this.motorcycleService = motorcycleService;
             this.serviceProvider = serviceProvider;
             this.votesService = votesService;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
         [Authorize]
         public IActionResult Create()
         {
+            if (this.User.IsInRole("Dealer"))
+            {
+                return this.BadRequest();
+            }
+
             return this.View();
         }
 
@@ -46,6 +61,11 @@
         {
             var userId = this.User.GetId();
             var isAlreadyExists = this.clientService.IsAlreadyClientExist(userId);
+
+            if (this.User.IsInRole("Client"))
+            {
+                return this.BadRequest();
+            }
 
             if (isAlreadyExists)
             {
@@ -61,6 +81,9 @@
 
             var email = this.clientService.GetCurrentClientEmail(userId);
             await this.userService.AssignRole(this.serviceProvider, email, GlobalConstants.ClientRoleName);
+
+            await this.signInManager.SignOutAsync();
+            this.logger.LogInformation("User logged out.");
 
             return this.RedirectToAction("Index", "Home");
         }

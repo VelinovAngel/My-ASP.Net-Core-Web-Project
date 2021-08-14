@@ -93,7 +93,12 @@
                 return false;
             }
 
-            await this.ValidationMotorcycle(motorcycle);
+            var isCreatingIsValid = await this.ValidationMotorcycle(motorcycle);
+
+            if (!isCreatingIsValid)
+            {
+                return false;
+            }
 
             var model = this.modelsRepository
                 .AllAsNoTracking()
@@ -384,45 +389,54 @@
             return offer;
         }
 
-        private async Task ValidationMotorcycle(MotorcycleServiceDto createMotorcycle)
+        private async Task<bool> ValidationMotorcycle(MotorcycleServiceDto createMotorcycle)
         {
-            if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
+            try
             {
-                await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Model });
-                await this.modelsRepository.SaveChangesAsync();
-            }
-
-            if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
-            {
-                await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer, Year = createMotorcycle.Year });
-                await this.manufacturerRepository.SaveChangesAsync();
-            }
-
-            if (!this.colorRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Color))
-            {
-                await this.colorRepository.AddAsync(new Color { Name = createMotorcycle.Color });
-                await this.colorRepository.SaveChangesAsync();
-            }
-
-            if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Country))
-            {
-                await this.countryRepository.AddAsync(new Country { Name = createMotorcycle.Country });
-                await this.countryRepository.SaveChangesAsync();
-            }
-
-            var countryId = this.countryRepository
-                                .AllAsNoTracking()
-                                .FirstOrDefault(x => x.Name == createMotorcycle.Country).Id;
-
-            if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.City))
-            {
-                await this.cityRepository.AddAsync(new City
+                if (!this.modelsRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Model))
                 {
-                    Name = createMotorcycle.City,
-                    CountryId = countryId,
-                    Postcode = new Random().Next(1000, 99999),
-                });
-                await this.cityRepository.SaveChangesAsync();
+                    await this.modelsRepository.AddAsync(new Model { Name = createMotorcycle.Model });
+                    await this.modelsRepository.SaveChangesAsync();
+                }
+
+                if (!this.manufacturerRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Manufacturer))
+                {
+                    await this.manufacturerRepository.AddAsync(new Manufacturer { Name = createMotorcycle.Manufacturer, Year = createMotorcycle.Year });
+                    await this.manufacturerRepository.SaveChangesAsync();
+                }
+
+                if (!this.colorRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Color))
+                {
+                    await this.colorRepository.AddAsync(new Color { Name = createMotorcycle.Color });
+                    await this.colorRepository.SaveChangesAsync();
+                }
+
+                if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.Country))
+                {
+                    await this.countryRepository.AddAsync(new Country { Name = createMotorcycle.Country });
+                    await this.countryRepository.SaveChangesAsync();
+                }
+
+                var countryId = this.countryRepository
+                                    .AllAsNoTracking()
+                                    .FirstOrDefault(x => x.Name == createMotorcycle.Country).Id;
+
+                if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == createMotorcycle.City))
+                {
+                    await this.cityRepository.AddAsync(new City
+                    {
+                        Name = createMotorcycle.City,
+                        CountryId = countryId,
+                        Postcode = new Random().Next(1000, 99999),
+                    });
+                    await this.cityRepository.SaveChangesAsync();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw new InvalidOperationException("Creating motorcycle falite!!");
             }
         }
     }

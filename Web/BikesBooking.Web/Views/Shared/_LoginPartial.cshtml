@@ -15,9 +15,6 @@
             <a class="btn " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                 @if (this.User.IsInRole(GlobalConstants.DealerRoleName))
                 {
-                    <!--<div class="row">-->
-                    @*<img src="/img/Client.jpg" alt="Avatar" class="avatar rounded-circle imgAvatar">*@
-                    <!--</div>-->
                     <img src="/img/Client.jpg" width="30" height="30" class="rounded-circle nav-item"   >
                     <span>Dealer</span>
                 }

@@ -8,10 +8,16 @@
     {
         Task CreateDealerAsync(CreateDealerDto dealer, string userId);
 
-        public int GetDealerId(string userId);
+        int GetDealerId(string userId);
+
+        string GetDealerIdByUser(string userId);
 
         string GetCurrentDealerEmail(int id);
 
-        public bool IsDealer(string userId);
+        bool IsDealer(string userId);
+
+        CreateDealerDto GetCurrentDealerInfo(int id);
+
+        Task<bool> Edit(CreateDealerDto dealer, int id);
     }
 }

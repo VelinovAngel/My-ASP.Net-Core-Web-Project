@@ -26,27 +26,7 @@
 
         public async Task CreateDealerAsync(CreateDealerDto dealer, string userId)
         {
-            if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == dealer.Country))
-            {
-                await this.countryRepository.AddAsync(new Country { Name = dealer.Country });
-                await this.countryRepository.SaveChangesAsync();
-            }
-
-            var countryId = this.countryRepository
-                                .AllAsNoTracking()
-                                .FirstOrDefault(x => x.Name == dealer.Country).Id;
-
-            if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == dealer.City))
-            {
-                await this.cityRepository.AddAsync(new City
-                {
-                    Name = dealer.City,
-                    CountryId = countryId,
-                    Postcode = new Random().Next(1000, 99999),
-                });
-
-                await this.cityRepository.SaveChangesAsync();
-            }
+            await this.ValidaiteDealerData(dealer);
 
             var cityId = this.cityRepository
                                 .AllAsNoTracking()
@@ -81,5 +61,86 @@
 
         public bool IsDealer(string userId)
             => this.dealerRepository.AllAsNoTracking().Any(x => x.UserId == userId);
+
+        public string GetDealerIdByUser(string userId)
+            => this.dealerRepository.All().FirstOrDefault(x => x.UserId == userId).UserId;
+
+        public CreateDealerDto GetCurrentDealerInfo(int id)
+            => this.dealerRepository.All()
+            .Select(x => new CreateDealerDto
+            {
+                Name = x.Name,
+                Address = x.Address,
+                Country = x.City.Country.Name,
+                City = x.City.Name,
+                Description = x.Description,
+                Email = x.Email,
+            }).FirstOrDefault();
+
+        public async Task<bool> Edit(CreateDealerDto dealer, int id)
+        {
+            var currDealer = this.dealerRepository.All().FirstOrDefault(x => x.Id == id);
+
+            if (currDealer == null)
+            {
+                return false;
+            }
+
+            var isDealerDataValid = await this.ValidaiteDealerData(dealer);
+
+            if (!isDealerDataValid)
+            {
+                return false;
+            }
+
+            var city = this.cityRepository
+                .AllAsNoTracking()
+                .FirstOrDefault(x => x.Name == dealer.City).Id;
+
+            currDealer.Name = dealer.Name;
+            currDealer.Address = dealer.Address;
+            currDealer.City.Id = city;
+            currDealer.Description = dealer.Description;
+            currDealer.Email = dealer.Email;
+
+            this.dealerRepository.Update(currDealer);
+            await this.dealerRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        private async Task<bool> ValidaiteDealerData(CreateDealerDto dealer)
+        {
+            try
+            {
+                if (!this.countryRepository.AllAsNoTracking().Any(x => x.Name == dealer.Country))
+                {
+                    await this.countryRepository.AddAsync(new Country { Name = dealer.Country });
+                    await this.countryRepository.SaveChangesAsync();
+                }
+
+                var countryId = this.countryRepository
+                                    .AllAsNoTracking()
+                                    .FirstOrDefault(x => x.Name == dealer.Country).Id;
+
+                if (!this.cityRepository.AllAsNoTracking().Any(x => x.Name == dealer.City))
+                {
+                    await this.cityRepository.AddAsync(new City
+                    {
+                        Name = dealer.City,
+                        CountryId = countryId,
+                        Postcode = new Random().Next(1000, 99999),
+                    });
+
+                    await this.cityRepository.SaveChangesAsync();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

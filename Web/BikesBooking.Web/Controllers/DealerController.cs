@@ -4,31 +4,47 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Common;
+    using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.Dealers;
     using BikesBooking.Services.Data.User;
+    using BikesBooking.Web.Areas.Identity.Pages.Account;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
 
     public class DealerController : BaseController
     {
         private readonly IDealersService dealersService;
         private readonly IUserService userService;
         private readonly IServiceProvider serviceProvider;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly ILogger<LogoutModel> logger;
 
         public DealerController(
             IDealersService dealersService,
             IUserService userService,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            SignInManager<ApplicationUser> signInManager,
+            ILogger<LogoutModel> logger)
         {
             this.dealersService = dealersService;
             this.userService = userService;
             this.serviceProvider = serviceProvider;
+            this.signInManager = signInManager;
+            this.logger = logger;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
+            if (this.User.IsInRole("Dealer"))
+            {
+                return this.BadRequest();
+            }
+
             return this.View();
         }
 
@@ -38,6 +54,11 @@
         {
             var userId = this.User.GetId();
             var isAlreadyExistId = this.dealersService.IsDealer(userId);
+
+            if (this.User.IsInRole("Dealer"))
+            {
+                return this.BadRequest();
+            }
 
             if (isAlreadyExistId)
             {
@@ -53,7 +74,8 @@
 
             await this.userService.AssignRole(this.serviceProvider, dealer.Email, GlobalConstants.DealerRoleName);
 
-            this.TempData["AddDealerSuccessful"] = "Added new dealer successfully";
+            await this.signInManager.SignOutAsync();
+            this.logger.LogInformation("User logged out.");
 
             return this.RedirectToAction("Index", "Home");
         }
