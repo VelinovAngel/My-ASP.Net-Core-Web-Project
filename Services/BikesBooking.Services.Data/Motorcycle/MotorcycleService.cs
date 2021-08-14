@@ -230,7 +230,7 @@
         }
 
         public MotorcycleDetailViewModel Details(int id)
-            => this.motorcycleRepository.AllAsNoTracking()
+            => this.motorcycleRepository.All()
             .Where(x => x.Id == id)
             .Select(x => new MotorcycleDetailViewModel
             {
@@ -254,6 +254,30 @@
                 DropOffDate = x.Offer.DropOffDate,
             })
             .FirstOrDefault();
+
+        public MotorcycleDetailViewModel DetailsForEdit(int id)
+           => this.motorcycleRepository.All()
+           .Where(x => x.Id == id)
+           .Select(x => new MotorcycleDetailViewModel
+           {
+               Id = x.Id,
+               Manufacturer = x.Manufacturer.Name,
+               Model = x.Model.Name,
+               Color = x.Color.Name,
+               CubicCentimetre = x.CubicCentimetre,
+               Country = x.City.Country.Name,
+               City = x.City.Name,
+               Price = x.Price,
+               Year = x.Manufacturer.Year,
+               Available = x.Available,
+               Url = x.Url,
+               Type = (TypeOfMotors)x.TypeMotor,
+               Description = x.Description,
+               AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+               DealerId = x.Dealer.UserId,
+               Dealer = x.Dealer.Name,
+           })
+           .FirstOrDefault();
 
         public int GetMotorcycleCount()
             => this.motorcycleRepository.AllAsNoTracking().Count();

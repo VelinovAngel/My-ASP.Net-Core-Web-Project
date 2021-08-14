@@ -15,8 +15,8 @@
         [DataType(DataType.Date)]
         public DateTime DropOffDate { get; set; }
 
-        public string Review { get; set; }
+        //public string Review { get; set; }
 
-        public string ReviewDescription { get; set; }
+        //public string ReviewDescription { get; set; }
     }
 }

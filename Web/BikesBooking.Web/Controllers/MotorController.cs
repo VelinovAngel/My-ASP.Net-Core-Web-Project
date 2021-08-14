@@ -165,7 +165,7 @@
                 return this.RedirectToAction("Create", "Dealer");
             }
 
-            var motor = this.motorcycleService.Details(id);
+            var motor = this.motorcycleService.DetailsForEdit(id);
             if (motor.DealerId != userId)
             {
                 return this.BadRequest();

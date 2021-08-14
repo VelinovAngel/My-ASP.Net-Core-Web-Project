@@ -32,6 +32,8 @@
 
         MotorcycleDetailViewModel Details(int id);
 
+        MotorcycleDetailViewModel DetailsForEdit(int id);
+
         bool IsByDealer(int motorId, int dealerId);
 
         public int GetMotorcycleCount();
