@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace BikesBooking.Data.Migrations
+﻿namespace BikesBooking.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class IntroduceImgUrlInDealerAndIsApprovedInMotrocycle : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

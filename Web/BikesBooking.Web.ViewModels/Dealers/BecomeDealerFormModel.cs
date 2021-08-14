@@ -1,7 +1,8 @@
 ﻿namespace BikesBooking.Web.ViewModels.Dealers
 {
-    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
 
     using static BikesBooking.Common.GlobalConstants;
     using static BikesBooking.Common.GlobalConstants.Dealer;

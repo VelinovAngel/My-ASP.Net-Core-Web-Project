@@ -171,9 +171,8 @@
         }
 
         public int GetClientId(string userId)
-             => this.clientRepository.AllAsNoTracking()
+             => this.clientRepository.All()
             .Where(x => x.UserId == userId)
-            .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
         public ClientServiceModel GetCurrentClient(string userId)

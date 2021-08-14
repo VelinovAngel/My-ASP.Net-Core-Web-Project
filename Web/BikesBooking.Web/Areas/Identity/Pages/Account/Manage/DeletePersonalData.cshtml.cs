@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
+
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
     using BikesBooking.Web.Infrastructure;
@@ -89,8 +90,6 @@
 
             return this.Redirect("~/");
         }
-
-
 
         public class InputModel
         {

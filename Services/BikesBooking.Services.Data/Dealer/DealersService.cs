@@ -47,9 +47,8 @@
         }
 
         public int GetDealerId(string userId)
-            => this.dealerRepository.AllAsNoTracking()
+            => this.dealerRepository.All()
             .Where(x => x.UserId == userId)
-            .Select(d => new { Id = d.Id })
             .FirstOrDefault().Id;
 
         public string GetCurrentDealerEmail(int id)

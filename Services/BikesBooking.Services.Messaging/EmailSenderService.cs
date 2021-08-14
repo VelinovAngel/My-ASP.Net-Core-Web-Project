@@ -24,11 +24,6 @@
             smtp.Authenticate(emailProject, password);
             smtp.Send(email);
             smtp.Disconnect(true);
-
-            // account : AccoutAspNetCoreProject@gmail.com
-            // password : AspNetCoreProject
-            // 2021!
-            // shfupswylwketxvj
         }
     }
 }

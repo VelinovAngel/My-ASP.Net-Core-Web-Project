@@ -154,7 +154,7 @@
                   Url = x.Url,
                   Type = (TypeOfMotors)x.TypeMotor,
                   Description = x.Description,
-                  AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+                  AddedOn = x.ModifiedOn ?? x.CreatedOn,
               })
               .ToListAsync();
 
@@ -255,7 +255,7 @@
                 Url = x.Url,
                 Type = (TypeOfMotors)x.TypeMotor,
                 Description = x.Description,
-                AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+                AddedOn = x.ModifiedOn ?? x.CreatedOn,
                 DealerId = x.Dealer.UserId,
                 Dealer = x.Dealer.Name,
                 PickUpDate = x.Offer.PickUpDate,
@@ -281,7 +281,7 @@
                Url = x.Url,
                Type = (TypeOfMotors)x.TypeMotor,
                Description = x.Description,
-               AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+               AddedOn = x.ModifiedOn ?? x.CreatedOn,
                DealerId = x.Dealer.UserId,
                Dealer = x.Dealer.Name,
            })
@@ -364,7 +364,7 @@
                  Url = x.Url,
                  Type = (TypeOfMotors)x.TypeMotor,
                  Description = x.Description,
-                 AddedOn = x.ModifiedOn.HasValue ? x.ModifiedOn.Value : x.CreatedOn,
+                 AddedOn = x.ModifiedOn ?? x.CreatedOn,
              })
              .ToListAsync();
 

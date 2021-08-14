@@ -102,7 +102,7 @@
         }
 
         [Authorize]
-        public IActionResult Book(int id)
+        public IActionResult Book()
         {
             var userId = this.User.GetId();
 
