@@ -222,5 +222,28 @@
             await this.reviewRepository.AddAsync(review);
             await this.reviewRepository.SaveChangesAsync();
         }
+
+        public string GetClientIdByUser(string userId)
+            => this.clientRepository.All().FirstOrDefault(x => x.UserId == userId).UserId;
+
+        public string GetCurrentClientInfo(int id)
+            => this.clientRepository.All()
+            .FirstOrDefault(x => x.Id == id).Address;
+
+        public async Task<bool> Edit(int clientId, string address, string city)
+        {
+            var currClient = this.clientRepository.All()
+                .FirstOrDefault(x => x.Id == clientId);
+
+            if (currClient == null)
+            {
+                return false;
+            }
+
+            currClient.Address = $"{city} - {address}";
+            this.clientRepository.Update(currClient);
+            await this.clientRepository.SaveChangesAsync();
+            return true;
+        }
     }
 }

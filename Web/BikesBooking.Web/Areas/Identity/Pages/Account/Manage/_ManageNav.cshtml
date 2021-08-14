@@ -4,6 +4,15 @@
 }
 <ul class="nav nav-pills flex-column">
     <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
+    @if (this.User.IsInRole("Dealer"))
+    {
+        <li class="nav-item"><a class="nav-link @ManageNavPages.DealerNavClass(ViewContext)" id="DealerPrifile" asp-area="" asp-controller="User" asp-action="EditDealerProfile">Dealer Profile</a></li>
+    }
+    @if (this.User.IsInRole("Client"))
+    {
+        <li class="nav-item"><a class="nav-link " id="ClientPrifile" asp-area="" asp-controller="User" asp-action="EditClientProfile">Client Profile</a></li>
+
+    }
     <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
     <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
     @if (hasExternalLogins)

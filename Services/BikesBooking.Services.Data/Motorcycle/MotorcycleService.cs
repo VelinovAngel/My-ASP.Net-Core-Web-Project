@@ -6,7 +6,6 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.Clients;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Services.Data.Votes;

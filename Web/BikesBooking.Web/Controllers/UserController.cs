@@ -1,11 +1,13 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
     using System.Threading.Tasks;
+    using BikesBooking.Services.Data.Client;
     using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.Dealers;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Web.Infrastructure;
+    using BikesBooking.Web.ViewModels.Client;
     using BikesBooking.Web.ViewModels.Dealers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -14,13 +16,16 @@
     {
         private readonly IMotorcycleService motorcycleService;
         private readonly IDealersService dealersService;
+        private readonly IClientService clientService;
 
         public UserController(
             IMotorcycleService motorcycleService,
-            IDealersService dealersService)
+            IDealersService dealersService,
+            IClientService clientService)
         {
             this.motorcycleService = motorcycleService;
             this.dealersService = dealersService;
+            this.clientService = clientService;
         }
 
         public async Task<IActionResult> FreeMotors([FromQuery] AllFreeMotorcylesQueryDto query, SearchMotorcycleInputModel inputModel)
@@ -57,7 +62,7 @@
 
         [Authorize(Roles = "Dealer")]
         [HttpPost]
-        public async Task<IActionResult> EditDealerProfil(CreateDealerDto dealer)
+        public async Task<IActionResult> EditDealerProfile(CreateDealerDto dealer)
         {
             var userId = this.User.GetId();
             var dealerId = this.dealersService.GetDealerIdByUser(userId);
@@ -92,22 +97,60 @@
         }
 
         [Authorize(Roles = "Client")]
-        public IActionResult EditClientProfil()
+        public IActionResult EditClientProfile()
         {
-            return this.View();
+            var userId = this.User.GetId();
+            var clientId = this.clientService.GetClientIdByUser(userId);
+            var intClientId = this.clientService.GetClientId(userId);
+            var clientInfo = this.clientService.GetCurrentClientInfo(intClientId);
+
+            if (userId != clientId)
+            {
+                return this.BadRequest();
+            }
+
+            var tokens = clientInfo.Split(" - ");
+
+            return this.View(new BecomeClientFromModel
+            {
+                City = tokens[0],
+                Address = tokens[1],
+            });
         }
 
         [Authorize(Roles = "Client")]
         [HttpPost]
-        public IActionResult EditClientProfil(string address, string city)
+        public async Task<IActionResult> EditClientProfile(string address, string city)
         {
+            var userId = this.User.GetId();
+            var clientId = this.clientService.GetClientIdByUser(userId);
+            var intClientId = this.clientService.GetClientId(userId);
+            var clientInfo = this.clientService.GetCurrentClientInfo(intClientId);
+
+            if (userId != clientId)
+            {
+                return this.BadRequest();
+            }
+
+            var tokens = clientInfo.Split(" - ");
 
             if (!this.ModelState.IsValid)
             {
-                return this.View();
+                return this.View(new BecomeClientFromModel
+                {
+                    City = tokens[0],
+                    Address = tokens[1],
+                });
             }
 
-            return this.View();
+            var isClientEdited = await this.clientService.Edit(intClientId, address, city);
+
+            if (!isClientEdited)
+            {
+                return this.BadRequest();
+            }
+
+            return this.RedirectToAction("Index", "Home");
         }
     }
 }

@@ -5,11 +5,12 @@
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO.Clients;
-    using BikesBooking.Services.Data.DTO.MotorcycleModels;
 
     public interface IClientService
     {
         Task CreateClientAsync(string userId, string address, string city);
+
+        Task<bool> Edit(int clientId, string address, string city);
 
         IEnumerable<BookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId);
 
@@ -19,7 +20,11 @@
 
         string GetCurrentClientEmail(string userId);
 
-        public int GetClientId(string userId);
+        int GetClientId(string userId);
+
+        string GetClientIdByUser(string userId);
+
+        string GetCurrentClientInfo(int id);
 
         Task<bool> BookThisMotorcycleByClient(int clientId, int offerId, DateTime pickUp, DateTime dropOff, int motorcycleId);
 

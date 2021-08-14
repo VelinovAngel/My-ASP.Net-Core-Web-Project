@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace BikesBooking.Web.Areas.Identity.Pages.Account.Manage
+﻿namespace BikesBooking.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System;
+
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public static class ManageNavPages
     {
         public static string Index => "Index";
 
         public static string Email => "Email";
+
+        public static string Dealer => "DealerProfil";
 
         public static string ChangePassword => "ChangePassword";
 
@@ -25,6 +25,8 @@ namespace BikesBooking.Web.Areas.Identity.Pages.Account.Manage
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+
+        public static string DealerNavClass(ViewContext viewContext) => PageNavClass(viewContext, Dealer);
 
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
 
