@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize(Roles = "Dealer, Administrator")]
+    [Authorize(Roles = "Dealer")]
     public class MotorController : Controller
     {
         private readonly IMotorcycleService motorcycleService;

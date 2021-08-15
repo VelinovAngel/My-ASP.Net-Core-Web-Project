@@ -24,7 +24,7 @@
             this.cityRepository = cityRepository;
         }
 
-        public async Task CreateDealerAsync(CreateDealerDto dealer, string userId)
+        public async Task CreateDealerAsync(CreateDealerDto dealer, string userId, string imgUrl)
         {
             await this.ValidaiteDealerData(dealer);
 
@@ -40,6 +40,7 @@
                 Email = dealer.Email,
                 UserId = userId,
                 CityId = cityId,
+                ImageFile = imgUrl,
             };
 
             await this.dealerRepository.AddAsync(currDealer);
@@ -76,7 +77,7 @@
                 Email = x.Email,
             }).FirstOrDefault();
 
-        public async Task<bool> Edit(CreateDealerDto dealer, int id)
+        public async Task<bool> Edit(CreateDealerDto dealer, int id, string imgUrl)
         {
             var currDealer = this.dealerRepository.All().FirstOrDefault(x => x.Id == id);
 
@@ -101,6 +102,7 @@
             currDealer.City.Id = city;
             currDealer.Description = dealer.Description;
             currDealer.Email = dealer.Email;
+            currDealer.ImageFile = imgUrl;
 
             this.dealerRepository.Update(currDealer);
             await this.dealerRepository.SaveChangesAsync();

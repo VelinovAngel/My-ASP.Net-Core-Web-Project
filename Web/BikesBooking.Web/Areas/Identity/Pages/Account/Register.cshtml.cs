@@ -7,6 +7,7 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using BikesBooking.Common;
     using BikesBooking.Data.Models;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authentication;
@@ -81,10 +82,12 @@
                         await this.signInManager.SignInAsync(user, isPersistent: false);
                         if (this.Input.Role == "Dealer")
                         {
+                            await this.userManager.AddToRoleAsync(user, GlobalConstants.DealerRoleName);
                             returnUrl ??= this.Url.Content("~/Dealer/Create");
                         }
                         else if (this.Input.Role == "Client")
                         {
+                            await this.userManager.AddToRoleAsync(user, GlobalConstants.ClientRoleName);
                             returnUrl ??= this.Url.Content("~/Client/Create");
                         }
 

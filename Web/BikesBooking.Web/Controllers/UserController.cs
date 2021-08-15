@@ -7,6 +7,7 @@
     using BikesBooking.Services.Data.DTO.Dealers;
     using BikesBooking.Services.Data.DTO.MotorcycleModels;
     using BikesBooking.Services.Data.Motorcycle;
+    using BikesBooking.Services.Services;
     using BikesBooking.Web.Infrastructure;
     using BikesBooking.Web.ViewModels.Client;
     using BikesBooking.Web.ViewModels.Dealers;
@@ -18,15 +19,18 @@
         private readonly IMotorcycleService motorcycleService;
         private readonly IDealersService dealersService;
         private readonly IClientService clientService;
+        private readonly ICloudinaryService cloudinaryService;
 
         public UserController(
             IMotorcycleService motorcycleService,
             IDealersService dealersService,
-            IClientService clientService)
+            IClientService clientService,
+            ICloudinaryService cloudinaryService)
         {
             this.motorcycleService = motorcycleService;
             this.dealersService = dealersService;
             this.clientService = clientService;
+            this.cloudinaryService = cloudinaryService;
         }
 
         public async Task<IActionResult> FreeMotors([FromQuery] AllFreeMotorcylesQueryDto query, SearchMotorcycleInputModel inputModel)
@@ -38,7 +42,7 @@
         }
 
         [Authorize(Roles = "Dealer")]
-        public IActionResult EditDealerProfil()
+        public IActionResult EditDealerProfile()
         {
             var userId = this.User.GetId();
             var dealerId = this.dealersService.GetDealerIdByUser(userId);
@@ -58,6 +62,7 @@
                 City = dealer.City,
                 Description = dealer.Description,
                 Email = dealer.Email,
+                ImageFile = dealer.ImageFile,
             });
         }
 
@@ -87,7 +92,9 @@
                 });
             }
 
-            var isDealerEdited = await this.dealersService.Edit(dealer, intDeaelerId);
+            var imageUrl = await this.cloudinaryService.UploudAsync(dealer.ImageFile);
+
+            var isDealerEdited = await this.dealersService.Edit(dealer, intDeaelerId, imageUrl);
 
             if (!isDealerEdited)
             {

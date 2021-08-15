@@ -15,18 +15,15 @@
         private readonly IRepository<Dealer> dealer;
         private readonly IRepository<ApplicationUser> user;
         private readonly IRepository<Client> client;
-        private UserManager<ApplicationUser> userManager;
 
         public UserService(
             IRepository<Dealer> dealer,
             IRepository<ApplicationUser> user,
-            IRepository<Client> client,
-            UserManager<ApplicationUser> userManager)
+            IRepository<Client> client)
         {
             this.dealer = dealer;
             this.user = user;
             this.client = client;
-            this.userManager = userManager;
         }
 
         public int GetTotalDeales()
@@ -37,14 +34,5 @@
 
         public int GetTotalClients()
             => this.client.AllAsNoTracking().Count();
-
-        public async Task<IdentityResult> AssignRole(IServiceProvider services, string email, string role)
-        {
-            this.userManager = services.GetService<UserManager<ApplicationUser>>();
-            ApplicationUser user = await this.userManager.FindByEmailAsync(email);
-            var result = await this.userManager.AddToRoleAsync(user, role);
-
-            return result;
-        }
     }
 }

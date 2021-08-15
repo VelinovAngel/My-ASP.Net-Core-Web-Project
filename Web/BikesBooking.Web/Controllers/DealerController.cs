@@ -1,13 +1,11 @@
 ﻿namespace BikesBooking.Web.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
-    using BikesBooking.Common;
     using BikesBooking.Data.Models;
     using BikesBooking.Services.Data.Dealer;
     using BikesBooking.Services.Data.DTO.Dealers;
-    using BikesBooking.Services.Data.User;
+    using BikesBooking.Services.Services;
     using BikesBooking.Web.Areas.Identity.Pages.Account;
     using BikesBooking.Web.Infrastructure;
     using Microsoft.AspNetCore.Authorization;
@@ -18,23 +16,20 @@
     public class DealerController : BaseController
     {
         private readonly IDealersService dealersService;
-        private readonly IUserService userService;
-        private readonly IServiceProvider serviceProvider;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LogoutModel> logger;
+        private readonly ICloudinaryService cloudinaryService;
 
         public DealerController(
             IDealersService dealersService,
-            IUserService userService,
-            IServiceProvider serviceProvider,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<LogoutModel> logger)
+            ILogger<LogoutModel> logger,
+            ICloudinaryService cloudinaryService)
         {
             this.dealersService = dealersService;
-            this.userService = userService;
-            this.serviceProvider = serviceProvider;
             this.signInManager = signInManager;
             this.logger = logger;
+            this.cloudinaryService = cloudinaryService;
         }
 
         [Authorize]
@@ -70,11 +65,12 @@
                 return this.View();
             }
 
-            await this.dealersService.CreateDealerAsync(dealer, userId);
+            var imageUrl = await this.cloudinaryService.UploudAsync(dealer.ImageFile);
 
-            await this.userService.AssignRole(this.serviceProvider, dealer.Email, GlobalConstants.DealerRoleName);
+            await this.dealersService.CreateDealerAsync(dealer, userId, imageUrl);
 
             await this.signInManager.SignOutAsync();
+
             this.logger.LogInformation("User logged out.");
 
             return this.RedirectToAction("Index", "Home");

@@ -22,7 +22,7 @@
                 {
                     <span>Client</span>
                 }
-                else
+                else if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                 {
                     <span>Admin</span>
                 }

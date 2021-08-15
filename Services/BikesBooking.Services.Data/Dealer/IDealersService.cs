@@ -6,7 +6,7 @@
 
     public interface IDealersService
     {
-        Task CreateDealerAsync(CreateDealerDto dealer, string userId);
+        Task CreateDealerAsync(CreateDealerDto dealer, string userId, string imgUrl);
 
         int GetDealerId(string userId);
 
@@ -18,6 +18,6 @@
 
         CreateDealerDto GetCurrentDealerInfo(int id);
 
-        Task<bool> Edit(CreateDealerDto dealer, int id);
+        Task<bool> Edit(CreateDealerDto dealer, int id, string imgUrl);
     }
 }

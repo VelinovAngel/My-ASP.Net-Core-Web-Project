@@ -1,5 +1,7 @@
 ﻿namespace BikesBooking.Services.Data.DTO.Dealers
 {
+    using Microsoft.AspNetCore.Http;
+
     public class CreateDealerDto
     {
         public string Name { get; set; }
@@ -13,5 +15,7 @@
         public string Email { get; set; }
 
         public string Description { get; set; }
+
+        public IFormFile ImageFile { get; set; }
     }
 }

@@ -79,9 +79,6 @@
 
             await this.clientService.CreateClientAsync(userId, address, city);
 
-            var email = this.clientService.GetCurrentClientEmail(userId);
-            await this.userService.AssignRole(this.serviceProvider, email, GlobalConstants.ClientRoleName);
-
             await this.signInManager.SignOutAsync();
             this.logger.LogInformation("User logged out.");
 
