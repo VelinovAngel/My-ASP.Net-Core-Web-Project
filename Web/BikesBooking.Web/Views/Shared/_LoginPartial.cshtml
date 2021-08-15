@@ -7,6 +7,11 @@
 @inject IDealersService Dealers
 @inject IClientService Client
 
+@{ 
+    var user = await UserManager.GetUserAsync(this.User);
+    var imgUser = user.Dealer.ImageFile;
+}
+
 <ul class="navbar-nav">
     @if (this.SignInManager.IsSignedIn(this.User))
     {
@@ -15,7 +20,7 @@
             <a class="btn " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                 @if (this.User.IsInRole(GlobalConstants.DealerRoleName))
                 {
-                    <img src="/img/Client.jpg" width="30" height="30" class="rounded-circle nav-item"   >
+                    <img src="@imgUser" width="30" height="30" class="rounded-circle nav-item"   >
                     <span>Dealer</span>
                 }
                 else if (this.User.IsInRole(GlobalConstants.ClientRoleName))
@@ -28,8 +33,6 @@
                 }
             </a>
         </li>
-
-        var user = await UserManager.GetUserAsync(this.User);
 
 
         if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))

@@ -62,7 +62,6 @@
                 City = dealer.City,
                 Description = dealer.Description,
                 Email = dealer.Email,
-                ImageFile = dealer.ImageFile,
             });
         }
 
