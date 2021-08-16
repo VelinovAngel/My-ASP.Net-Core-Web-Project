@@ -1,14 +1,10 @@
 ﻿namespace BikesBooking.Services.Data.User
 {
-    using System;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using BikesBooking.Common;
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.DependencyInjection;
 
     public class UserService : IUserService
     {
@@ -30,7 +26,8 @@
             => this.dealer.AllAsNoTracking().Count();
 
         public int GetTotalUsers()
-            => this.user.AllAsNoTracking().Where(x => x.Email != GlobalConstants.AdministratorEmailAddress).Count();
+            => this.user.All()
+            .Where(x => x.Email != GlobalConstants.AdministratorEmailAddress).Count();
 
         public int GetTotalClients()
             => this.client.AllAsNoTracking().Count();

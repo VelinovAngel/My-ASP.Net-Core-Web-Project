@@ -18,6 +18,7 @@
             this.cloudinary = cloudinary;
         }
 
+        [System.Obsolete]
         public async Task<string> UploudAsync(IFormFile file)
         {
             if (file == null || this.IsFileValid(file) == false)
@@ -47,6 +48,7 @@
             return url;
         }
 
+        [System.Obsolete]
         public async Task<string> UploadVideoAsync(IFormFile file)
         {
             string url = string.Empty;

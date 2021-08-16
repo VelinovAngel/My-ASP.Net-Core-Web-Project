@@ -5,6 +5,7 @@
     using System.Globalization;
     using System.Reflection;
 
+    using BikeBooking.Service.CronJobs;
     using BikesBooking.Data;
     using BikesBooking.Data.Common;
     using BikesBooking.Data.Common.Repositories;
@@ -135,7 +136,7 @@
             AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IRecurringJobManager recurringJobManager)
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
@@ -144,6 +145,8 @@
                 dbContext.Database.Migrate();
 
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+
+                this.SeedHangfireJobs(recurringJobManager, dbContext);
             }
 
             if (env.IsDevelopment())
@@ -200,6 +203,11 @@
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();
                     });
+        }
+
+        private void SeedHangfireJobs(IRecurringJobManager recurringJobManager, ApplicationDbContext dbContext)
+        {
+            recurringJobManager.AddOrUpdate<DeletePastOffers>("DeletePastOffers", x => x.Work(), Cron.Daily);
         }
     }
 }
