@@ -1,0 +1,30 @@
+﻿@using BikesBooking.Services.Data.DTO.Dealers
+@model IEnumerable<AllReviewOuputDto>
+
+<table class="table">
+    <caption>List of FeedBack</caption>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Client</th>
+            <th scope="col">Release Date</th>
+            <th scope="col">Motorcycle</th>
+            <th scope="col">Vote</th>
+            <th scope="col">Description</th>
+        </tr>
+    </thead>
+    @foreach (var date in Model)
+    {
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>@date.Name</td>
+                <td>@date.DateRelease</td>
+                <td>@date.MotorcycleInfo</td>
+                <td>@date.Vote</td>
+                <td>@date.Desription</td>
+            </tr>
+
+        </tbody>
+    }
+</table>

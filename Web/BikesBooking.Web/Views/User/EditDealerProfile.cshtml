@@ -1,5 +1,4 @@
-﻿@using BikesBooking.Common
-@using BikesBooking.Data.Models
+﻿@using BikesBooking.Data.Models
 @using Microsoft.AspNetCore.Identity
 @model BecomeDealerFormModel
 @inject SignInManager<ApplicationUser> SignInManager
@@ -65,24 +64,9 @@
             <div class="btn">
                 <input type="file" asp-for="ImageFile">
             </div>
-            @*@if (imgUser == null)
-            {*@
-                <div class="text-center">
-                    <img src="http://via.placeholder.com/240x180" id="preview" class="img-thumbnail">
-                </div>
-            <!--}
-            else
-            {-->
-                @*<div class="text-center">
-                <img src="@imgUser" id="preview" class="img-thumbnail" style="width: 300px; height: 180px;">
-            </div>*@
-                <!--<div class="text-md-center">
-                    <img src="@imgUser" alt="Avatar" class="avatar rounded-circle" style='width:50%;height:130%'>
-
-                </div>
-            }-->
-
-
+            <div class="text-center">
+                <img src="http://via.placeholder.com/240x180" id="preview" class="img-thumbnail">
+            </div>
         </div>
 
         <br />

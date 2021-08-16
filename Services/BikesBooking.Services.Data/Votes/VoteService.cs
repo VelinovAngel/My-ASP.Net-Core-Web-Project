@@ -11,16 +11,13 @@
     public class VoteService : IVoteService
     {
         private readonly IRepository<Vote> votesRepository;
-        private readonly IRepository<Motorcycle> motorcycleRepository;
         private readonly IRepository<Review> reviewRepository;
 
         public VoteService(
             IRepository<Vote> votesRepository,
-            IRepository<Motorcycle> motorcycleRepository,
             IRepository<Review> reviewRepository)
         {
             this.votesRepository = votesRepository;
-            this.motorcycleRepository = motorcycleRepository;
             this.reviewRepository = reviewRepository;
         }
 

@@ -290,6 +290,9 @@
         public int GetMotorcycleCount()
             => this.motorcycleRepository.AllAsNoTracking().Count();
 
+        public bool IsInActiveOffer(int motorcycleId)
+            => this.motorcycleRepository.All().Any(x => x.OfferId.HasValue);
+
         public int GetNotAvailableMotorcycleCount()
             => this.offerRepository.AllAsNoTracking()
             .Where(x => x.IsFree == false)

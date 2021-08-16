@@ -30,6 +30,8 @@
 
         Task RemoveMotorcycleAsync(int id);
 
+        bool IsInActiveOffer(int motorcycleId);
+
         MotorcycleDetailViewModel Details(int id);
 
         MotorcycleDetailViewModel DetailsForEdit(int id);

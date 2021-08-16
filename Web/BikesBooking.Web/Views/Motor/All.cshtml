@@ -20,6 +20,14 @@
     </div>
 }
 
+@if (this.TempData.ContainsKey("Cancellation"))
+{
+    <div class="alert alert-success alert-danger fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["Cancellation"]
+    </div>
+}
+
 
 <h1 class="text-center mt-2">My Store</h1>
 <br />

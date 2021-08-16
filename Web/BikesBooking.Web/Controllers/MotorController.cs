@@ -245,9 +245,35 @@
         [Authorize]
         public async Task<IActionResult> Remove(int id)
         {
+            var userId = this.User.GetId();
+            var dealerId = this.dealersService.GetDealerIdByUser(userId);
+            if (this.motorcycleService.IsInActiveOffer(id))
+            {
+                this.TempData["Cancellation"] = "The cancellation was not successful because the motorcycle has an active offer.";
+                return this.RedirectToAction("All", "Motor");
+            }
+
             await this.motorcycleService.RemoveMotorcycleAsync(id);
+            if (dealerId != userId)
+            {
+                return this.BadRequest();
+            }
 
             return this.RedirectToAction("All", "Motor");
+        }
+
+        [Authorize]
+        public IActionResult ReadAllReview(int id)
+        {
+            var userId = this.User.GetId();
+            var dealerId = this.dealersService.GetDealerIdByUser(userId);
+            if (dealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var model = this.dealersService.ReadAllReviewFromCliet(id);
+            return this.View(model);
         }
 
         private int GetUserId()

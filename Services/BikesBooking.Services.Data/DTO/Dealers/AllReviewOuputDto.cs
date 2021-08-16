@@ -2,8 +2,6 @@
 {
     using System;
 
-    using BikesBooking.Services.Data.DTO.MotorcycleModels;
-
     public class AllReviewOuputDto
     {
         public string Name { get; set; }
@@ -14,6 +12,6 @@
 
         public int Vote { get; set; }
 
-        public MotorcycleServiceDto MotorcycleInfo { get; set; }
+        public string MotorcycleInfo { get; set; }
     }
 }

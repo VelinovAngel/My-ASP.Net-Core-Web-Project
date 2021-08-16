@@ -68,6 +68,7 @@
                 {
                     currOffer.PickUpDate = currOffer.DropOffDate;
                     currMotorcycle.Available = false;
+                    currMotorcycle.OfferId = null;
                 }
 
                 currOffer.StatisticsBooked++;

@@ -14,15 +14,18 @@
         private readonly IRepository<Dealer> dealerRepository;
         private readonly IRepository<Country> countryRepository;
         private readonly IRepository<City> cityRepository;
+        private readonly IRepository<Review> reviewRepository;
 
         public DealersService(
             IRepository<Dealer> dealer,
             IRepository<Country> countryRepository,
-            IRepository<City> cityRepository)
+            IRepository<City> cityRepository,
+            IRepository<Review> reviewRepository)
         {
             this.dealerRepository = dealer;
             this.countryRepository = countryRepository;
             this.cityRepository = cityRepository;
+            this.reviewRepository = reviewRepository;
         }
 
         public async Task CreateDealerAsync(CreateDealerDto dealer, string userId, string imgUrl)
@@ -77,6 +80,18 @@
                 Description = x.Description,
                 Email = x.Email,
             }).FirstOrDefault();
+
+        public IEnumerable<AllReviewOuputDto> ReadAllReviewFromCliet(int motorcycleId)
+            => this.reviewRepository.All().Where(x => x.MotorcycleId == motorcycleId)
+            .Select(x => new AllReviewOuputDto
+            {
+                Name = x.Name,
+                Desription = x.Description,
+                DateRelease = x.DateRelease,
+                Vote = x.Vote,
+                MotorcycleInfo = $"{x.Motorcycle.Manufacturer.Name} {x.Motorcycle.Model.Name} - Year: {x.Motorcycle.Manufacturer.Year}",
+            })
+            .ToList();
 
         public async Task<bool> Edit(CreateDealerDto dealer, int id, string imgUrl)
         {
@@ -143,11 +158,6 @@
             {
                 return false;
             }
-        }
-
-        public IEnumerable<AllReviewOuputDto> ReadAllReviewFromCliet(int motorcycleId)
-        {
-            throw new NotImplementedException();
         }
     }
 }
