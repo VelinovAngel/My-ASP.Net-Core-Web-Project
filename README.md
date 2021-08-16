@@ -35,6 +35,7 @@ My web defence project in SoftUni..
 <li>  Custom validation attributes</li>
 <li>  Roles (User -> Client or Dealer)</li>
 <li>  Management by Administrator's Dashboard all information about (motorcycles, dealers and clients)</li>
+<li>  Cloudinary</li>
 <li>  Facebook login (for developers)</li>
 <li>  Google login (for developers)</li>
 <li>  Custom Identity (login and register with initial chooice if you wanna be a dealer or client)</li>
