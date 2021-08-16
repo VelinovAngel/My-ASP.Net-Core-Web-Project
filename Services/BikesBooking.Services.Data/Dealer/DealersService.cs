@@ -1,6 +1,7 @@
 ﻿namespace BikesBooking.Services.Data.Dealer
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -66,7 +67,7 @@
             => this.dealerRepository.All().FirstOrDefault(x => x.UserId == userId).UserId;
 
         public CreateDealerDto GetCurrentDealerInfo(int id)
-            => this.dealerRepository.All()
+            => this.dealerRepository.All().Where(x => x.Id == id)
             .Select(x => new CreateDealerDto
             {
                 Name = x.Name,
@@ -142,6 +143,11 @@
             {
                 return false;
             }
+        }
+
+        public IEnumerable<AllReviewOuputDto> ReadAllReviewFromCliet(int motorcycleId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

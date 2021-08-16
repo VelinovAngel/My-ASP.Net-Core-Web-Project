@@ -66,8 +66,7 @@
                 Description = x.Description,
                 Vote = x.Vote,
             })
-                .OrderByDescending(x => x.Vote)
-                .ThenByDescending(c => c.DateRelease)
+                .OrderByDescending(c => c.DateRelease)
                 .ToList().Take(3);
     }
 }

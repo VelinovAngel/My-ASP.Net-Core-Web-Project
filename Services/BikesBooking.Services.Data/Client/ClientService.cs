@@ -96,8 +96,7 @@
 
             await this.clientsOffersRepository.AddAsync(newBookingTimeSpan);
             await this.clientsOffersRepository.SaveChangesAsync();
-            this.clientRepository.Update(currClient);
-            await this.clientRepository.SaveChangesAsync();
+
             return true;
         }
 

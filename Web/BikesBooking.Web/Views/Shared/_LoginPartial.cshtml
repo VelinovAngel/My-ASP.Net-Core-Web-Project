@@ -7,9 +7,13 @@
 @inject IDealersService Dealers
 @inject IClientService Client
 
-@{ 
+@{
+    var imgUser = string.Empty;
     var user = await UserManager.GetUserAsync(this.User);
-    var imgUser = user.Dealer.ImageFile;
+    @if (user != null && Dealers.IsDealer(User.GetId()))
+    {
+        imgUser = user.Dealer.ImageFile;
+    }
 }
 
 <ul class="navbar-nav">
@@ -20,7 +24,7 @@
             <a class="btn " asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
                 @if (this.User.IsInRole(GlobalConstants.DealerRoleName))
                 {
-                    <img src="@imgUser" width="30" height="30" class="rounded-circle nav-item"   >
+                    <img src="@imgUser" width="30" height="30" class="rounded-circle nav-item">
                     <span>Dealer</span>
                 }
                 else if (this.User.IsInRole(GlobalConstants.ClientRoleName))

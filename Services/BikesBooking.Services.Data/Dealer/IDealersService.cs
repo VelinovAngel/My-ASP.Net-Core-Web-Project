@@ -1,5 +1,6 @@
 ﻿namespace BikesBooking.Services.Data.Dealer
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using BikesBooking.Services.Data.DTO.Dealers;
@@ -19,5 +20,7 @@
         CreateDealerDto GetCurrentDealerInfo(int id);
 
         Task<bool> Edit(CreateDealerDto dealer, int id, string imgUrl);
+
+        IEnumerable<AllReviewOuputDto> ReadAllReviewFromCliet(int motorcycleId);
     }
 }
