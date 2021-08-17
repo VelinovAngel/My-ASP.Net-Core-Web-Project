@@ -44,6 +44,28 @@ My web defence project in SoftUni..
 </ul>
 
 
+<h5>Home Page</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Home%20Page.jpg"/>
+
+<h5>Admin Dashboard</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Admin%20Dashboard.jpg"/>
+
+<h5>Admin Control Panel</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Admin%20control%20panel.jpg"/>
+
+
+<h5>Mine Booked Motorcycle (Client)</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Booked%20Motorcycle.jpg"/>
+
+<h5>Contact Form</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Contact%20Form.jpg"/>
+
+
+<h5>Dealer Collection</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Dealer%20Collection.jpg"/>
+
+<h5>All emails from clients</h5>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Messagges.jpg"/>
 
 
 
