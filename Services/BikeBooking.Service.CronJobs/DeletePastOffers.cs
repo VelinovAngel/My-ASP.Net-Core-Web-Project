@@ -18,19 +18,19 @@
 
         public async Task Work()
         {
-            var allAppointments = await this.offersRepository
+            var alloffers = await this.offersRepository
                 .All()
                 .ToListAsync();
 
-            var expiredAppointments =
-                 allAppointments
+            var expiredOffers =
+                 alloffers
                  .Where(x => 
                  x.DropOffDate.Subtract(DateTime.UtcNow).Days == 0)
                  .ToList();
 
-            foreach (var appointment in expiredAppointments)
+            foreach (var offer in expiredOffers)
             {
-                this.offersRepository.Delete(appointment);
+                this.offersRepository.Delete(offer);
             }
 
             await this.offersRepository.SaveChangesAsync();

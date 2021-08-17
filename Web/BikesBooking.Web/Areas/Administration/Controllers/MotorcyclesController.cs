@@ -143,7 +143,7 @@
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ManufacturerId,ModelId,ColorId,CubicCentimetre,Description,Price,Available,TypeMotor,Url,ReviewId,CityId,OfferId,DealerId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Motorcycle motorcycle)
+        public async Task<IActionResult> Edit(int id, [Bind("ManufacturerId,ModelId,ColorId,CubicCentimetre,Description,Price,Available,IsApproved,TypeMotor,Url,ReviewId,CityId,OfferId,DealerId,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Motorcycle motorcycle)
         {
             if (id != motorcycle.Id)
             {

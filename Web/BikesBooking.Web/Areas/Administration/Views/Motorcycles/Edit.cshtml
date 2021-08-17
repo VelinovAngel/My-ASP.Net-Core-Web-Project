@@ -59,6 +59,11 @@
                     <input class="form-check-input" asp-for="Available" /> @Html.DisplayNameFor(model => model.Available)
                 </label>
             </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsApproved" /> @Html.DisplayNameFor(model => model.IsApproved)
+                </label>
+            </div>
             <div class="form-group">
                 <label asp-for="TypeMotor"> Motor type</label>
                 <select asp-for="TypeMotor" class="form-control" asp-items="@Html.GetEnumSelectList<MotorType>()"></select>

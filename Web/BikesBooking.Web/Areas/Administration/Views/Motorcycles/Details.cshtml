@@ -16,6 +16,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            Motorcycle Image
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Html.DisplayFor(model => model.Url)" alt="Alternate Text" style="width: 300px; height: 180px;" />
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Manufacturer)
         </dt>
         <dd class="col-sm-10">
@@ -52,22 +58,10 @@
             @Html.DisplayFor(model => model.Price)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Available)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Available)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.TypeMotor)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.TypeMotor)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Url)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Url)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.City)
