@@ -43,9 +43,10 @@ My web defence project in SoftUni..
 <li>  Integration of Google Maps (For development purposes only)</li>
 </ul>
 
+<hr/>
 
 <h5>Home Page</h5>
-<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Home%20Page.jpg"/>
+<img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/71883283f51c12888c196bb2ae6cc07e830013ad/Imeges/Home%20Page.jpg"/>
 
 <h5>Admin Dashboard</h5>
 <img src="https://github.com/VelinovAngel/My-ASP.Net-Core-Web-Project/blob/da9b4845ab76df94ea1c4b139172772526091949/Imeges/Admin%20Dashboard.jpg"/>
