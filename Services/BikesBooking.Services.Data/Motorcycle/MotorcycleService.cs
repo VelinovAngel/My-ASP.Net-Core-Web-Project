@@ -136,7 +136,7 @@
         {
             var motorcycles = await this.motorcycleRepository.AllAsNoTracking()
               .AsQueryable()
-              .Where(x => x.DealerId == dealerId)
+              .Where(x => x.DealerId == dealerId && x.IsApproved == true)
               .OrderByDescending(x => x.CreatedOn)
               .Skip((currentPage - 1) * motorcyclesPerPage)
               .Take(motorcyclesPerPage)
@@ -181,6 +181,7 @@
               .Where(x => x.Id == id)
               .Select(x => new OfferSigleMotorcycleDto
               {
+                  Id = x.Id,
                   ModelId = x.Id,
                   Manufacturer = x.Manufacturer.Name,
                   Model = x.Model.Name,
@@ -205,6 +206,7 @@
               .Where(x => x.Id == id)
               .Select(x => new OfferSigleMotorcycleDto
               {
+                  Id = x.Id,
                   ModelId = x.Id,
                   Manufacturer = x.Manufacturer.Name,
                   Model = x.Model.Name,
@@ -334,6 +336,32 @@
             await this.motorcycleRepository.SaveChangesAsync();
         }
 
+        public async Task<bool> CancelCurrentOffer(int motorcycleId)
+        {
+            var currentMotorcycle = this.motorcycleRepository.All()
+                .FirstOrDefault(x => x.Id == motorcycleId);
+            if (currentMotorcycle == null)
+            {
+                return false;
+            }
+
+            var currentOfferForThisMotorcycle = this.offerRepository.All()
+                .FirstOrDefault(x => x.Id == currentMotorcycle.OfferId);
+            if (currentOfferForThisMotorcycle == null)
+            {
+                return false;
+            }
+
+            currentMotorcycle.OfferId = null;
+            this.motorcycleRepository.Update(currentMotorcycle);
+            await this.motorcycleRepository.SaveChangesAsync();
+
+            this.offerRepository.Delete(currentOfferForThisMotorcycle);
+            await this.offerRepository.SaveChangesAsync();
+
+            return true;
+        }
+
         public bool IsByDealer(int motorId, int dealerId)
             => this.motorcycleRepository.AllAsNoTracking()
                                         .Any(x => x.Id == motorId && x.Dealer.Id == dealerId);
@@ -347,7 +375,8 @@
              && x.Offer.DropOffDate >= inputModel.DropOffDate
              && x.ManufacturerId == inputModel.ManufacturerId
              && x.CityId == inputModel.CityId
-             && x.TypeMotor == inputModel.Type)
+             && x.TypeMotor == inputModel.Type
+             && x.IsApproved == true)
              .OrderByDescending(x => x.CreatedOn)
              .Skip((currentPage - 1) * motorcyclesPerPage)
              .Take(motorcyclesPerPage)

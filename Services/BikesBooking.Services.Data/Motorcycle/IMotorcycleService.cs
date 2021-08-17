@@ -28,6 +28,8 @@
 
         Task OfferCurrentMotor(OfferPeriodForMotorDto offerPeriodForMotorDto, int id);
 
+        Task<bool> CancelCurrentOffer(int motorcycleId);
+
         Task RemoveMotorcycleAsync(int id);
 
         bool IsInActiveOffer(int motorcycleId);

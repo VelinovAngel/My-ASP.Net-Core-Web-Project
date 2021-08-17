@@ -124,6 +124,49 @@
             await this.clientRepository.SaveChangesAsync();
         }
 
+        public async Task<bool> CancellationOfBookedMotorcycleByClient(int clientId, DateTime pickUp, DateTime dropOff, int motorcycleId)
+        {
+            if (pickUp >= DateTime.UtcNow)
+            {
+                return false;
+            }
+
+            var currMotorcycle = this.motorcyclesRepository.All()
+                .FirstOrDefault(x => x.Id == motorcycleId);
+
+            var motorcycleOffer = this.offerRepository.All()
+                .FirstOrDefault(x => x.Id == currMotorcycle.OfferId);
+
+            motorcycleOffer.PickUpDate = pickUp;
+            this.offerRepository.Update(motorcycleOffer);
+            await this.offerRepository.SaveChangesAsync();
+
+            var currClientOffer = this.clientsOffersRepository.All()
+                .FirstOrDefault(x => x.ClientId == clientId);
+            if (currClientOffer == null)
+            {
+                return false;
+            }
+
+            var currOffer = this.offerRepository.All()
+                .FirstOrDefault(x => x.Id == currClientOffer.OfferId);
+            var currClient = this.clientRepository.All()
+                .FirstOrDefault(x => x.Id == currClientOffer.ClientId);
+
+            if (currOffer == null || currClient == null)
+            {
+                return false;
+            }
+
+            this.clientsOffersRepository.Delete(currClientOffer);
+            await this.clientsOffersRepository.SaveChangesAsync();
+
+            this.offerRepository.Delete(currOffer);
+            await this.offerRepository.SaveChangesAsync();
+
+            return true;
+        }
+
         public IEnumerable<BookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId)
         {
             var currOffer = this.clientsOffersRepository.All()

@@ -14,6 +14,8 @@
 
         IEnumerable<BookedMotorcycleDto> GetAllListOfMotorcycleByClietId(int clientId);
 
+        Task<bool> CancellationOfBookedMotorcycleByClient(int clientId, DateTime pickUp, DateTime dropOff, int motorcycleId);
+
         BookedMotorcycleDto GetSingleBookedMotorcycleByClientId(int clientId, int motorcycleId);
 
         bool IsAlreadyClientExist(string userId);

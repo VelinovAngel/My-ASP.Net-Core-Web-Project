@@ -1,9 +1,24 @@
 ﻿@model OfferThisModelForm
 
 @{
-    this.ViewData["Title"] = "Offer-This-Model";
+    this.ViewData["Title"] = "Offer This Model";
     var beginBooking = Model.Motor.BeginBooking.Year;
     var finalBooking = Model.Motor.FinalBooking.Year;
+}
+
+@if (this.TempData.ContainsKey("CancelSuccessful"))
+{
+    <div class="alert alert-success alert-dismissible fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["CancelSuccessful"]
+    </div>
+}
+@if (this.TempData.ContainsKey("CancelNotSuccessful"))
+{
+    <div class="alert alert-success alert-danger fade show">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @this.TempData["CancelNotSuccessful"]
+    </div>
 }
 
 
@@ -48,26 +63,35 @@
                 </div>
             }
         </div>
-        <form method="post" class="container lead-section col-md-6 offset-md-3">
-            <div asp-validation-summary="All" class="text-danger"></div>
+        <div>
+            <form method="post" class="container lead-section col-md-6 offset-md-3">
+                <div asp-validation-summary="All" class="text-danger"></div>
 
-            <div class="row">
-                <div class="form-group col-6">
-                    <label asp-for="PickUpDate"></label>
-                    <input asp-for="PickUpDate" class="form-control" />
-                    <span asp-validation-for="PickUpDate" class="text-danger"></span>
-                </div>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label asp-for="PickUpDate"></label>
+                        <input asp-for="PickUpDate" class="form-control" />
+                        <span asp-validation-for="PickUpDate" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group col-6">
-                    <label asp-for="DropOffDate"></label>
-                    <input asp-for="DropOffDate" class="form-control" />
-                    <span asp-validation-for="DropOffDate" class="text-danger"></span>
+                    <div class="form-group col-6">
+                        <label asp-for="DropOffDate"></label>
+                        <input asp-for="DropOffDate" class="form-control" />
+                        <span asp-validation-for="DropOffDate" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Offer</button>
+                </div>
+            </form>
             <div class="text-center">
-                <button type="submit" class="btn btn-success">Done</button>
+                <a type="submit" asp-controller="Motor" asp-action="CancelCurrentOffer"
+                   asp-route-id="@Model.Motor.Id"
+                   class="btn btn-danger mt-4">
+                    Cancel
+                </a>
             </div>
-        </form>
+        </div>
     </div>
 </section>
 

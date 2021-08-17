@@ -4,6 +4,8 @@
 
     public class OfferSigleMotorcycleDto
     {
+        public int Id { get; set; }
+
         public int ModelId { get; set; }
 
         public string Manufacturer { get; set; }

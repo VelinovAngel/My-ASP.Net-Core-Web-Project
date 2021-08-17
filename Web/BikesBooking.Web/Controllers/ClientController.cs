@@ -114,6 +114,32 @@
         }
 
         [Authorize]
+        public async Task<IActionResult> CancellationCurrentMotorcycle(DateTime pickUpDate, DateTime dropOffDate, int id)
+        {
+            var userId = this.User.GetId();
+
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var isCancellated = await this.clientService.CancellationOfBookedMotorcycleByClient(currClient.Id, pickUpDate, dropOffDate, id);
+
+            if (isCancellated)
+            {
+                this.TempData["Cancellation"] = "The cancellation was successful.";
+            }
+            else
+            {
+                this.TempData["IsNotCancellation"] = "You cannot cancel this motorcycle!";
+            }
+
+            return this.RedirectToAction("MyAllMotorcycle", "Client");
+        }
+
+        [Authorize]
         public IActionResult BookThisModel(int id, string information)
         {
             var model = this.motorcycleService.Details(id);

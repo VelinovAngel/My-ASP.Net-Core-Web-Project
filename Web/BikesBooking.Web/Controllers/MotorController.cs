@@ -276,6 +276,29 @@
             return this.View(model);
         }
 
+        [Authorize]
+        public async Task<IActionResult> CancelCurrentOffer(int id)
+        {
+            var userId = this.User.GetId();
+            var model = await this.motorcycleService.GetMotorcycleByIdAsync(id);
+            if (model.DealerId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var isCanceled = await this.motorcycleService.CancelCurrentOffer(id);
+            if (isCanceled)
+            {
+                this.TempData["CancelSuccessful"] = "Cancellation successful";
+            }
+            else
+            {
+                this.TempData["CancelNotSuccessful"] = "Cancellation unsuccessful!";
+            }
+
+            return this.RedirectToAction("OfferThisModel", new { id = id });
+        }
+
         private int GetUserId()
         {
             var currentUserId = this.User.GetId();

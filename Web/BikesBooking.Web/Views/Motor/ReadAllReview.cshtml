@@ -1,6 +1,19 @@
 ﻿@using BikesBooking.Services.Data.DTO.Dealers
 @model IEnumerable<AllReviewOuputDto>
 
+@{
+    this.ViewData["Title"] = "Read all view";
+    var count = 1;
+}
+
+<a class="btn btn-primary" asp-action="All">Back to All</a>
+<br />
+<br />
+
+@if (!Model.Any())
+{
+    <h2 class="text-center">You not have yet reviews for this motorcycle!</h2>
+}
 <table class="table">
     <caption>List of FeedBack</caption>
     <thead>
@@ -13,18 +26,19 @@
             <th scope="col">Description</th>
         </tr>
     </thead>
+
     @foreach (var date in Model)
     {
         <tbody>
             <tr>
-                <th scope="row">1</th>
+                <th scope="row">@count</th>
                 <td>@date.Name</td>
                 <td>@date.DateRelease</td>
                 <td>@date.MotorcycleInfo</td>
                 <td>@date.Vote</td>
                 <td>@date.Desription</td>
             </tr>
-
         </tbody>
+        count++;
     }
 </table>

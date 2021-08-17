@@ -8,7 +8,7 @@
 @model BookedMotorcycleDto
 
 @{
-    this.ViewData["Title"] = "My Motorcycle";
+    this.ViewData["Title"] = "Details";
     var user = await UserManager.GetUserAsync(this.User);
     var clientName = $"{user.FirstName} {user.LastName}";
 }
@@ -50,14 +50,14 @@
                 <textarea asp-for="DescriptionMessage" type="text" class="form-control"></textarea>
                 <span asp-validation-for="DescriptionMessage" class="text-danger"></span>
                 <button type="submit" asp-controller="Client" asp-action="Reviews" asp-route-id="@Model.Id" class="btn btn-block btn-primary mt-4">Feedback</button>
-                <button type="submit" asp-controller="Client" asp-action="Cancellation"
-                        asp-route-id="@Model.Id"
-                        asp-route-PickUpDate="@Model.PickUpDate"
-                        asp-route-DropOffDate="@Model.DropOffDate"
-                        class="btn btn-block btn-danger mt-4">
-                    Cancellation
-                </button>
             </form>
+            <a type="submit" asp-controller="Client" asp-action="CancellationCurrentMotorcycle"
+               asp-route-id="@Model.Id"
+               asp-route-PickUpDate="@Model.PickUpDate"
+               asp-route-DropOffDate="@Model.DropOffDate"
+               class="btn btn-block btn-danger mt-4">
+                Cancellation
+            </a>
         </div>
         <div class="col-lg-7 col-lg-offset-1 col-md-4 col-sm-2">
             <h2 class="text-center ">@Model.Manufacturer @Model.Model</h2>
