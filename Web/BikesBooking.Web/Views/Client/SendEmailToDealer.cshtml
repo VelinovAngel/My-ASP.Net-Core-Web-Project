@@ -1,19 +1,12 @@
-﻿@model SendEmailForm
+﻿@model SendEmailFormToDealer
 
 @{
     this.ViewData["Title"] = "Send Email";
 }
 
-@if (this.TempData.ContainsKey("Successful Message"))
-{
-    <div class="alert alert-success alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        @this.TempData["Successful Message"]
-    </div>
-}
 
 <h1 class="text-center">
-    Answer to client: @Model.ClientName complaint.
+   
 </h1>
 
 <section class="mb-4">
@@ -26,28 +19,38 @@
                 <div class="row">
                     <div class="col-md-8 col offset-2">
                         <div class="md-form mb-0">
-                            <label asp-for="Subject">Subject</label>
-                            <input asp-for="Subject" class="form-control ">
-                            <span asp-validation-for="Subject" class="text-danger"></span>
+                            <label asp-for="@Model.DealerEmail">Dealer Email Address:</label>
+                            <input asp-for="@Model.DealerEmail" readonly class="form-control">
+                            <span asp-validation-for="DealerEmail" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col-md-8 col offset-2">
-                        <div class="md-form mb-0">
-                            <label asp-for="Subject">Subject</label>
-                            <input asp-for="Subject" class="form-control">
-                            <span asp-validation-for="Subject" class="text-danger"></span>
+                    <div class="row col offset-2">
+                        <div class="col-5 m-md-2">
+                            <div class="md-form">
+                                <label asp-for="@Model.Username">Your name:</label>
+                                <input asp-for="@Model.Username" class="form-control">
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-4 m-md-2">
+                            <div class="md-form">
+                                <label asp-for="@Model.UserEmail">Your Email:</label>
+                                <input asp-for="@Model.UserEmail" class="form-control">
+                                <span asp-validation-for="@Model.UserEmail" class="text-danger"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="col offset-2 col-md-8">
                         <div class="md-form">
-                            <label asp-for="Content">Your message</label>
-                            <textarea asp-for="Content" rows="6" cols="120" class="form-control md-textarea"></textarea>
-                            <span asp-validation-for="Content" class="text-danger"></span>
+                            <label asp-for="@Model.Description">Your message</label>
+                            <textarea asp-for="@Model.Description" rows="6" cols="120" class="form-control md-textarea"></textarea>
+                            <span asp-validation-for="@Model.Description" class="text-danger"></span>
                         </div>
                     </div>
+
                 </div>
                 <div class="text-center col-12 mt-4">
-                    <button type="button" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToUser" data-toggle="modal" data-target="#rejectButton">Send</button>
+                    <button type="button" class="btn btn-primary" asp-controller="Contact" asp-action="SendEmailToDealer" data-toggle="modal" data-target="#rejectButton">Send</button>
                 </div>
 
                 <div class="modal fade" id="rejectButton" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -60,7 +63,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <p class="bg-light">Are you sure you want to send this email to @ViewBag.CurrentUserEmail?</p>
+                                <p class="bg-light">Are you sure you want to send this email to @Model.DealerEmail?</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-info btn-icon" data-dismiss="modal">Close</button>

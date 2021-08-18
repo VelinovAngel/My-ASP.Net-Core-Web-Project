@@ -9,8 +9,10 @@
     using BikesBooking.Services.Data.Motorcycle;
     using BikesBooking.Services.Data.User;
     using BikesBooking.Services.Data.Votes;
+    using BikesBooking.Services.Messaging;
     using BikesBooking.Web.Areas.Identity.Pages.Account;
     using BikesBooking.Web.Infrastructure;
+    using BikesBooking.Web.ViewModels.Client;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -23,6 +25,7 @@
         private readonly IMotorcycleService motorcycleService;
         private readonly IServiceProvider serviceProvider;
         private readonly IVoteService votesService;
+        private readonly IEmailSenderService emailSenderService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LogoutModel> logger;
 
@@ -32,6 +35,7 @@
             IMotorcycleService motorcycleService,
             IServiceProvider serviceProvider,
             IVoteService votesService,
+            IEmailSenderService emailSenderService,
             SignInManager<ApplicationUser> signInManager,
             ILogger<LogoutModel> logger)
         {
@@ -40,6 +44,7 @@
             this.motorcycleService = motorcycleService;
             this.serviceProvider = serviceProvider;
             this.votesService = votesService;
+            this.emailSenderService = emailSenderService;
             this.signInManager = signInManager;
             this.logger = logger;
         }
@@ -221,6 +226,42 @@
 
             this.TempData["message"] = "You have successfully submitted a review for this motorcycle. Thank you!";
             return this.RedirectToAction("DetailsByMotorcycleId", new { id = id });
+        }
+
+        [Authorize]
+        public IActionResult SendEmailToDealer(string email)
+        {
+            var userId = this.User.GetId();
+            var currClient = this.clientService.GetCurrentClient(userId);
+
+            if (currClient.UserId != userId)
+            {
+                return this.BadRequest();
+            }
+
+            var model = new SendEmailFormToDealer
+            {
+                DealerEmail = email,
+                UserEmail = string.Empty,
+            };
+
+            return this.View(model);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult SendEmailToDealer(SendEmailFormToDealer form)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View();
+            }
+
+            this.emailSenderService.SendMail(form.Username, form.DealerEmail, form.Username, form.Description);
+
+            this.TempData["Successful Message"] = $"Email to {form.DealerEmail} send successfully";
+
+            return this.RedirectToAction("MyAllMotorcycle");
         }
     }
 }
