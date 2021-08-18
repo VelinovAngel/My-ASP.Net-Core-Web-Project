@@ -6,6 +6,7 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
 
@@ -13,10 +14,17 @@
     public class ClientsController : Controller
     {
         private readonly IRepository<Client> client;
+        private readonly IRepository<ApplicationUser> user;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ClientsController(IRepository<Client> client)
+        public ClientsController(
+            IRepository<Client> client,
+            IRepository<ApplicationUser> user,
+            UserManager<ApplicationUser> userManager)
         {
             this.client = client;
+            this.user = user;
+            this.userManager = userManager;
         }
 
         // GET: Administration/Clients
@@ -147,6 +155,14 @@
         {
             var client = await this.client.All()
                 .FirstOrDefaultAsync(m => m.Id == id);
+            var currentUser = this.user.All().FirstOrDefaultAsync(x => x.Id == client.UserId).GetAwaiter().GetResult();
+            var role = await this.userManager.RemoveFromRoleAsync(currentUser, "Client");
+            var result = await this.userManager.DeleteAsync(currentUser);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{currentUser.Id}'.");
+            }
+
             this.client.Delete(client);
             await this.client.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));

@@ -167,9 +167,10 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var dealer = this.dealer.All().FirstOrDefault(x => x.Id == id);
+            var dealer = this.dealer.All()
+                .FirstOrDefault(x => x.Id == id);
             var currentUser = this.user.All().FirstOrDefaultAsync(x => x.Id == dealer.UserId).GetAwaiter().GetResult();
-            var role = this.userManager.RemoveFromRoleAsync(currentUser, "Dealer");
+            var role = await this.userManager.RemoveFromRoleAsync(currentUser, "Dealer");
             var result = await this.userManager.DeleteAsync(currentUser);
             if (!result.Succeeded)
             {
