@@ -6,21 +6,28 @@
 
     using BikesBooking.Data.Common.Repositories;
     using BikesBooking.Data.Models;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.EntityFrameworkCore;
 
     public class DealersController : AdministrationController
     {
+        private readonly IRepository<ApplicationUser> user;
         private readonly IRepository<Dealer> dealer;
         private readonly IRepository<City> city;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public DealersController(
+            IRepository<ApplicationUser> user,
             IRepository<Dealer> dealer,
-            IRepository<City> city)
+            IRepository<City> city,
+            UserManager<ApplicationUser> userManager)
         {
+            this.user = user;
             this.dealer = dealer;
             this.city = city;
+            this.userManager = userManager;
         }
 
         // GET: Administration/Dealers
@@ -145,6 +152,7 @@
             var dealer = await this.dealer.All()
                 .Include(d => d.City)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (dealer == null)
             {
                 return this.NotFound();
@@ -160,6 +168,14 @@
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var dealer = this.dealer.All().FirstOrDefault(x => x.Id == id);
+            var currentUser = this.user.All().FirstOrDefaultAsync(x => x.Id == dealer.UserId).GetAwaiter().GetResult();
+            var role = this.userManager.RemoveFromRoleAsync(currentUser, "Dealer");
+            var result = await this.userManager.DeleteAsync(currentUser);
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException($"Unexpected error occurred deleting user with ID '{currentUser.Id}'.");
+            }
+
             this.dealer.Delete(dealer);
             await this.dealer.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
