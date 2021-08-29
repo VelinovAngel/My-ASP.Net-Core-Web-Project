@@ -160,7 +160,7 @@
                 app.UseHsts();
             }
 
-            RequestLocalizationOptions localizationOptions = new RequestLocalizationOptions
+            RequestLocalizationOptions localizationOptions = new()
             {
                 SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US") },
                 SupportedUICultures = new List<CultureInfo> { new CultureInfo("en-US") },
