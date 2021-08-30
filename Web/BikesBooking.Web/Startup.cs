@@ -146,7 +146,7 @@
 
                 new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
 
-                this.SeedHangfireJobs(recurringJobManager, dbContext);
+                SeedHangfireJobs(recurringJobManager);
             }
 
             if (env.IsDevelopment())
@@ -205,7 +205,7 @@
                     });
         }
 
-        private void SeedHangfireJobs(IRecurringJobManager recurringJobManager, ApplicationDbContext dbContext)
+        private static void SeedHangfireJobs(IRecurringJobManager recurringJobManager)
         {
             recurringJobManager.AddOrUpdate<DeletePastOffers>("DeletePastOffers", x => x.Work(), Cron.Daily);
         }
