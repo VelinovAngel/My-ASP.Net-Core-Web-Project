@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly IMotorcycleService motorcycleService;
         private readonly IDealersService dealersService;

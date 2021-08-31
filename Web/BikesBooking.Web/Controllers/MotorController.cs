@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize(Roles = "Dealer")]
-    public class MotorController : Controller
+    public class MotorController : BaseController
     {
         private readonly IMotorcycleService motorcycleService;
         private readonly IDealersService dealersService;

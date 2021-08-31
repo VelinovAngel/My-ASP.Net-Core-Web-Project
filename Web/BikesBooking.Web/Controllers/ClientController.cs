@@ -18,7 +18,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    public class ClientController : Controller
+    public class ClientController : BaseController
     {
         private readonly IClientService clientService;
         private readonly IUserService userService;
