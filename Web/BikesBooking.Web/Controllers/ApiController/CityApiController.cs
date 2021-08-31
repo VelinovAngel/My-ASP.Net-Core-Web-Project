@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     [ApiController]
-    public class CityApiController : ControllerBase
+    public class CityApiController : BaseController
     {
         private readonly IHomeService homeService;
 
