@@ -21,7 +21,6 @@
     public class ClientController : BaseController
     {
         private readonly IClientService clientService;
-        private readonly IUserService userService;
         private readonly IMotorcycleService motorcycleService;
         private readonly IServiceProvider serviceProvider;
         private readonly IVoteService votesService;
@@ -40,7 +39,6 @@
             ILogger<LogoutModel> logger)
         {
             this.clientService = clientService;
-            this.userService = userService;
             this.motorcycleService = motorcycleService;
             this.serviceProvider = serviceProvider;
             this.votesService = votesService;
