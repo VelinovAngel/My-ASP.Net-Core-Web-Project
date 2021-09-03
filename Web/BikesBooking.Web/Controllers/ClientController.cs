@@ -22,7 +22,6 @@
     {
         private readonly IClientService clientService;
         private readonly IMotorcycleService motorcycleService;
-        private readonly IServiceProvider serviceProvider;
         private readonly IVoteService votesService;
         private readonly IEmailSenderService emailSenderService;
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -40,7 +39,6 @@
         {
             this.clientService = clientService;
             this.motorcycleService = motorcycleService;
-            this.serviceProvider = serviceProvider;
             this.votesService = votesService;
             this.emailSenderService = emailSenderService;
             this.signInManager = signInManager;
