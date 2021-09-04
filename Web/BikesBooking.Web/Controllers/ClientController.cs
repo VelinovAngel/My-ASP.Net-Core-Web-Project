@@ -29,9 +29,7 @@
 
         public ClientController(
             IClientService clientService,
-            IUserService userService,
             IMotorcycleService motorcycleService,
-            IServiceProvider serviceProvider,
             IVoteService votesService,
             IEmailSenderService emailSenderService,
             SignInManager<ApplicationUser> signInManager,
