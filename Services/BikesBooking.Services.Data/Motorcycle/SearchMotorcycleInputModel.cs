@@ -4,8 +4,6 @@
 
     public class SearchMotorcycleInputModel
     {
-        public int CountryId { get; set; }
-
         public int CityId { get; set; }
 
         public DateTime PickUpDate { get; set; }
