@@ -12,6 +12,9 @@
 
     public class AdministratorSeeder : ISeeder
     {
+        private readonly ApplicationDbContext dbContext;
+        private readonly IServiceProvider serviceProvider;
+
         public AdministratorSeeder(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
             this.dbContext = dbContext;
