@@ -24,7 +24,7 @@
         public double GetAverageVote(int? motorcyleId)
         {
             var votes = this.votesRepository.All().Where(x => x.MotorcycleId == motorcyleId);
-            if (votes.Count() == 0)
+            if (!votes.Any())
             {
                 return 0;
             }
